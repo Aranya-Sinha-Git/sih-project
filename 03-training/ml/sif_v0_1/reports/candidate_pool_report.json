@@ -1,0 +1,29 @@
+{
+  "candidate_pool_records": 63020,
+  "verified_naics_oil_gas": 3453,
+  "ambiguous_existing_filter": 59567,
+  "tfidf_near_duplicate_groups_verified_naics": 2,
+  "labeling_queue_records": 500,
+  "source": "C:\\Users\\arany\\Desktop\\SIH Project\\SIF validation datasets\\04_OSHA\\OIL_GAS_SUBSET\\osha_sir_oil_gas_subset.csv",
+  "label_audit": {
+    "reviewed_labels_accepted": 0,
+    "sif": 0,
+    "non_sif": 0,
+    "uncertain": 0,
+    "rejected_labels_by_reason": {
+      "rules_classified": 1,
+      "weak_label": 100
+    },
+    "eligible_for_supervised_training": false,
+    "accepted_provenance": [
+      "expert_reviewed",
+      "manual_reviewed"
+    ]
+  },
+  "excluded_sources": [
+    "BSEE: incident/aggregate grain not reconciled",
+    "IOGP 2025: validation locked",
+    "BRSR/tenders/LSR: reference-only",
+    "NIOSH: records unavailable"
+  ]
+}

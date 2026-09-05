@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — NEGATIVE / CONTROL FAILURE
+Source type: Public-report paraphrase (not Oil India data)
+Source: https://ehss.energy.gov/oesummary/oesummary2002/oe2002-16.pdf
+
+During a mechanical lockout/tagout installation, an independent verifier could not see a valve position because a locking device covered the operator. Instead of stopping work and notifying a supervisor, the verifier assumed the position was correct and signed the verification record.

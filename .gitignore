@@ -1,0 +1,34 @@
+.env
+.env.*
+!.env.example
+*.log
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+01-app/.run/
+01-app/.pytest_cache/
+01-app/backend/.venv/
+01-app/backend/.deps/
+**/.deps/
+**/node_modules/
+01-app/frontend/node_modules/
+01-app/frontend/.next/
+02-labeling/web-review-app/node_modules/
+02-labeling/web-review-app/.next/
+02-labeling/web-review-app/out/
+02-labeling/web-review-app/.env.local
+03-training/ml/sif_v0_1/data/local_label_store/
+03-training/ml/sif_v0_1/data/annotation_decisions.csv
+03-training/ml/sif_v0_1/data/reviewed_labels.csv
+
+# Downloaded or regenerated validation-source assets are not versioned in the
+# public repository. Their manifests, source links, schemas, and small derived
+# assets remain tracked.
+04-data/validation-datasets/16_DOWNLOAD_STATUS/READY_ACCESSIBLE/FILES/
+04-data/validation-datasets/**/RAW/
+04-data/validation-datasets/04_OSHA/SEVERE_INJURY_RAW/
+04-data/validation-datasets/**/*.pdf
+04-data/validation-datasets/**/*.xlsx
+04-data/validation-datasets/**/*.zip
+04-data/validation-datasets/09_PROCESSED/candidate_master/sif_public_data_master.csv
+04-data/validation-datasets/09_PROCESSED/source_normalized/osha_sir_oil_gas_normalized.csv

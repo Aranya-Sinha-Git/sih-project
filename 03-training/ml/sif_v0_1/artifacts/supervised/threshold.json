@@ -1,0 +1,10 @@
+{
+  "model": "tfidf_word_12_char_35",
+  "sif_threshold": 0.4,
+  "selection_rule": "maximise recall, then minimise SIF false-negative rate, then F2, precision and F1 subject to a validation precision floor of max(0.75, 95% of precision at 0.50)",
+  "human_review_band": [
+    0.35,
+    0.45
+  ],
+  "not_probability_calibrated": true
+}

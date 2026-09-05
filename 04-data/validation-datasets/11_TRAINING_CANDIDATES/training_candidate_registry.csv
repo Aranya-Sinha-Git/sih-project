@@ -1,0 +1,4 @@
+﻿dataset,records,reason,known_label,label_quality,domain_match,leakage_checked,recommended_weight,notes
+NIOSH FACE oil/gas relevant,6 landing-page-indexed reports,rich fatal narratives and recommendations,fatality/source-native,source-native actual outcome; not generic SIF,high,landing-page index only; cross-source check pending,low-medium,not automatic negatives
+OSHA SIR oil/gas subset,63020,real severe injury reports with establishment and incident fields,severe injury/source-native,source-native reporting category,high,exact narrative check on master,medium,federal OSHA only; no SIF conversion
+BSEE incident investigations/statistics,6252,offshore oil/gas incident and aggregate data,source-native incident types/outcomes where present,mixed incident-level and aggregate,high,pending cross-source linkage,low-medium,do not mix aggregates with incident rows

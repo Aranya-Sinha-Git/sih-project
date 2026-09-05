@@ -1,0 +1,8 @@
+source_family,url,role
+Oil India BRSR,https://www.oil-india.com/business-responsibility-sustainability-report,reference and safety statistics source
+Oil India Baghjan update,https://www.oil-india.com/baghjan-update,reference-only incident context
+IOGP safety data,https://www.iogp.org/workstreams/safety/safety/safety-data/,gated annual safety report index
+NIOSH FOG,https://www.cdc.gov/niosh/oil-gas/about/fog/index.html,official data landing page
+OSHA Severe Injury Reports,https://www.osha.gov/severe-injury-reports,raw source landing page
+BSEE Offshore Incident Statistics,https://www.bsee.gov/stats-facts/offshore,raw source landing page
+NIOSH FACE,https://www.cdc.gov/niosh/face/,official case-study index

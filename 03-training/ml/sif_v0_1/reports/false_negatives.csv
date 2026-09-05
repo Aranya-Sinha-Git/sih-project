@@ -1,0 +1,2 @@
+candidate_id,source,narrative,true_label,predicted_label,score,error_type
+OSHA-SIR-2024010047,OSHA_SIR,An employee was standing on top of a pump truck when he slipped and fell to the ground. The employee suffered a skull fracture.,SIF_POTENTIAL,NON_SIF_POTENTIAL,0.342043,false_negative

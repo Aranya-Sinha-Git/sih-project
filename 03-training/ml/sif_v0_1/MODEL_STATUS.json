@@ -1,0 +1,15 @@
+{
+  "model_version": "sif_v0.1",
+  "status": "AI_ASSISTED_SUPERVISED_PROTOTYPE",
+  "external_validation_completed": false,
+  "training_label_status": "AI_ASSISTED_CONSENSUS",
+  "accepted_ai_assisted_labels": 449,
+  "class_counts": {
+    "SIF_POTENTIAL": 365,
+    "NON_SIF_POTENTIAL": 84
+  },
+  "unresolved_excluded": 51,
+  "selected_model": "tfidf_word_12_char_35",
+  "selected_threshold": 0.4,
+  "locked_external_validation": "IOGP 2025 remains untouched"
+}

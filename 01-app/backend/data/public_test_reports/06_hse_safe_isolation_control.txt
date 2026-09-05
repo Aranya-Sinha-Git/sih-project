@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — POSITIVE / CONTROL VERIFIED
+Source type: Guidance-derived test case (not an incident report and not Oil India data)
+Source: https://www.hse.gov.uk/electricity/nearelectric.htm
+
+Before work near electrical equipment, the competent person used a suitable isolator, locked it off, checked that the circuit could not be fed by another source, and proved the circuit was no longer live before work started.

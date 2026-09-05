@@ -1,0 +1,4 @@
+﻿source,reason,notes
+Random Kaggle/GitHub safety datasets,Author not authoritative / provenance unclear,"Rejected in favor of official OSHA, BSEE, CDC/NIOSH, IOGP, and OIL sources."
+NIOSH CDC Stacks direct file endpoints,HTTP 403 from edge protection in this environment,Landing pages were verified; no bypass attempted. Manual/browser download is logged.
+IOGP 2021-2025 narrative reports via direct guessed URLs,Official checkout form required,Manual download required; no credentials fabricated.

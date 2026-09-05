@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-08-27T11:23:48+00:00",
+  "captured_pages": [
+    {
+      "url": "https://www.oil-india.com/baghjan-update",
+      "status": "downloaded",
+      "file": "01_OIL_INDIA_PUBLIC\\OTHER_PUBLIC_SAFETY\\oil_india_baghjan_update.html",
+      "bytes": "705030",
+      "sha256": "c52677df3d71cb9620e5719607b1010a56515abbc85835566a237c32161cb8c3"
+    },
+    {
+      "url": "https://www.oil-india.com/business-responsibility-sustainability-report",
+      "status": "downloaded",
+      "file": "01_OIL_INDIA_PUBLIC\\ENVIRONMENT_AND_RISK\\oil_india_brsr_index.html",
+      "bytes": "93145",
+      "sha256": "6ef9225fbb40efff2894c557d318ab8344ef8f9b05a6eb22387a27b1c1e39a92"
+    },
+    {
+      "url": "https://www.cdc.gov/niosh/oil-gas/about/fog/index.html",
+      "status": "downloaded",
+      "file": "03_NIOSH_FOG\\DOCUMENTATION\\niosh_fog_landing.html",
+      "bytes": "55313",
+      "sha256": "ec872f61ba21aeb5675e8c8d72919d478de8dad315918e1420b37a259ba786b1"
+    },
+    {
+      "url": "https://www.osha.gov/severe-injury-reports",
+      "status": "downloaded",
+      "file": "04_OSHA\\DOCUMENTATION\\osha_severe_injury_reports_landing.html",
+      "bytes": "106007",
+      "sha256": "86e8f77a731861e2b1e89e2bc526ae7e27260bec2acb5ff29accc855edeedcde"
+    },
+    {
+      "url": "https://www.bsee.gov/stats-facts/offshore",
+      "status": "not_downloaded: HTTP Error 404: Not Found",
+      "file": ""
+    },
+    {
+      "url": "https://www.cdc.gov/niosh/face/",
+      "status": "downloaded",
+      "file": "06_NIOSH_FACE\\OIL_GAS_RELEVANT\\niosh_face_landing.html",
+      "bytes": "45396",
+      "sha256": "e477dfe8491122920ed07db8bbb2df0a42acd5815bd4bfcffc38bfa6d261f75e"
+    },
+    {
+      "url": "https://www.iogp.org/workstreams/safety/safety/safety-data/",
+      "status": "not_downloaded: HTTP Error 403: Forbidden",
+      "file": ""
+    }
+  ],
+  "policy": "status artifacts only; no synthetic records"
+}

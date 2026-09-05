@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — NEGATIVE / HIGH RISK
+Source type: Public-report paraphrase (not Oil India data)
+Source: https://www.csb.gov/assets/1/6/incident_reports_volume_4_2026-02-18.pdf
+
+During turnaround maintenance, contract workers opened a flange connected to an active process containing pressurised flammable hydrocarbon. The work was a first break, but the required operator was not present. The crew had not applied locks or tags to the isolation valves. Flammable material was released and ignited.

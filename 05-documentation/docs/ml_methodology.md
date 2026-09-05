@@ -1,0 +1,5 @@
+# ML methodology
+
+The active screening component is the frozen **SIF v0.1 supervised classifier** selected by the versioned threshold configuration. It emits an uncalibrated raw score and routes `<0.35` to Non-SIF, `0.35–0.45` inclusive to human review, and `>0.45` to SIF Potential. Missing or failed artifacts produce a null score and an actionable human-review result. The existing rules engine remains supplemental for extraction and Life-Saving Rule signals; it cannot override screening.
+
+Internal model-development evaluation may train and select thresholds, but the separate `03-training/ml/sif_v0_1/src/evaluate_human.py` evaluator never fits or tunes anything. It scores only locked reviewer adjudications, publishes binary precision, recall, F2 and confusion-matrix results at the frozen threshold, and reports three-band routing separately; Review is not counted as a correct binary classification. The human-blind population remains pending until qualified reviewers provide locked adjudications. Calibration is not claimed and no final blind-test threshold is fitted.

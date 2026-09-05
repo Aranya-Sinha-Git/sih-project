@@ -1,0 +1,15 @@
+﻿field_name,category,description,source_document,source_page,source_status,notes
+date/time,event,Date and time of event,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,Contractor incident/near-miss procedure
+location,event,Location/site of event,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,Details of event and circumstances
+department,organization,Department or responsible function,NIT_CDH7317P22.pdf,,OIL_PUBLICLY_SPECIFIED_FIELD,Portal is described as collecting safety/environment data across business units and locations; exact incident field not asserted
+injury/illness,outcome,Details of injuries or illness and actual/potential occupational exposure,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+environmental_effects,outcome,Adverse effects on the environment,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+involved_persons,people,"Involved persons, casualties, witnesses, and statements",NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+outcomes,outcome,Outcomes and recovery actions taken,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+potential_consequences,risk,Potential consequences,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,Important for separating actual outcome from potential
+management_system_failures,causal,Identified management-system failures contributing to incident,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+immediate_underlying_causes,causal,Immediate and underlying causes,NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+corrective_preventive_actions,controls,"Actions to restore compliance, prevent recurrence, and improve performance",NIT_CDG3685P15.pdf,189,OIL_PUBLICLY_SPECIFIED_FIELD,
+activity,context,Operational activity,,,PROJECT_DERIVED_FIELD,Canonical field requested by project; not asserted as a named OIL public form field unless source-specific evidence is found
+hazards,context,Hazard tags,,,PROJECT_DERIVED_FIELD,Derived during normalization/modeling
+sif_potential,label,SIF potential label,,,PROJECT_DERIVED_FIELD,Must remain unresolved unless expert/source-native evidence exists

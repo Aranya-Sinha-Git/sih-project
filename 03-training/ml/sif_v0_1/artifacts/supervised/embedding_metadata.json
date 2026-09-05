@@ -1,0 +1,10 @@
+{
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "architecture": "frozen pretrained SentenceTransformer embeddings -> LogisticRegression",
+  "fine_tuned": false,
+  "pooling": "attention-mask mean pooling with L2 normalization",
+  "embedding_dimension": 384,
+  "cache_path": "artifacts\\supervised\\embedding_cache\\436393f95960ec829fbd822cac1220936bb6123b0b9f7f91d32bebc6aaadb96f.npy",
+  "cache_hit": true,
+  "fingerprint": "436393f95960ec829fbd822cac1220936bb6123b0b9f7f91d32bebc6aaadb96f"
+}

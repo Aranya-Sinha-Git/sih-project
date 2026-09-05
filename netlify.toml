@@ -1,0 +1,7 @@
+[build]
+base = "01-app/frontend"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

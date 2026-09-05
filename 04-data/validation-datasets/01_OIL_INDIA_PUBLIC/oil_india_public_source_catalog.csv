@@ -1,0 +1,5 @@
+﻿source_id,title,publisher,official_url,years,local_path,contains_incident_narratives,contains_statistics,priority,notes
+OIL-BRSR,Business Responsibility & Sustainability Reports,Oil India Limited,https://www.oil-india.com/business-responsibility-sustainability-report,2021-22 to 2025-26,01_OIL_INDIA_PUBLIC/BRSR,limited,yes,1,Aggregate safety metrics; no missing values inferred.
+OIL-HSE,HSE@OIL and public HSE pages,Oil India Limited,https://www.oil-india.com/hseoil,current,01_OIL_INDIA_PUBLIC/HSE_REPORTING_SCHEMA,no,limited,1,Context and schema discovery.
+OIL-BAGHJAN,Baghjan Update and source documents,Oil India Limited and official authorities,https://www.oil-india.com/baghjan-update,2020-2025,01_OIL_INDIA_PUBLIC/BAGHJAN,yes,limited,1,One incident with multiple sources.
+OIL-ENV,Environment and risk repository candidates,Oil India Limited,https://www.oil-india.com/Sustainability-at-oil,various,01_OIL_INDIA_PUBLIC/ENVIRONMENT_AND_RISK,unknown,unknown,2,Index only; no indiscriminate archive download.

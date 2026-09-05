@@ -1,0 +1,51 @@
+model,association,rank,feature,coefficient
+tfidf_word_12_char_35,SIF_POTENTIAL,1,word:feet,0.45823
+tfidf_word_12_char_35,SIF_POTENTIAL,2,word:hand,0.408625
+tfidf_word_12_char_35,SIF_POTENTIAL,3,word:by,0.387729
+tfidf_word_12_char_35,SIF_POTENTIAL,4,char:con,0.377435
+tfidf_word_12_char_35,SIF_POTENTIAL,5,word:burns,0.375478
+tfidf_word_12_char_35,SIF_POTENTIAL,6,char:re ,0.349718
+tfidf_word_12_char_35,SIF_POTENTIAL,7,char:es ,0.339223
+tfidf_word_12_char_35,SIF_POTENTIAL,8,char: fo,0.337176
+tfidf_word_12_char_35,SIF_POTENTIAL,9,char:ck ,0.337036
+tfidf_word_12_char_35,SIF_POTENTIAL,10,char:for,0.330062
+tfidf_word_12_char_35,SIF_POTENTIAL,11,word:for,0.329273
+tfidf_word_12_char_35,SIF_POTENTIAL,12,char:ne ,0.31685
+tfidf_word_12_char_35,SIF_POTENTIAL,13,char: con,0.314526
+tfidf_word_12_char_35,SIF_POTENTIAL,14,word:were,0.311638
+tfidf_word_12_char_35,SIF_POTENTIAL,15,word:rig,0.310928
+tfidf_word_12_char_35,SIF_POTENTIAL,16,char:uck ,0.310568
+tfidf_word_12_char_35,SIF_POTENTIAL,17,char:bur,0.308832
+tfidf_word_12_char_35,SIF_POTENTIAL,18,word:fire,0.308509
+tfidf_word_12_char_35,SIF_POTENTIAL,19,char:str,0.307355
+tfidf_word_12_char_35,SIF_POTENTIAL,20,char: bur,0.303652
+tfidf_word_12_char_35,SIF_POTENTIAL,21,char:uck,0.300251
+tfidf_word_12_char_35,SIF_POTENTIAL,22,char:hand,0.298357
+tfidf_word_12_char_35,SIF_POTENTIAL,23,word:truck,0.293329
+tfidf_word_12_char_35,SIF_POTENTIAL,24,char:burn,0.291553
+tfidf_word_12_char_35,SIF_POTENTIAL,25,char: burn,0.291553
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,1,word:fingertip,-0.812134
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,2,word:finger,-0.684403
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,3,word:slipped,-0.651615
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,4,word:his,-0.641873
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,5,word:hammer,-0.602935
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,6,char: fing,-0.570228
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,7,char: fin,-0.566246
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,8,char:finge,-0.565069
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,9,char:fing,-0.560984
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,10,char:fin,-0.554218
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,11,char:inger,-0.548608
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,12,char:inge,-0.546821
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,13,char:rti,-0.546157
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,14,char:nger,-0.532802
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,15,char:ger,-0.512323
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,16,char:nge,-0.505161
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,17,char:erti,-0.489508
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,18,word:hernia,-0.47218
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,19,char:rtip,-0.468197
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,20,char:ngert,-0.468197
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,21,char:ertip,-0.468197
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,22,char:gert,-0.468197
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,23,char:gerti,-0.468197
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,24,char: her,-0.462485
+tfidf_word_12_char_35,NON_SIF_POTENTIAL,25,char:lan,-0.459659

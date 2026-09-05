@@ -1,0 +1,10 @@
+{
+  "version": "validation-lock-v1",
+  "locked_sources": [
+    "IOGP 2025",
+    "human_blind_test"
+  ],
+  "locked_record_flags": [
+    "validation_locked"
+  ]
+}

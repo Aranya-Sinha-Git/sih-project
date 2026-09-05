@@ -1,0 +1,51 @@
+{
+  "dataset": "blind_test_v0_1",
+  "selection_seed": 20260830,
+  "source_policy": "Only candidate_pool records marked verified_naics_oil_gas were eligible; IOGP 2025 is excluded as validation-locked.",
+  "counts": {
+    "input_candidate_records": 63020,
+    "source_screened_records": 3453,
+    "matching_candidate_or_source_id": 500,
+    "exact_narrative_duplicate": 1
+  },
+  "excluded_overlap_counts": {
+    "matching_candidate_or_source_id": 500,
+    "exact_narrative_duplicate": 1,
+    "normalized_text_duplicate": 0,
+    "known_duplicate_group_overlap": 0,
+    "high_similarity_near_duplicate": 0
+  },
+  "near_duplicate_method": {
+    "type": "token_3gram_jaccard_or_character_sequence",
+    "thresholds": {
+      "token_3gram_jaccard": 0.82,
+      "character_sequence_ratio": 0.92
+    },
+    "matched_count": 0
+  },
+  "integrity": {
+    "report_count": 75,
+    "unique_test_ids": 75,
+    "unique_source_record_ids": 75,
+    "duplicate_normalized_narratives": 0,
+    "training_overlap": 0,
+    "unresolved_overlap": 0,
+    "known_duplicate_group_overlap": 0,
+    "validation_locked_overlap": 0,
+    "prefilled_reviewer_fields": false,
+    "model_prediction_columns": [],
+    "validation_locked_sources_excluded": [
+      "IOGP 2025"
+    ],
+    "status": "passed"
+  },
+  "source_files": [
+    "ml/sif_v0_1/data/candidate_pool.csv",
+    "ml/sif_v0_1/data/ai_labeling/training_labels_v0_1.csv",
+    "ml/sif_v0_1/data/ai_labeling/unresolved_after_pass_c.csv",
+    "SIF validation datasets/15_REPORTS/HOLDOUT_POLICY.md",
+    "SIF validation datasets/13_DUPLICATE_ANALYSIS/narrative_duplicates.csv",
+    "SIF validation datasets/13_DUPLICATE_ANALYSIS/exact_duplicates.csv",
+    "SIF validation datasets/13_DUPLICATE_ANALYSIS/semantic_duplicate_candidates.csv"
+  ]
+}

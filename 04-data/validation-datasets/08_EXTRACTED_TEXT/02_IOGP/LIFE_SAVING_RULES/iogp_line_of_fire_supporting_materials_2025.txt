@@ -1,0 +1,298 @@
+--- PAGE 1 ---
+LIFE-SAVING RULES
+Line of Fire
+Introduction
+The IOGP Safety Committee’s core objective is to eliminate fatal and life changing injuries. To 
+support the successful implementation of IOGP Report 459 – Life-Saving Rules (LSR), a package of 
+materials focused on Line of Fire (LoF) (Figure 1) has been developed.
+Ten LoF hazard categories have been derived from the analysis of fatalities and permanent 
+impairment injuries reported to IOGP. The materials have been created to enhance understanding 
+and promote learning from these incidents and provide:
+• Questions to help prevent people being in the wrong place at the wrong time.
+• Actions to help prevent people being in the wrong place at the wrong time.
+Figure 1 – Line of Fire Life-Saving Rule
+Keep yourself and others out of the line of fire
+• I position myself to avoid:
+ - moving objects
+ - vehicles
+ - pressure releases
+ - dropped objects
+• I establish and obey barriers and exclusion zones
+• I take action to secure loose objects and report potential dropped objects
+PSI
+
+--- PAGE 2 ---
+The IOGP LoF Questions and Actions can be used as part of a process such as a risk management 
+cycle (Figure 2) to identify, assess, and effectively control LoF hazards.
+Line of Fire 
+risk management
+assess 
+risks
+implement 
+controls
+review 
+effectiveness 
+of controls
+identity
+hazards
+workforce engagement
+known risks and control
+workforce engagement
+workforce engagementworkforce engagement
+1
+2
+3
+4
+Figure 2 – LoF Questions and Actions can be used within a Line of Fire risk management cycle
+Work site implementation
+The IOGP Life-Saving Rules are based around actions that individuals can take to protect themselves 
+and others. The LoF materials are intended to be used by individuals to help themselves or others 
+avoid being in the line of fire.
+Context drives behaviour1 and control measures necessary in different work sites and operating 
+conditions may vary. Multiple LoF hazard categories may be relevant and may require specific 
+controls to be implemented. The LoF materials are not intended to provide a fully comprehensive 
+set of design requirements and controls for workplace line of fire hazards. These should be the 
+responsibility of the organization that manages the work site and be prioritized based on the 
+hierarchy of controls, (see Figure 3).
+1 IOGP Human Performance Principles, https://www.iogp.org/workstreams/safety/safety/human-performance
+2
+Raising Awareness of Line of Fire FPI Hazards
+
+--- PAGE 3 ---
+PPE
+ADMINSTRATIVE 
+CONTROLS 
+ENGINEERING CONTROLS
+SUBSTITUTION
+ELIMINATION
+Most effective
+Hierarchy of Controls
+Least effective
+Figure 3 – Hierarchy of Controls
+The LoF materials have been developed to provide guidance in the form of questions and actions 
+for front line workers, designers, risk assessors, and managers. The 10 LoF hazard categories are 
+illustrated with a graphic, and explained through bullet points, to represent common causes of LoF 
+actual FPI injuries. The materials include:
+• an infographic
+• a presentation pack
+• prompt cards for workplace use
+The LoF hazard prevention questions and actions can be used to:
+• Raise workforce awareness to improve understanding of workplace LoF hazards.
+• Promote worker engagement, e.g., by encouraging conversations around relevant hazard 
+categories and how to avoid being in the LoF.
+• Check control measures are effectively implemented (verification and validation).
+• Provide reminders to improve the workplace, work equipment, task design, and planning 
+processes, to avoid LoF hazards.
+Note: although not specifically stated in the infographic for each hazard category, for operational 
+activities, personnel should always be trained and competent to perform their assigned tasks in 
+addition to the implementation of the Life-Saving Rules.
+Suggested uses for the materials include:
+• visuals for toolbox talks
+• start of work conversations
+• worksite awareness campaigns
+• discuss a different topic every day/month/week
+• hazard hunts/risk identification
+Raising Awareness of Line of Fire FPI Hazards
+3
+
+
+--- PAGE 4 ---
+Background
+The 10 LoF hazard categories presented are based on analysis of Fatality and Permanent 
+Impairment (FPI) incidents where LoF has been assigned as a primary or secondary LSR.
+Definitions:
+Permanent impairment
+Permanent impairment is defined as the outcome of a work-related injury from 
+which the worker cannot or is not expected to return to their previous (pre-incident) 
+whole person function as a result of an acute, single incident.  
+Reference https://iogp.org/fpi.
+High potential event (HiPo)
+IOGP defines a high potential event as an event which could have, under slightly 
+different circumstances, realistically resulted in a fatal incident.
+Incident vs. injury
+An injury is a specific outcome to an individual person as a result of an acute  
+single incident. An incident may encompass one or more injury outcomes (fatality  
+or injury).
+Control
+An item or system designed to reduce safety risk. The term ‘control’ is intended  
+to include safeguards, barriers, or other equivalent terminology.
+Barrier (from IOGP Report 510 – Operating Management System Framework for 
+controlling risk and delivering high performance in the oil and gas industry)
+A risk control that seeks to prevent unintended events from occurring, or prevent 
+escalation of events into incidents with harmful consequences.
+4
+Raising Awareness of Line of Fire FPI Hazards
+
+--- PAGE 5 ---
+Data Analysis – Life-Saving Rules
+Figure 4 shows the primary LSR allocated to fatal incidents reported to IOGP between 2000 and 
+2024, and that LoF is the LSR that was most frequently allocated.
+05 0 100 150 200 250 300 350 400
+Unspecified
+Other issue – no applicable rule
+Working at height
+Work authorization
+Safe mechanical lifting
+Line of fire
+Hot work
+Energy isolation
+Driving
+Confined space
+Bypassing safety controls
+2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
+2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024
+Fatal incidents
+Figure 4 – IOGP Life-Saving Rules allocated to fatal incidents (2000-2024)
+IOGP has been collecting permanent impairment injury data since 2022. Data analysis is presented 
+at https://data.iogp.org/. Figure 5 shows the primary LSR assigned to permanent impairment (PI) 
+incidents reported to IOGP between 2022 and 2024.
+01 02 03 04 05 0
+Other issue – no applicable rule
+Working at height
+Safe mechanical lifting
+Line of fire
+Hot work
+Energy isolation
+Driving
+Bypassing safety controls
+Permanent impairment incidents
+2022 2023 2024
+Figure 5 – IOGP Life-Saving Rules allocated to permanent impairment incidents (2022-2024)
+Raising Awareness of Line of Fire FPI Hazards
+5
+
+
+--- PAGE 6 ---
+Data Analysis – Line of Fire
+Further analysis of the fatality and permanent impairment (FPI) data helped to identify the 10 LoF 
+hazard categories, and the associated Questions and Actions.
+The data shows that the difference between a high potential event outcome (an event where, under 
+different circumstances, there could have been a fatality) and a fatal incident is often dependent 
+on where people are positioned in relation to the surrounding hazards. LoF hazards are not always 
+obvious or constant and can be introduced as a task progresses.
+Both primary and secondary LSR have been allocated to fatal and PI incidents reported to IOGP. 
+The primary LSR associated with an FPI injury is the LSR that, if followed, might have prevented 
+the incident, and has the most specific learning. The primary LSR may be LoF or another LSR. 
+In many cases, more than one LSR apply, and in these cases, a secondary LSR has also been 
+assigned.
+Analysis of fatality and PI data reported to IOGP highlights that 36% of fatalities and 80% of PI 
+injuries were assigned a primary or secondary LSR. A further 6% of fatalities and 4% of PI injuries 
+were assigned a different primary or secondary LSR but were identified as having a causal factor of 
+LoF. See Table 1, and Figures 6 and 7.
+Table 1 – FPI incidents and injuries by IOGP LoF hazard category
+2000-2024 2022-2024
+LoF hazard category Fatalities Fatal incidents PI injuries PI incidents
+Electrical equipment/exposure 68 65 2 2
+Machinery & tools 42 41 20 20
+Mechanical lifting/hoisting 71 71 4 4
+Moving vehicles/mobile equipment 142 142 1 1
+Natural environmental events/
+extreme weather 3 3 0 0
+Objects with uncontrolled roll, slide, 
+or fall potential 89 88 12 12
+Pressurized or vacuum systems/
+equipment 56 47 9 9
+Projectiles/explosion/jet fire 34 31 4 3
+Tensioned lines/spring loaded 
+devices/stored energy 31 31 9 9
+Working at height  
+(falls and dropped objects) 94 92 5 5
+Not applicable 1 1 0 0
+Total 631 612 66 65
+6
+Raising Awareness of Line of Fire FPI Hazards
+
+--- PAGE 7 ---
+Moving vehicles/
+mobile equipment
+23%
+Not applicable
+0.2%
+Working at height
+(falls and dropped objects)
+15%
+Objects with uncontrolled roll,
+slide, or fall potential
+14%
+Mechanical lifting/hoisting
+11%
+Electrical equipment/exposure
+11%
+Pressurized or vaccum 
+systems/equipment
+9%
+Machinery & tools
+7%
+Projectiles/explosion/jet fire
+5%
+Tensioned lines/spring loaded
+devices/stored energy
+5%
+Natural environmental 
+events/extreme weather
+0.5%
+Figure 6 – Line of Fire fatalities 2000-2024
+Moving vehicles/
+mobile equipment
+2%
+Working at height
+(falls and dropped objects)
+8%
+Objects with uncontrolled roll,
+slide, or fall potential
+19%
+Mechanical lifting/hoisting
+6%
+Electrical equipment/exposure
+3%
+Pressurized or vaccum 
+systems/equipment
+12%
+Machinery & tools
+31%Projectiles/explosion/jet fire
+6%
+Tensioned lines/spring loaded
+devices/stored energy
+13%
+Figure 7 – Line of Fire PI injuries 2022-2024
+Raising Awareness of Line of Fire FPI Hazards
+7
+
+
+--- PAGE 8 ---
+References
+For detailed FPI definitions: https://iogp.org/fpi.
+There are a number of IOGP Reports that support managing the risks associated with the 10 elements:
+• IOGP Human Performance Principles, https://www.iogp.org/workstreams/safety/safety/
+human-performance/
+• IOGP Report 365 – Land transportation safety practice
+• IOGP Report 376 – Lifting and hoisting recommended practice
+• IOGP Report 459 – Life-Saving Rules
+•  IOGP Report 459-1 – Life-Saving Rules – Start Work Checks
+• IOGP Report 510 – Operating Management System Framework for controlling risk and delivering 
+high performance in the oil and gas industry
+• IOGP Report 577 – Fabrication site construction safety recommended practices
+• IOGP Report 690 series – Offshore Helicopter Recommended Practices
+For user guides and safety performance go to https://data.iogp.org.
+8
+Raising Awareness of Line of Fire FPI Hazards
+
+--- PAGE 9 ---
+This page is intentionally blank
+Raising Awareness of Line of Fire FPI Hazards
+9
+9
+
+
+--- PAGE 10 ---
+https://www.iogp.org/life-savingrules/
+IOGP Headquarters
+3 Moorgate Place, London, EC2R 6EA, United Kingdom 
+T: +44 20 4570 6879 
+E: reception@iogp.org 
+IOGP Europe
+T: +32 2 882 16 53 
+E: reception-europe@iogp.org 
+www.iogp.org
+www.iogp.org/life-savingrules/
+

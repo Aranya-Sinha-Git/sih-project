@@ -1,0 +1,77 @@
+from __future__ import annotations
+
+import re
+from typing import Any
+
+RULES = {
+    "Energy Isolation": ["isolation", "stored pressure", "energized", "electrical", "lockout", "depressuris", "live line", "pressure"],
+    "Line of Fire": ["line of fire", "release path", "struck", "pinch point", "between", "flange", "suspended load"],
+    "Working at Height": ["height", "scaffold", "fall protection", "harness", "ladder", "platform edge"],
+    "Safe Mechanical Lifting": ["lifting", "crane", "hoist", "sling", "load", "rigging", "suspended"],
+    "Driving": ["vehicle", "revers", "blind spot", "forklift", "collision", "traffic", "driving"],
+    "Confined Space": ["confined", "toxic", "atmosphere", "gas test", "entry permit"],
+    "Hot Work": ["hot work", "spark", "ignition", "flammable", "welding", "fire"],
+    "Work Authorisation": ["permit", "authorization", "work authorisation", "work authorization", "permit to work"],
+    "Bypassing Safety Controls": ["procedure bypass", "control bypass", "override", "disabling safety", "crossing a barrier"],
+}
+HAZARDS = {
+    "stored energy": ["pressure", "energized", "stored energy", "hydraulic"],
+    "line-of-fire exposure": ["release path", "line of fire", "flange", "pinch", "suspended"],
+    "mechanical lifting": ["lifting", "crane", "load", "sling", "hoist"],
+    "fall exposure": ["height", "scaffold", "harness", "ladder"],
+    "vehicle movement": ["vehicle", "revers", "blind spot", "forklift"],
+    "toxic atmosphere": ["toxic", "gas", "confined"],
+    "fire/explosion": ["flammable", "ignition", "fire", "hot work"],
+}
+ACTIVITIES = {
+    "Valve Maintenance": ["valve maintenance", "process valve", "maintenance", "repair", "turnaround"],
+    "Mechanical Lifting": ["lifting", "crane", "hoist", "rigging", "sling", "suspended load"],
+    "Drilling": ["drilling", "drill floor", "well intervention", "rig floor"],
+    "Driving": ["driving", "vehicle", "forklift", "traffic", "revers"],
+    "Hot Work": ["hot work", "welding", "cutting", "grinding"],
+    "Pressure Testing": ["pressure test", "hydrotest", "pneumatic test", "pressuriz"],
+    "Inspection": ["inspection", "inspected", "walkdown"],
+}
+BARRIER_FAILURES = {
+    "isolation / control verification failure": ["not been completely", "not completely isolated", "incomplete", "not verified", "isolation"],
+    "permit or authorization control failure": ["permit", "authorization", "procedure bypass", "control bypass"],
+    "line-of-fire exclusion failure": ["release path", "line of fire", "under a suspended", "beneath a suspended", "pinch point"],
+    "fall-protection control failure": ["without harness", "fall protection absent", "unprotected edge"],
+}
+
+def _hits(text: str, terms: list[str]) -> list[str]: return [t for t in terms if t in text.lower()]
+
+def _location(text: str) -> str | None:
+    match = re.search(r"\b(?:at|in|on)\s+((?:site|facility|plant|yard|platform|rig|station|terminal)\s+[a-z0-9][a-z0-9 ._-]{0,50})", text, re.I)
+    return match.group(1).strip(" .,") if match else None
+
+def analyze_text(narrative: str) -> dict[str, Any]:
+    if not narrative or len(narrative.strip()) < 12: raise ValueError("Provide a report narrative of at least 12 characters.")
+    text=narrative.lower(); rule_scores=[]
+    for rule,terms in RULES.items():
+        found=_hits(text,terms)
+        if found: rule_scores.append((rule,min(.96,.48+.12*len(found)),found))
+    rule_scores.sort(key=lambda r:r[1],reverse=True)
+    hazards=[name for name,terms in HAZARDS.items() if _hits(text,terms)]
+    high_cues=_hits(text,["stored pressure","pressure","energized","suspended","height","toxic","flammable","release path","flange","critical control","bypass"])
+    exposure=_hits(text,["worker","technician","standing","within","under","near","occupied"])
+    failures=_hits(text,["not been completely","not completely isolated","incomplete","failed","bypass","missing","without","not verified","deviation"])
+    score=.08+.095*min(5,len(high_cues))+.07*min(3,len(exposure))+.1*min(3,len(failures))
+    if any(x in text for x in ["released","fell","struck","contact","collapse"]): score+=.15
+    if any(x in text for x in ["housekeeping","paper","minor","cleaned"]): score-=.16
+    probability=round(max(.03,min(.97,score)),2); risk="High" if probability>=.65 else "Medium" if probability>=.35 else "Low"
+    cue_text={"stored pressure":"stored pressure is described","pressure":"pressure exposure is described","release path":"a person is in a potential release path","not been completely":"isolation appears incomplete","not completely isolated":"isolation appears incomplete","incomplete":"a control is described as incomplete","suspended":"suspended-load exposure is described","height":"work at height is described","energized":"hazardous energy may be present"}
+    evidence=[cue_text[t] for t in dict.fromkeys(high_cues+failures) if t in cue_text]
+    precursors=[]
+    if any(x in text for x in ["isolation","pressure","energized"]): precursors.append("isolation verification gap")
+    if any(x in text for x in ["release path","flange","suspended","pinch"]): precursors.append("line-of-fire exposure")
+    if any(x in text for x in ["permit","bypass"]): precursors.append("permit or critical-control deviation")
+    activity=next((name for name,terms in ACTIVITIES.items() if _hits(text,terms)),"Unclassified")
+    barrier_failures=[name for name,terms in BARRIER_FAILURES.items() if _hits(text,terms)]
+    if probability >= .65:
+        classification, sif_potential = "SIF Potential", True
+    elif probability < .35:
+        classification, sif_potential = "Non-SIF Potential", False
+    else:
+        classification, sif_potential = "Needs Review", None
+    return {"sif_probability":probability,"risk":risk,"classification":classification,"classification_basis":"Prototype rules threshold; not a calibrated probability.","model_mode":"Transparent Rules Engine","model_version":"rules-v1.0","evidence":evidence or ["No strong SIF precursor language detected; human review remains available."],"evidence_note":"These are textual signals, not proof of causation.","rules":{"primary":{"rule":rule_scores[0][0],"confidence":round(rule_scores[0][1],2)} if rule_scores else None,"secondary":[{"rule":r,"confidence":round(c,2)} for r,c,_ in rule_scores[1:3]]},"activity":activity,"location":_location(narrative),"hazards":hazards or ["not classified"],"precursors":precursors or ["no strong precursor pattern"],"barrier_failures":barrier_failures,"priority":"Immediate review" if probability>=.65 else "Review" if probability>=.35 else "Monitor","review_required":probability>=.35,"high_potential":None,"sif_potential":sif_potential,"sif_label_status":"rules_classified" if sif_potential is not None else "unresolved"}

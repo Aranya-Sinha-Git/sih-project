@@ -1,0 +1,12 @@
+{
+  "model_status": "WEAK_DEMO_UNVALIDATED",
+  "implementation": "src/weak_demo_engine.py",
+  "output": "demo_risk_score",
+  "not_a_probability": true,
+  "review_required_for_every_output": true,
+  "prohibited_uses": [
+    "performance claims",
+    "automated safety approval",
+    "SIF ground-truth inference"
+  ]
+}

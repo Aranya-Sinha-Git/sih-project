@@ -1,0 +1,7 @@
+# Architecture
+
+Next.js App Router provides a desktop-first operational UI. FastAPI serves Pydantic contracts over a local SQLite database that remains backward-compatible with existing incident records. New reports pass through one cached adapter for the frozen TF-IDF classifier; its raw, uncalibrated screening score and threshold decision are immutable in the analysis JSON. The deterministic rules engine remains supplemental for extraction and LSR cues.
+
+Grounded intelligence is separate from screening: a versioned public IOGP/OIL reference catalog and TF-IDF retrieval return cited evidence, while historical-incident retrieval uses source IDs, provenance, relevance filtering, self/duplicate exclusion, and validation-lock exclusion. Optional local-LLM explanations consume only retrieved evidence, validate citation IDs, cache by versioned inputs, and fall back to a structured evidence summary.
+
+Human adjudication is stored independently through the existing review fields and an append-only review history with previous/new disposition and screening version. API responses expose model, human, and effective outcomes separately. The blind evaluator consumes only locked reviewer adjudications and the frozen predictor; it never trains, selects thresholds, or publishes human metrics before qualified review is complete. Calibration remains explicitly incomplete unless independently labelled development data is available.

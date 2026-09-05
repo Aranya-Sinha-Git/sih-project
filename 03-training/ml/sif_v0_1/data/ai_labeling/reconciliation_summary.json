@@ -1,0 +1,36 @@
+{
+  "reconciliation_provenance": "AI_SOL_DUAL_PASS_RECONCILIATION",
+  "total_records": 500,
+  "exact_label_agreement_pct": 90.6,
+  "binary_agreement_pct": 95.7494,
+  "cohen_kappa": 0.78876,
+  "cohen_kappa_binary": 0.876553,
+  "sif_sif_agreements": 339,
+  "non_sif_non_sif_agreements": 89,
+  "uncertain_containing_cases": 53,
+  "opposite_label_disagreements": 19,
+  "high_confidence_consensus_count": 356,
+  "lower_confidence_consensus_count": 72,
+  "adjudication_queue_size": 144,
+  "training_candidates_count": 356,
+  "status_counts": {
+    "CONSENSUS_HIGH": 356,
+    "CONSENSUS_LOWER_CONFIDENCE": 72,
+    "UNCERTAIN": 53,
+    "DISAGREEMENT": 19
+  },
+  "agreement_by_source": {
+    "OSHA_SIR": {
+      "total_records": 500,
+      "exact_label_agreement_pct": 90.6,
+      "binary_comparable_cases": 447,
+      "binary_agreement_pct": 95.7494,
+      "cohen_kappa": 0.78876,
+      "cohen_kappa_binary": 0.876553,
+      "sif_sif_agreements": 339,
+      "non_sif_non_sif_agreements": 89,
+      "uncertain_containing_cases": 53,
+      "opposite_label_disagreements": 19
+    }
+  }
+}

@@ -1,0 +1,3 @@
+﻿source,publisher,domain_similarity,has_narrative,has_severity,has_outcome,has_activity,has_location,has_hazard,has_control_failure,public_access,licensing,sample_size,potential_for_non_sif_labeling,notes
+OIL contractor near-miss reporting procedure,Oil India Limited,very high,schema,schema,actual/potential,yes,yes,yes,yes,public PDF,copyright/terms not asserted; cite official source,2015,yes,schema reference and acquisition target for private OIL records
+DOE Operating Experience Summaries,U.S. Department of Energy,medium,yes,yes,yes,yes,yes,yes,yes,public PDFs,document-specific terms,various,no,near-miss/property-only candidates require expert labeling

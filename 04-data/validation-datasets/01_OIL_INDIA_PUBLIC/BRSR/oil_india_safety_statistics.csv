@@ -1,0 +1,7 @@
+﻿fiscal_year,metric,value,unit,source_document,page,notes
+2025-26,source report available,,,oil_india_brsr_2025-26.pdf,,Downloaded official BRSR; safety metrics to be extracted after native text/table review.
+2024-25,LTIFR - workers (non-executives),0.071,per one million person-hours worked,oil_india_brsr_2024-25.pdf,37,Source-native reported value.
+2024-25,total recordable work-related injuries - workers (non-executives),2,count,oil_india_brsr_2024-25.pdf,37,Source-native reported value.
+2024-25,fatalities - workers (non-executives),0,count,oil_india_brsr_2024-25.pdf,37,Source-native reported value.
+2024-25,high consequence work-related injury or ill-health excluding fatalities - workers (non-executives),2,count,oil_india_brsr_2024-25.pdf,37-38,Source-native reported value.
+2023-24,near misses,349,count,oil_india_brsr_2023-24.pdf,55,Reported in the safety performance section; preserve as source-native aggregate.

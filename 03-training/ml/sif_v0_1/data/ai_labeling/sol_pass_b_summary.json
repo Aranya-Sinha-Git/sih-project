@@ -1,0 +1,21 @@
+{
+  "provenance": "AI_SOL_XHIGH_PASS_B",
+  "framework_version": "SIF_LABELING_GUIDE_V0_1",
+  "total_labelled": 500,
+  "counts": {
+    "SIF": 369,
+    "Non_SIF": 97,
+    "Uncertain": 34
+  },
+  "mean_confidence": 0.9126,
+  "verification": {
+    "exactly_500_records": true,
+    "exactly_500_unique_candidate_ids": true,
+    "candidate_ids_match_queue": true,
+    "no_missing_labels": true,
+    "valid_label_values": true,
+    "confidence_values_between_0_and_1": true,
+    "no_missing_required_fields": true,
+    "no_malformed_rows": true
+  }
+}

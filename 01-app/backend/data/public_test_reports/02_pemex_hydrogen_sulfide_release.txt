@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — NEGATIVE / HIGH RISK
+Source type: Public-report paraphrase (not Oil India data)
+Source: https://www.csb.gov/assets/1/6/PEMEX_Investigation_Report_Final.pdf
+
+During blind-installation work, workers selected the wrong flange while locating an isolation blind. Hydrogen sulfide began leaking as bolts were removed. The flange burst open and released toxic gas. Equipment identification and control markers were inconsistent.

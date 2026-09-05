@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — POSITIVE / NEAR MISS CONTROL DETECTED
+Source type: Public-report paraphrase (not Oil India data)
+Source: https://ehss.energy.gov/oesummary/oesummary2003/oe2003-15.pdf
+
+During a zero-energy check before electrical modification work, an electrician found a pressure switch still energised at 110 volts. A complex lockout/tagout had been misinterpreted, but the check found the condition before workers were exposed.

@@ -1,0 +1,9 @@
+{
+  "total": 500,
+  "SIF_POTENTIAL": 342,
+  "NON_SIF_POTENTIAL": 114,
+  "UNCERTAIN": 44,
+  "mean confidence": 0.8742,
+  "high-confidence count": 368,
+  "low-confidence count": 32
+}

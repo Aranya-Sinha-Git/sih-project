@@ -1,0 +1,15 @@
+{
+  "reviewed_labels_accepted": 0,
+  "sif": 0,
+  "non_sif": 0,
+  "uncertain": 0,
+  "rejected_labels_by_reason": {
+    "rules_classified": 1,
+    "weak_label": 100
+  },
+  "eligible_for_supervised_training": false,
+  "accepted_provenance": [
+    "expert_reviewed",
+    "manual_reviewed"
+  ]
+}

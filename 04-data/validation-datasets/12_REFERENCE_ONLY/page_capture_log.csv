@@ -1,0 +1,8 @@
+url,status,file,bytes,sha256
+https://www.oil-india.com/baghjan-update,downloaded,01_OIL_INDIA_PUBLIC\OTHER_PUBLIC_SAFETY\oil_india_baghjan_update.html,705030,c52677df3d71cb9620e5719607b1010a56515abbc85835566a237c32161cb8c3
+https://www.oil-india.com/business-responsibility-sustainability-report,downloaded,01_OIL_INDIA_PUBLIC\ENVIRONMENT_AND_RISK\oil_india_brsr_index.html,93145,6ef9225fbb40efff2894c557d318ab8344ef8f9b05a6eb22387a27b1c1e39a92
+https://www.cdc.gov/niosh/oil-gas/about/fog/index.html,downloaded,03_NIOSH_FOG\DOCUMENTATION\niosh_fog_landing.html,55313,ec872f61ba21aeb5675e8c8d72919d478de8dad315918e1420b37a259ba786b1
+https://www.osha.gov/severe-injury-reports,downloaded,04_OSHA\DOCUMENTATION\osha_severe_injury_reports_landing.html,106007,86e8f77a731861e2b1e89e2bc526ae7e27260bec2acb5ff29accc855edeedcde
+https://www.bsee.gov/stats-facts/offshore,not_downloaded: HTTP Error 404: Not Found,,,
+https://www.cdc.gov/niosh/face/,downloaded,06_NIOSH_FACE\OIL_GAS_RELEVANT\niosh_face_landing.html,45396,e477dfe8491122920ed07db8bbb2df0a42acd5815bd4bfcffc38bfa6d261f75e
+https://www.iogp.org/workstreams/safety/safety/safety-data/,not_downloaded: HTTP Error 403: Forbidden,,,

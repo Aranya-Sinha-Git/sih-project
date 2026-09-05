@@ -1,0 +1,5 @@
+PUBLIC TEST REPORT — NEGATIVE / HIGH RISK
+Source type: Public-report paraphrase (not Oil India data)
+Source: https://www.hse.gov.uk/electricity/maintenance/isolate.htm
+
+During refurbishment electrical work, an electrician received a severe electric shock because the electrical supply had not been properly isolated. Investigation found no management system for checking electrical-work precautions.

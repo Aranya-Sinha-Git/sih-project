@@ -1,0 +1,4912 @@
+--- PAGE 1 ---
+[Document title] 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BUSINESS RESPONSIBILITY AND 
+SUSTAINABILITY REPORT   
+FY- 2023-24  
+ 
+
+
+--- PAGE 2 ---
+ 
+2 
+ 
+BRSR 2023-24 
+ 
+CONTENTS  
+Section A: General disclosures ...................................................................................................................... 3 
+Section B: Management and process disclosures ......................................................................................... 16 
+SECTION C: PRINCIPLE WISE PERFORMANCE DISCLOSURE ......................................................... 20 
+Principle 1: Businesses should conduct and govern themselves with integrity, and in a manner that is 
+Ethical, Transparent and Accountable ....................................................................................................... 20 
+Essential indicators ................................................................................................................................ 20 
+Leadership indicators ............................................................................................................................. 24 
+Principle 2: Businesses should provide goods and services in a manner that is sustainable and safe  ............ 26 
+Essential indicators ................................................................................................................................ 26 
+Leadership Indicators ............................................................................................................................ 27 
+Principle 3: Businesses should respect and promote the well-being of all employees, including those in their 
+value chains ................................................................................................................................................ 29 
+Essential indicators ................................................................................................................................ 29 
+Leadership indicators ............................................................................................................................. 37 
+Principle 4: Businesses should respect the interests of and be responsive to all its stakeholders  ................... 39 
+Essential indicators ................................................................................................................................ 39 
+Leadership indicators ............................................................................................................................. 41 
+Principle 5: Businesses should respect and promote human rights .............................................................. 43 
+Essential indicators ................................................................................................................................ 43 
+Leadership Indicators ............................................................................................................................ 47 
+Principle 6: Businesses should respect and make efforts to protect and restore the environment ................. 49 
+Essential indicators ................................................................................................................................ 49 
+Leadership indicators ............................................................................................................................. 58 
+Principle 7: Businesses, when engaging in influencing public and regulatory policy, should do so in a manner 
+that is responsible and transparent ............................................................................................................. 63 
+Essential indicators ................................................................................................................................ 63 
+Leadership indicators ............................................................................................................................. 63 
+Principle 8: Businesses should promote inclusive growth and equitable development  ................................. 64 
+Essential indicators ................................................................................................................................ 64 
+Leadership indicators ............................................................................................................................. 65 
+Principle 9: Businesses should engage with and provide value to their consumers in a responsible manner  . 67 
+Essential indicators ................................................................................................................................ 67 
+Leadership indicators ............................................................................................................................. 69 
+Appendix - 1 
+Assurance Statement 
+ 
+
+--- PAGE 3 ---
+ 
+3 
+ 
+BRSR 2023-24 
+ SECTION A: GENERAL DISCLOSURES  
+ 
+I. Details of the listed entity 
+ 
+1 Corporate Identity Number (CIN) of 
+the Listed Entity 
+L11101AS1959GOI001148 
+2 Name of the Listed Entity Oil India Limited 
+3 Year of incorporation 1959 
+4 Registered office address Duliajan, Assam 
+5 Corporate address Plot No. 19, Sector- 16A, Noida- 201301 
+6 E-mail esg@oilindia.in  
+7 Telephone +91-0374-2800427 
+8 Website www.oil-india.com  
+9 Financial year for which reporting is 
+being done 
+2023-24 
+10 Name of the Stock Exchange(s) where 
+shares are listed 
+National Stock Exchange of India Ltd. and BSE Limited 
+11 Paid-up Capital  Rs. 1084.41 Crore 
+12 Name and contact details (telephone, 
+email address) of the person who may be 
+contacted in case of any queries on the 
+BRSR report 
+Name: Mr. Shiladitya Deb 
+Designation: General Manager- ESG, FHQ, Duliajan 
+Telephone No.: 0374-2807991 
+Email ID: shiladitya@oilindia.in 
+13 Reporting boundary - Are the 
+disclosures under this report made on a 
+standalone basis (i.e., only for the entity) 
+or on a consolidated basis ( i.e., for the 
+entity and all the entities which form a 
+part of its consolidated financial 
+statements, taken together). 
+Standalone basis    
+
+--- PAGE 4 ---
+ 
+4 
+ 
+BRSR 2023-24 
+ 14 Name of assurance provider  Bureau Veritas India Pvt Ltd 
+15 Type of assurance obtained  Reasonable assurance  
+ 
+ 
+II. Products/services 
+16. Details of business activities (accounting for 90% of the turnover):  
+S. No. Description of Main Activity Description of Business 
+Activity % of Turnover of the entity 
+1 Exploration and Production of 
+Hydrocarbon 
+Exploration and Production of 
+Crude oil and Natural gas 97.08% 
+   
+ 
+17. Products/Services sold by the entity (accounting for 90% of the entity’s Turnover)   
+S. No. Product/Service NIC Code % of total Turnover contributed 
+1 Crude Oil 061 72.86% 
+2 Natural Gas  062 23.45% 
+3 LPG 192 0.77% 
+III. Operations 
+18. Number of locations where plants and/or operations/offices of the entity are situated:   
+Location Number of plants Number of offices Total 
+National 173 12 185 
+International 0 1 1 
+19. Markets served by the entity:  
+S. 
+No. 
+ Particular Number 
+a National (No. of States) 6 States (Assam, Arunachal Pradesh, Rajasthan, Madhya Pradesh, 
+Gujarat, Odisha)  
+International (No. of 
+Countries) 
+ Nil 
+    % Contribution 
+b What is the contribution of 
+exports as a percentage of the 
+total turnover of the entity? 
+Nil 
+   Provide description below - 
+
+--- PAGE 5 ---
+ 
+5 
+ 
+BRSR 2023-24 
+ c A brief on types of customers Majority of our customer-base consists of Public Sector Undertakings 
+(PSUs) in the Oil and Gas sector. Other customers include DISCOMs 
+like Rajasthan-Jodhpur Vidyut Vitaran Nigam Limited,  Gujarat- 
+Gujarat Urja Vikas Nigam Limited & Madhya Pradesh Power 
+Management Company Limited  and private-sector entities operating 
+in regions nearby our facilities (ex. Tea producers) 
+IV. Employees 
+20. Details as at the end of Financial Year (FY2023-24) 
+a. Employees (executives) and workers (non-executives) (including differently abled)  
+FY 2023-24 
+S. 
+No.  
+Particulars Total (A) Male No. (B) Percentage 
+% (B / A) 
+Female 
+No. (C) 
+Percentage 
+% (C / A) 
+EMPLOYEES (executives)  
+1 Permanent (D) 1771 1546 87.30% 225 12.70% 
+2 Other than Permanent (E) 131 105 80.15% 26 19.85% 
+3 Total employees (D + E) 1902 1651 86.80% 251 13.20% 
+WORKERS (non-executives) 
+4 Permanent (F) 4721 4450 94.26% 271 5.74% 
+5 Other than Permanent (G) 154 145 94.16% 9 5.84% 
+6 Total workers (F + G) 4875 4595 94.26% 280 5.74% 
+ 
+b. Differently abled Employees (executives) and workers (non-executives) 
+FY 2023-24 
+S. 
+No.  
+Particulars Total (A) Male No. 
+(B) 
+Percentage 
+% (B / A) 
+Female 
+No. (C) 
+Percentage 
+% (C / A) 
+DIFFERENTLY ABLED EMPLOYEES (executives) 
+1 Permanent (D) 42 39 92.86% 3 7.14% 
+2 Other than Permanent / 
+Contractual / Third Party (E) 0 0 0% 0 0% 
+3 Total differently abled 
+employees (D + E) 42 39 92.86% 3 7.14% 
+DIFFERENTLY ABLED WORKERS (non-executives) 
+
+--- PAGE 6 ---
+ 
+6 
+ 
+BRSR 2023-24 
+ 4 Permanent (F) 121 115 95.04% 6 4.96% 
+5 Other than Permanent / 
+Contractual / Third Party (E) 
+0 0 0% 0 0% 
+6 Total differently abled workers 
+(F+G) 
+121 115 95.04% 6 4.96% 
+ 
+21. Participation/Inclusion/Representation of women 
+Representative Stakeholder Total (A) 
+No. and percentage of Females (B) 
+No. (B) % (B / A) 
+Board of Directors 7* 1* 14.29% 
+Key Management Personnel 1 0 0% 
+*Position as on 31.03.2024. 
+22. Turnover rate for permanent employees (executives) and workers (non-executives) 
+ 
+FY 2023-24 
+(Turnover rate in 
+current FY) 
+FY 2022-23 
+(Turnover rate in 
+previous FY) 
+FY2021-22 
+(Turnover rate in prior 
+to previous FY) 
+Male Female Total Male Female Total Male Female Total 
+Turnover rate for 
+Permanent Employees 
+(Executives) (%)  
+4.45 2.72 4.23 3.94 4.32 3.99 3.05 4.44 3.22 
+Turnover rate for 
+Permanent Workers 
+(Non-executives) (%) 
+6.24 2.94 6.06 7.56 2.91 7.32 9.12 4.42 8.91 
+ 
+V. Holding, Subsidiary and Associate Companies (including joint 
+ventures) 
+23. (a) Names of holding / subsidiary / associate companies / joint ventures 
+S. 
+No. 
+Name of the holding 
+/subsidiary / associate 
+companies / joint ventures 
+(A) 
+Indicate whether 
+holding/ 
+Subsidiary/ 
+Associate/ Joint 
+Venture 
+% of shares 
+held by 
+listed entity 
+Does the entity indicated at 
+column A, participate in the 
+Business Responsibility 
+initiatives of the listed entity? 
+(Yes/No) 
+1 Numaligarh Refinery 
+Limited 
+Subsidiary  69.63% The Company undertakes its own 
+Business Responsibility (BR) 
+initiatives and adheres to the 
+
+--- PAGE 7 ---
+ 
+7 
+ 
+BRSR 2023-24 
+ 
+guidelines issued by statutory 
+bodies / Government from time to 
+time. 
+2 Oil India International Pte. 
+Ltd. (OIIPL) 
+Subsidiary 100% The Overseas Subsidiaries of the 
+Company are SPVs / Investment 
+arms for acquisition of overseas 
+E&P Assets only. 3 Oil India International B.V 
+(OIIBV) 
+Subsidiary 100% 
+4 Oil India Sweden AB Subsidiary 100% 
+5 Oil India (USA) Inc. Subsidiary 100% On 14th January 2022, Oil India 
+(USA) Inc., the wholly owned 
+subsidiary of the Company closed 
+the deal to divest its entire stake 
+in Niobrara shale oil and gas asset 
+in USA. After compliance of 
+applicable US laws, Oil India 
+(USA) Inc. has been wound up on 
+2nd May,2023. 
+6 Brahmaputra Cracker and 
+Polymer Ltd (BCPL) 
+Associate 10% The Company undertakes its own 
+Business Responsibility (BR) 
+initiatives and adheres to the 
+guidelines issued by statutory 
+bodies / Government from time to 
+time. 
+7 DNP Ltd. Joint Venture 23% 
+8 Assam Petro-Chemicals 
+Limited (APL) 
+Joint Venture 48.80% The Company undertakes its own 
+Business Responsibility (BR) 
+initiatives and adheres to the 
+guidelines issued by statutory 
+bodies / Government from time to 
+time. 
+9 Indradhanush Gas Grid 
+Limited (IGGL) 
+Joint Venture 20% 
+10 HPOIL Gas Private Ltd. 
+(HPOIL) 
+Joint Venture 50% 
+11 Purba Bharati Gas Private 
+Limited (PBGPL) 
+Joint Venture 26% 
+12 North East Gas Distribution 
+Company Limited 
+Joint Venture 49% 
+13 Suntera Nigeria 205 Ltd. Joint Venture 25% The overseas JV Companies 
+undertake BR initiatives as per 
+the applicable laws of 13 native 
+country 
+14 Beas Rovuma Energy 
+Mozambique Ltd. (BREML) 
+Joint Venture 40% 
+VI. CSR details 
+24. (i) Whether CSR is applicable as per section 135 of Companies Act, 2013: (Yes/No)  - Yes 
+ (ii) Turnover (in Rs.) - Rs. 22129.79 Cr 
+ (iii) Net worth (in Rs.) – Rs.  35449.32 Cr   
+VII. Transparency and Disclosures Compliances 
+25. Complaints/Grievances on any of the principles (Principles 1 to 9) under the National Guidelines on 
+Responsible Business Conduct 
+
+--- PAGE 8 ---
+ 
+8 
+ 
+BRSR 2023-24 
+ 
+Stakeholder 
+group from 
+whom 
+complaint is 
+received 
+Grievance 
+Redressal 
+Mechanism in 
+Place (Yes/No)  
+(If Yes, then 
+provide the 
+documented 
+management 
+approved SOP 
+for grievance 
+mechanism 
+and the web-
+link for 
+grievance 
+redressal 
+policy) 
+FY2023-24 FY2022-23 
+Number 
+of 
+complaint
+s filed 
+during 
+the year 
+Number 
+of 
+complaint
+s pending 
+resolution 
+at close of 
+the year 
+Remarks 
+(e.g., 
+categorizati
+on of 
+grievances 
+if available) 
+Number of 
+complaints 
+filed during 
+the year 
+Number of 
+complaints 
+pending 
+resolution at 
+close of the 
+year 
+Remarks 
+Communities Yes. 
+https://www.
+oil-
+india.com/N
+ComplaintHa
+ndling 
+Additionally, 
+local 
+community 
+can file 
+grievance 
+physically as 
+illustrated 
+under P5 Pt. 
+4. 
+129 6 
+- 
+ 
+113 4 - 
+Investor Yes,  
+TOPSUBME
+NU9543Main
+MenuEnglish
+Level-
+2_Process_fo
+r_Resolution
+_of_Investors
+_Grievances.
+pdf (oil-
+india.com) 
+0 Nil - 0 Nil - 
+Shareholders Yes 
+The 
+Company 
+has created a 
+designated 
+email-id 
+investors 
+@oilindia. 
+in 
+128 Nil - 107 Nil - 
+Employees 
+and workers 
+Yes  Nil Nil - Nil Nil - 
+
+--- PAGE 9 ---
+ 
+9 
+ 
+BRSR 2023-24 
+ https://oilweb
+.oilindia.in/G
+rievanceSyste
+m 
+Customers Yes 
+https://www.
+oil-
+india.com/N
+ComplaintHa
+ndling 
+Nil Nil - Nil Nil - 
+Value Chain 
+Partners 
+(upstream & 
+downstream) 
+Yes 
+https://www.
+oil-
+india.com/N
+ComplaintHa
+ndling 
+Nil Nil Nil 05 Nil  
+Public 
+Grievances 
+received 
+through 
+CPGRAMS 
+Portal 
+Yes 
+https://pgport
+al.gov.in/ 
+29 Nil Nil 46 8 - 
+Other 
+(Public) 
+https://www.
+oil-
+india.com/N
+ComplaintHa
+ndling  
+14 Nil  Nil 7 Nil  
+26. Overview of the entity’s material responsible business conduct issues 
+Please indicate material responsible business conduct and sustainability issues pertaining to environmental 
+and social matters that present a risk or an opportunity to your business, rationale for identifying the same, 
+approach to adapt or mitigate the risk along-with its financial implications, as per the following format 
+S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+1 Response to 
+climate change 
+Opportunity OIL 
+conducted a 
+comprehensiv
+e stakeholder 
+engagement 
+and 
+materiality 
+assessment to 
+identify key 
+ESG issues.  
+These 
+1. Oil India Limited (OIL) has set 
+forth a visionary goal of achieving 
+net-zero emissions by 2040. 
+2. OIL is actively diversifying its 
+energy mix by delving into 
+renewable energy sources. The 
+successful commissioning of wind 
+and solar energy projects, reflects 
+a commitment to reducing 
+dependence on traditional fossil 
+fuels. 
+ Positive 
+
+--- PAGE 10 ---
+ 
+10 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+findings are 
+detailed in 
+Appendix I,  
+3. OIL has initiated a process for 
+incorporation of wholly owned 
+subsidiary company to manage 
+Alternate Energy Business of OIL. 
+4. OIL executed a Joint Venture 
+Agreement (JVA) with Assam 
+Power Generation Corporation 
+Ltd. (APGCL) in 2024 for 
+development of renewable power 
+projects of total 645 MW capacity 
+in the state of Assam. The process 
+of formation of a JV company with 
+APGCL is in progress.  
+5. OIL is strategically planning to 
+become a zero -flare company by 
+2025 through upgrading & 
+construction of installations and 
+pipeline networks and adding 
+compression facilities for gas field 
+monetisation etc. 
+6. OIL is actively  engaging with 
+industry stakeholders, research 
+institutions, academia, and 
+government agencies, thereby 
+leveraging collective expertise and 
+collaboration for sustainable 
+growth.  
+7. OIL is actively seeking to stay at 
+the forefront of emerging energy 
+markets. For example, OIL has 
+commissioned India 's first pilot 
+plant for Green Hydrogen 
+Production in Jorhat, Assam. 
+2 Talent 
+Management 
+Opportunity -do- 1. OIL provides capacity building 
+and upgrading knowledge and skill 
+of employees through regular 
+training programs.  . A training 
+calendar has been made to 
+routinely upskill the employees.  
+2.  We have human resource 
+committee overseeing the 
+identification of training needs to 
+provide necessary training to 
+ensure the workforce is prepared 
+for the future. 
+3. We have launched "Project OIL 
+Swabalamban" to provide job 
+training and capacity building for 
+ Positive 
+
+--- PAGE 11 ---
+ 
+11 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+youth in Assam and Arunachal 
+Pradesh 
+4. Under the Ministry of Petroleum 
+and Natural Gas, we also 
+established skill development 
+institute in Guwahati   which 
+provides placement -oriented skill 
+trainings to the economically 
+backward youths of the Northeast. 
+3 Indirect 
+economic 
+performance 
+Opportunity -do- 1. OIL has implemented a holistic 
+strategy to boost the local 
+economy significantly by offering 
+training and skill development to 
+the local youth, followed by 
+employment opportunities. 
+2. Our operations meet India's energy 
+needs, lessen the nation's reliance 
+on imports, and concurrently 
+deliver concrete advantages to 
+nearby communities through area 
+development.  
+3. OIL operations have a beneficial 
+effect on promoting 
+entrepreneurship, especially in the 
+civil construction and 
+transportation sectors, thus 
+expanding business prospects for 
+the locals. 
+Positive 
+4 Corporate 
+Governance 
+Opportunity  do- 1. The corporate governance policies 
+of OIL meet the stipulations of 
+regulators including the guidelines 
+issued by the Government of India, 
+Ministry of Petroleum and Natural 
+Gas, Department of Public 
+Enterprises, Securities and 
+Exchange Board of India etc. 
+2. We are committed to deliver value 
+inclusively and sustainably, with 
+the support of our stakeholders. 
+Thereby driving the company’s 
+success in present and future.  
+3. To reduce our reliance on a single 
+segment and to provide integrated 
+products and services to the 
+country, OIL has targeted goal to 
+expand capabilities across entire 
+oil and gas value chain.  
+ Positive 
+
+--- PAGE 12 ---
+ 
+12 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+4. OIL recognizes the significance of 
+sustaining our social license to 
+operate, which we accomplish by 
+consistently engaging with our 
+stakeholders. Such interactions 
+enable us to formulate strategies 
+that are in harmony with their 
+expectations. 
+5 Emissions 
+Management  
+Opportunity  do- 1. OIL has done thorough assessment 
+of our carbon inventory and major 
+greenhouse gas hotspots, coupled 
+with the identification of reduction 
+opportunities across our 
+operational spectrum.  
+2. Our activities such as 
+establishment of renewable energy 
+projects, emphasis on natural gas, 
+innovative solutions like hydrogen 
+fuel cell buses, and pilot studies 
+such as carbon capture, utilization, 
+and storage (CCUS) initiatives at 
+Naharkatiya Field, Assam 
+showcase our efforts to reduce our 
+carbon footprint and contribute to  
+a sustainable future. 
+3. A feasibility study is under 
+progress for identification of 
+suitable reservoirs/aquifers along 
+with design considerations for 
+capture, transportation and 
+sequestration of CO2 in suitable 
+reservoirs/aquifers within 
+Jaisalmer Basin in Rajasthan. 
+4. Construction of strategic field 
+pipelines and adoption energy 
+efficient technologies has lead to 
+reduction in our flaring from 
+7.26% in FY 23 to 6.79%in FY 24. 
+We are targeting to achieve Zero -
+flare milestone in 2025. 
+ 
+ Positive 
+6 Water and 
+effluents 
+management 
+Risk do- 1. Our water conservation measures 
+using recycled water, treated 
+sewage water, rainwater, and 
+process effluents.  
+ Negative 
+
+--- PAGE 13 ---
+ 
+13 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+2. Our central Effluent Treatment 
+Plant (ETP) has a capacity of 7200 
+KLD and treats process effluents. 
+3. We use rainwate r for irrigation, 
+cleaning, and other purposes, 
+thereby reducing dependance to 
+fresh water. 
+4. Through a pilot study at Madhuban 
+ETP, we have managed to 
+decrease our wastewater 
+generation and freshwater usage 
+by treating formation water 
+(produced during oil a nd gas 
+extraction) via Central ETPs, 
+which is then recycled into 
+injection wells. 
+7 Closure and 
+rehabilitation 
+of Oil fields 
+Risk do- 1. OIL has established management 
+processes, technical protocols, and 
+checkpoints to ensure the safe 
+closure of oil wells.  
+2. Post closure of wells we 
+consistently monitor the pressure 
+levels to maintain their integrity.  
+3. Our well abandonment policy is 
+stringent, ensuring responsible and 
+secure procedures.  
+4. We install barricades around the 
+well sites to deter unauthorized 
+entry and protect the environment 
+and complement it by security 
+personnel who oversee and 
+regulate access. 
+ Negative 
+8 Waste 
+Management  
+Risk do- 1. OIL has adopted circularity 
+initiatives such as bioremediation 
+and recycling. We've developed an 
+oily sludge treatment system 
+where the sludge is treated to 
+extract hydrocarbons, and the 
+residual matter is treated with 
+proprietary bioremediation 
+bacteria. 
+2.  Last year, 3541.99 MT  metric 
+tons of sludge were processed for 
+bioremediation and oil recovery, 
+while 97.98 metric tons of spent oil 
+were recycled.  
+ Negative 
+
+--- PAGE 14 ---
+ 
+14 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+3. Our bio-medical waste is disposed 
+of via a double chamber 
+incinerator, adhering t o the state 
+pollution control board's 
+regulations.  
+4. Drill cuttings are cleansed and 
+stored at the drill site in HDPE -
+lined pits, in accordance with the 
+Ministry of Environment, Forest 
+and Climate Change (MoEFCC) 
+guidelines.  
+5. To reduce drilling waste and 
+wastewater, and to recover drilling 
+fluid, we've implemented the 
+Drilling Cutting Treatment Unit 
+under Project Bhuvan Mitra. This 
+unit employs a Vertical Cutting 
+Dryer that separates drill cuttings 
+from drilling fluid using 
+centrifugal force, eliminating the  
+need for water in the cleaning 
+process. 
+9 Occupational 
+health and 
+safety 
+Risk do- 1. OIL has implemented a 
+comprehensive Health, Safety, and 
+Environment (HSE) management 
+system that adheres to all relevant 
+regulations and ISO 14001 & 
+45001 management system 
+standards.  
+2. Our HSE policy is based on the 
+principle of zero tolerance for 
+work-related injuries and illnesses. 
+3. We provided Mines Vocational 
+Training (MVT), Refresher 
+Program and firefighting training 
+to Workers.  
+4. We have robust HSE management 
+system to systematically identify, 
+assess, and mitigate potential risks 
+associated with our ins tallations. 
+Periodically, comprehensive risk 
+assessments, including 
+Quantitative Risk Assessments 
+(QRA) and Hazard and 
+Operability (HAZOP) studies, are 
+conducted for all installations. 
+ Negative 
+
+--- PAGE 15 ---
+ 
+15 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Material issue 
+identified 
+Indicate 
+whether 
+risk or 
+opportunity 
+(R/O) 
+Rationale for 
+identifying 
+the risk / 
+opportunity  
+In case of risk, approach to adapt or 
+mitigate  
+Financial 
+implications 
+of the risk or 
+opportunity 
+(Indicate 
+positive or 
+negative 
+implications) 
+10 Asset integrity 
+and critical 
+incident 
+management 
+Risk do- 1. OIL regularly assess potential 
+workplace-related health and 
+safety hazards and risks through 
+risk assessment studies such as 
+Hazard and Operability Study 
+(HAZOP) and Quantitative risk 
+assessment (QRA). 
+2. We conduct job safety analysis for 
+significant jobs and take necessary 
+precautions to minimize risks. 
+3. We conduct mock drills for critical 
+incidents to train our workforce in 
+effectively handling emergencies. 
+4. We launched an initiative called 
+KAVACH, which a ims to bring 
+about a significant improvement in 
+safety practices. This initiative 
+emphasizes a renewed 
+commitment to health, safety, 
+environment, and social 
+governance (HSE and ESG). 
+ Negative 
+ 
+  
+
+--- PAGE 16 ---
+ 
+16 
+ 
+BRSR 2023-24 
+ SECTION B: MANAGEMENT AND PROCESS DISCLOSURES  
+ 
+Description This section is aimed at helping businesses 
+demonstrate the structures, policies and 
+processes put in place towards adopting the 
+NGRBC Principles and Core Elements. 
+S No. Disclosure Question P1 P2 P3 P4 P5 P6 P7 P8 P9 
+Policy and management processes 
+1 a. Whether your entity’s policy/policies cover each 
+principle and its core elements of the NGRBCs. 
+(Yes/No)  
+Y Y Y Y Y Y N Y Y 
+b. Has the policy been approved by the Board? 
+(Yes/No) 
+Y Y Y Y Y Y NA Y Y 
+c. Web Link of the Policies, if available https://www.oil-india.com/5Investor-services 
+2 Whether the entity has translated the policy into 
+procedures. (Yes / No) 
+Y Y Y Y Y Y NA Y Y 
+3 Do the enlisted policies extend to your value chain 
+partners? (Yes/No) 
+Y Y Y Y Y Y NA Y Y 
+4 Name of the national and international 
+codes/certifications/labels/ standards (e.g. Forest 
+Stewardship Council, Fairtrade, Rainforest 
+Alliance, Trustee) standards (e.g. SA 8000, OHSAS, 
+ISO, BIS) adopted by your entity and mapped to 
+each principle. 
+ISO 9001:2015 Quality Management System 
+ISO 45001:2018 Occupational Health and 
+Safety Management System 
+ISO 14001:2015 Environment Management 
+System 
+ISO 170 25:2017 Competence of testing and 
+calibration laboratories 
+ISO 27001:2013  Information Security 
+Management System 
+ISO 50001:2018 Energy Management   
+Oil has developed a comprehensive set of 
+policies that adhere to various regulations and 
+guidelines issued by the Government of India . 
+we have considered industry's best practices and 
+national/international standards while 
+developing these policies. This approach 
+ensures that our  policies align with multiple 
+sector-specific standards, reflecting a 
+commitment to regulatory compliance and 
+excellence. 
+5 Specific commitments, goals and targets set by the 
+entity with defined timelines, if any. 
+OIL is committed to adhering to the highest 
+standards of corporate governance, as outlined 
+in the Companies Act, 2013, and SEBI 
+regulations. We prioritize transparent business 
+operations, responsible practices, and low -
+carbon solutions. Our focus on safety is 
+unwavering, with a zero -incident goal. We 
+
+--- PAGE 17 ---
+ 
+17 
+ 
+BRSR 2023-24 
+ 
+actively support MSMEs and strive for 
+operational excellence with a commitment to 
+achieving net -zero emissions by 2040. Our 
+business philosoph y emphasizes integrity, 
+inclusivity, and accountability, while fostering 
+entrepreneurship and skill development. We are 
+dedicated to safeguarding customer data 
+through robust cybersecurity measures. 
+6 Performance of the entity against the specific 
+commitments, goals and targets along-with reasons 
+in case the same are not met. 
+The Company regularly monitors its 
+performance against key ESG parameters, 
+details of which are available in BRSR’s 
+disclosures a nd Company’s sustainability 
+report. The BRSR may be read in conjunction  
+with the company’s sustainability report and is 
+available on Company’s  Sustainability 
+webpage https://www.oil-
+india.com/5Sustainability-at-oil  
+ 
+S 
+No. 
+Governance, leadership, and oversight  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Statement by director responsible for the 
+business responsibility  report, high-
+lighting ESG related challenges, targets, 
+and achievements 
+I am happy to present to you the latest edition of OIL's 
+Business Responsibility and Sustainability Report (BRSR), 
+which is prepared in accordance with SEBI guidelines. 
+BRSR reflects our efforts and progress towards a 
+sustainable future, marked by signific ant milestones and a 
+deep sense of responsibility to our Nation and its people.  
+ 
+As an early adopter of ESG reporting in India, OIL 
+consistently endeavors to enhance its disclosures aligned 
+with international and national standards. As a Maharatna 
+energy company, we are tasked with ensuring nation’s 
+energy security, we are deeply committed to the highest 
+standards of transparency, integrity & accountability, 
+uphold corporate governance principles and maintain 
+ethical and responsible business practices acro ss all our 
+operations. At OIL, sustainability is a core value, it is our 
+guiding principle to add to the energy security of the 
+country.  
+ 
+As the energy sector shifts towards cleaner and more 
+sustainable sources, OIL recognizes the need to adapt. 
+We've recently adopted Vision & Strategy 2040, developed 
+with international consultants, to guide our transformation 
+into an Integrated Energy Player. 
+  
+Aligned with this vision and India's ambitious emission 
+reduction target, OIL is committed to becoming a net -zero 
+company by 2040. We are envisaging to invest ₹25,000 Cr 
+by 2040 for development of Alternate energy through a 
+wholly owned subsidiary company dedicated to manage 
+Alternate Energy Business of OIL. The process has been 
+initiated for the incorporation of wh olly owned subsidiary 
+company.  This investment will drive growth in renewable 
+energy, biofuels, compressed bio gas, green hydrogen, bio 
+
+--- PAGE 18 ---
+ 
+18 
+ 
+BRSR 2023-24 
+ 
+ethanol, CCS / CCUS and Geothermal etc.  
+ 
+To strengthen our energy portfolio further, we're exploring 
+diversification i n downstream operations. This includes 
+investments in refining facilities, petrochemicals, LNG 
+infrastructure, fertilizers, and critical minerals exploration. 
+  
+Our focus is on delivering sustainable growth and 
+generating long -term value. We will invest in our people, 
+technology, and infrastructure to maintain our competitive 
+edge and seize emerging opportunities in the evolving 
+energy landscape. 
+ 
+8 
+Details of the highest authority 
+responsible for implementation and 
+oversight of the Business Responsibility 
+policy / (ies). 
+Dr. Ranjit Rath 
+Chairman & Managing Director 
+ 
+ 
+9 
+ 
+Does the entity have a specified 
+Committee of the Board/ Director 
+responsible for decision making on 
+sustainability related issues? (Yes / No). If 
+yes, pro-vide details. 
+The Company has a Board Committee on Corporate Social 
+Responsibility & Sustainable Development (CSR & SD). The 
+Company has established inter sphere ESG & SD to develop 
+targets, review new projects’ contribution to the mitigation 
+plan, monitor corporate communication disclosures, monitor 
+progress, and assess the allocation of resources in line with 
+Net Zero Commitments. 
+ 
+Details of Review of NGRBCs by the Company:  
+ 
+10 
+ 
+Subject for Review 
+Indicate whether review was 
+undertaken by Director / 
+Committee of the Board/Any 
+other Committee 
+Frequency (Annually/ Half yearly/ 
+Quarterly/ Any other – please 
+specify) 
+P 
+1 
+P 
+2 
+P 
+3 
+P 
+4 
+P 
+5 
+P 
+6 
+P 
+7 
+P 
+8 
+P 
+9 
+P 
+1 
+P 
+2 
+P 
+3 
+P 
+4 
+P 
+5 
+P 
+6 
+P 
+7 
+P 
+8 
+P 
+9 
+ Performance against 
+above policies and follow 
+up action 
+Committee of the Board Periodically 
+ Compliance with statutory 
+requirements of relevance 
+to the principles, and,  
+rectification of any non -
+compliances 
+Committee of the Board Periodically 
+ 
+11 Has the entity carried 
+out independent 
+assessment/ 
+evaluation of the 
+working of its policies 
+by an external 
+agency? (Yes/No). If 
+yes, provide name of 
+the agency. 
+P 1 P 2 P 3 P 4 P 5 P 6 P 7  P 8 P 9 
+The Company, being a listed entity, is subject to numerous audits, reviews, 
+scrutiny etc. by regulators, auditors amongst others, which inter-alia review the 
+implementation of approved policies, etc. 
+
+--- PAGE 19 ---
+ 
+19 
+ 
+BRSR 2023-24 
+ 
+ 
+If answer to question (1) under Policy and Management Processes is “No” i.e., not all Principles are 
+covered by a policy, reasons to be stated: 
+12 Questions P 1 P 2 P 3 P 4 P 5 P 6 P 7 P 8 P 9 
+ The  entity does not 
+consider the principles 
+material to its business 
+(Yes/No) 
+NA NA NA NA NA NA No NA NA 
+ The entity is not at a 
+stage where it is in a 
+position to formulate 
+and implement the 
+policies on specified 
+principles (Yes/No) 
+NA NA NA NA NA NA Yes NA NA 
+ The entity does not 
+have the financial or / 
+human and technical 
+resources available for 
+the task (Yes/No) 
+NA NA NA NA NA NA No  NA NA 
+ It is planned to be done 
+in the next financial 
+year (Yes/No) 
+NA NA NA NA NA NA Yes NA NA 
+ Any other reason 
+(please specify) 
+NA NA NA NA NA NA  NA NA 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 20 ---
+ 
+20 
+ 
+BRSR 2023-24 
+ 
+ 
+SECTION C: PRINCIPLE WISE PERFORMANCE DISCLOSURE  
+ 
+PRINCIPLE 1: BUSINESSES SHOULD CONDUCT  AND GOVERN 
+THEMSELVES WITH INTEGRITY, AND IN A MANNER THAT IS ETHICAL, 
+TRANSPARENT AND ACCOUNTABLE  
+ESSENTIAL INDICATORS  
+ 
+1. Percentage coverage by training and awareness programmes on any of the principles during the 
+financial year: 
+ 
+Segment 
+Total 
+number 
+of 
+training 
+and 
+awareness 
+program
+mes held 
+Topics / principles covered under the 
+training and its impact 
+Total 
+persons 
+People 
+attended 
+%age of 
+persons in 
+respective 
+category 
+covered 
+by the 
+awareness 
+program
+mes 
+P
+1 
+P
+2 
+P
+3 
+P
+4 
+P
+5 
+P
+6 
+P
+7 
+P
+8 
+P
+9 
+Board of 
+Directors 
+5    √    √ √ 10 6 60% 
+Key 
+Manager
+ial 
+Personne
+l 
+1 √     √ √   1 1 100% 
+Employe
+es other 
+than 
+BoD and 
+KMPs 
+285 √ √ √ √ √ √ √ √ √ 1902 1679 88.28% 
+Workers 129 √ √ √ √ √ √ √ √ √ 4875 2763 56.68% 
+ 
+2. Details of fines / penalties /punishment/ award/ compounding fees/ settlement amount paid in 
+proceedings (by the entity or by directors / KMPs) with regulators/ law enforcement agencies/ judicial 
+institutions, in the financial year, in the following format  (Note: the entity shall make disclosures on 
+the basis of materiality as specified in Regulation 30 of SEBI (Listing Obligations and Disclosure 
+Obligations) Regulations, 2015 and as disclosed on the entity’s website):  
+ 
+
+--- PAGE 21 ---
+ 
+21 
+ 
+BRSR 2023-24 
+ Monetary 
+  NGRBC Principle Name of the 
+regulatory/ 
+enforcement 
+agencies/judicial 
+institutions 
+Amount 
+ (In INR) 
+Brief of 
+the Case 
+Has an 
+appeal been 
+preferred? 
+(Yes/No) 
+Penalty/ Fine Nil Nil Nil Nil Nil 
+Settlement Nil Nil Nil Nil Nil 
+Compounding fee Nil Nil Nil Nil Nil 
+Non-Monetary 
+  NGRBC Principle Name of the 
+regulatory/ 
+enforcement 
+agencies/judicial 
+institutions 
+Amount (In 
+INR) 
+Brief of 
+the Case 
+Has an 
+appeal been 
+preferred? 
+(Yes/No) 
+Imprisonment  Nil Nil Nil Nil Nil 
+Punishment  Nil Nil Nil Nil Nil 
+ 
+ 
+3. Of the instances disclosed in Question 2 above, details of the Appeal/ Revision preferred in cases 
+where monetary or non-monetary action has been appealed. 
+ 
+Case details  Name of the regulatory / enforcement agencies / 
+judicial institutions 
+Not Applicable 
+ 
+4. Does the entity have an anti -corruption or anti-bribery policy? If yes, provide details in brief and if 
+available, provide a web-link to the policy. 
+ 
+Oil India is focused on maintaining the most elevated moral and moral norms and doesn't endure pay off or 
+debasement in any structure. The Company, being a listed Public Sector Enterprise, leads and oversees itself 
+with morals, straightforwardness and responsibility according to the strategies commanded by Department 
+of Public Enterprises (DPE), G uidelines on Corporate Governance, SEBI (Listing Obligations and 
+Disclosure Requirement) Regulations, 2015 and other guidelines and policies of the DPE in particular and 
+Govt. of India in general. The Company has a Vigilance department  guiding transparenc y, efficiency and 
+integrity and best corporate practices in its working. The Company has a Whistle Blower Policy intended 
+to give a channel to the representatives to report certifiable concerns and issues about unscrupulous conduct 
+inside the organization. Further, the Executives and Employees of the Company are bound by the respective 
+rules on conduct and discipline which inter -alia ensures any form of indulging in bribery or corruption as 
+'Misconduct’. 
+ 
+The Company endeavors to work against corruption in all its forms through well -defined Whistle Blower 
+Policy. This approach furnishes every one of the workers with free access to the Administration in the event 
+
+--- PAGE 22 ---
+ 
+22 
+ 
+BRSR 2023-24 
+ 
+that they notice unscrupulous or ill-advised rehearses or any other wrongful conduct in the Company and to 
+preclude administrative faculty from making any unfavorable individual move against those representatives. 
+Further, no workforce has been denied access to the Audit & Ethics Committee of the Board and no 
+complaint under the Vigil Mechanism was received during the financial year.  
+ 
+Weblink of Policy: https://www.oil-india.com/Document/Financial/Whistle_Blower_Policy.pdf 
+ 
+Oil India Limited endeavors to work against corruption in all its forms, including demanding and accepting 
+bribe, illegal gratification or unjust rewards and to achieve the objectives appropriate provisions have been 
+incorporated in the Conduct Discipline and Appeal Rules/Standing Orders applicable to employees.  
+5. Number of Directors/KMPs/employees/workers against whom disciplinary action was taken by any 
+law enforcement agency for the charges of bribery/ corruption: 
+ 
+ 
+6. Details of complaints regarding conflict of interest: 
+ 
+ 
+ 
+7. Provide details of any corrective action taken or underway on issues related to fines / penalties / action 
+taken by regulators/ law enforcement agencies/ judicial institutions, on cases of corruption and 
+conflicts of interest.  
+  FY 2023-24 
+(Current Financial Year) 
+FY 2022-23 
+(Previous Financial Year) 
+Directors 0 0 
+KMPs 
+Employees (executives) 
+Workers (non-executives) 
+  FY 2023-24 
+(Current Financial Year) 
+FY 2022-23 
+(Previous Financial Year) 
+ Number Remarks Number Remarks 
+Number of complaints 
+received in relation to 
+issues of conflict of 
+interest of the directors 
+0 NA 0 NA 
+Number of complaints 
+received in relation to 
+issues of conflict of 
+interest of the KMPs 
+0 NA 0 NA 
+
+--- PAGE 23 ---
+ 
+23 
+ 
+BRSR 2023-24 
+ 
+Regulatory 
+Action 
+FY 2023-24 
+(Current Financial Year) 
+Incident 
+description Number Incident type Corrective 
+action 
+Attachment of 
+MOM 
+Nil  NA 
+Regulatory 
+Action 
+FY 2022-23 
+(Previous Financial Year) 
+Incident 
+description Number Incident type Corrective 
+action 
+Attachment of 
+MOM 
+Nil NA 
+ 
+8. Number of days of accounts payables (Accounts payable * 365) / Cost of goods  / Services procured) in the 
+following format 
+(BRSR Core Attribute 8: Fairness in Engaging with Customers and Suppliers) –  
+ 
+ FY 2023-24 
+(Current Financial Year) 
+FY 2022-23 
+(Previous Financial Year) 
+Number of days of accounts payables 23.67 24.39 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+ 
+9. Open-ness of business  
+(BRSR Core Attribute 9: Open-ness of business) 
+ 
+Provide details of concentration of purchase and sales with trading houses, dealers, and related parties along-
+with loans and advances & investments, with related parties, in the following format; 
+ 
+ 
+ 
+Parameter Metrics  FY 2023-24 
+(Current financial 
+Year) 
+FY 2022-23 
+(Previous financial 
+Year) 
+Concentration of 
+Purchases 
+a. Purchases from trading houses as 
+% of total purchases 
+ 
+ 
+Not Applicable* b. Number of trading houses where 
+purchase is made from 
+c. Purchase from top 10 trading 
+houses as % of total purchase 
+from trading houses 
+Concentration of Sales 
+a. Sales to dealers / distribution as 
+% of total sales 
+ 
+ 
+ 
+Not Applicable** 
+b. Number of dealers / distributions 
+to whom sales are made 
+
+--- PAGE 24 ---
+ 
+24 
+ 
+BRSR 2023-24 
+ 
+c. Sales to top 10 dealers / 
+distributors as % of total sales to 
+dealers / distributors 
+Share of RPTs in 
+a. Purchases (Purchases with 
+related parties / total purchases) 0.48% 0.74% 
+b. Sales (Sales to related parties / 
+total sales) 49.76% 57.19% 
+c. Loans & Advances (Loans & 
+Advances given to related parties 
+/ total loans & advances) 0.00%*** 0.00%*** 
+d. (Investments in related parties / 
+total investments made) 61.60%*** 74.59%*** 
+*OIL did not place any Purchase Order on any Trading House in FY2022-23 and 2023-24. 
+** OIL is not involved in business transactions of sales with trading houses, dealers, and related parties.  
+*** Based on cumulative figures 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas (India) 
+Private Limited 
+LEADERSHIP INDICATORS  
+ 
+1. Awareness programmes conducted for value chain partners (VCP) on any of the principles during 
+the financial year: 
+Total number of 
+awareness 
+programmes held 
+for VCP 
+Topics / principles 
+covered under the 
+training  
+Attendance of 
+VCP 
+Total 
+VCPs 
+%age of value chain 
+partners covered (by 
+value of business done 
+with such partners) 
+under the awareness 
+programmes 
+06 1.Seminar cum workshop 
+under AtmaNirbhar Bharat 
+campaign-for successful 
+implementation in OIL as 
+per SOP issued by DPIIT 
+for Development order.  
+(P7) 
+273 1776 13.3% 
+2.Vendors Meet-& 
+Grievance Redressal 
+Program (P4) 
+3.Vendors Meet- For 
+interaction and awareness 
+about OIL’s procurement 
+policies and Development 
+order policy under 
+Atmanirbhar Bharat 
+Campaign (P8) 
+
+--- PAGE 25 ---
+ 
+25 
+ 
+BRSR 2023-24 
+ 4.Partners Meet / 
+Roadshow in Abu Dhabi 
+(P4) 
+5.Procedure for submitting 
+bid against OIL’s tenders in 
+GeM & SRM portal and 
+awareness on Invoice to 
+Pay Automation VIM 
+portal-OIL Vendor 
+Awareness Programme 
+organized in Guwahati on 
+7th October 2023. (P4) 
+6.Vigilance sensitization 
+Programme on 30.10.2023. 
+(P1) 
+ 
+2. Does the entity have processes in place to avoid/ manage conflict of interests involving members of 
+the Board? (Yes/No) If Yes, provide details of the same.  
+ 
+Yes, since OIL is a Government Company, and all the Directors are appointed by Government of India. The 
+Administrative Ministry of the Company viz. Ministry of Petroleum and Natural Gas ((MoP&NG) has put 
+in place requisite processes and procedures to manage the conflict of interest involving members of the 
+Board. 
+ 
+ 
+  
+
+--- PAGE 26 ---
+ 
+26 
+ 
+BRSR 2023-24 
+ PRINCIPLE 2: BUSINESSES SHOULD PROVIDE GOODS AND SERVICES 
+IN A MANNER THAT IS SUSTAINABLE AND SAFE  
+ 
+ESSENTIAL INDICATORS  
+ 
+1. Percentage of R&D and capital expenditure (capex) investments in specific technologies to improve 
+the environmental and social impacts of product and processe s to total R&D and capex investments 
+made by the entity, respectively. 
+ 
+ FY 2023-24 FY 2022-23 Details of improvements in environmental and 
+social impacts 
+R&D 100% 100%* 
+All our R&D efforts are aligned towards increasing 
+Crude & Natural gas production which will add 
+towards the energy security of the country , 
+improving product efficiency, energy efficiency & 
+lowering emissions, improving processes, green & 
+new energy etc. 
+Capex 31.38% 26.93% 
+OIL’s Capital equipment CAPEX is focused on 
+technological advancement, energy efficiency, 
+augmenting facilities, safety and environmental 
+features. 
+      *This is a restatement from last year 
+2. a. Does the entity have procedures in place for sustainable sourcing? (Yes/No)  
+Yes, at OIL, we are committed to maintaining responsible and sustainable practices in all our operations, 
+including our vendor selection process. Our dedication extends to cons idering social, ethical, and 
+environmental factors in our decision -making. We have established a robust and transparent tendering 
+process that complies with relevant laws and regulations. Our tender processes are conducted online and 
+paperless to provide equal opportunities to eligible bidders and maintain transparency. Our tender invitations 
+include clauses addressing critical issues such as the prohibition of child labor and the welfare of contractual 
+labor to ensure a fair and ethical execution of the pr ocess. Additionally, we have integrated environment -
+related screening parameters that require compliance with global and national standards as the establishment 
+of performance criteria. We also provide  weightage to ESG related elements while analysing scoring the 
+technical bid submitted by the vendors. These considerations are rigorously evaluated on a tender-to-tender 
+basis to promote sustainability and minimize our ecological impact. Furthermore, we actively support local 
+vendors and contrib ute to the vision of Aatmanirbhar Bharat by implementing purchase preference 
+conditions that prioritize engaging with local suppliers and small or medium -scale industries. 
+ 
+b. If yes, what percentage of inputs were sourced sustainably?  
+100% 
+ 
+3. Describe the processes in place to safely reclaim your products for reusing, recycling, and disposing 
+at the end of life, for (a) Plastics (including packaging) (b) E-waste (c) Hazardous waste and (d) other 
+waste.   
+ 
+Product Process to safely reclaim the product 
+
+--- PAGE 27 ---
+ 
+27 
+ 
+BRSR 2023-24 
+ a. Plastics (including 
+packaging) 
+Product recycling is not practiced in this sector. The product portfolio consists 
+mainly of crude oil, natural gas and value -added products (LPG,), which cannot 
+be recycled. 
+b. E-Waste Disposed via registered recyclers 
+c. Hazardous Waste Oily Sludge Recovered through in -house sludge processing plant for reuse as 
+crude oil and Remaining sludge undergoes bioremediation for proper disposal.  
+ 
+Spent Oil: Sold to authorized recyclers/re-processors for further processing. 
+d. Other Waste All Non-hazardous wastes are properly stored and disposed as per regulation 
+ 
+4. Whether Extended Producer Responsibility (EPR) is applicable to the entity’s activities (Yes / No). If 
+yes, whether the waste collection plan is in line with the Extended Producer Responsibility (EPR) plan 
+submitted to Pollution Control Boards? If not, provide steps taken to address the same.  
+ 
+No. 
+The oil and gas industry  being a complex and diverse sector, with a wide range of products and services. 
+This makes it dif ficult to develop a single EPR system that would be effective for all segments of the 
+industry. It is heavily regulated, with a number of existing laws and regulations governing the management 
+of waste. These regulations often include requirements for prod ucers to collect and recycle waste, which 
+can make EPR redundant. 
+The oil and gas industry being a global industry, with producers operating in a variety of countries with 
+different environmental regulations. This makes it difficult to implement a single EPR system that would 
+be effective across all countries. 
+Leadership  Indicators  
+ 
+1. Has the entity conducted Life Cycle Perspective / Assessments (LCA) for any of its products (for 
+manufacturing industry) or for its services (for service industry)? If yes, provide details in the 
+following format? 
+              No, LCA study has not been conducted for any product or service. 
+ 
+2.  If there are any significant social or environmental concerns and/or risks arising from production 
+or disposal of your products / services, as identified in the life cycle perspective / assessments ( LCA) 
+or through any other means, briefly describe the same along-with action taken to mitigate the same. 
+Life Cycle Assessment to identify list of environmental & social concerns / risks is yet to be carried out. 
+3.  Percentage of recycled or reused input material to total material (by value) used in production (for 
+manufacturing industry) or providing services (for service industry).  
+ The product portfolio consists majorly of crude oil and natural gas which can’t be recycled. 
+ 
+4. Of the products and packaging reclaimed at end of life of products, amount (in metric tonnes) 
+reused, recycled, and safely disposed, as per the following format:  
+ 
+
+--- PAGE 28 ---
+ 
+28 
+ 
+BRSR 2023-24 
+ 
+The product portfolio consists majorly of crude oil and natural gas which is supplied via pipeline. Hence 
+reclamation of product and packaging is not applicable. 
+ 
+ 
+5. Reclaimed products and their packaging materials (as percentage of products sold) for each product 
+category. 
+Not Applicable 
+  
+
+--- PAGE 29 ---
+ 
+29 
+ 
+BRSR 2023-24 
+ PRINCIPLE 3: BUSINESSES SHOULD RESPECT AND PROMOTE THE 
+WELL -BEING OF ALL EMPLOYEES, INCLUDING THOSE IN THEIR 
+VALUE CHAINS  
+ 
+ESSENTIAL INDICATORS  
+1. a. Details of measures for the well-being of Executives (Executives): 
+Category % of Executives covered by 
+Total 
+(A) 
+Health 
+insurance 
+Accident 
+Insurance 
+Maternity 
+Benefits 
+Paternity 
+Benefits 
+Day Care 
+facilities# 
+Number    
+(B) 
+% 
+(B/A) 
+Number
+(C) 
+% 
+(C/A) 
+Number 
+(D) 
+% 
+(D/A) 
+Number 
+(E) 
+% 
+(E/A) 
+Number
+(F) 
+% 
+(F/A) 
+Permanent Employees * 
+Male 1,546 1,546 100% 1,546 100% NA NA 1546 100 1,270 82.15
+% 
+Female 225 225 100% 225 100% 225 100% NA NA 194 86.22
+% 
+Total 1,771 1,771 100% 1,771 100% 225 12.7% 1546 87.29
+% 
+1,464 82.67
+% 
+Other than Permanent Employees** 
+Male 105 105 100% 105 100% NA NA 105 100% 0 0% 
+Female 26 26 100% 26 100% 26 100% NA NA 0 0% 
+Total 131 131 100% 131 100% 26 19.85
+% 105 80.15
+% 0 0% 
+*Permanent Employees of the Company are covered under the OIL Employees' Medical Attendance Rules-2018 
+(Amended). 
+** Other than Permanent Employees are covered under Employees’ Compensation Act, 1923. The benefits under 
+this Policy are governed by limits mentioned in the act. 
+#Day care facility is provided to the Permanent Executives in the FHQ and Corporate office only 
+ 
+b. Details of measures for the well-being of workers (Non-executives) : 
+Catego
+ry 
+% of Non-Executives covered by  
+Total (A) Health insurance Accident 
+Insurance 
+Maternity 
+Benefits 
+Paternity Benefits Day Care facilities# 
+Number 
+(B) 
+% 
+(B/A) 
+Number  
+(C)  
+% 
+(C/A) 
+Number 
+(D) 
+% 
+(D/A) 
+Number 
+(E) 
+% 
+E/A) 
+Number 
+(F) 
+%  
+(F/A) 
+Permanent Non-Executives* 
+Male 4450 4450 100% 4450 100% NA NA 4450 100% 4,114 92.45% 
+
+--- PAGE 30 ---
+ 
+30 
+ 
+BRSR 2023-24 
+ 
+Female 271 271 100% 271 100% 271 100% NA NA 247 91.14% 
+Total 4721 4721 100% 4721 100% 271 5.74% 4450 94.26
+% 4,361 92.37% 
+Other than Permanent workers (non-executives)** 
+Male 145 145 100% 145 100% NA NA 145 100% 0 0% 
+Female 9 9 100% 9 100% 9 100% NA NA 0 0% 
+Total 154 154 100% 154 100% 9 5.84
+% 145 94.16 
+% 0 0% 
+*Permanent Non-Executives of the Company are covered under the OIL Employees' Medical Attendance Rules -
+2018 (Amended). 
+** Other than Permanent Non-Executives are covered under Employees’ Compensation Act, 1923. The benefits 
+under this Policy are governed by limits mentioned in the act. 
+#Day care facility is provided to the Permanent Non-Executives in the FHQ and Corporate office only 
+ 
+c.   Spending on measures towards well-being of employees and workers (including permanent and other 
+than permanent) in the following format – 
+(BRSR Core Attribute 5: Enhancing Employee Wellbeing and Safety) 
+  
+Cost incurred on well-being measures as a % of total revenue of the company 
+FY 2023-24 
+Current 
+Financial 
+Year 
+FY 2022-
+23 
+Previous 
+Financial 
+Year 
+0.6% 0.5% 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas (India) 
+Private Limited 
+2. Details of retirement benefits, for Current FY and Previous Financial Year.  
+ FY2023-24 FY2022-23 
+Benefits No. of 
+employees 
+covered as 
+a    %    of 
+total 
+employees* 
+No. of 
+workers 
+covered as 
+a % of 
+total 
+workers 
+Deducted 
+and 
+deposited 
+with the 
+authority 
+(Y/N/N.A.) 
+No. of 
+employees 
+covered as a    
+%    of total 
+employees 
+No. of 
+workers 
+covered as a 
+% of total 
+workers 
+Deducted and 
+deposited with 
+the authority 
+(Y/N/N.A.) 
+PF 100% 100% Yes 100% 100% Yes 
+Gratuity 100% 100% Yes 100% 100% Yes 
+
+--- PAGE 31 ---
+ 
+31 
+ 
+BRSR 2023-24 
+ ESI NA NA NA NA NA NA 
+Others – 
+please 
+specify 
+- - -  - - -  
+ 
+ 
+3. Accessibility of workplaces 
+Are the premises / offices of the entity accessible to differently abled employees and workers, as per 
+the requirements of the Rights of Persons with Disabilities Act, 2016? If not, whether any steps are 
+being taken by the entity in this regard.  
+ 
+Offices premises employing people with disabilities have been made accessible to them by installing 
+wheelchair ramps and lifts. Additionally, all new office buildings under construction are being designed 
+with additional accessibility features for people with disabilities. 
+ 
+4. Does the entity have an equal opportunity policy as per the Rights of Persons with Disabilities Act, 
+2016? If so, provide a web-link to the policy.  
+ 
+OIL understands and demonstrates the value of a diverse workforce. At OIL, we are committed to providing 
+equal em ployment opportunities and fostering an inclusive work environment and culture where all 
+employees are treated with respect and dignity. This policy applies to the entire organization and aims to 
+promote inclusiveness, striving to maintain a work environme nt free from harassment or discrimination 
+against individuals with special abilities and disabilities. The policy ensures equal employment 
+opportunities without discrimination against persons with disabilities, in accordance with the provisions of 
+the Rights of Persons with Disabilities Act, 2016, and the company's service conditions. It has been made 
+accessible to all employees via the company's internal web portal, allowing them to access the policy at any 
+time, from any device, as long as they have access to the internal web portal. 
+ 
+5. Return to work and Retention rates of permanent employees (executives) and workers (non-
+executive) that took parental leave. 
+Sl. No. Particulars Permanent Employees (executives) Permanent Workers (non-executives) 
+    Male Female Total Male Female Total 
+1 Returned to 
+work rate 
+100% 100% 100% 100% 100% 100% 
+2 Retention 
+rate 
+100% 100% 100% 100% 100% 100% 
+ 
+6. Is there a mechanism available to receive and redress grievances for the following categories of 
+employees and worker? If yes, give details of the mechanism in brief.  
+  Yes/No (If Yes, 
+then give 
+details of the 
+mechanism in 
+brief) 
+Details of mechanism 
+
+--- PAGE 32 ---
+ 
+32 
+ 
+BRSR 2023-24 
+ Permanent Workers (non-
+executives) 
+Yes Yes. In Oil India Limited, there exists an “Online Grievance 
+Redressal Portal/Mechanism” for addressing the grievances 
+of the permanent executives/ employees of the Company. 
+The procedure for addressing the grievances is as per the laid 
+down policy/procedure of the Company.  
+For contract labours there exists the “Shram Suvidha Portal” 
+for flagging off their grievances.  
+Additionally, a platform “Sanglap” has been created to 
+enable employees to submit their suggestions towards 
+performance improvement of the company 
+Other than Permanent 
+Workers (non-executives) 
+Yes 
+Permanent Employees 
+(executives) 
+Yes 
+Other than Permanent 
+Employees (executives) 
+Yes 
+ 
+7. Membership of employees (executives) and worker (non-executives) in association(s) or Unions 
+recognized by the listed entity: 
+Category FY2023-24 FY2022-23 
+Total 
+employees 
+/ workers 
+in 
+respective 
+category 
+(A) 
+No. of 
+employees/ 
+workers in 
+respective 
+category, 
+who are part 
+of 
+association(s) 
+or Union (B) 
+% (B / A) Total 
+employees / 
+workers in 
+respective 
+category (C) 
+No. of 
+employees/ 
+workers in 
+respective 
+category, 
+who are part 
+of 
+association(s) 
+or Union (D) 
+% (D / 
+C) 
+Total Permanent 
+Employees 
+(executives) 
+1771 1440 81.31% 1772 1413 79.74% 
+Male 1546 1233* 79.75% 1556 1247* 80.14% 
+Female 225 207* 92% 216 166* 76.85% 
+Total Permanent 
+Workers (non-
+executives) 
+4721 3217 68.14% 
+ 
+4987 2837 56.89%  
+Male 4450 3077* 69.15% 4714 2734* 58%  
+Female 271 140* 51.66% 273 103* 37.73%  
+*The Employee Association numbers are as per Calendar year  
+ 
+8. Details of training given to employees (executives) and workers (non-executives) 
+ 
+Category FY 2023-24 FY 2022-23 
+Total 
+(A) 
+On Health and 
+Safety Measures 
+On Skills 
+upgradation 
+Total 
+(D) 
+On Health and 
+Safety Measures 
+On Skills 
+upgradation 
+No. (B) % (B/A) No. 
+(C) 
+%  
+(C/A) 
+No. 
+(E) 
+% (E/D) No. (F) % (F/D) 
+Employees (executives) 
+
+--- PAGE 33 ---
+ 
+33 
+ 
+BRSR 2023-24 
+ 
+Male 1546 457* 29.56% 1154 76.64% 1556 406* 26.09%  948 60.93% 
+Female 225 65* 28.89% 159 70.67% 216 37* 17.13% 132 61.11% 
+Total 1771 522* 29.47% 1313 74.14% 1772 443 25.0%  1080 60.95% 
+Workers (non-executives) 
+Male 4450 1880* 42.25% 1132 25.44% 4714 2180* 46.25% 587  12.45 % 
+Female 271 122* 45.02% 106 39.11% 273 99* 36.26%  41 15.02 % 
+Total 4721 2002* 42.41% 1238 26.22% 4987 2279 45.70%  628 12.59 % 
+* No. of participants attended multiple training programmes. One person has been counted only once even if he/she 
+has attended multiple sessions.  
+ 
+9. Details of performance and career development reviews of employees (executives) and workers 
+(non-executives) 
+ 
+FY2023-24 FY2022-23 
+Total (A) No. (B) % (B/A) Total (A) No. (B) % (B/A) 
+Employees (executives)  
+Male 1546 1546 100.00% 1556 1556 100.00% 
+Female 225 225 100.00% 216 216 100.00% 
+Total 1771 1771 100.00% 1772 1772 100.00% 
+Workers (non-executives) 
+Male 4450 4450 100.00% 4714 4714 100.00% 
+Female 271 271 100.00% 273 273 100.00% 
+Total 4721 4721 100.00% 4987 4987 100.00% 
+ 
+10. Health and safety management system:  
+a. Whether an occupational health and safety management system has been implemented by the 
+entity? (Yes/ No). If yes, the coverage such system?  
+ 
+
+--- PAGE 34 ---
+ 
+34 
+ 
+BRSR 2023-24 
+ 
+Yes. Oil India Limited prioritizes safety with a comprehensive Health, S afety, and Environment (HSE) 
+management system covering all employees (100% coverage)  and all operational facilities . The system 
+incorporates various practices: HSE awareness programs, regular inspections and audits, clear Standard 
+Operating Procedures (SOPs), comprehensive HSE training, and mandatory Personal Protective, Equipment 
+(PPE). Emergency preparedness drills and a permit -to-work system ensure readiness for unforeseen 
+situations. Regular HSE meetings foster communication, while accident reporting a nd analysis help prevent 
+future incidents. OIL proactively manages its risk through hazard identification and embrace technology to 
+enhance safety. This robust system reflects OIL's dedication to a safe and healthy work environment for its 
+employees and minimizing environmental impact. OIL's commitment extends to employee well -being with 
+annual health checks and 24/7 medical facilities. Their dedicated HSE policy promotes continuous 
+improvement. 
+b. What are the processes used to identify work-related hazards and assess risks on a routine and 
+non-routine basis by the entity?  
+ 
+At OIL, identification of work -related hazards and assessment of risks is a critical element of our HSE 
+Management system practices for  ensuring a safe and healthy work environment. In this regard, several 
+routine and non-routine processes have been put in place for identification of risks and hazards as detailed 
+below:  
+a) Hazard Identification: HAZOP (Hazard and Operability Study), Quality Risk Assessment (QRA) 
+studies are carried out at installations at regular intervals to identify potential hazards and Risks. 
+Based on the study, appropriate hazard/risk control measures are put in place for bring the risk to 
+a ALARP (As Low As Reasonably Practicable) level.  
+b) Job Safety Analysis (JSA): JS A are carried out at OIL to understand the risks associated with 
+specific job tasks and implement appropriate control measures. 
+c) Incident Reporting and Investigation: Reporting and investigating incidents, near misses, and 
+accidents are crucial for identifying root causes and underlying hazards. This information helps in 
+implementing preventive measures to mitigate future risks. 
+d) Health and Safety Committees: OIL has multi -level HSE committees meetings carried out at 
+regular intervals. At the Apex level the meetings are chaired by CMD, OIL. These meetings enables 
+employees and management to collaborate in identifying hazards, assessing risks, and proposing 
+solutions.  
+e) Work Permits: For non-routine tasks or high-risk activities, work permits are issued. These permits 
+include a risk assessment and ensure that appropriate safety procedures are followed before and 
+during the task. 
+f) Training and Awareness: Regular training sessions and awareness programs are imparted for equip 
+employees about potential hazards  and risks associated with their work. This helps in fostering a 
+safety-conscious culture and empowers employees to identify and report hazards  
+g) Review of HSE Data: Review of HSE data, like incident reports, and trend analyses, helps in 
+identifying common hazards and potential risks that needs to be addressed. 
+h) Regulatory Compliance: OIL ensures compliance with relevant HSE regulations of 
+Statutory/Regulatory bodies like Oil Industry Safety Directorate (OISD), Directorate General of 
+Mines Safety (DGMS), Facto ry Inspectorates of the respective State, Petroleum and Natural Gas 
+Regulatory Board (PNGRB), Petroleum and Explosives Safety Organization (PESO), etc. which 
+leads to reduction of risk in process safety. 
+ 
+Further the Company’s conducts Mock Drill (Level 1/ II/III) at regular intervals, with the objective of 
+remaining preparedness for any Hazard Scenario. DMP/ERDMP/CDMP are regularly updated to cater to 
+real time situations. 
+ 
+
+--- PAGE 35 ---
+ 
+35 
+ 
+BRSR 2023-24 
+ 
+c. Whether you have processes for workers to report the work-related hazards and to remove 
+themselves from such risks. (Y/N)  
+ 
+Yes. OIL has a structured mechanism for reporting of incidents. Depending on the severity of the incident 
+an enquiry/investigation is carried out and remedial measures are implemented. Additionally, OIL has a 
+stop work policy which empowers employees to stop work in case of imminent hazard or unsafe condition.  
+ 
+ 
+d. Do the employees/ worker of the entity have access to non-occupational medical and healthcare 
+services? (Yes/ No) 
+ 
+Yes 
+ 
+11. Details of safety related incidents, in the following format: 
+(BRSR Core Attribute 5 : Enhancing Employee Wellbeing and Safety)  
+ 
+* Comparatives for FY 2022-23 have been restated due to the re-computation of BRSR attributes on the basis 
+determination of the LTIFR separately for employees and workers for the disclosures of FY 2023 -24. The 
+restatements would enable completeness and compa rability of information for the current and previous 
+years. 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+12. Describe the measures taken by the entity to ensure a safe and healthy workplace.  
+ 
+Ensuring a safe and healthy workplace is paramount at Oil India Limited (OIL). Our unwavering vision is 
+to achieve "zero accident and no harm to Man, Machine, and Material." To realize this goal, we've 
+implemented a robust HSE (Health, Safety, and Environment) Management System that adheres to stringent 
+regulations and best practices. 
+Key Elements of Our HSE Framework: 
+• Comprehensive Procedures & Guidelines: Well -defined protocols set the bar for world -class HSE 
+standards. Regular monitoring, audits, and system updates ensure compliance. 
+Safety incident/ numbers Categories FY2023-24 FY2022-23 
+Lost Time Injury Frequency Rate 
+(LTIFR) (per one million-person 
+hours worked) 
+Employees (executives) 0 0 
+Workers (non-executives) 0.158 0.462 
+Total recordable work-related 
+injuries 
+Employees (executives) 0 0 
+Workers (non-executives) 4 4 
+No. of fatalities Employees (executives) 0 0 
+Workers (non-executives) 1 0 
+High consequence work-related 
+injury or ill-health (excluding 
+fatalities) 
+Employees (executives) 0 0 
+Workers (non-executives) 3 3 
+
+--- PAGE 36 ---
+ 
+36 
+ 
+BRSR 2023-24 
+ 
+• Continuous Improvement: We identify and address gaps through awareness programs, technological 
+advancements, industry collaborations, training initiatives, and regular interactions with regulators.  
+• Infrastructure Integrity: Recognizing the critical role of infrastructure, OIL allocates a substantial 
+budget for refurbishment, ensuring a safe and efficient operational environment.  
+Project KAVACH: Elevating HSE Practices 
+To further strengthen our HSE commitment, we launched Project KAVACH (Key to Awareness, Value 
+Creation, and Change). This comprehensive program focuses on ten strategic goals that transform our HSE 
+management system into HSE+. These goals include: 
+• Strengthening HSE Management Systems 
+• Establishing an Integrated HSE Management Organization 
+• Building a Generative Safety Culture 
+• Benchmarking Against Industry Best Practices 
+• Integrating Technology for Enhanced HSE Management 
+• Robust Asset Integrity Management 
+• Implementing a Comprehensive HSE Audit Universe 
+• Establishing an Emergency Response Center 
+• Achieving Net Zero Emissions 
+• Conducting Occupational Health Surveys 
+Project KAVACH serves as a catalyst for positive change, reinforcing a robust HSE framework and 
+fostering responsible business practices aligned with global standards. 
+Commitment to Continuous Improvement: 
+• Revised HSE Policy & HSE Policy Guidebook: Approved in February 2024, the revised 
+bilingual HSE Policy emphasizes OIL's commitment to HSE excellence. This policy is duly 
+signed by the Chairman and Managing Director (CMD). 
+• Zero Tolerance Policy: Approved in May 2023, this policy establishes clear guidelines for 
+addressing operational and safety lapses, ultimately aiming for zero accidents.  
+• Stop Work Authority (SWA): Empowers employees t o stop unsafe actions or conditions, 
+encouraging them to speak up for safety without fear of retribution. The STOP program was 
+approved in January 2023. 
+• Guidelines for Safety Management Plan: Released in April 2023, these guidelines provide a 
+framework for developing comprehensive safety plans as mandated by regulations. 
+• HSE Documents Management & Control Procedure: This procedure, finalized in 2023, 
+promotes document standardization for HSE practices across departments, ensuring 
+compliance with regulations and best practices. 
+OIL is committed to maintaining a safe and healthy workplace, continually improving its HSE practices, 
+and safeguarding its people, assets, and the environment. 
+ 
+13. Number of Complaints on the following made by employees (executives) and workers (non-
+executives) 
+ 
+  
+FY2023-24 FY2022-23 
+Filed 
+during the 
+year 
+Pending 
+resolution at 
+the end of 
+year 
+Remarks Filed during 
+the year 
+Pending 
+resolution at 
+the end of 
+year 
+Remarks 
+Working 
+Conditions 0 0 - 0 0 - 
+
+--- PAGE 37 ---
+ 
+37 
+ 
+BRSR 2023-24 
+ Health & 
+Safety 0 0 - 0 0 - 
+ 
+14. Assessments for the year 
+  
+FY2023-24 
+  No. of plants and office assesses 
+(by entity or statutory authorities 
+or third parties) 
+% of your plants and offices that were 
+assessed (by entity or statutory 
+authorities or third parties) 
+Health and 
+safety practices                          11 
+             (As per Section A-Q18) 
+100% 
+Working 
+Conditions 
+ 
+15. Provide details of any corrective action taken or underway to address safety-related incidents (if 
+any) and on significant risks / concerns arising from assessments of health & safety practices and 
+working conditions. 
+All incidents are thoroughly investigated, and improvement recommendations are aligned with the relevant 
+regulations and guidelines provided by the O IL Mines Regulation, PNGRB ERDMP Regulations, and 
+OISD. These recommendations are promptly put into action to safeguard the well-being of OIL's employees, 
+workers, and the environment. To ensure the safety system's efficacy, internal and external audits are carried 
+out by various organizations, such as the Director ate General of Mines Safety (DGMS), the Factory 
+Inspectorate, the Petroleum Explosives and Safety Organization (PESO), the Central Electricity Authority 
+(CEA), Petroleum and Natural Gas Regulatory B oard (PNGRB), and the Oil Industry Safety Directorate 
+(OISD). These audits are closely monitored at multiple levels to verify the implementation of 
+recommendations and the maintenance of an effective safety system. 
+ 
+ 
+LEADERSHIP INDICATORS  
+1. Does the entity extend any life insurance or any compensatory package in the event of death of (A) 
+Employees (Y/N) (B) Workers (Y/N). 
+Employees – Yes 
+Workers - Yes.  
+ 
+2. Provide the measures undertaken by the entity to ensure that statutory dues have been deducted 
+and deposited by the value chain partners.  
+As a part of the contract, it is mandatory to ensure that the statutory dues have been deducted and 
+deposited by the value chain partners. 
+ 
+3. Provide the number of employees / workers having suffered high consequence w ork related injury / 
+ill-health / fatalities (as reported in Q11 of Essential Indicators above), who have been/ are 
+rehabilitated and placed in suitable employment or whose family members have been placed in 
+suitable employment: 
+Total no. of affected employees/ workers 
+
+--- PAGE 38 ---
+ 
+38 
+ 
+BRSR 2023-24 
+ 
+ 
+FY2023-24 FY2022-23 
+Employees (executives) 0 0 
+Workers (non-executives) 3 3 
+No. of employees/workers that are rehabilitated and placed in suitable employment or whose 
+family members have been placed in suitable employment 
+  FY2023-24 FY2022-23 
+Employees (executives) 
+Nil Nil 
+Workers (non-executives) 
+ 
+4. Does the entity provide transition assistance programs to facilitate continued employability and the 
+management of career endings resulting from retirement or termination of employment? (Yes/ No) 
+Yes 
+ 
+5. Details on assessment of value chain partners: 
+  
+Total No. of 
+value chain 
+partners 
+No. of value chain 
+partners that were 
+assessed 
+% of value chain partners (by 
+value of business done with 
+such partners) that were 
+assessed 
+Health and safety 
+practices No assessment of value chain partners was conducted in the reporting period. 
+Working 
+Conditions 
+ 
+6. Provide details of any corrective actions taken or underway to address significant risks / concerns 
+arising from assessments of health and safety practices and working conditions of value chain 
+partners.  
+Not Applicable 
+  
+
+--- PAGE 39 ---
+ 
+39 
+ 
+BRSR 2023-24 
+ PRINCIPLE 4: BUSINESSES SHOULD RESPECT THE INTERESTS OF AND 
+BE RESPONSIVE TO ALL ITS STAKEHOLDERS  
+ 
+ESSENTIAL INDICATORS  
+ 
+1. Describe the processes for identifying key stakeholder groups of the entity  
+ 
+OIL, as a Central Public Sector Undertaking, is dedicated to being accountable to all its stakeholders and 
+enabling their participation in identifying material topics and solutions. To identify its stakeholders, OIL 
+employs various methods such as examining the stakeholders of its peers and competitors, utilizing internal 
+sources, and analyzing the repetitive presence of stakeholders in its communication materials. 
+ 
+When identifying, prioritizing, and engaging with its stakeholders, OIL considers several factors. These 
+include the relevance of the stakeholder to OIL's operations, the impact of O IL's operations on the 
+stakeholder, the power of the stakeholder to influence OIL, and the interest of the stakeholder in OIL.  
+ 
+OIL engages with its stakeholders through both direct (for e.g., interviews, meetings, focus group 
+discussions, surveys, etc.)  and indirect modes of engagement ( for e.g., monitor media, social media, and 
+other public forums).Through these mediums, we also establish feedback loops to continuously improve 
+engagement processes and address new or evolving stakeholder concerns. We be lieve that effective 
+stakeholder engagement is essential to its success and the long-term sustainability of its operations. 
+Given the extensive stakeholder network and interactions, achieving inclusivity can be a complex task. By 
+utilizing its established processes, OIL has identified 11 key stakeholder groups, including the public at 
+large. These groups are further classified into external and internal stakeholders. Internal stakeholders 
+consist of all employees, while the key external stakeholders encompass the remaining 10 stakeholder group 
+such as investors, community, regulatory bodies, etc.  
+ 
+2. List stakeholder groups identified as key for your entity and the frequency of engagement with each 
+stakeholder group. 
+Stakeholder 
+group 
+Whether 
+identified as 
+Vulnerable 
+& 
+Marginalize
+d Group 
+(Yes/No) 
+Channels of 
+communication 
+(Emails, SMS, 
+Newspapers, 
+Pamphlets, 
+Advertisement, 
+Community 
+meetings, Notices 
+Board, Website) 
+Frequency of 
+engagement 
+(Annually/ Half 
+yearly/ 
+Quarterly/other
+s)- Please 
+specify 
+Purpose and scope of 
+engagement including key 
+topics and concerns raised 
+during such engagements 
+Government 
+and other 
+regulators 
+No Regular 
+compliance 
+submissions 
+Annual, Monthly 
+and Need-based 
+Support government 
+missions to promote 
+sustainable development 
+goals 
+• Performance appraisal 
+through MoUs 
+• Discussions on major 
+investment plans 
+
+--- PAGE 40 ---
+ 
+40 
+ 
+BRSR 2023-24 
+ Employees No Satisfaction 
+surveys, Social 
+Media Grievance 
+Redressal Emails, 
+Journals, Meetings 
+with employee 
+associations and 
+unions 
+Annual, 
+Quarterly, 
+Monthly, Daily 
+Communication on OIL’s 
+business goals, values, and 
+principles 
+• Implementation of best 
+practices 
+• Facilitating learning and 
+developing 
+• Track key performance 
+indicators and action plans 
+Suppliers No Supplier Meets, 
+Industry 
+Conclave, Access 
+to empowered 
+C&P committee 
+and Vendor 
+development 
+programs 
+Annual, 
+Quarterly, 
+Monthly, Daily 
+Communicate operational 
+decisions 
+• Seek their performance 
+data/information 
+• Understand and address 
+their concerns 
+• Dispute resolution 
+• Review of Contracts 
+Customers No Annual Customer 
+Meet 
+Customer 
+Interactive Meet 
+Customer 
+Satisfaction Survey 
+Annual, 
+Quarterly 
+To understand their 
+satisfaction levels 
+• To address operational 
+concerns 
+• To get feedback on new 
+product development 
+Joint ventures 
+and 
+subsidiaries 
+No Need-based 
+meetings 
+Reports and 
+Newsletters 
+Need-based Discussions on major 
+investment plans’ 
+• Sharing of performance 
+data 
+• Facilitate decision-making 
+on major topics 
+Industry 
+partners 
+No Seminars 
+Conferences 
+Industry Expo 
+Interviews 
+Reports and 
+Newsletters 
+Need-based Share performance data 
+Inform on keys decisions 
+and projects 
+• Participating in 
+conferences and seminars 
+• Engage in public policy 
+advocacy 
+Communities Yes Meetings and 
+direct interactions, 
+Community 
+events, Needs 
+analysis and 
+Impact 
+assessments, 
+CSR initiatives & 
+Corporate 
+communication 
+Materials 
+Need-based Engaging with communities 
+for conducting need 
+assessment and executing 
+community development 
+projects 
+• Understanding and 
+addressing their concerns on 
+critical incidents 
+• Community Grievances 
+Redressal 
+Contractors/ 
+Implementing 
+agencies 
+No Need-based 
+meetings & 
+Website 
+Annual, 
+Quarterly, 
+Monthly, Daily 
+Communicate operational 
+decisions 
+• To align their work with 
+company policies and 
+mandates (Compliance) 
+
+--- PAGE 41 ---
+ 
+41 
+ 
+BRSR 2023-24 
+ NGOs /Civil 
+society 
+organizations 
+No Project meetings & 
+Annual 
+reviews 
+Need-based Executing community 
+development projects 
+• Understanding and 
+addressing their concerns on 
+critical incidents 
+Media No   Monthly, Need-
+based 
+Relationship building 
+• Promotion of latest 
+initiatives and events 
+• Increase brand recall value 
+• Appraising performance 
+highlights and lowlights 
+• Point-of-view on major 
+sectoral development 
+Investors No   Periodical, Need-
+based 
+Servicing of Investor 
+Queries and Information 
+about the Performance 
+[Ref: Report on Corporate 
+Governance] 
+ 
+LEADERSHIP INDICATORS  
+ 
+1. Provide the processes for consultation between stakeholders and the Board on economic, 
+environmental, and social topics or if consultation is delegated, how is feedback from such 
+consultations provided to the Board. 
+ 
+Stakeholder consultations on ESG topics are usually conducted by respective spheres, department heads, 
+and relevant company officers using various communication channels, including face -to-face meetings, 
+surveys, and online forums. The feedback and identified areas of corporate concern are escalated to the 
+Board level, either directly or through various Board Committees. The board integrates stakeholder 
+feedback into the company’s strategic planning and decision -making processes and implements its action 
+plans though these committees. The committees also do performance monitoring the action plans.  
+ 
+2. Whether stakeholder consultation is used to support the identification and management of 
+environmental, and social topics (Yes / No). If so, provide details of instances as to how the inputs 
+received from stakeholders on these topics were incorporated into policies and activities of the entity.  
+ 
+Yes. Stakeholder consultation is essential for identifying areas of improvement in corporate environmental 
+and social efforts. OIL places high importance on understanding the needs and expectations of communities 
+through a focused engagement process and communication strategy. This understanding is used to develop 
+and implement outcome-based and impact-oriented projects in selected areas. 
+  
+Since OIL operates in remote and underdeveloped regions, engaging with exter nal stakeholders, including 
+the local communities, provides valuable insights into the needs of disadvantaged and vulnerable groups. In 
+recent years, OIL has conducted baseline surveys and needs assessments in several of its operational areas 
+to better understand community needs through structured interactions and feedback. 
+  
+Before granting environmental clearance for new exploration and production (E&P) activities, the State 
+Pollution Control Board organizes a public hearing with the local community. An a ction plan based on 
+
+--- PAGE 42 ---
+ 
+42 
+ 
+BRSR 2023-24 
+ 
+public input is then submitted to the Ministry of Environment, Forest and Climate Change (MoEF&CC) and 
+implemented during the project. 
+  
+OIL also adheres to the Presidential Directives and guidelines issued by the Government of India on  
+reservations in services for Scheduled Castes (SC), Scheduled Tribes (ST), Other Backward Classes (OBC), 
+Persons with Disabilities (PWD), and Ex-servicemen to promote inclusive growth. 
+ 
+3. Provide details of instances of engagement with, and actions taken to , address the concerns of 
+vulnerable/ marginalized stakeholder groups. 
+ 
+OIL has undertaken various initiatives as part of its Corporate Social Responsibility (CSR) to support 
+vulnerable and marginalized stakeholder groups. The details of these CSR activiti es can be found in the 
+CSR section of the Annual Report. These initiatives encompass projects in Healthcare, Education, 
+Sustainable Livelihoods, Skill Development, Capacity Building, Empowerment of Women and Persons 
+with Disabilities, Drinking Water & Sani tation under the Swachh Bharat Abhiyan, Promotion of Rural 
+Sports, Development of Social Assets, Sustainable Environment, and Development of Aspirational 
+Districts, among others. OIL has also procured goods and services from vendors belonging to the Scheduled 
+Caste (SC) and Scheduled Tribe (ST) categories, as well as from women entrepreneurs, in line with the 
+Public Procurement Policy of the Government of India. Additionally, OIL promotes employment 
+opportunities for SC/ST/OBC/EWS classes, along with other vulnerable groups such as ex-servicemen and 
+people with disabilities. 
+ 
+  
+
+--- PAGE 43 ---
+ 
+43 
+ 
+BRSR 2023-24 
+ PRINCIPLE 5: BUSINESSES SHOULD RESPECT AND PROMOTE HUMAN 
+RIGHTS  
+ 
+ESSENTIAL INDICATORS  
+ 
+1. Employees (executives) and workers (non-executives) who have been provided training on human 
+rights issues and policy(ies) of the entity, in the following format:  
+Category FY 2023-24 FY 2022-23 
+  Total (A) No. 
+employees / 
+workers 
+covered (B) 
+% 
+(B / A) 
+Total (A) No. employees 
+/ workers 
+covered (B) 
+% 
+(B / A) 
+Employees (executives)  
+Permanent 1771 1542 87.07% 1772 243 13.71% 
+Other 
+than 
+permanent 
+131 0 0% 53 0 00.00% 
+Total 
+Employees 1902 1542 81.07% 1825 243 13.32% 
+Workers (non-executives)  
+Permanent 4721 1480 31.35% 4987 2542 50.97% 
+Other 
+than 
+permanent 
+154 143 92.67% 116 63 54.43% 
+Total 
+Workers 4875 1623 33.29% 5103 2605 51.05% 
+ 
+2. Details of minimum wages paid to employees (executives) and workers (non -executives), in the 
+following format: 
+Category FY2023-24 FY2022-23 
+Total 
+(A) 
+Equal to 
+Minimum Wage 
+More than 
+Minimum 
+Wage 
+Total 
+(D) 
+Equal to 
+Minimum 
+Wage 
+More than 
+Minimum Wage 
+No. (B) % (B 
+/A) 
+No.(C) % (C 
+/ A) 
+No. 
+(E) 
+% 
+(E/D) 
+No. (F) % (F 
+/D) 
+
+--- PAGE 44 ---
+ 
+44 
+ 
+BRSR 2023-24 
+ Employees (executives) 
+Permanent 1771 0 0% 1771 100% 1772 0 0% 1772 100% 
+Male 1546 0 0% 1546 100%  1556  0 0% 1556 100% 
+Female 225 0 0% 225 100%  216  0 0% 216 100% 
+Other than 
+Permanent 
+131 0 0% 131 100%  53  0  0%  53 100%  
+Male 105 0 0% 105 100%  45 0  0 % 45  100%  
+Female 26 0 0% 26 100%  8 0  0 % 8  100% 
+Workers (non-executives) 
+Permanent 4721 0 0% 4721 100%  4987  0  0%   4987  100% 
+Male 4450 0 0% 4450 100%  4714  0 0% 4714 100% 
+Female 271 0 0% 271 100%  273  0 0% 273 100% 
+Other than 
+Permanent 
+154 0 0% 154 100%  116  0  0%  116  100% 
+Male 145 0 0% 145 100%  86 0  0%  86  100%  
+Female 9 0 0% 9 100%  30 0  0%  30  100%  
+ 
+3. Details of remuneration/salary/wages, in the following format: 
+a. Median remuneration/ wages 
+ 
+ 
+*We have considered Government Nominee Directors on Board. There is no remuneration for 
+Government Nominee Directors. 
+ Male Female 
+  Number Median 
+remuneration/ 
+salary/ wages of 
+respective category 
+Number Median 
+remuneration/ 
+salary/ wages of 
+respective category 
+Board of Directors 
+(BoD) 
+7 9840663.00* 1 1200000.00 
+ 
+Key Managerial 
+Personnel 
+1 7659302.00 0 0 
+Employees other 
+than BoD and KMP 
+(Executives) 
+1546 3640586.04** 225 2811995.07** 
+Workers (Non-
+executives) 
+4450 1647308.70** 271 1437397.92** 
+
+--- PAGE 45 ---
+ 
+45 
+ 
+BRSR 2023-24 
+ 
+**Salary mentioned is only for permanent employees and workers. 
+b. Gross wages paid to females as % of total wages paid by the entity, in the following format: 
+(BRSR Core Attribute 6 : Enabling Gender Diversity in Business) 
+ 
+ 
+ FY2023-24 FY2022-23 
+Gross wages paid to females as % of total wages – (B/A) 7.05% 6.64% 
+ 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited 
+4. Do you have a focal point (Individual/ Committee) responsible for addressing human rights impacts 
+or issues caused or contributed to by the business? (Yes/No)  
+ 
+Yes, OIL has a system responsible for addressing human rights related concerns / impacts. Human rights 
+related grievances pertaining to any Sphere or installation are registered through respective Engineer -In-
+Charge present at sites. The issues are resolved at sites or escalated to higher level i.e. concerned Department 
+/ Sphere Head/ Company level, based on the severity of impact. 
+ 
+5. Describe the internal mechanisms in place to redress grievances related to human rights issues.                                                                                                                    
+Appropriate systems and mechanisms with time bound process for redressal, such as Grievance 
+Management System, Safety Committees, Internal Complaints Committee, W histle-blower Policy etc. are 
+in place to allow for resolution of the issues raised under Human Rights policy. There are well-established 
+policies and practices in place such as the Online Grievance Management System, Whistle Blower Policy/ 
+Vigil Mechanism, including strict compliance to laws, rules, and regulations, such as labour rights, health 
+and safety, non-discrimination, freedom of association and collective bargaining, human rights disciplinary 
+practices, contract management, and Prevention of Sexual Harassment, amongst others. OIL also has an 
+independent Chief Vigilance Officer who reports to the Central Vigilan ce Commission, Govt. of India. 
+6. Number of Complaints on the following made by employees and workers:  
+  FY2023-24 FY2022-23 
+Filed 
+during the 
+year 
+Pending 
+resolution 
+at the end 
+of the year 
+Remarks Filed 
+during the 
+year 
+Pending 
+resolution 
+at the end 
+of the year 
+Remarks 
+Employees (executives) 
+Sexual 
+Harassment 
+Nil Nil 
+ 
+Nil Nil   
+Discrimination at 
+workplace 
+Nil Nil 
+ 
+Nil Nil   
+Child Labor Nil Nil 
+ 
+Nil Nil   
+Forced 
+Labor/Involuntary 
+Labor 
+Nil Nil 
+ 
+Nil Nil   
+
+--- PAGE 46 ---
+ 
+46 
+ 
+BRSR 2023-24 
+ Wages Nil Nil 
+ 
+Nil Nil   
+Other human 
+rights related 
+issues 
+Nil Nil 
+ 
+Nil Nil   
+Workers (non-executives) 
+Sexual 
+Harassment 
+01* Nil 
+ 
+02* Nil 
+ 
+Discrimination at 
+workplace 
+Nil Nil 
+ 
+Nil Nil   
+Child Labor Nil Nil 
+ 
+Nil Nil   
+Forced 
+Labor/Involuntary 
+Labor 
+Nil Nil 
+ 
+Nil Nil   
+Wages Nil Nil 
+ 
+Nil Nil   
+Other human 
+rights related 
+issues 
+Nil Nil 
+ 
+Nil Nil   
+* These cases fall under categories other than those of permanent and non -permanent employees and 
+workers. 
+ 
+7. Complaints filed under the Sexual Harassment of Women at Workplace (Prevention, Prohibition and 
+Redressal) Act, 2013, in the following format: 
+(BRSR Core Attribute 6: Enabling Gender Diversity in Business) 
+ 
+ FY2023-24 
+Current Financial Year 
+FY2022-23 
+Previous Financial Year 
+Total Complaints reported under Sexual 
+Harassment on of Women at Workplace 
+(Prevention, Prohibition and Redressal) Act, 
+2013 (POSH) 
+01 02 
+Complaints on POSH as a % of female 
+employees/workers 0.20%1 0.38% 
+Complaints on POSH upheld Nil Nil 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited 
+8. Mechanisms to prevent adverse consequences to the complainant in discrimination and harassment 
+cases. 
+ 
+Mechanisms have been laid down as per the “Grievance Management” and “Prevention of sexual 
+harassment (POSH)” Policies of the Company. OIL, strictly abides by Section 9,12 and 16 of the POSH Act 
+2013 and clauses 6.1(2), 6.2.2 (9) and 8.0 of the POSH policy w.r.t. prevention of adverse consequences to 
+the complainant of harassment cases. 
+ 
+1 * These cases fall under categories other than those of permanent and non-permanent employees and workers. 
+
+--- PAGE 47 ---
+ 
+47 
+ 
+BRSR 2023-24 
+ 
+ 
+9. Do human rights requirements form part of your business agreements and contracts? (Yes/No)  
+ 
+Oil India Limited incorporates the following provisions in its contract agreements to protect human rights 
+and prohibit exploitation: 
+  
+• No labor below the age of 18 will be employed for the work. 
+• The contractor will not pay less than the legally mandated wages to laborers engaged by them on 
+the work. 
+• The contractor will pay equal wages to men and women in accordance with applicable labor laws. 
+• The contractor must obtain a PF code from the relevant authority under the Employees Provident 
+Fund and Miscellaneous Provisions Act, 1952. Similarly, the contractor must obtain an ESI co de 
+under the Employees State Insurance Act, 1948. 
+• As the employer of the laborers/personnel engaged under the contract, the contractor shall be liable 
+to pay gratuity as per the provisions of the Payment of Gratuity Act, 1972.  
+• Additionally, the contractor shall comply with various labor-related laws, including but not limited 
+to the Code of Wages, 2019, the Minimum Wages Act, 1948, the Interstate Migrant Workmen Act, 
+1979 (Regulation of Employment and Conditions of Service), the Employees' Compensation Act,  
+1923, the Maternity Benefit Act, 1961, the Contract Labour (Regulation and Abolition) Act, 1970, 
+the Employment of Children Act, 1938, and the Employees Pension Scheme, 1995, or any 
+modifications/amendments thereof, or any other related law and rules made  thereunder from time 
+to time. 
+ 
+These provisions are designed to ensure that the contractor complies with all applicable labor laws and 
+that the laborers/personnel engaged on the work are treated fairly and with respect.  
+ 
+10. Assessment for the year 
+  % of you r plants and offices that were assessed (by entity or 
+statutory authorities or third parties) 
+Child labor   
+  
+100%  
+  
+Forced/involuntary labor 
+Sexual harassment 
+Discrimination at workplace 
+Wages 
+Others – please specify 
+ 
+11. Provide details of any corrective actions taken or underway to address significant risks / concerns 
+arising from the assessments at Question 9 above.  
+ 
+Not Applicable 
+ 
+LEADERSHIP INDICATORS  
+ 
+
+--- PAGE 48 ---
+ 
+48 
+ 
+BRSR 2023-24 
+ 
+1. Details of a business process being modified / introduced as a result of addressing human rights 
+grievances/complaints. 
+Yes. In Oil India Limited there is a ‘Grievance Management System’ application in the intranet portal to 
+address grievances of the perma nent executives/employees of the company.  The grievance resolution 
+process adheres to the company’s established policies and procedures. 
+ 
+2. Details of the scope and coverage of any Human rights due-diligence conducted. 
+Due diligence is conducted by the Comp any as per the applicable rules and regulations  across all its 
+operations. 
+ 
+3. Is the premise/office of the entity accessible to differently abled visitors, as per the requirements of 
+the Rights of Persons with Disabilities Act, 2016? 
+Wheelchair ramps and lifts have been installed in office premises to accommodate differently abled visitors. 
+Furthermore, all upcoming office buildings are being designed with extra accessibility features to cater to 
+individuals with disabilities. 
+4. Details on assessment of value chain partners: 
+  % of your plants and offices that were assessed (by entity or 
+statutory authorities or third parties) 
+Sexual harassment The Company ensures compliance with applicable labour practice laws, 
+including child labour and human rights issues, throughout its value 
+chain. Discrimination at 
+workplace 
+Child labor 
+Forced/involuntary 
+labor 
+Wages 
+Others – please 
+specify 
+ 
+5. Provide details of any corrective actions taken or underway to address significant risks / concerns 
+arising from the assessments at Question 4 above. 
+ 
+Not applicable 
+  
+
+--- PAGE 49 ---
+ 
+49 
+ 
+BRSR 2023-24 
+ PRINCIPLE 6: BUSINESSES SHOULD RESPECT AND MAKE EFFORTS TO 
+PROTECT AND RESTORE THE ENVIRONMENT  
+ 
+ESSENTIAL INDICATORS  
+1. Details of total energy consumption (in Joules or multiples) and energy intensity, in the following 
+format: 
+(BRSR Core Attribute 3 : Energy footprint) 
+Parameter Units FY 2023-24 FY 2022-23 
+From renewable sources 
+ 
+Total electricity 
+consumption (A) (Solar) 
+GJ 2,653 2,128 
+Total fuel consumption 
+(B) 
+GJ 0 0 
+Energy consumption 
+through other sources (C)  
+GJ 0 0 
+Total energy consumed 
+from renewable sources 
+(A+B+C)  
+GJ 2,653 2,128 
+From non-renewable sources  
+ 
+Total electricity 
+consumption (D) (Grid) 
+GJ 134,612 81,555 
+Total fuel consumption 
+(E)  
+GJ  24,771,462  25,491,338  
+Natural Gas GJ  14,676,569   14,717,602  
+Diesel GJ  1,119,824   867,459  
+Diesel (Vehicles) GJ  214,317   259,885  
+Petrol GJ  287    -   
+Petrol (Vehicles) GJ 11,843  6,574  
+Natural gas Flaring  GJ  8,357,892   9,143,262  
+Crude oil GJ  390,730   496,556  
+Energy consumption 
+through other sources (F)  
+GJ 0 0 
+Total energy consumed 
+from non-renewable 
+sources (D+E+F) 
+GJ 
+24,906,073 25,572,893 
+Total energy consumed 
+(A+B+C+D+E+F) GJ 24,908,727 25,575,021 
+Revenue INR Crore 22,130 23,260 
+Energy intensity per rupee 
+of turnover  (Total energy 
+consumption / revenue in 
+Crore rupees) 
+GJ/INR 
+Crore 1,126 1,100 
+Energy intensity per rupee 
+of turnover adjusted for 
+Purchasing Power  
+GJ/INR 
+Crore 272.97 272.99 
+
+--- PAGE 50 ---
+ 
+50 
+ 
+BRSR 2023-24 
+ 
+(Total energy consumed / 
+Revenue from operations 
+adjusted for PPP2) 
+Energy intensity in terms 
+of physical output GJ/MMToe 3,862,416.93 4,113,723.84 
+Energy intensity (optional) 
+– the relevant metric may be 
+selected by the entity 
+ 
+- 
+- 
+ 
+Note – Comparatives for FY 2022 -23 have been restated due to the re -computation of BRSR attributes on 
+the basis of revised approach and methodology adopted for the disclosures of FY 2023-24. The restatements 
+would enable completeness and comparability of information for the current and previous years. 
+              Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+2. Does the entity have any sites / facilities identified as designated consumers (DCs) under the 
+Performance, Achieve and Trade (PAT) Scheme of the Government of India? (Y/N) If yes, disclose 
+whether targets set under the PAT scheme have been achieved. In case targets have not been achieved, 
+provide the remedial action taken, if any. 
+ 
+Not applicable. PAT scheme is applicable to Oil & Gas refineries but not to E&P companies.   
+ 
+3. Provide details of the following disclosures related to water, in the following format:  
+(BRSR Core Attribute 2: Water footprint) 
+ 
+Parameter Units FY2023-24 FY2022-23 
+Water withdrawal by source (in kiloliters) 
+(i) Surface water KL 8,668,115** 8,874,666** 
+(ii) Groundwater KL 7,060,035 6,391,929 
+(iii) Third party water KL 366,115 287,168 
+(iv) Seawater / desalinated water KL 0 0 
+(v) Others (Municipal water) KL 1,557 16,385  
+Total volume of water withdrawal (in 
+kiloliters) (i + ii + iii + iv + v)* KL 16,095,822 15,570,147 
+Total volume of water consumption (in 
+kiloliters) * KL 16,095,822 15,570,147 
+Revenue INR Crore 22,130 23,260 
+ 
+2  The calculation used for PPP is as follows: 
+• PPP adjusted revenue in INR – (Revenue in INR/ PPP conversion factor) * Exchange rate (USD to INR) 
+• PPP Conversion factor is taken as 20.22 (for FY 2023-24) and 20.7 (for FY 2022-23) as per latest value available value 
+taken from PPP conversion factor, GDP (LCU per international $) | Data (worldbank.org) 
+• Foreign exchange rate has been considered as the rate on the end of FY and has been taken from Reserve Bank of 
+India - Reference Rate Archive (rbi.org.in) 
+ 
+
+--- PAGE 51 ---
+ 
+51 
+ 
+BRSR 2023-24 
+ Water intensity per rupee of turnover  
+(Water consumed / revenue in Crore 
+rupees) 
+KL/INR 
+Crore 727 669 
+Water intensity per rupee of turnover 
+adjusted for Purchasing Power Parity 
+(PPP) 
+(Total water consumption / Revenue 
+from operations adjusted for PPP) 
+KL/INR 
+Crore 
+176.39 
+ 
+166.20 
+ 
+Water intensity in terms of physical 
+output KL/MMToe 2,495,863 2,504,447 
+*Assumption for reporting – Total water withdrawal is equivalent to total water consumption 
+** Out of total surface water drawn, only 9.1% is being used for industrial/ office purposes. Rest is being 
+used by township/local community.  
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+4. Provide the following details related to water discharged: 
+(BRSR Core Attribute 2: Water footprint) 
+ 
+Parameter  FY2023-24 
+Current Financial Year 
+FY2022-23 
+Previous Financial Year 
+Water discharge by 
+destination and level of 
+treatment (in kilolitres)  
+  
+(i) To Surface water  0 0 
+- No treatment  Not Applicable Not Applicable 
+- With treatment – please 
+specify level of treatment  
+Not Applicable Not Applicable 
+(ii) To Groundwater  0 0 
+- No treatment  Not Applicable Not Applicable 
+- With treatment – please 
+specify level of treatment  
+Not Applicable Not Applicable 
+iii) To Seawater  0 0 
+- No treatment  Not Applicable Not Applicable 
+- With treatment – please 
+specify level of treatment  
+Not Applicable Not Applicable 
+iv) Sent to third-parties  0 0 
+- No treatment  Not Applicable Not Applicable 
+- With treatment – please 
+specify level of treatment  
+Not Applicable Not Applicable 
+(v) Others  0 0 
+- No treatment  
+ 
+Not Applicable Not Applicable 
+
+--- PAGE 52 ---
+ 
+52 
+ 
+BRSR 2023-24 
+ - With treatment – please 
+specify level of treatment  
+Not Applicable Not Applicable 
+Total water discharged (in 
+kiloliters)  
+0 0 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+5. Has the entity implemented  a mechanism for Zero Liquid Discharge? If yes, provide details of its 
+coverage and implementation.  
+ 
+Yes. 
+OIL has implemented a robust Zero Liquid Discharge (ZLD) mechanism as part of our commitment to 
+sustainable water management. Our ZLD initiative ensures that no liquid waste from our operations is 
+discharged outside, thereby minimizing the impact on water bodies and promotin g responsible waste 
+management. 
+ 
+To achieve Zero Liquid Discharge (ZLD), we have installed and commissioned Produced Water Re -
+Injection (PWRI) facilities through strategic capital investments. In recent years, we have proactively 
+installed new high -capacity centralized Effluent Treatment Plants (ETPs), including modular units for 
+remote locations. These ETPs utilize advanced technologies to effectively treat produced water, ensuring it 
+meets the stringent quality standards of the Minimum National Standards (MINAS) for underground 
+disposal in designated water disposal wells. This process safeguards the environment and minimizes our 
+ecological footprint, contributing to responsible water management and conservation efforts.  
+ 
+Additionally, OIL has established a  desalination pilot plant at STF -Madhuban, which treats highly saline 
+water (Total Dissolved Solids) to make it suitable for reuse in our operations. This initiative aligns with our 
+zero liquid discharge philosophy, and we plan to scale up the unit and rep licate it in other locations to 
+optimize water usage and reduce our environmental footprint. Our commitment to sustainable water 
+management and actions towards ZLD demonstrate our dedication to environmental stewardship and 
+resource conservation. 
+ 
+At OIL, our commitment to environmental stewardship drives us to continuously enhance our practices for 
+the sustainable management of precious natural resources. The implementation of Zero Liquid Discharge is 
+a crucial part of our efforts to create a greener and more sustainable future. 
+ 
+ 
+6. Please provide details of air emissions (other than GHG emissions) by the entity, in the following 
+format: 
+Parameter Please specify unit FY2023-24 FY2022-23 
+NOx  μg/m3 22.20 22.40 
+SOx  μg/m3 7.63 8.05 
+Particulate matter 
+(PM10) 
+μg/m3 71.59 72.60 
+Particulate matter 
+(PM2.5) 
+μg/m3 37.73 37 
+Volatile organic 
+compounds (VOC) 
+μg/m3 <4.2 <4.2 
+
+--- PAGE 53 ---
+ 
+53 
+ 
+BRSR 2023-24 
+ Hazardous air pollutants 
+(HAP) 
+μg/m3 <4.2 <4.2 
+Others – please specify    
+ 
+ 
+7. Provide details of greenhouse gas emissions (Scope 1 and Scope 2 emissions) & its intensity, in the 
+following format:  
+(BRSR Core Attribute 1 : Green-house gas (GHG) footprint) 
+ 
+Parameter Unit FY 2023-24 FY 2022-23 
+Total Scope 1 emissions (Break-
+up of the GHG into CO2, CH4, 
+N2O, HFCs, PFCs,  SF6, NF3, if 
+available)  
+Metric tonnes of 
+CO2 equivalent 
+1,405,804.09 1,441,072.58 
+Total Scope 2 emissions (Break-
+up of the GHG into CO2, CH4, 
+N2O, HFCs, PFCs,  SF6, NF3, if 
+available) 
+Metric tonnes of 
+CO2 equivalent 
+26,773 16,198 
+Revenue INR Crores 22,130 23,260 
+Total Scope 1 and Scope 2 
+emissions per rupee of 
+turnover (Total Scope 1 and 
+scope 2 GHG emissions / 
+Revenue from operations) 
+Metric tonnes of 
+CO2 equivalent / 
+INR Crores 
+64.73 62.65 
+Total Scope 1 and Scope 2 
+emission intensity per rupee of 
+turnover adjusted  for 
+Purchasing Power Parity 
+(PPP) 
+(Total Scope 1 and Scope 2 GHG 
+emissions / Revenue from 
+operations adjusted for PPP) 
+Metric tonnes of 
+CO2 equivalent / 
+INR Crores 
+15.97 15.29 
+Total Scope 1 and Scope 2 
+emission intensity in terms of 
+physical output 
+Metric tonnes of 
+CO2 equivalent / 
+MMToe 
+234,400.89 222,139.37 
+Total Scope 1 and Scope 2 
+emission intensity (optional) – 
+the relevant metric may be 
+selected by the entity 
+ - - 
+Note – Comparatives for FY 2022 -23 have been restated due to the re -computation of BRSR attributes on 
+the basis of revised approach and methodology adopted for the disclosures of FY 2023-24. The restatements 
+would enable completeness and comparability of information for the current and previous years. 
+ 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+ 
+ 
+
+--- PAGE 54 ---
+ 
+54 
+ 
+BRSR 2023-24 
+ 
+8. Does the entity have any project related to reducing Green House Gas emission? If Yes, then provide 
+details. 
+Oil India Limited (OIL) has taken significant measures to align its operations with these objectives and 
+establish its own Net Zero commitments and sets its ambitious target to be a Net Zero company by 2040. 
+Th following initiatives has been undertaken by OIL:  
+ 
+Renewable Energy Portfolio: OIL has established a significant wind and solar power capacity exceeding 
+188 MW. OIL executed a Joint Venture Agreement (JVA) with Assam Power Generation Corporation Ltd. 
+(APGCL) in 2024 for development of renewable powe r projects of total 645 MW capacity in the state of 
+Assam. The process of formation of a JV company with APGCL is in progress. Additionally, collaborations 
+with various state governments are underway to develop other renewable power projects.  
+Emphasis on N atural Gas: Recognizing its cleaner profile compared to coal, OIL is actively exploring 
+new gas fields and expanding infrastructure to increase the share of natural gas in India's energy mix.  
+Green Hydrogen Initiatives: OIL is at the forefront of green hydrogen development, producing hydrogen 
+and developing a hydrogen fuel cell e-bus. Feasibility studies for larger-scale green hydrogen plants are also 
+underway. 
+Biofuels: OIL is promoting biofuels such as compressed biogas (CBG) and has planned to establish 25 CBG 
+plants across the nation. OIL’s material subsidiary, NRL is setting up a 50 KTPA 2G Bio -ethanol plant at 
+Numaligarh based on locally grown bamboo as feedstock through a JV company called Assam Bio Refinery 
+Private Limited (ABRPL) with expected commencement of production from August 2024.  
+City Gas Distribution: OIL prioritizes responsible energy practices by collaborating with various partners 
+to establish city gas distribution networks across several Indian states. 
+Zero Routine Flaring: OIL is committed to eliminating routine gas flaring at its operations and has planned 
+to become a Zero flare company in 2025 . This includes pipeline construction projects and infrastructure 
+development to reduce gas flaring and associated carbon emissions. 
+Carbon Capture, Utilization, and Storage (CCUS) : OIL is exploring innovative CCUS technologies for 
+reducing its carbon footprint and enhancing reservoir pressure for resource recovery.  A feasibility study is 
+under progress for identification of suitable reservoirs/aquifers along with design considerations for capture, 
+transportation and sequestration of CO2 in suitable reservoirs/aquifers within Jaisalmer Basin in Rajasthan. 
+Creation of Carbon Sinks:  OIL's Project Vasundhara involve s large -scale tree plantation initiatives to 
+sequester carbon and restore degraded forest lands. 
+ 
+9. Provide details related to waste management by the entity, in the following format:  
+(BRSR Core Attribute 4 : Embracing circularity – details related to waste management by the entity) 
+Parameter FY2023-24 FY2022-23 
+Total Waste generated (in metric tonnes) 
+Plastic waste (A) 32.83 MT  80.33 MT  
+E-waste (B) 12.92 MT  16.68 MT 
+Bio-medical waste (C) 15.52 MT  15.53 MT3 
+Construction and demolition waste (D) -  - 
+Battery waste (E) 52.57 MT  15.91 MT 
+Radioactive waste (F) -  
+ 
+3 FY 2022-23 is revised owing to correction in data 
+
+--- PAGE 55 ---
+ 
+55 
+ 
+BRSR 2023-24 
+ Other Hazardous waste. Please specify, if any. 
+(G) 
+3978.27 MT 5211.64 MT 
+Burnt Lube Oil4 200.195292 MT 199.68 MT 
+Oily Sludge 3581.56 MT 4671.52 MT 
+Chemical sludge from wastewater treatment 98.44 MT 120.84 MT 
+Oil soaked cotton & Contaminated Jute  7.99 MT 6.19 MT 
+Contaminated containers 90.08 MT5 213.41 MT  
+Other Non-hazardous waste generated (H). 
+Please specify, if any.  
+(Break-up by composition i.e. by materials 
+relevant to the sector) 
+  
+Drill cuttings & solids in Drilling & Workover 
+Fluids 
+378.54 MT 445.08 MT 
+Metal scrap 1755.75 MT 2202.58 MT 
+Total (A+B+C+D+E+F+G+H) 6226.41 MT 7987.75 MT 
+Waste intensity per rupee of turnover  
+(Total waste generated / Revenue from 
+operations) (MT/INR Crores) 
+0.28 0.34 
+Waste intensity per rupee of turnover 
+adjusted for Purchasing Power Parity (PPP)  
+(Total waste generated / Revenue from operations 
+adjusted for PPP) (MT/INR Crores) 
+0.07 0.09 
+Waste intensity in terms of physical output 
+(MT/MMToe) 
+965.48 1284.82 
+Waste intensity (optional) – the relevant metric 
+may be selected by the entity  
+- - 
+For each category of waste generated, total waste recovered through recycling, re -using or other 
+recovery operations (in metric tonnes) 
+Category of waste     
+(i) Recycle - - 
+(ii) Re-used (a+b) 238.94  - 
+Reused burnt oil (a) 14.94  
+Reused containers (b) 224  
+(iii) Other recovery operations – Sludge recovery 
+plant 
+1148.15 MT  4197.8 MT 
+Total 1387.09  MT 4197.8 MT 
+ 
+4 1 kiloliter = 0.984 metric tons 
+5 Average weight on a container considered – 8 kg 
+
+--- PAGE 56 ---
+ 
+56 
+ 
+BRSR 2023-24 
+ For each category of waste generated, total waste disposed by nature of disposal method (in metric 
+tonnes) 
+Category of waste     
+(i) Incineration 8.61 MT 6.42 MT  
+(ii) Landfilling 2672.05 MT 273.42 MT 
+Disposal in HDPE lined pit 486.02 MT 120.84 MT 
+Registered recycler 2176.81 MT 151.26 MT 
+Stored in concrete pit 9.22 MT 1.32 MT 
+(iii) Other disposal operations - Bio-remediation 2398.76 MT 4203.99 MT 
+Total 5079.42 MT 4483.83 MT 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited 
+10. Briefly describe the waste management practices adopted in your establishments. Describe the 
+strategy adopted by your company to reduce usage of hazardous and toxic chemicals in your products 
+and processes and the practices adopted to manage such wastes 
+ 
+Oil India Limited (OIL) has implemented a comprehensive waste management system to ensure that all 
+waste generated by its operations is disposed of in an environmentally sound manner. The following 
+approach is adopted for managing hazardous and non-hazardous waste: 
+ 
+ A. Hazardous Waste 
+1. Oily Sludge: Oily sludge from storage tank bottoms at various installations in FHQ, Duliajan, is collected, 
+transferred, and processed at OIL's Sludge Processing Plant. The crude oil recovered from the process is 
+pumped to the nearest oil collecting station as recove red crude oil. The remaining sludge is bioremediated 
+through contracts with registered and reputable organizations. Additionally, in -situ and ex -situ 
+bioremediation are carried out at affected sites to handle emergencies involving oil spills on land and water 
+bodies. 
+2. Spent Oil : Used lubricant oil from various installations is collected and disposed of by registered 
+recyclers for recycling or co-processing. 
+3. Chemical sludge from wastewater treatment : In wastewater treatment facility, the chemical sludge  
+produced during the treatment process is typically disposed of on -site in a pit lined with high -density 
+polyethylene (HDPE) to prevent leaching into the surrounding soil. 
+4. Oil soaked cotton rag : Contaminated cotton rag is incinerated or bioremediated.  
+B. Non-Hazardous Waste 
+1.Drill Cuttings: Drill cuttings, solid materials removed from the wellbore during drilling, are washed and 
+stored in HDPE -lined pits at drill sites. Additionally, under Project Bhuvan Mitra, OI L has introduced a 
+Vertical Cutting Dryer (VCD) system for the treatment of drill cuttings. This system uses centrifugal force 
+to separate drill cuttings from the drill fluid, eliminating wastewater generation and allowing the recovery 
+and recycling of drill fluid back into drilling operations. 
+2. E-Waste: E-waste, generated from electronic and electrical equipment such as computers, televisions, 
+and cell phones, is disposed of through an approved recycler agency. 
+3. Battery : Battery waste is disposed of through registered recyclers. 
+
+--- PAGE 57 ---
+ 
+57 
+ 
+BRSR 2023-24 
+ 
+4. Bio-Medical Waste : Bio -medical waste, generated from healthcare facilities, includes items such as 
+needles, swabs, and bandages. OIL disposes of bio-medical waste through a double-chamber incinerator. 
+5. Other Scrap: Other scrap, generated from various sources and including items such as metal, plastic, and 
+wood, is disposed of through a Memorandum of Understanding (MOU) with MSTC.  
+ 
+11. If the entity has operations/offices in/around ecologically sensitive areas (such as  national parks, 
+wildlife sanctuaries, biosphere reserves, wetlands, biodiversity hotspots, forests, coastal regulation 
+zones etc.) where environmental approvals / clearances are required, please specify details in the 
+following format: 
+ 
+As per the provision of Environment Impact Assessment, 2006, OIL takes Environmental Clearance (EC) 
+before stating any E&P operations.  Accordingly, as per the requirement under Forest Act/Wildlife Act/CRZ 
+Regulation etc. additional clearances in conjunction with EC are also o btained by OIL.  
+S.No. Location of 
+operations/offices 
+Type of operations Whether the conditions of 
+environmental approval / 
+clearance are being 
+complied with? (Y/N)  
+If no, the reasons thereof 
+and corrective action 
+taken, if any. 
+1 Assam Onshore oil & gas exploration & 
+production 
+Yes 
+2 Bhubaneswar Onshore oil & gas exploration & 
+production 
+Yes 
+ 
+12. Details of environmental impact assessments of projects undertaken by the entity based on applicable 
+laws, in the current financial year: 
+Name and brief details of 
+project 
+EIA Notification No. Date Whether 
+conducted 
+by 
+independent 
+external 
+agency (Yes 
+/ No) 
+Results 
+communicated 
+in public 
+domain (Yes / 
+No) 
+Relevan
+t Web 
+link 
+Rajasthan DSF III block  
+(RJ/ONDSF/BAKHRITIB
+BA/2021) 
+S.O.1533 dated 14 
+September 2006 
+November 
+2023 
+Yes No No 
+ 
+13. Is the entity compliant with the applicable environmental law/ regulations/ guidelines in India, such as the 
+Water (Prevention and Control of Pollution) Act, Air (Prevention and Control of Pollution) Act, 
+Environment protection act and rules thereunder (Y/N). If not, provide details of all such non -
+compliances, in the following format:  
+ 
+
+--- PAGE 58 ---
+ 
+58 
+ 
+BRSR 2023-24 
+ S. 
+No. 
+Specify the law / 
+regulation / 
+guidelines which 
+was not complied 
+with 
+Provide details 
+of the non - 
+compliance 
+Any fines / 
+penalties / action 
+taken by 
+regulatory 
+agencies such as 
+pollution control 
+boards or by 
+courts 
+Details of 
+fines / 
+penalties / 
+action 
+Corrective action 
+taken, if any 
+No cases of non-compliance with all applicable environmental law/ regulations/ guidelines in India. 
+LEADERSHIP INDICATORS  
+1. Water withdrawal, consumption and discharge in areas of water stress (in kilolitres): 
+For each facility / plant located in areas of water stress, provide the following information:  
+(i) Name of the area: Rajasthan 
+(ii) Nature of operations: Extraction of crude oil and production of natural gas 
+Parameter Units FY2023-24 FY2022-23 
+Water withdrawal by source (in kiloliters) 
+(i) Surface water KL 0 0 
+(ii) Groundwater KL 4,370 0 
+(iii) Third party water KL 30,793 8,749 
+ OIL House KL 3,873 8,472 
+Baghewala Area (for Drilling and 
+Production activities) from IGNP 
+KL 26,920 277 
+(iv) Seawater / desalinated water KL 0 0 
+(v) Others (Municipal water) KL 0 0 
+Total volume of water withdrawal 
+(in kiloliters) (i + ii + iii + iv + v) * KL 35,163 8,749 
+Total volume of water 
+consumption (in kiloliters) ** KL 35,163 8,749 
+Turnover  INR Crore 22130 23260 
+Water intensity per rupee of 
+turnover (Water consumed 
+/turnover) 
+KL/INR Crore 1.59 0.38 
+Water intensity  (optional) – the 
+relevant metric may be selected by 
+the entiry 
+   - -  
+Water discharge by destination and level of treatment (in kilolitres)  
+(i) Into Surface water  KL 0 0 
+ 
+- No treatment  
+KL Not applicable Not applicable 
+
+--- PAGE 59 ---
+ 
+59 
+ 
+BRSR 2023-24 
+  
+- With treatment – please specify 
+level of treatment  KL Not applicable Not applicable 
+(ii) Into Groundwater  KL 0 0 
+- No treatment  KL Not applicable Not applicable 
+- With treatment – please specify 
+level of treatment  KL Not applicable Not applicable 
+iii) Into Seawater  KL 0 0 
+- No treatment  KL Not applicable Not applicable 
+- With treatment – please specify 
+level of treatment  KL Not applicable Not applicable 
+iv) Sent to third-parties  KL 0 0 
+- No treatment  KL Not applicable Not applicable 
+- With treatment – please specify 
+level of treatment  
+KL Not applicable Not applicable 
+(v) Others  KL 0 0 
+- No treatment  KL Not applicable Not applicable 
+- With treatment – please specify 
+level of treatment  KL Not applicable Not applicable 
+Total water discharged (in 
+kilolitres)  KL 0 0 
+ 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+ 
+2.  Please provide details of total Scope 3 emissions & its intensity, in the following format:  
+  
+Parameter Unit FY2023-24 FY2022-23 
+Total Scope 3 emissions  
+(Break-up of the GHG into CO2, 
+CH4, N2O, HFCs, PFCs, SF6, 
+NF3, if available)  
+Metric tonnes of 
+CO2 equivalent 
+16,989.37 20,028.61 
+Turnover INR Crores 22130 23260 
+Total Scope 3 emissions per 
+rupee of turnover  
+Metric tonnes  of 
+CO2 equivalent/ 
+INR Crores 
+0.77  0.86 
+Total Scope 3 emission 
+intensity (optional) – the 
+relevant metric may be selected 
+by the entity  
+ - - 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau Veritas 
+(India) Private Limited 
+
+--- PAGE 60 ---
+ 
+60 
+ 
+BRSR 2023-24 
+ 
+3. With respect to the ecologically sensitive areas reported at Question 11 of Essential Indicators above, 
+provide details of significant direct & indirect impact of the entity on biodiversity in such areas along-
+with prevention and remediation activities. 
+ 
+Oil India Limited has implemented various measures to reduce the environmental footprint of its operations 
+on biodiversity. These initiatives encompass conducting Environmental Impact Assessment (EIA) studies 
+to recognize pot ential impacts and devise mitigation strategies. OIL has formulated an Environment 
+Management Plan (EMP) detailing specific actions to minimize these impacts. Furthermore, OIL complies 
+with all conditions set forth in Environmental Clearance. These concert ed efforts have resulted in minimal 
+impact on biodiversity from OIL's operations. 
+  
+OIL remains dedicated to reducing its environmental impact and continually enhancing its environmental 
+performance. 
+ 
+ 
+4. If the entity has undertaken any specific initiatives or used innovative technology or solutions to 
+improve resource efficiency, or reduce impact due to emissions / effluent discharge / waste generated, 
+please provide details of the same as well as outcome of such initiatives, as per the following format : 
+S. 
+No 
+Initiative 
+Undertaken 
+Details of the initiative (Web -link, if any, may be 
+provided along-with summary) 
+Outcome of the 
+initiative 
+ 1 Bhuvan Mitra Under the project Bhuvan Mitra, Oil India Limited 
+(OIL) has taken a pioneering step towards waste 
+management and reduction through the installation of 
+a drilling cutting treatment unit. This innovative 
+initiative aims to address the challenges associated 
+with the generation and disposal of drilling waste, 
+while demonstrating a proactive approach to 
+environmental protection. One of the primary 
+problems faced was the generation of a significant 
+amount of wastewater and the wastage of drilling fluid, 
+which posed handling and disposal issues. 
+Additionally, the requirement of land for waste 
+collection pits further compounded the challenges.  
+This system 
+utilizes centrifugal 
+force to separate 
+the drill cuttings 
+from the drill fluid, 
+eliminating the 
+generation of 
+wastewater and 
+allowing for the 
+recovery and 
+recycling of the 
+drill fluid back into 
+the drilling 
+operations. 
+ 2 Recovery of 
+hydrocarbon 
+from oily waste 
+Oil India Limited has introduced a set up a treatment 
+plant to recover valuable hydrocarbon from oily waste 
+such as tank bottom sludge and spilled crude oil. This 
+initiative eliminates the need to dispo se of oily waste 
+in landfills or incinerators, which can be harmful to the 
+environment.  
+The overall 
+recovery from the 
+plant is 40% to 
+45%, and in 2022, 
+the plant recovered 
+1400 KL of crude 
+oil. This represents 
+a significant 
+reduction in the 
+environmental 
+impact of oily 
+waste, and it also 
+provides a valuable 
+source of revenue 
+for the plant. 
+ 3 Installation of 
+Central ETPs 
+Oil India Limited has installed two Central ETPs 
+(Effluent Treatment Plants) with a capacity of 7200 
+This helps to 
+reduce the amount 
+
+--- PAGE 61 ---
+ 
+61 
+ 
+BRSR 2023-24 
+ 
+KLD and 5000 KLD to treat formation water produced 
+during oil and gas production activities. The formation 
+water generated during oil and gas separation pr ocess 
+are treated through Central ETP’s to remain within 
+permissible limits of treated effluent quality as per 
+Minimum National Standards (MINAS) and then 
+reinjected into injection wells.  
+of wastewater that 
+needs to be 
+disposed of, and it 
+also reduces the 
+amount of 
+groundwater that 
+needs to be 
+consumed. 
+ 4 Gas Blending 
+System 
+In order to reduce dependency on diesel and aim for 
+lower emissions, a pilot project of Dynamic Gas 
+Blending (DGB) system has been implemented in the 
+powerpacks of the S#7 Drilling Rig of OIL at the MGS 
+(Lakwa Gaon) site on March 5th, 2024. The system 
+enables diesel engines to run on either diesel fuel alone 
+or a combination of diesel and natural gas, thus 
+diminishing the environmental footprint and 
+operational expenses while maintaining the engine's 
+performance characteristics. 
+Reduction in diesel 
+consumption 
+resulting in 
+emission reduction  
+ 
+5. Does the entity have a business continuity and disaster management plan? Give details in 100 words/ 
+web link. 
+1) OIL has well defined preventive, control and mitigation measures to handle emergency situations. There 
+is four tier system of handling the emergencies depending on the severity of events  
+• Site specific Disaster Management Plan, 
+• Onsite Disaster Management Plan, 
+• Offsite Disaster Management Plan  
+• Corporate Disaster Management Plan 
+2) To tackle blowout/uncontrolled flow related emergency situations, OIL has a Crisis Management Teams 
+(CMTs) at its FHQ, Duliajan 
+ 3) Mock drills are conducted at regular in tervals as per periodicity defined in respective emergency 
+response plans to test their efficacy. The lessons learnt from the drills are used for strengthening the 
+response mechanism by taking corrective measures and the plans are updated whenever gaps are identified. 
+ Additionally, Emergency Response and Disaster Management Plan (ERDMP), has been prepared in 
+accordance with PNGRB (Petroleum and Natural Gas Regulatory Board) ERDMP Regulation 2010 
+(amended in Sep’20) for all applicable installations and certified by PNGR B accredited 3rd Party. The 
+ERDMPs are approved by Board of Directors in line with PNGRB ERDMP Regulations. OIL’s Board has 
+nominated one of its Directors to ensure the compliance of PNGRB ERDMP Regulations.  
+6. Disclose any significant adverse impact to the environment, arising from the value chain of the 
+entity. What mitigation or adaptation measures have been taken by the entity in this regard.  
+ 
+ 
+Our major upstream value chain partners (~75% of business transactions) are heavy equipment 
+manufacturers and downstream value chain partners are refineries. Both upstream and downstream value 
+chain partners have mature ESG-related systems and processes with respect to reporting and impact 
+assessments. 
+
+--- PAGE 62 ---
+ 
+62 
+ 
+BRSR 2023-24 
+ 
+ 
+7. Percentage of value chain partners (by value of business done with such partners) that were 
+assessed for environmental impacts. 
+ 
+Not applicable 
+  
+
+--- PAGE 63 ---
+ 
+63 
+ 
+BRSR 2023-24 
+ PRINCIPLE 7: BUSINESSES, WHEN ENGAGING IN INFLUENCING 
+PUBLIC AND REGULATORY POLICY, SHOULD DO SO IN A MANNER 
+THAT IS RESPONSIBLE AND TRANSPARENT  
+ 
+ESSENTIAL INDICATORS  
+1. a. Number of affiliations with trade and industry chambers/ associations.  
+ 
+Yes, some of the major ones are: Confederation on Indian Industries (CII) (PSE Council), Federation of 
+Indian Chambers of Commerce (FICCI), Federation of Indian Petroleum Industry (FIPI), All India 
+Organization of Employers (AIOE), Standing Conference of Public Enterprises (SCOPE) and Indian 
+Federation of Green Energy. 
+ 
+b. List the top 10 trade and industry chambers/ associations (determined based on the total 
+members of such body) the entity is a member of/ affiliated to 
+S. 
+No. 
+Name of the trade and industry chambers/ 
+associations 
+Reach of trade and 
+industry chambers/ 
+associations 
+(State/National) 
+Remarks 
+(if any) 
+1 Confederation on Indian Industries (CII) (PSE Council) National   
+2 Federation of Indian Chambers of Commerce (FICCI) National   
+3 Federation of Indian Petroleum Industry (FIPI) National   
+4 All India Organization of Employers (AIOE) National   
+5 Standing Conference of Public Enterprises (SCOPE) National   
+6 Indian Federation of Green Energy National  
+ 
+2. Provide details of corrective action taken or underway on any issues related to anti -competitive 
+conduct by the entity, based on adverse orders from regulatory authorities. 
+Not applicable 
+LEADERSHIP INDICATORS  
+1. Details of public policy positions advocated by the entity: 
+S. No Public policy 
+advocated 
+Method 
+resorted for 
+such advocacy 
+Whether 
+information 
+available in 
+public domain? 
+(Yes/No) 
+Frequency of 
+Review by 
+Board 
+(Annually/ Half 
+yearly/ 
+Quarterly / 
+Others – please 
+specify) 
+Web Link, if 
+available 
+Not Applicable 
+
+--- PAGE 64 ---
+ 
+64 
+ 
+BRSR 2023-24 
+ PRINCIPLE 8: BUSINESSES SHOULD PROMOTE INCLUSIVE GROWTH 
+AND EQUITABLE DEVELOPMENT  
+ 
+ESSENTIAL INDICATORS  
+ 
+1. Details of Social Impact Assessments (SIA) of projects undertaken by the entity based on applicable 
+laws, in the current financial year 
+ 
+Name and 
+brief details 
+of project 
+SIA 
+Notification 
+No. 
+Date of 
+notification 
+Whether 
+conducted by 
+independent 
+external agency 
+(Yes / No) 
+Results 
+communicated in 
+public domain. 
+(Yes / No) 
+Relevant 
+Web link 
+No CSR project falls under the criteria as per regulatory requirement for conducting SIA. 
+ 
+ 
+2. Provide information on project(s) for which ongoing Rehabilitation and Resettlement (R&R) is 
+being undertaken by your entity, in the following format: 
+There is no such project where R&R is applicable. 
+ 
+3. Describe the mechanisms to receive and redress grievances of the community.  
+ 
+Oil India Limited has a grievance redressal mechanism in place to address complaints from stakeholders in 
+the community. Stakeholders can approach the nearest OIL installation to  file a complaint, which will then 
+be forwarded to the complaint cell for resolution. The grievance cell will contact the complainant onsite and 
+take essential action to resolve the complaint to the satisfaction of the complainant. If the complainant is 
+nonetheless dissatisfied, the grievance cell may also seek the assistance of the District Administration or a 
+third party to attain a mutually beneficial solution. 
+In some cases, stakeholders may also additionally approach other designated d epartments in the company 
+with their grievances. Depending on the nature of the grievance, the matter may also be in addition be taken 
+up with OIL management for resolution. 
+The grievance redressal mechanism at OIL is designed to ensure that complaints fro m stakeholders are 
+addressed promptly and effectively. The mechanism is also designed to be transparent and impartial, so that 
+stakeholders can be assured that their complaints will be heard and taken seriously.  
+ 
+4. Percentage of input material (inputs to tot al inputs by value) sourced from suppliers:  
+(BRSR Core Attribute 7 : Enabling Inclusive Development) 
+  FY2023-24 FY2022-23 
+Directly sourced from MSMEs/ small 
+producers 
+53.46% (1431.35 Crore) * 
+*Excluding Hi-tech Items 
+ 50.52% (1357.73 Crore) * 
+*Excluding Hi-tech Items  
+Directly from within India 68.79% (4815.26 Crore)  73.02% (4180.25 Crore) 
+ 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited 
+
+--- PAGE 65 ---
+ 
+65 
+ 
+BRSR 2023-24 
+ 
+5. Job creation in smaller towns – Disclose wages paid to persons employed (including employees or 
+workers employed on a permanent or non -permanent / on contract basis) in the following locations, 
+as % of total wage cost 
+(BRSR core attribute 7: Enabling Inclusive Development) 
+Location FY2023-24 FY 2022-23 
+Rural 6.73% 6.84% 
+Semi-urban 76.93% 77.13% 
+Urban 9.72% 9.60% 
+Metropolitan 6.61% 6.42% 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited 
+LEADERSHIP INDICATORS  
+1. Provide details of actions taken to mitigate any negative social impacts identified in the Social 
+Impact Assessments (Reference: Question 1 of Essential Indicators above):   
+No negative social impact has been identified. 
+ 
+2. Provide the following information on CSR projects undertaken by your entity in designated 
+aspirational districts as identified by government bodies:  
+S. 
+No 
+State Aspirational District Amount spent (in INR) 
+1  Assam Dhubri  38,61,975.00 
+Goalpara 10,88,548.00 
+2 Arunachal Pradesh Namsai 26,90,100.00 
+ 
+3. (a) Do you have a preferential procurement policy where you give preference to purchase from 
+suppliers comprising marginalized /vulnerable groups? (Yes/No)  
+Yes. OIL has adopted purchase preference policy as mandated under Public Procurement Policy for 
+Schedules Caste, Scheduled Tribe and Women  Entrepreneurs and incorporated suitable provisions in 
+tenders to encourage/promote participation of such groups in public procurement.    
+ 
+(b) From which marginalized /vulnerable groups do you procure?  
+MSEs owned by SC/ST and Women Entrepreneurs as per Public Procurement Policy. 
+ 
+(c) What percentage of total procurement (by value) does it constitute? 
+Particulars  Value (Rs.) Crores 
+Total procurement from MSE 1431.35 
+Total procurement from SC/ST 33.402 
+Total procurement from woman led MSE vendors 18.983 
+Percentage of total employment from marginalized/vulnerable groups  3.66%  
+              * Excluding Hi-Tech items 
+
+--- PAGE 66 ---
+ 
+66 
+ 
+BRSR 2023-24 
+ 
+4. Details of the benefits derived and shared from the intellectual properties owned or acquired by your 
+entity (in the current financial year), based on traditional knowledge: 
+S. No Intellectual Property based 
+on traditional knowledge 
+Owned/ Acquired 
+(Yes/No) 
+Benefit shared 
+(Yes / No) 
+Basis of 
+calculating benefit 
+share 
+Not applicable 
+ 
+ 
+5. Details of corrective actions taken or underway, based on any adverse order in intellectual property 
+related disputes wherein usage of traditional knowledge is involved 
+ 
+Name of authority Brief of the Case Corrective action taken 
+Not applicable 
+ 
+ 
+6. Details of beneficiaries of CSR Projects:  
+S. 
+No. 
+CSR Project Total no. of persons benefitted from 
+CSR Projects 
+% of 
+beneficiaries 
+from 
+vulnerable and 
+marginalized 
+groups  
+OIL carries out its CSR initiatives 
+in a wide range of areas specified 
+under Schedule VII of the 
+Companies Act, 2013. Our 
+interventions are focused on 
+several key thrust areas such as 
+Healthcare, Education, 
+Sustainable Livelihood, Skill 
+Development, Capacity Building 
+and Empowerment of Women, 
+Drinking Water & Sanitation 
+under Swachh Bharat Abhiyan, 
+Promotion of Rural Sports, 
+Environment Sustainability, 
+Augmentation of Rural 
+Infrastructure, Transformation of 
+Aspirational districts, etc. 
+1 Healthcare 1,38,945+ 
+community at 
+large 
+2 Education 6,326 + 
+community at 
+large 
+3 Skill 
+Development 
+2,388 
+4 Sports 1,861 + 
+community at 
+large 
+5 Sustainable 
+Livelihood 
+4,631 
+6 Rural 
+Development 
+through 
+creation of 
+Social Assets 
+Community 
+at large 
+7 Environment 
+Sustainability 
+ Community 
+at large 
+ 
+All CSR projects 
+are targeted 
+towards socio-
+economic 
+development of 
+marginalized 
+communities like 
+SC/ ST 
+communities, 
+OBC 
+communities, 
+economically 
+backward groups, 
+and women. 
+  
+
+--- PAGE 67 ---
+ 
+67 
+ 
+BRSR 2023-24 
+ PRINCIPLE 9: BUSINESSES SHOULD ENGAGE WITH AND PROVIDE 
+VALUE TO THEIR CONSUME RS IN A RESPONSIBLE MANNER  
+ 
+ESSENTIAL INDICATORS  
+ 
+1. Describe the mechanisms in place to receive and respond to consumer complaints and feedback.  
+Oil India Limited (OIL) has established a built-in mechanism for stakeholder grievance redressal in its Crude 
+Oil Sales Agreement and Gas Supply Agreement. OIL sells crude oil to refineries and natural gas to gas utility 
+companies, and supplies LPG, both in packed and bulk form, to Indian Oil Corporation Limited. Feedback is 
+collected based on specific quali tative and quantitative parameters, which helps identify areas for 
+improvement. 
+ 
+For instance, OIL conducts daily quality checks of crude oil at the point of sale. The integrity of pipelines is 
+regularly inspected using standard pipeline inspection methods  and monitored through the existing SCADA 
+and LDS systems. In the case of natural gas, supply to consumers is monitored daily to ensure the delivery of 
+the committed quantity, quality, and pressure of gas as per the terms and conditions of the agreement. 
+Additionally, a joint reconciliation of gas with customers is carried out every month and recorded. Any 
+discrepancies, complaints, or suggestions are discussed in the monthly meetings. OIL is committed to 
+providing its customers with high-quality products and reliable delivery services. 
+ 
+2. Turnover of products and/ services as a percentage of turnover from all products/service that carry 
+information about:  
+  Turnover with respect to: As a 
+percentage to 
+total 
+turnover 
+Environmental and social 
+parameters relevant to the product 
+ Not Applicable  Not 
+Applicable 
+Safe and responsible usage Crude oil & gas are extracted and processed 
+according to the safety norms of the Government 100% 
+ Recycling and/or safe disposal  Not Applicable Not 
+Applicable 
+ 
+3. Number of consumer complaints in respect of the following:  
+ FY2023-24 FY2022-23 
+Received 
+during the 
+year 
+Pending 
+resolution at 
+end of year 
+Remarks Received 
+during the 
+year 
+Pending 
+resolution at 
+end of year 
+Remarks 
+Data 
+privacy 
+Nil Nil Nil Nil Nil Nil 
+Advertising Nil Nil Nil Nil Nil Nil 
+
+--- PAGE 68 ---
+ 
+68 
+ 
+BRSR 2023-24 
+ Cyber-
+security 
+Nil Nil Nil Nil Nil Nil 
+Delivery of 
+essential 
+services 
+Nil Nil Nil Nil Nil Nil 
+Restrictive 
+Trade 
+Practices 
+Nil Nil Nil Nil Nil Nil 
+Unfair 
+Trade 
+Practices 
+Crude oil pricing formula is approved by the 
+Government of India and sales are made at 
+an arm’s length 
+Crude oil pricing formula is approved by 
+the Government of India and sales are 
+made at an arm’s length 
+Other          
+4. Details of instances of product recalls on account of safety issues: 
+  Number Reasons for recall 
+Voluntary recalls Nil Not Applicable 
+Forced recalls Nil Not Applicable 
+ 
+5. Does the entity have a framework/ policy on cyber security and risks related to data privacy? (Yes/No) If 
+available, provide a web-link of the policy.  
+ 
+Oil India Limited has an Information Security Management System (ISMS) in place that is certified to the 
+ISO 27001 standard. This means that OIL has implemented a set of controls that are designed to protect its 
+information assets, including data privacy. The risk assessment exercise that is carried out as part of the ISO 
+27001 certification process helps to identify and assess the risks to data privacy. These risks can then be 
+mitigated through the implementation of appropriate controls. OIL's Data Centre at Duliajan and DR Site at 
+Noida are both ISO 27001:2013 certified. This means that these data centers have implemented the controls 
+required by the ISO 27001 standard to protect data privacy.  
+ 
+6. Provide details of any corrective actions taken or underw ay on issues relating to advertising, and delivery 
+of essential services; cyber security and data privacy of customers; re -occurrence of instances of product 
+recalls; penalty / action taken by regulatory authorities on safety of products / service  
+ 
+We have established a Cybersecurity Operations Centre (CSOC) to monitor all the End Point Detection & 
+Response (EDR) for all servers/desktops/ laptops connected to OIL's network. EDR solution monitors every 
+endpoint in real time round the clock for any suspicious/malicious activities and raises necessary alert 
+messages accordingly . This centralized approach allows security policies to be efficiently pushed to the 
+onboarded devices from a single portal, enhancing manageability and providing greater security related 
+control capabilities to administrators. 
+Additionally, security controls pertaining to user access & identity management, network & data center 
+architecture were reviewed & improved based on recommendations of a reputed international security 
+agency. 
+ 
+
+--- PAGE 69 ---
+ 
+69 
+ 
+BRSR 2023-24 
+ 
+Another initiative is ongoing for the engagement of a cybersecurity consultant to evaluate OIL’s existing 
+ICT and OT systems, identify and analyze cybersecurity risks, redesign systems for risk mitigation, develop 
+policies and procedures, determine a dedicated organizational unit for cybersecurity, and create a 
+comprehensive IT, OT, and cybersecurity for the company. 
+   
+7. Provide the following information relating to data breaches: 
+(BRSR Core Attribute 8: Fairness in Engaging with Customers and Suppliers) 
+ 
+a. Number of instances of data breaches 
+No reported instances of Data Breaches in FY’23-24 
+b. Percentage of data breaches involving personally identifiable information of customers 
+Not Applicable since no instances were reported. 
+c. Impact, if any, of the data breaches 
+Not Applicable since no instances were reported. 
+ 
+Independent assessment/ evaluation/assurance on the above figures has been carried out by Bureau 
+Veritas (India) Private Limited  
+ 
+LEADERSHIP INDICATORS  
+ 
+1. Channels / platforms where information on products and services of the entity can be accessed 
+(provide web link, if available).  
+ 
+OIL is primary involved in business to business  (B2B) operations & transactions . All the information 
+regarding the Company’s products could be accessed through the official website of Oil India Limited . 
+ 
+2. Steps taken to inform and educate consumers about safe and responsible usage of products and/or 
+services.  
+ 
+Not applicable. Crude oil and natural gas, which are sold to OMCs, constitute the main products of the 
+company. 
+ 
+3. Mechanisms in place to inform consu mers of any risk of disruption/discontinuation of essential 
+services. 
+  
+The product sale agreements of the Company have suitable provisions to address variance in product sale, 
+if any. Moreover, the Assets/ Plants disseminate information within reasonable time frame in case of any 
+disruption or discontinuation of the products and services. 
+ 
+4. Does the entity display product information on the product over and above what is mandated as per 
+local laws? (Yes/No/Not Applicable) If yes, provide details in brief. Did your entity carry out any 
+survey regarding consumer satisfaction relating to the major products / services of the entity, 
+significant locations of operation of the entity or the entity as a whole? (Yes/No)  
+ 
+Not Applicable 
+
+--- PAGE 70 ---
+ 
+ 
+70 
+ 
+BRSR 2023-24 
+ 
+APPENDIX- 1 
+Stakeholder Engagement and Materiality Assessment   
+ 
+Stakeholder Engagement (GRI 2-29) 
+To improve our value proposition and meet the expectations of those involved, we at OIL understand the importance 
+of maintaining our social license to operate. This is accomplished by regularly engaging with our stakeholders to gain 
+a better understanding of their perspectives and needs and developing strategies that align with their expectations. Our 
+stakeholders consist of individuals and organizations who are affected by our operations and resources and therefore 
+have a significant influence on how we conduct our business. By collaborating with our stakeholders, we can enhance 
+our products and processes, involve them in decision-making, and establish trust.  
+We actively seek to understand the concerns of our stakeholders by directly consulting with them, taking into 
+consideration potential barriers such as language, cultural differences, gender and power imbalances, and divisions 
+within the community. Throughout the year, we interact with various stakeholders, including employees, government 
+and regulatory  bodies, suppliers, customers, industry partners, communities, non -governmental organizations 
+(NGOs), and contractors. These stakeholders were identified through our sustainability and annual reports, as well as 
+those of our peers and competitors, and were categorized into 12 key groups, encompassing both internal and external 
+stakeholders. 
+We uphold the human rights of all stakeholders and individuals that we engage with, including their rights to privacy, 
+freedom of expression, peaceful assembly, and protest. We take measures to protect them from any form of retaliation 
+for raising complaints or concerns. 
+Table 1: Method of Stakeholder engagement 
+Whether identified 
+as Vulnerable & 
+Marginalized 
+Group (Yes/No) 
+Channels of 
+communication 
+(Emails, SMS, 
+Newspapers, 
+Pamphlets, 
+Advertisement, 
+Community 
+meetings, Notices 
+Board, Website) 
+Frequency of 
+engagement 
+(Annually/ Half 
+yearly/ 
+Quarterly/others)- 
+Please specify 
+Purpose and scope of engagement 
+including key topics and concerns raised 
+during such engagements 
+Government and other regulators 
+No Monthly, Quarterly 
+and Annual Review 
+Annual, Monthly 
+and Need-based 
+Support government missions to promote 
+sustainable development goals 
+• Performance appraisal through MoUs 
+• Discussions on major investment plans 
+Employees 
+No Satisfaction 
+surveys, Social 
+Media Grievance 
+Redressal Emails, 
+Journals, Meetings 
+with employee 
+associations and 
+unions 
+Annual, Quarterly, 
+Monthly, Daily 
+Communication on OIL’s business goals, 
+values, and principles 
+• Implementation of best practices 
+• Facilitating learning and developing 
+• Track key performance indicators and 
+action plans 
+
+--- PAGE 71 ---
+ 
+ 
+71 
+ 
+BRSR 2023-24 
+ Whether identified 
+as Vulnerable & 
+Marginalized 
+Group (Yes/No) 
+Channels of 
+communication 
+(Emails, SMS, 
+Newspapers, 
+Pamphlets, 
+Advertisement, 
+Community 
+meetings, Notices 
+Board, Website) 
+Frequency of 
+engagement 
+(Annually/ Half 
+yearly/ 
+Quarterly/others)- 
+Please specify 
+Purpose and scope of engagement 
+including key topics and concerns raised 
+during such engagements 
+Suppliers 
+No Supplier Meets, 
+Industry 
+Conclave, Access 
+to empowered C&P 
+committee and 
+Vendor 
+development 
+programs 
+Annual, Quarterly, 
+Monthly, Daily 
+Communicate operational decisions 
+• Seek their performance data/information 
+• Understand and address their concerns 
+• Dispute resolution 
+• Review of Contracts 
+Customers 
+No Annual Customer 
+Meet 
+Customer 
+Interactive Meet 
+Customer 
+Satisfaction Survey 
+Annual, Quarterly To understand their satisfaction levels 
+• To address operational concerns 
+• To get feedback on new product 
+development 
+Joint ventures and subsidiaries 
+No Need-based 
+meetings 
+Reports and 
+Newsletters 
+Need-based Discussions on major investment plans’ 
+• Sharing of performance data 
+• Facilitate decision-making on major topics 
+Industry partners 
+No Seminars 
+Conferences 
+Industry Expo 
+Interviews 
+Reports and 
+Newsletters 
+Need-based Share performance data 
+Inform on keys decisions and projects 
+• Participating in conferences and seminars 
+• Engage in public policy advocacy 
+Communities 
+Yes Meetings and direct 
+interactions, 
+Community 
+events, Needs 
+analysis and Impact 
+assessments, 
+CSR initiatives & 
+Corporate 
+communication 
+Materials 
+Need-based Engaging with communities for conducting 
+need assessment and executing community 
+development projects 
+• Understanding and addressing their 
+concerns on critical incidents 
+• Community Grievances Redressal 
+Contractors/ Implementing agencies 
+
+--- PAGE 72 ---
+ 
+ 
+72 
+ 
+BRSR 2023-24 
+ Whether identified 
+as Vulnerable & 
+Marginalized 
+Group (Yes/No) 
+Channels of 
+communication 
+(Emails, SMS, 
+Newspapers, 
+Pamphlets, 
+Advertisement, 
+Community 
+meetings, Notices 
+Board, Website) 
+Frequency of 
+engagement 
+(Annually/ Half 
+yearly/ 
+Quarterly/others)- 
+Please specify 
+Purpose and scope of engagement 
+including key topics and concerns raised 
+during such engagements 
+No Need-based 
+meetings & 
+Website 
+Annual, Quarterly, 
+Monthly, Daily 
+Communicate operational decisions 
+• To align their work with company policies 
+and mandates (Compliance) 
+NGOs /Civil society organizations 
+No Project meetings & 
+Annual 
+reviews 
+Need-based Executing community development projects 
+• Understanding and addressing their 
+concerns on critical incidents 
+Media 
+No   Monthly, Need-
+based 
+Relationship building 
+• Promotion of latest initiatives and events 
+• Increase brand recall value 
+• Appraising performance highlights and 
+lowlights 
+• Point-of-view on major sectoral 
+development 
+Investors 
+No   Periodical, Need-
+based 
+Servicing of Investor Queries and 
+Information about the Performance 
+[Ref: Report on Corporate Governance] 
+ 
+Materiality Assessment (GRI 3-1) 
+In FY 2022 -23, we undertook a materiality assessment guided by the GRI Standards 2021. OIL acknowledges that 
+stakeholders may have varying levels of importance for different ESG issues. As a result, OIL categorizes ESG topics 
+as high, medium, or low based on their significance to both internal and external stakeholders. This matrix of 
+materiality guides strategic decision-making, mitigates operational risks, and determines priority areas for intervention 
+by OIL. We have considered the views of stakeholders (Mentioned in table 2) and subject matter experts from different 
+business domain within our organization,  to finalize the material topics and associated impacts.  
+We undertook the materiality assessment in 4 steps: 
+1. Determining OIL’s organizational context : In this stage, a desk review was conducted to evaluate the business 
+operations, the business relationships, and the manner in which the business interacts with its immediate 
+environment. A sustainability context was established by examining the economic,  ecological, human rights and 
+other societal issues at local, provincial, and global levels throughout the value chain. A high-level initial overview 
+of the activities and business relations, the sustainability framework in which these are occurring, and an outline of 
+its stakeholders was established. This provided essential information for determining its real and potential effects. 
+The activities, business relations, stakeholders and sustainability framework of all entities that the business controls 
+or has an interest in, including minority interests, were also considered. 
+2. Identify actual and potential impacts: In this step, we took guidance from the GRI Oil & Gas Sector Standards to 
+determine our impacts on the economy, environment, and people, including  impacts on their human rights, across 
+our activities and business relationships. Additionally, we conducted secondary research to determine the actual and 
+
+--- PAGE 73 ---
+ 
+ 
+73 
+ 
+BRSR 2023-24 
+ potential impacts of our business and operations. Actual impacts are those that have already occurred, and potential 
+impacts are those that could occur but have not yet occurred. The elements of impacts considered as intended and 
+unintended.  
+3. Quantify impact:  In this step, the insights gained from the stakeholder consultation were used to identify the 
+importance of the impacts outlined in the preceding step. Numerous actual and potential impacts were identified. 
+The importance of the impacts was then evaluated and prioritized. Prioritization allows for action to be taken on the 
+impacts and the material topics for reporting to be identified. Prioritization of impacts for action is pertinent where 
+it is relevant. 
+The severity of the impacts is determined by their scope, scale and irremediable nature. The probability of the impact 
+is based on the likelihood o f its occurrence. The impact of the issues on human rights were also evaluated. In the 
+event of potential adverse human rights impacts, their severity takes precedence over their likelihood.  
+4. Prioritizing material topics:  In this step, we grouped our impacts under umbrella topics and prioritized them based 
+on the quantitative analysis conducted in the previous step. Subsequently, we arrived at the list of material topics 
+for reporting. The significance of an impact is assessed in relation to the other impacts that we have identified. Then, 
+we arranged the impacts from most to least significant and define a cut-off point or threshold to determine which of 
+the impacts it will focus its reporting on. 
+ 
+ 
+ 
+Identification 
+of material 
+topics relevant 
+to Oil and Gas 
+sector 
+Shortlisting and 
+prioritization of 
+material topics 
+Performing 
+“significance 
+assessment” of 
+the identified 
+Impacts 
+Mapping of 
+Impacts with 
+the applicable 
+stakeholders 
+Perception 
+survey of 
+stakeholder 
+against the 
+identified 
+impacts 
+Prioritization of 
+Impacts through 
+data driven 
+methodology 
+Mapping of 
+prioritized 
+Impact with the 
+GRI topic 
+specific 
+disclosure 
+Final list of 
+prioritized 
+impact for 
+incorporation 
+in ESG report 
+Impact 
+identification 
+for the 
+prioritized 
+material topics 
+Process flow chart – Prioritization of material topics with corresponding material impacts  
+
+--- PAGE 74 ---
+ 
+Ref: BV_OIL_BRSR_ 22803166         
+ 
+Independent Assurance Statement 
+ 
+Assurance Statement on Oil India Limited 
+Business Responsibility and Sustainability 
+Report Core 
+ 
+For 
+Reporting Period:  
+April 01, 2023 – March 31, 2024 
+ 
+ 
+ 
+ 
+Bureau Veritas (India) Private Limited 
+4th Floor ServeSpaces Business Park D-5 & 6 Sector 3, Noida 201301 
+ 
+ 
+ 
+
+
+--- PAGE 75 ---
+Independent Assurance Statement 
+ 
+Ref: BV_OIL_BRSR_ 22803166         
+To  
+Oil India Limited (OIL) 
+Plot Number 19, Oil House, Near Film City, Sector 16A-201301. 
+Introduction and Objective of Work 
+BUREAU VERITAS has been engaged by Oil India Limited (hereinafter abbreviated as “OIL”) to conduct 
+an independent assurance of the Business Responsibili ty and Sustainability Report Core (hereinafter 
+abbreviated as “BRSR Core”), consisting of the Key Performance Indicators (KPIs) under Environment, 
+Social and Governance (ESG) attributes, which are mentioned in Annexure I, as prescribed under the 
+Securities and Exchange Board of India (SEBI) Circular dated 12th July, 2023. 
+Intended User 
+The assurance statement is made solely for “OIL and its stakeholders” as per the governing contractual 
+terms and conditions of the assurance engagement contract between “OIL” and “Bureau Veritas”. To 
+the extent that the law permits, we owe no responsibility and do not accept any liability to any party 
+other than “OIL” for the work we have performed for this assurance report or our conclusions stated 
+in the paragraph below. 
+Reporting Criteria 
+Reporting Framework based on BRSR Core, Business Responsibility and Sustainability Report as per 
+Annexure 1 of the SEBI circular (SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122,) dated July 12, 2023) BRSR 
+Core KPIs. 
+The reported information of BRSR core based on following nine ESG attributes: 
+1. Green-house gas (GHG) footprint 
+2. Water footprint 
+3. Energy footprint 
+4. Embracing circularity - details related to waste management by the entity 
+5. Enhancing Employee Wellbeing and Safety 
+6. Enabling Gender Diversity in Business 
+7. Enabling Inclusive Development 
+8. Fairness in Engaging with Customers and Suppliers 
+9. Open-ness of business 
+Assurance Standards Used 
+Bureau Veritas conducted reasonable assurance of BRSR Core in accordance with the requirements of 
+the International Federation of Accountants (IFAC), International Standard on Assurance Engagement 
+(ISAE) 3000 (Revised) Reasonable Assurance & GHG as per  ISAE 3410 "Assurance Engagements on  
+Greenhouse Gas Statements" . Under this standard, Bureau Veritas has reviewed the in formation 
+presented in the report against the characteristics of relevance, completeness, materiality, reliability, 
+neutrality, and understandability.  
+Scope and Boundary of Assurance 
+The scope of assurance involves evaluating the sustainability performance of non-financial disclosures 
+for the period from 1st April 2023 to 31st March 2024, based on BRSR Core requirements. 
+Reporting Boundary: Only the standalone operations of OIL. 
+As part of its independent reasonable assurance, we assessed the appropriateness and robustness of 
+underlying reporting systems and processes, used to collect, analyse and review the information 
+reported. 
+The Scope of Assurance for BRSR Core includes: 
+
+--- PAGE 76 ---
+Independent Assurance Statement 
+ 
+Ref: BV_OIL_BRSR_ 22803166         
+ An assessment of the procedures or approaches followed for data compilation and reporting 
+of the sustainability performance non-financial disclosures for specific operations. 
+ Testing, on a sample basis, of evidence supporting the data. 
+ Verification of the sample data evidence and information on selected material topics reported 
+at the above-mentioned operations for the defined reporting period. 
+ Assessment of the suitability between the backup data for the selected sustainability 
+performance non -financial disclosures a nd the information presented as per BRSR Core 
+requirements. 
+ The General and topic-specific sustainability non-financial standard disclosures are subject to 
+limited assurance based on the extent of information available for assurance. 
+ Completion of assurance statement for inclusion in the report reflecting the verification, 
+findings, and conclusion of the disclosure’s assurance.  
+The Methodology Adopted for Assurance 
+Bureau Veritas' sustainability assurance process involves specified procedures to obtain evidence 
+regarding the accuracy and reliability of the data provided related to BRSR core  disclosures. The 
+nature, timing, and extent of procedures selected depend on the data and evidence provided, 
+including the verification of the associated risks with the material topics of the selected sustainability 
+non-financial disclosures and their relevance for the reporting period.  
+As per the scope of the assurance, sample ev idence, information, and explanations that were 
+considered necessary in relation to the assurance scope and following conclusions have been made: 
+ Assessed the report preparation in line with BRSR Core parameters relevant to OIL operations, 
+ensuring no misrepresentation of disclosures within the assurance scope. 
+ Evaluated the appropriateness of assumptions used for data estimation and reviewed systems 
+for data compilation and reporting, adhering to BRSR principles of materiality, inclusivity, and 
+responsiveness. 
+ Verified the systems and procedures for quantification, collation, and analysis of sustainability 
+performance disclosures through site visits and review of supporting evidence. 
+ Engaged with corporate office officials to understand sustainability risks , opportunities, and 
+OIL's strategies, evaluating data for reliability and accuracy. 
+ Reviewed the stakeholder engagement process and materiality assessment, ensuring the 
+accuracy of sustainability performance data at both corporate and operational levels. 
+ Executed an audit trail to verify the accuracy of non -financial disclosures and sustainability 
+performance data, including GHG emissions reporting and associated calculations. 
+ Evaluated Environmental, Social, and Governance (ESG) practices to ensure the BR SR Core 
+reporting provided a balanced representation of the organization’s contributions to 
+sustainable development. 
+Limitations and Exclusions 
+The assurance is limited to the above-mentioned scope of work and excludes the information relating 
+to: 
+ Data related to the Company’s financial performance disclosures. 
+ Activities and practices followed outside the defined assurance period stated hereinabove. 
+ Positional statements, expressions of opinion, belief, aim, or future intention by “ OIL” and 
+statements of future commitment. 
+ The assurance does not extend to the activities and operations of “ OIL” outside of the scope 
+and geographical boundaries mentioned in the report as well as the operations undertaken 
+by any other entity that may be associated with or have a business relationship with “OIL”. 
+
+--- PAGE 77 ---
+Independent Assurance Statement 
+ 
+Ref: BV_OIL_BRSR_ 22803166         
+ Compliance with any Environmental, Social, and legal issues related to the regulatory 
+authority. 
+ Any of the statements related to company aspects or reputation. 
+Our Findings 
+On the basis of our methodology and the activities described above, 
+ Nothing has come to our attention to indicate that the BRSR disclosures are inaccurate or that 
+the information included therein is not fairly stated. 
+ It is our opinion that Company has established appropriate systems for the collectio n, 
+aggregation, and analysis of data on Sustainability/Non -Financial performance disclosures in 
+the BRSR. 
+ The BRSR disclosure on core parameter provides a fair representation of the Company’s 
+activities as included therein.  
+ The information is presented in  a clear, understandable, and accessible manner, and allows 
+readers to form a balanced opinion over the Company and status during the reporting period. 
+ OIL’s data and information on BRSR core disclosures for the period of 01 April 2023 to 31 
+March 2024 included in the Report, is, in all material respects, in accordance with the SEBI’s 
+BRSR guidelines.  
+Management Responsibility 
+OIL is completely responsible for the report contents, identification of material topics, and data 
+reporting structure. The selection of reporting criteria, reporting period, reporting boundary, 
+monitoring, and measurement of data, preparation, and presentati on of information for the report 
+are the sole responsibility of the management of “ OIL”. Bureau Veritas (BV) was not involved in the 
+drafting or preparation of the report and any other backup data for the reporting period. The 
+responsibility of BV was to p rovide reasonable independent assurance for the sustainability of non -
+financial disclosures as described in the scope of assurance. 
+The said assessment is properly based on the assumption that the data and information provided in 
+the report are proper and without any discrepancy. Bureau Veritas shall not be held liable or 
+responsible for any type of decision a person or entity would make based on this assurance statement. 
+While reading the assurance statement, stakeholders shall recognize and accept the lim itations and 
+scope as mentioned above. 
+Uncertainty 
+The reliability of assurance is subject to uncertainty(ies) that is inherent in the assurance process. 
+Uncertainties stem from limitations in quantification models used, assumptions, or data conversion 
+factors used or may be present in the estimation of data used to arrive at results. Our conclusions with 
+respect to this assurance are naturally subject to any inherent uncertainty(ies) involved in the 
+assurance process. 
+Statement of Independence, Impartiality, and Competence 
+Bureau Veritas is an independent professional services company that specializes in Quality, Health, 
+Safety, Social, and Environm ental Management with almost 195  years of history in providing 
+independent assurance services. Bureau Veritas has implemented a Code of Ethics across the business 
+to maintain high ethical standards among staff in their day -to-day business activities. We are 
+particularly vigilant in the prevention of conflicts of interest. 
+No member of the assurance team has a business relationship with “OIL”, its Directors, Managers, or 
+officials beyond that required of this assignment. We have conducted this verification independently 
+and there has been no conflict of interest. 
+
+--- PAGE 78 ---
+Independent Assurance Statement 
+ 
+Ref: BV_OIL_BRSR_ 22803166         
+Competence  
+The assurance team has extensive experience in conducting assurance over environmental, social, 
+ethical, and health & safety information, systems and processes an excellent understanding of Bureau 
+Veritas standard methodology for the Assurance of Sustainability Reports. 
+Restriction on use of Our Report 
+Our Reasonable assurance report has been prepared and addressed to the Board of Directors of the 
+Company at the request of the company solely to assist the company in reporting on the Company’s 
+Sustainability performance and activities. Accordingly, we accept no liability to anyone, other than the 
+Company. Our deliverables should not be used for any other purpose or by any person other than the 
+addressees of our deliverables. The Firm neither accepts nor assumes any duty of care or liability for 
+any other purpose or to any other party to whom our Deliverables are shown or into whose hands it 
+may come without our prior consent in writing. 
+ 
+ 
+ 
+ 
+ 
+Kalyan Dey         Munji Rama Mohan Rao 
+Senior Lead Assurer       Technical Reviewer  
+ 
+ 
+ 
+Amit Kumar 
+Team Member  
+  
+Date: 08/08/2024       Date: 08/08/2024 
+Place: Delhi, India       Place: Hyderabad, Ind ia 
+ 
+
+
+--- PAGE 79 ---
+ 
+

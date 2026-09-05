@@ -1,0 +1,39 @@
+{
+  "reconciliation_provenance": "AI_SOL_PASS_C_RECONCILIATION",
+  "ai_assisted": true,
+  "total_source_records": 500,
+  "existing_consensus_high_accepted": 356,
+  "pass_c": {
+    "total": 144,
+    "SIF_POTENTIAL": 103,
+    "NON_SIF_POTENTIAL": 7,
+    "UNCERTAIN": 34,
+    "provenance": "AI_SOL_XHIGH_PASS_C"
+  },
+  "reconciliation": {
+    "triple_confirmed": 62,
+    "majority_2_of_3_resolved": 31,
+    "newly_resolved": 93,
+    "remaining_unresolved": 51
+  },
+  "final_training_labels": {
+    "total": 449,
+    "SIF_POTENTIAL": 365,
+    "NON_SIF_POTENTIAL": 84,
+    "class_distribution": {
+      "SIF_POTENTIAL": {
+        "count": 365,
+        "percent": 81.2918
+      },
+      "NON_SIF_POTENTIAL": {
+        "count": 84,
+        "percent": 18.7082
+      }
+    }
+  },
+  "confidence_method": {
+    "existing_consensus": "existing consensus_confidence",
+    "triple_confirm": "minimum of the three agreeing pass confidences",
+    "majority_2_of_3": "minimum of the two agreeing binary pass confidences"
+  }
+}

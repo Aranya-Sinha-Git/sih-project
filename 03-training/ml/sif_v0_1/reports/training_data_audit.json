@@ -1,0 +1,118 @@
+{
+  "dataset": "data/ai_labeling/training_labels_v0_1.csv",
+  "training_label_status": "AI_ASSISTED_CONSENSUS",
+  "ai_assisted_not_expert_ground_truth": true,
+  "accepted_binary_rows": 449,
+  "expected_counts_verified": {
+    "SIF_POTENTIAL": 365,
+    "NON_SIF_POTENTIAL": 84
+  },
+  "unresolved_rows_excluded": 51,
+  "missing_narratives": 0,
+  "duplicate_candidate_ids": 0,
+  "duplicate_normalized_narratives": 0,
+  "source_distribution": {
+    "OSHA_SIR": 449
+  },
+  "label_provenance_distribution": {
+    "AI_SOL_DUAL_PASS_CONSENSUS": 356,
+    "AI_SOL_TRIPLE_CONFIRM": 62,
+    "AI_SOL_MAJORITY_2_OF_3": 31
+  },
+  "narrative_length_characters": {
+    "min": 40,
+    "median": 250.0,
+    "mean": 284.833,
+    "max": 1247
+  },
+  "model_input_fields": [
+    "narrative"
+  ],
+  "leakage_fields_excluded_from_model_input": [
+    "final_sif_label",
+    "label_provenance",
+    "agreement_pattern",
+    "final_confidence",
+    "target",
+    "candidate_id",
+    "source",
+    "source_record_id",
+    "event_group"
+  ],
+  "near_duplicate_method": "character word-boundary TF-IDF cosine similarity >= 0.95, unioned with exact narrative and source-record groups",
+  "exact_duplicate_pairs": 0,
+  "duplicate_source_record_pairs": 0,
+  "near_duplicate_pairs_at_or_above_0_95": 0,
+  "event_groups": 449,
+  "multi_record_event_groups": 0,
+  "largest_event_group": 1,
+  "split_candidates": [
+    {
+      "fold": 0.0,
+      "train_rows": 359.0,
+      "validation_rows": 90.0,
+      "validation_fraction": 0.20044543429844097,
+      "train_sif_rate": 0.8133704735376045,
+      "validation_sif_rate": 0.8111111111111111,
+      "selected": true
+    },
+    {
+      "fold": 1.0,
+      "train_rows": 359.0,
+      "validation_rows": 90.0,
+      "validation_fraction": 0.20044543429844097,
+      "train_sif_rate": 0.8133704735376045,
+      "validation_sif_rate": 0.8111111111111111,
+      "selected": false
+    },
+    {
+      "fold": 2.0,
+      "train_rows": 360.0,
+      "validation_rows": 89.0,
+      "validation_fraction": 0.19821826280623608,
+      "train_sif_rate": 0.8111111111111111,
+      "validation_sif_rate": 0.8202247191011236,
+      "selected": false
+    },
+    {
+      "fold": 3.0,
+      "train_rows": 359.0,
+      "validation_rows": 90.0,
+      "validation_fraction": 0.20044543429844097,
+      "train_sif_rate": 0.8133704735376045,
+      "validation_sif_rate": 0.8111111111111111,
+      "selected": false
+    },
+    {
+      "fold": 4.0,
+      "train_rows": 359.0,
+      "validation_rows": 90.0,
+      "validation_fraction": 0.20044543429844097,
+      "train_sif_rate": 0.8133704735376045,
+      "validation_sif_rate": 0.8111111111111111,
+      "selected": false
+    }
+  ],
+  "selected_split": {
+    "seed": 26165,
+    "train_rows": 359,
+    "validation_rows": 90,
+    "train_groups": 359,
+    "validation_groups": 90,
+    "event_group_overlap": 0,
+    "source_distribution_train": {
+      "OSHA_SIR": 359
+    },
+    "source_distribution_validation": {
+      "OSHA_SIR": 90
+    },
+    "class_distribution_train": {
+      "SIF_POTENTIAL": 292,
+      "NON_SIF_POTENTIAL": 67
+    },
+    "class_distribution_validation": {
+      "SIF_POTENTIAL": 73,
+      "NON_SIF_POTENTIAL": 17
+    }
+  }
+}
