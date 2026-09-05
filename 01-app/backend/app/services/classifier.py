@@ -162,7 +162,7 @@ def analyze_with_classifier(narrative: str, supplemental: dict[str, Any], artifa
         "classification_basis": "Frozen classifier raw score; not calibrated as a probability.",
         "model_mode": "Frozen supervised classifier",
         "model_version": screening.get("model_version", "sif-v0.1"),
-        "priority": "Immediate review" if decision == "SIF_POTENTIAL" else "Review" if review_required else "Monitor",
+        "priority": "Immediate attention" if decision == "SIF_POTENTIAL" else "Review" if review_required else "Monitor",
         "review_required": review_required,
         "sif_potential": sif_potential,
         "sif_label_status": "classifier_screened" if sif_potential is not None else "unresolved",

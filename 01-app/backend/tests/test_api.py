@@ -18,7 +18,7 @@ def test_health():assert client.get('/health').status_code==200
 def test_empty_database():
  d=client.get('/dashboard/summary').json();assert d['reports_analyzed']==0 and d['emerging_alert'] is None and client.get('/alerts').json()==[]
 def test_high_risk():
- r=client.post('/analyze',json={'narrative':'Stored pressure was not completely isolated; a technician loosened the flange while standing in the release path.','report_type':'Near Miss'});assert r.status_code==200 and r.json()['risk']=='High' and r.json()['classification']=='SIF Potential' and r.json()['sif_potential'] is True and r.json()['report_type']=='Near Miss'
+ r=client.post('/analyze',json={'narrative':'Stored pressure was not completely isolated; a technician loosened the flange while standing in the release path.','report_type':'Near Miss'});assert r.status_code==200 and r.json()['risk']=='High' and r.json()['classification']=='SIF Potential' and r.json()['sif_potential'] is True and r.json()['report_type']=='Near Miss' and r.json()['priority']=='Immediate attention'
 def test_low_risk():
  r=client.post('/analyze',json={'narrative':'Routine housekeeping cleared a cable from a walkway with no equipment exposure.'});assert r.status_code==200 and r.json()['model_mode']=='Frozen supervised classifier' and r.json()['sif_probability']==r.json()['screening']['raw_score'] and r.json()['classification'] in {'SIF Potential','Needs Review','Non-SIF Potential'}
 def test_invalid():assert client.post('/analyze',json={'narrative':'short'}).status_code==422
@@ -134,6 +134,8 @@ def test_barrier_extraction_requires_failure_context():
  failed=main.analyze_text('Work began without a permit and isolation was not verified.')
  assert 'permit or authorization control failure' in failed['barrier_failures']
  assert 'isolation / control verification failure' in failed['barrier_failures']
+ assert safe['precursors']==['no strong precursor pattern']
+ assert failed['precursors']==['isolation verification gap','permit or critical-control deviation']
 
 def test_duplicate_narratives_are_not_historical_evidence():
  item={'id':'CURRENT','narrative':'Worker entered the release path after isolation failure.','source_id':'CURRENT-SOURCE'}

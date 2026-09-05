@@ -70,9 +70,11 @@ def analyze_text(narrative: str) -> dict[str, Any]:
     cue_text={"stored pressure":"stored pressure is described","pressure":"pressure exposure is described","release path":"a person is in a potential release path","not been completely":"isolation appears incomplete","not completely isolated":"isolation appears incomplete","incomplete":"a control is described as incomplete","suspended":"suspended-load exposure is described","height":"work at height is described","energized":"hazardous energy may be present"}
     evidence=[cue_text[t] for t in dict.fromkeys(high_cues+failures) if t in cue_text]
     precursors=[]
-    if any(x in text for x in ["isolation","pressure","energized"]): precursors.append("isolation verification gap")
+    isolation_failure = any(x in text for x in ["not been completely", "not completely isolated", "isolation failure", "isolation gap", "without isolation", "not verified", "incomplete isolation"])
+    permit_failure = any(x in text for x in ["permit bypass", "permit violation", "permit missing", "without a permit", "no permit", "authorization failure", "procedure bypass", "control bypass"])
+    if isolation_failure: precursors.append("isolation verification gap")
     if any(x in text for x in ["release path","flange","suspended","pinch"]): precursors.append("line-of-fire exposure")
-    if any(x in text for x in ["permit","bypass"]): precursors.append("permit or critical-control deviation")
+    if permit_failure: precursors.append("permit or critical-control deviation")
     activity=next((name for name,terms in ACTIVITIES.items() if _hits(text,terms)),"Unclassified")
     barrier_failures=[name for name,terms in BARRIER_FAILURES.items() if _hits(text,terms)]
     barrier_candidates=[name for name,terms in BARRIER_CANDIDATES.items() if _hits(text,terms) and name not in barrier_failures]

@@ -41,7 +41,7 @@ Browser → Next.js frontend (/api proxy) → FastAPI → frozen classifier + su
 2. **Report types** — Unsafe Act, Unsafe Condition, Near Miss, and Incident are stored with new records/imports.
 3. **SIF classification** — every newly analysed report is returned as `SIF Potential`, `Non-SIF Potential`, or `Needs Review`.
 4. **Life-Saving Rules** — primary/secondary keyword-based mappings include Energy Isolation, Line of Fire, Working at Height, Safe Mechanical Lifting, Driving Safety, Confined Space, Hot Work, and Permit to Work.
-5. **Extraction** — activity, basic location, hazards, precursor groups, and barrier/control-failure phrases are displayed.
+5. **Extraction** — activity, basic location, hazards, precursor groups, and barrier/control-failure phrases are displayed. Explicit failure language is required for asserted failures; neutral mentions remain candidate control topics.
 6. **Recurring patterns** — precursor/rule groups are aggregated across stored reports.
 7. **Density ranking** — sites and activities are ranked by `SIF classifications ÷ total reports`.
 8. **Human review** — reviewer, outcome, comment, timestamp, and history are stored.
@@ -80,9 +80,9 @@ The import preserves source report ID, report date, source, report type, import 
 
 ## Validation
 
-Last verified on 2026-08-27:
+Last verified on 2026-09-06:
 
-- Backend: `9 passed` via `01-app/backend\.venv\Scripts\python.exe -m pytest -q tests`.
+- Backend: `27 passed` via `01-app/backend\.venv\Scripts\python.exe -m pytest -q tests/test_api.py`.
 - Frontend: `npm run build` passed.
 - Launcher: local production frontend successfully returned the page and CSS asset with HTTP 200.
 - Dashboard and site-detail Recharts graphics rendered as SVG without console errors.
