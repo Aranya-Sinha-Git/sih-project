@@ -12,12 +12,18 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import evaluate_human
 from build_blind_test_v0_2 import (
-    ARTIFACTS, CANDIDATES, FORBIDDEN_FIELD_TOKENS, PACKET_NAME,
+    ARTIFACTS, CANDIDATES, FORBIDDEN_FIELD_TOKENS, PACKET_NAME as V2_PACKET_NAME,
     REVIEWER_PACKET_FIELDS, REVIEW_METADATA_FIELDS, VALIDATION_POLICY,
     validation_locked_mask,
 )
+from build_blind_test_v0_3 import (
+    MANIFEST_NAME as V3_MANIFEST_NAME, PACKET_NAME,
+    OFFICIAL_ATTESTATION_NAME,
+    OFFICIAL_FINALIZATION_MANIFEST_NAME, OFFICIAL_FINALIZED_PACKET_NAME,
+    OUT as V3_OUT, V2_MANIFEST, V2_PACKET,
+)
 from evaluate import binary_metrics
-from evaluate_human import EvaluationError, assess_calibration, canonical_manifest, evaluate_file, finalized_packet_sha256
+from evaluate_human import EvaluationError, assess_calibration, canonical_manifest, evaluate_file, evaluate_official, finalized_packet_sha256
 from finalize_human_reviews import finalize
 
 
@@ -64,7 +70,7 @@ def finalized_fixture(tmp_path: Path, rows: list[dict[str, str]] | None = None) 
     return packet, manifest
 
 
-def test_actual_v02_release_packet_and_manifest_are_canonical_and_reviewer_safe():
+def test_actual_v03_release_packet_and_manifest_are_canonical_and_reviewer_safe():
     manifest, rows = canonical_manifest(), release_rows()
     assert len(rows) == len(manifest["records"]) == 75
     assert list(rows[0]) == REVIEWER_PACKET_FIELDS
@@ -76,6 +82,17 @@ def test_actual_v02_release_packet_and_manifest_are_canonical_and_reviewer_safe(
     assert all(not any(token in field.casefold() for token in FORBIDDEN_FIELD_TOKENS) for field in rows[0])
     assert all(not any(row[field].strip() for field in REVIEW_METADATA_FIELDS) for row in rows)
     evaluate_human._validate_release_anchor(manifest, ARTIFACTS)
+
+
+def test_v02_remains_historical_and_v03_keeps_exact_membership_and_packet_bytes():
+    assert hashlib.sha256(V2_MANIFEST.read_bytes()).hexdigest() == "cdb27d32de1a9845ecd76db72bacb827058a57fb06bb76e93051711f0d7833b0"
+    assert hashlib.sha256(V2_PACKET.read_bytes()).hexdigest() == "f911b0a78b8c366c95a18d6c60f47dda596adae3ef9edfc0719a357c0b6d83b3"
+    v3 = canonical_manifest()
+    assert v3["schema_version"] == "blind-human-freeze-v0.3"
+    assert v3["canonical_packet"]["sha256"] == hashlib.sha256(V2_PACKET.read_bytes()).hexdigest()
+    assert len(v3["records"]) == 75
+    assert v3["finalization_policy"]["minimum_retained_records"] == 70
+    assert v3["official_artifacts"] == {"finalized_packet": OFFICIAL_FINALIZED_PACKET_NAME, "finalization_manifest": OFFICIAL_FINALIZATION_MANIFEST_NAME, "attestation": OFFICIAL_ATTESTATION_NAME}
 
 
 def test_validation_policy_locks_and_missing_required_lock_field_fail_closed():
@@ -99,6 +116,14 @@ def test_non_finalized_packet_is_rejected_before_metrics(tmp_path, monkeypatch):
         evaluate_file(source, tmp_path / "missing-finalization.json")
 
 
+def test_official_evaluator_uses_only_fixed_v03_artifacts_and_fails_closed_before_review():
+    assert not (V3_OUT / OFFICIAL_FINALIZED_PACKET_NAME).exists()
+    assert not (V3_OUT / OFFICIAL_FINALIZATION_MANIFEST_NAME).exists()
+    assert not (V3_OUT / OFFICIAL_ATTESTATION_NAME).exists()
+    with pytest.raises(EvaluationError):
+        evaluate_official()
+
+
 def test_valid_finalized_packet_evaluates_and_publishes_exclusions(tmp_path, monkeypatch):
     rows = completed_rows()
     exclude(rows[0])
@@ -108,6 +133,8 @@ def test_valid_finalized_packet_evaluates_and_publishes_exclusions(tmp_path, mon
     assert result["frozen_records"] == 75
     assert result["excluded_records"] == 1
     assert result["evaluated_records"] == 74
+    assert result["official_status"] == "NON_OFFICIAL"
+    assert result["population"] == "non_official_development_evaluation"
     assert result["exclusions"] == [{"test_id": rows[0]["test_id"], "reason": "withdrawn_before_review", "excluded_by": "Synthetic Release Steward", "excluded_at": "2026-09-08", "approved_by": "Synthetic Approval Steward", "approval_date": "2026-09-08"}]
 
 
@@ -145,7 +172,8 @@ def test_finalized_hash_is_deterministic_across_row_order_and_serialization(tmp_
     assert finalized_packet_sha256(rows) == finalized_packet_sha256(list(reversed(rows)))
     write_rows(packet, list(reversed(rows)))
     monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
-    assert evaluate_file(packet, manifest)["evaluated_records"] == 75
+    with pytest.raises(EvaluationError, match="file hash mismatch"):
+        evaluate_file(packet, manifest)
 
 
 def test_finalization_manifest_cannot_redefine_canonical_release(tmp_path, monkeypatch):
@@ -158,6 +186,12 @@ def test_finalization_manifest_cannot_redefine_canonical_release(tmp_path, monke
         evaluate_file(packet, manifest)
 
 
+def test_generic_evaluator_cannot_write_official_artifacts(tmp_path):
+    packet, manifest = finalized_fixture(tmp_path)
+    with pytest.raises(EvaluationError, match="cannot write an official"):
+        evaluate_file(packet, manifest, output_path=V3_OUT / OFFICIAL_ATTESTATION_NAME)
+
+
 def test_minimum_retained_sample_is_enforced(tmp_path):
     rows = completed_rows()
     for row in rows[:6]:
@@ -166,6 +200,33 @@ def test_minimum_retained_sample_is_enforced(tmp_path):
     write_rows(source, rows)
     with pytest.raises(EvaluationError, match="below policy minimum 70"):
         finalize(source, tmp_path / "final.csv", tmp_path / "final.json", finalized_by="Synthetic Finalizer", finalized_at_utc="2026-09-09T00:00:00+00:00")
+
+
+def test_v03_policy_changes_fail_against_hard_anchored_freeze(tmp_path, monkeypatch):
+    changed = tmp_path / "finalization-policy.json"
+    policy = json.loads(evaluate_human.FINALIZATION_POLICY.read_text(encoding="utf-8"))
+    policy["minimum_retained_records"] = 1
+    policy["approved_exclusion_reasons"].append("operator_choice")
+    changed.write_text(json.dumps(policy), encoding="utf-8")
+    monkeypatch.setattr(evaluate_human, "FINALIZATION_POLICY", changed)
+    with pytest.raises(EvaluationError, match="Finalization policy"):
+        evaluate_human._validate_release_anchor(canonical_manifest(), ARTIFACTS)
+
+
+def test_missing_or_wrong_official_attestation_and_git_binding_fail(tmp_path, monkeypatch):
+    packet = tmp_path / "packet.csv"; finalization = tmp_path / "finalization.json"; attestation = tmp_path / "attestation.json"
+    packet.write_bytes(b"packet")
+    finalization.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(evaluate_human, "OFFICIAL_FINALIZED_PACKET", packet)
+    monkeypatch.setattr(evaluate_human, "OFFICIAL_FINALIZATION_MANIFEST", finalization)
+    monkeypatch.setattr(evaluate_human, "OFFICIAL_ATTESTATION", attestation)
+    with pytest.raises(EvaluationError, match="missing"):
+        evaluate_human._require_official_attestation({"release_version": "v0.3"}, {"counts": {}})
+    attestation.write_text(json.dumps({"schema_version": "blind-human-official-attestation-v0.3", "status": "official_attested"}), encoding="utf-8")
+    with pytest.raises(EvaluationError, match="hash binding"):
+        evaluate_human._require_official_attestation({"release_version": "v0.3"}, {"counts": {}})
+    with pytest.raises(EvaluationError, match="commit attestation"):
+        evaluate_human._git_resolved_commit("not-a-real-commit")
 
 
 def test_tampered_anchor_model_config_threshold_and_policy_fail(tmp_path, monkeypatch):

@@ -6,14 +6,20 @@ import csv
 import hashlib
 import io
 import json
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
 from build_blind_test_v0_2 import (
-    ARTIFACTS, CANDIDATES, DATASET, MANIFEST_NAME, OUT as RELEASE_ROOT,
-    PACKET_NAME, PREPROCESSING, REVIEWER_PACKET_FIELDS, REVIEW_METADATA_FIELDS,
-    ROOT, VALIDATION_POLICY, normalized_narrative_hash, sha256,
+    PREPROCESSING, REVIEWER_PACKET_FIELDS, REVIEW_METADATA_FIELDS,
+    ROOT, VALIDATION_POLICY, normalized_narrative_hash,
+)
+from build_blind_test_v0_3 import (
+    ARTIFACTS, CANDIDATES, DATASET, FINALIZATION_POLICY,
+    MANIFEST_NAME, OFFICIAL_ATTESTATION_NAME, OFFICIAL_FINALIZATION_MANIFEST_NAME,
+    OFFICIAL_FINALIZED_PACKET_NAME, OUT as RELEASE_ROOT, PACKET_NAME,
+    sha256,
 )
 from evaluate import binary_metrics
 from predict import POLICY_REVIEW_BAND, predict
@@ -25,10 +31,12 @@ class EvaluationError(ValueError):
 
 CANONICAL_PACKET = RELEASE_ROOT / PACKET_NAME
 CANONICAL_MANIFEST = RELEASE_ROOT / MANIFEST_NAME
-CANONICAL_MANIFEST_SHA256 = "cdb27d32de1a9845ecd76db72bacb827058a57fb06bb76e93051711f0d7833b0"
-FINALIZATION_POLICY = ROOT / "01-app" / "backend" / "app" / "reference" / "human_review_finalization_policy.json"
-FINALIZATION_SCHEMA_VERSION = "blind-human-adjudication-finalization-v0.2"
-EVALUATOR_SCHEMA_VERSION = "evaluate-human-finalized-v0.2"
+CANONICAL_MANIFEST_SHA256 = "c4821727fbcbcdbb1bce7d3dcb6a4e02077931b52a7a2095cbd27f9c7a88ee53"
+OFFICIAL_FINALIZED_PACKET = RELEASE_ROOT / OFFICIAL_FINALIZED_PACKET_NAME
+OFFICIAL_FINALIZATION_MANIFEST = RELEASE_ROOT / OFFICIAL_FINALIZATION_MANIFEST_NAME
+OFFICIAL_ATTESTATION = RELEASE_ROOT / OFFICIAL_ATTESTATION_NAME
+FINALIZATION_SCHEMA_VERSION = "blind-human-adjudication-finalization-v0.3"
+EVALUATOR_SCHEMA_VERSION = "evaluate-human-finalized-v0.3"
 LABELS = {"0": 0, "1": 1, "non-sif": 0, "non_sif": 0, "non sif": 0, "sif": 1, "sif potential": 1, "non-sif potential": 0}
 CONFIDENCE_VALUES = frozenset({"low", "medium", "high"})
 
@@ -128,7 +136,7 @@ def canonical_manifest() -> dict[str, Any]:
     if not CANONICAL_MANIFEST.is_file() or sha256(CANONICAL_MANIFEST) != CANONICAL_MANIFEST_SHA256:
         raise EvaluationError("Canonical freeze manifest hash mismatch.")
     manifest = _read_json(CANONICAL_MANIFEST, "Canonical freeze manifest")
-    if manifest.get("schema_version") != "blind-human-freeze-v0.2" or manifest.get("dataset") != DATASET:
+    if manifest.get("schema_version") != "blind-human-freeze-v0.3" or manifest.get("dataset") != DATASET:
         raise EvaluationError("Canonical freeze manifest has an unexpected schema or dataset.")
     return manifest
 
@@ -176,6 +184,22 @@ def _validate_release_anchor(manifest: dict[str, Any], artifact_dir: Path) -> di
     policy, current = manifest.get("validation_policy") or {}, _read_json(VALIDATION_POLICY, "Validation policy")
     if policy.get("sha256") != sha256(VALIDATION_POLICY) or policy.get("version") != current.get("version"):
         raise EvaluationError("Validation policy does not match the canonical freeze.")
+    final_policy = finalization_policy()
+    frozen_policy = manifest.get("finalization_policy") or {}
+    if (
+        frozen_policy.get("sha256") != sha256(FINALIZATION_POLICY)
+        or frozen_policy.get("version") != final_policy.get("version")
+        or frozen_policy.get("minimum_retained_records") != final_policy.get("minimum_retained_records")
+        or frozen_policy.get("approved_exclusion_reasons") != final_policy.get("approved_exclusion_reasons")
+    ):
+        raise EvaluationError("Finalization policy does not match the canonical v0.3 freeze.")
+    official = manifest.get("official_artifacts") or {}
+    if official != {
+        "finalized_packet": OFFICIAL_FINALIZED_PACKET_NAME,
+        "finalization_manifest": OFFICIAL_FINALIZATION_MANIFEST_NAME,
+        "attestation": OFFICIAL_ATTESTATION_NAME,
+    }:
+        raise EvaluationError("Canonical v0.3 official artifact locations are invalid.")
     frozen, expected_frozen = frozen_metadata(artifact_dir), manifest.get("frozen_model") or {}
     for key in ("model_identity", "model_sha256", "preprocessing_sha256", "configuration_sha256", "binary_threshold", "review_band"):
         if expected_frozen.get(key) != frozen.get(key):
@@ -244,7 +268,7 @@ def validate_completed_packet(rows: Iterable[dict[str, Any]], artifact_dir: Path
     return manifest, frozen, retained, exclusions
 
 
-def _require_finalization_manifest(path: Path, rows: list[dict[str, Any]], canonical: dict[str, Any]) -> dict[str, Any]:
+def _require_finalization_manifest(path: Path, packet_path: Path, rows: list[dict[str, Any]], canonical: dict[str, Any]) -> dict[str, Any]:
     finalized = _read_json(path, "Finalization manifest")
     if finalized.get("schema_version") != FINALIZATION_SCHEMA_VERSION or finalized.get("status") != "adjudication_finalized":
         raise EvaluationError("Packet has not been finalized under the supported adjudication schema.")
@@ -254,8 +278,11 @@ def _require_finalization_manifest(path: Path, rows: list[dict[str, Any]], canon
     policy, declared = finalization_policy(), finalized.get("finalization_policy") or {}
     if declared.get("sha256") != sha256(FINALIZATION_POLICY) or declared.get("version") != policy.get("version") or declared.get("minimum_retained_records") != policy.get("minimum_retained_records"):
         raise EvaluationError("Finalization policy does not match the finalized adjudication.")
-    if (finalized.get("finalized_reviewer_packet") or {}).get("canonical_content_sha256") != finalized_packet_sha256(rows):
+    finalized_packet = finalized.get("finalized_reviewer_packet") or {}
+    if finalized_packet.get("canonical_content_sha256") != finalized_packet_sha256(rows):
         raise EvaluationError("Finalized reviewer packet content hash mismatch.")
+    if finalized_packet.get("packet_file_sha256") != sha256(packet_path):
+        raise EvaluationError("Finalized reviewer packet file hash mismatch.")
     retained, exclusions = _locked_rows(rows, canonical)
     expected_counts = {"frozen_records": 75, "retained_records": len(retained), "excluded_records": len(exclusions), "evaluated_records": len(retained)}
     if finalized.get("counts") != expected_counts or finalized.get("exclusions") != exclusions:
@@ -269,6 +296,49 @@ def _require_finalization_manifest(path: Path, rows: list[dict[str, Any]], canon
     if not isinstance(attestation, dict) or set(attestation) != {"git_commit_sha", "git_tag"}:
         raise EvaluationError("Finalization manifest external attestation metadata is invalid.")
     return finalized
+
+
+def _git_resolved_commit(commit: str) -> str:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--verify", f"{commit}^{{commit}}"],
+            cwd=ROOT, check=True, capture_output=True, text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise EvaluationError("Official Git commit attestation cannot be verified locally.") from error
+    return result.stdout.strip()
+
+
+def _require_official_attestation(canonical: dict[str, Any], finalized: dict[str, Any]) -> dict[str, Any]:
+    if not OFFICIAL_ATTESTATION.is_file():
+        raise EvaluationError("Official v0.3 attestation is missing.")
+    attestation = _read_json(OFFICIAL_ATTESTATION, "Official v0.3 attestation")
+    if attestation.get("schema_version") != "blind-human-official-attestation-v0.3" or attestation.get("status") != "official_attested":
+        raise EvaluationError("Official v0.3 attestation status or schema is invalid.")
+    if (
+        attestation.get("release_version") != canonical.get("release_version")
+        or attestation.get("canonical_release_manifest_sha256") != CANONICAL_MANIFEST_SHA256
+        or attestation.get("finalized_packet_sha256") != sha256(OFFICIAL_FINALIZED_PACKET)
+        or attestation.get("finalization_manifest_sha256") != sha256(OFFICIAL_FINALIZATION_MANIFEST)
+        or attestation.get("finalization_policy_sha256") != sha256(FINALIZATION_POLICY)
+    ):
+        raise EvaluationError("Official attestation hash binding does not match v0.3 artifacts.")
+    expected_counts = finalized.get("counts")
+    if attestation.get("counts") != expected_counts:
+        raise EvaluationError("Official attestation counts do not match finalized adjudications.")
+    _require_date(attestation.get("attested_at_utc"), "attested_at_utc", "official attestation")
+    commit = str(attestation.get("git_commit_sha") or "").strip()
+    tag = str(attestation.get("git_tag") or "").strip()
+    if not commit or not tag:
+        raise EvaluationError("Official attestation requires Git commit and tag metadata.")
+    resolved = _git_resolved_commit(commit)
+    try:
+        tag_result = subprocess.run(["git", "rev-parse", "--verify", f"{tag}^{{commit}}"], cwd=ROOT, check=True, capture_output=True, text=True)
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise EvaluationError("Official Git tag attestation cannot be verified locally.") from error
+    if tag_result.stdout.strip() != resolved:
+        raise EvaluationError("Official Git tag does not resolve to the attested commit.")
+    return attestation
 
 
 def _routing(score: float | None) -> str:
@@ -329,24 +399,47 @@ def evaluate_rows(rows: Iterable[dict[str, Any]], predictor: Callable[[str], dic
     return {"population": "human_blind_test_v0_2", "sample_size": len(locked), "scored_sample_size": len(scored), "frozen_records": 75, "evaluated_records": len(locked), "excluded_records": len(exclusions), "exclusions": exclusions, "inference_failure_ids": failures, "binary_threshold": float(threshold), "binary_metrics": {key: value for key, value in metrics.items() if key != "false_negative_indices"}, "false_negative_ids": false_negatives, "three_band_routing": {"counts": routes, "review_workload": routes["HUMAN_REVIEW"], "human_positive_cases_routed_non_sif": len(auto_non_sif), "human_positive_ids_routed_non_sif": auto_non_sif, "review_is_not_a_correct_binary_classification": True}, "frozen": frozen, "calibration": {"status": "not_assessed_on_blind_test", "calibrator_fitted": False}}
 
 
-def evaluate_file(packet_path: Path, finalization_manifest_path: Path, artifact_dir: Path = ARTIFACTS, output_path: Path | None = None) -> dict[str, Any]:
+def _evaluate_packet(packet_path: Path, finalization_manifest_path: Path, artifact_dir: Path = ARTIFACTS) -> dict[str, Any]:
     canonical, frozen, packet = canonical_manifest(), None, _read_csv(packet_path)
     frozen = _validate_release_anchor(canonical, artifact_dir)
-    finalized = _require_finalization_manifest(finalization_manifest_path, packet, canonical)
+    finalized = _require_finalization_manifest(finalization_manifest_path, packet_path, packet, canonical)
     result = evaluate_rows(packet, lambda text: predict(text, artifact_dir=artifact_dir), frozen["binary_threshold"], manifest=canonical, frozen=frozen)
     result["canonical_freeze"] = {"manifest_path": str(CANONICAL_MANIFEST), "manifest_sha256": CANONICAL_MANIFEST_SHA256, "release_status": canonical["release_status"]}
     result["finalization"] = {"manifest_path": str(finalization_manifest_path), "completed_packet_sha256": finalized["finalized_reviewer_packet"]["canonical_content_sha256"], "status": finalized["status"], "finalized_at_utc": finalized["finalized_at_utc"]}
+    return result
+
+
+def evaluate_file(packet_path: Path, finalization_manifest_path: Path, artifact_dir: Path = ARTIFACTS, output_path: Path | None = None) -> dict[str, Any]:
+    """Development-only evaluator; output is explicitly NON_OFFICIAL."""
+    result = _evaluate_packet(packet_path, finalization_manifest_path, artifact_dir)
+    result["official_status"] = "NON_OFFICIAL"
+    result["population"] = "non_official_development_evaluation"
+    if output_path:
+        if output_path.resolve() in {OFFICIAL_FINALIZED_PACKET.resolve(), OFFICIAL_FINALIZATION_MANIFEST.resolve(), OFFICIAL_ATTESTATION.resolve()}:
+            raise EvaluationError("Generic evaluator cannot write an official v0.3 artifact.")
+        output_path.parent.mkdir(parents=True, exist_ok=True); output_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    return result
+
+
+def evaluate_official(artifact_dir: Path = ARTIFACTS, output_path: Path | None = None) -> dict[str, Any]:
+    """Official v0.3 evaluation; all artifact paths are fixed by the freeze."""
+    canonical = canonical_manifest()
+    finalized = _require_finalization_manifest(OFFICIAL_FINALIZATION_MANIFEST, OFFICIAL_FINALIZED_PACKET, _read_csv(OFFICIAL_FINALIZED_PACKET), canonical)
+    attestation = _require_official_attestation(canonical, finalized)
+    result = _evaluate_packet(OFFICIAL_FINALIZED_PACKET, OFFICIAL_FINALIZATION_MANIFEST, artifact_dir)
+    result["official_status"] = "OFFICIAL"
+    result["population"] = "human_blind_test_v0_3"
+    result["official_attestation"] = {"path": str(OFFICIAL_ATTESTATION), "sha256": sha256(OFFICIAL_ATTESTATION), "status": attestation["status"]}
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True); output_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     return result
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate a finalized v0.2 human-review packet.")
-    parser.add_argument("--packet", type=Path, required=True); parser.add_argument("--finalization-manifest", type=Path, required=True)
+    parser = argparse.ArgumentParser(description="Evaluate the designated official v0.3 human-review result.")
     parser.add_argument("--artifacts", type=Path, default=ARTIFACTS); parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    print(json.dumps(evaluate_file(args.packet, args.finalization_manifest, args.artifacts, args.output), indent=2))
+    print(json.dumps(evaluate_official(args.artifacts, args.output), indent=2))
 
 
 if __name__ == "__main__": main()

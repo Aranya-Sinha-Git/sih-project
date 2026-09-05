@@ -1,0 +1,19 @@
+{
+  "dataset": "blind_test_v0_3",
+  "policy_version": "validation-lock-v2",
+  "counts": {
+    "input_candidate_records": 63020,
+    "source_screened_records": 3453,
+    "matching_candidate_or_source_id": 500,
+    "exact_narrative_duplicate": 1
+  },
+  "integrity": {
+    "record_count": 75,
+    "unique_test_ids": 75,
+    "training_identifier_overlap": 0,
+    "unresolved_identifier_overlap": 0,
+    "known_duplicate_group_overlap": 0,
+    "locked_source_or_record_overlap": 0,
+    "duplicate_normalized_narratives": 0
+  }
+}

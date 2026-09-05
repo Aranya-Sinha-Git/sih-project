@@ -95,6 +95,7 @@ def finalize(
     finalized_packet.parent.mkdir(parents=True, exist_ok=True)
     finalization_manifest.parent.mkdir(parents=True, exist_ok=True)
     finalized_packet.write_bytes(canonical_packet_bytes(rows))
+    manifest["finalized_reviewer_packet"]["packet_file_sha256"] = sha256(finalized_packet)
     finalization_manifest.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest
 
