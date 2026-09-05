@@ -1,5 +1,7 @@
 import os
 import tempfile
+import csv
+import runpy
 from pathlib import Path
 os.environ.setdefault('SIF_LOCAL_DEMO', '1')
 TEST_DIR=Path(tempfile.mkdtemp(prefix='sif_sentinel_api_tests_'))
@@ -50,7 +52,7 @@ def test_escalation_stays_actionable_until_confirmed(monkeypatch):
  assert client.get('/incidents/'+ident).json()['human_review_outcome']=='Confirm SIF'
 
 def test_classifier_boundaries_and_single_batch_parity(monkeypatch):
- scores=iter([0.34999,0.35,0.45,0.45001])
+ scores=iter([0.34999,0.35,0.45,0.45001,0.2,0.2])
  def fake_predict(text,artifact_dir=None):
   score=next(scores);decision='NON_SIF_POTENTIAL' if score<0.35 else 'HUMAN_REVIEW' if score<=0.45 else 'SIF_POTENTIAL';return {'model_version':'test','model_status':'READY','sif_score':score,'decision':decision,'review_required':decision=='HUMAN_REVIEW'}
  monkeypatch.setattr('app.services.classifier._predict_module',lambda: type('Predictor',(),{'predict':staticmethod(fake_predict)})())
@@ -117,6 +119,8 @@ def test_grounded_reference_and_historical_retrieval():
  service=main.get_retrieval_service()
  references=service.reference_evidence('worker entered a pressure release path while isolation was incomplete')
  assert references and all(x['citation']['source_url'].startswith('https://') and x['relevance_score']>0 for x in references)
+ glossary=service.reference_evidence('OIL HSE management system')
+ assert any(x['reference_type']=='oil_glossary' and x['evidence_id'].startswith('OIL-GLOSSARY-') and x['citation']['publisher']=='Oil India Limited' for x in glossary)
  assert service.reference_evidence('unrelated garden scheduling phrase')==[]
  incidents=[{'id':'H-1','narrative':'Worker entered pressure release path after isolation failure.','source_id':'SRC-1','source':'operational','sif_label_status':'classifier_screened'},{'id':'H-1-copy','narrative':'Worker entered pressure release path after isolation failure.','source_id':'SRC-1','source':'operational'},{'id':'H-2','narrative':'Worker failed to use a permit during hot work.','source_id':'SRC-2','source':'operational'},{'id':'LOCKED','narrative':'pressure release path','source_id':'LOCKED','source':'IOGP 2025'},{'id':'FLAGGED','narrative':'pressure release path','source_id':'FLAGGED','validation_locked':True}]
  historical=service.historical_evidence('pressure release path isolation',incidents,locked_ids={'H-1-copy'},current_source_id='SRC-1')
@@ -124,11 +128,41 @@ def test_grounded_reference_and_historical_retrieval():
  source_history=service.historical_evidence('permit hot work',incidents,current_source_id='SRC-1')
  assert len(source_history)==1 and source_history[0]['source_id']=='SRC-2' and source_history[0]['retrieval_method']=='tfidf_cosine'
 
+def test_barrier_extraction_requires_failure_context():
+ safe=main.analyze_text('The permit was approved and isolation was verified before work began.')
+ assert safe['barrier_failures']==[] and safe['barrier_candidates']
+ failed=main.analyze_text('Work began without a permit and isolation was not verified.')
+ assert 'permit or authorization control failure' in failed['barrier_failures']
+ assert 'isolation / control verification failure' in failed['barrier_failures']
+
+def test_duplicate_narratives_are_not_historical_evidence():
+ item={'id':'CURRENT','narrative':'Worker entered the release path after isolation failure.','source_id':'CURRENT-SOURCE'}
+ corpus=[{**item,'id':'DUPLICATE','source_id':'OTHER-SOURCE'},{'id':'OTHER','source_id':'OTHER-2','narrative':'Worker failed to use a permit during hot work.'}]
+ assert all(x['incident_id']!='DUPLICATE' for x in main.sim(item, corpus=corpus))
+
+def test_retrieval_failure_does_not_break_submission_or_detail(monkeypatch):
+ def failed_service(): raise OSError('catalog unavailable')
+ monkeypatch.setattr(main,'get_retrieval_service',failed_service)
+ narrative='A unique report with pressure exposure and unavailable retrieval.'
+ response=client.post('/analyze',json={'site':'Failure Site','narrative':narrative})
+ assert response.status_code==200 and response.json()['intelligence']['status']=='retrieval_unavailable'
+ detail=client.get('/incidents/'+response.json()['id'])
+ assert detail.status_code==200 and detail.json()['analysis']['intelligence']['status']=='retrieval_unavailable'
+
+def test_csv_import_uses_frozen_classifier_pipeline(tmp_path):
+ path=tmp_path/'reports.csv'
+ with path.open('w',newline='',encoding='utf-8') as handle:
+  writer=csv.DictWriter(handle,fieldnames=['report_id','date','site','activity','narrative']); writer.writeheader(); writer.writerow({'report_id':'CSV-PIPELINE','date':'2026-09-05','site':'CSV Site','activity':'Maintenance','narrative':'A unique imported report with pressure exposure.'})
+ runpy.run_path(str(Path(__file__).resolve().parents[1]/'scripts'/'import_incidents.py'),run_name='not_main')['main'](path)
+ imported=client.get('/incidents/CSV-PIPELINE').json()
+ assert imported['analysis']['model_mode']=='Frozen supervised classifier'
+ assert imported['analysis']['screening']['decision'] in {'SIF_POTENTIAL','NON_SIF_POTENTIAL','HUMAN_REVIEW'}
+
 def test_retrieval_failure_is_distinct_from_empty_evidence(monkeypatch):
  def failed_service():raise OSError('catalog unavailable')
  monkeypatch.setattr(main,'get_retrieval_service',failed_service)
  snapshot=main.intelligence_snapshot('A sufficiently long safety narrative.')
- assert snapshot['status']=='retrieval_failed' and snapshot['failure_reason']=='OSError'
+ assert snapshot['status']=='retrieval_unavailable' and snapshot['failure_reason']=='OSError'
 
 def test_local_llm_is_optional_grounded_and_cached(monkeypatch):
  service=LocalLLMService(url='http://local.test',timeout=1)
@@ -145,6 +179,9 @@ def test_local_llm_is_optional_grounded_and_cached(monkeypatch):
  ordinary=service.explain('ordinary report',{'decision':'SIF_POTENTIAL'},evidence,[]);assert ordinary['status']=='not_requested'
  malformed=LocalLLMService(url='http://local.test');monkeypatch.setattr('app.services.local_llm.request.urlopen',lambda req,timeout: type('R',(),{'__enter__':lambda self:self,'__exit__':lambda self,*args:False,'read':lambda self:b'{"response":"bad","cited_evidence_ids":["INVENTED"]}'})())
  assert malformed.explain('review report',screening,evidence,[],force=True)['status']=='fallback'
+ nested=LocalLLMService(url='http://local.test')
+ monkeypatch.setattr('app.services.local_llm.request.urlopen',lambda req,timeout: type('R',(),{'__enter__':lambda self:self,'__exit__':lambda self,*args:False,'read':lambda self:b'{"response":"{\\"text\\":\\"Use E-1.\\",\\"cited_evidence_ids\\":[\\"E-1\\"]}"}'})())
+ assert nested.explain('review report',screening,evidence,[],force=True)['cited_evidence_ids']==['E-1']
 
 def test_incident_pagination_and_validation():
  before=client.get('/incidents').json()['total']

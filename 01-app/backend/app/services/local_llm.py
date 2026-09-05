@@ -55,8 +55,23 @@ class LocalLLMService:
                 req = request.Request(self.url, data=payload, headers={"Content-Type": "application/json"}, method="POST")
                 with request.urlopen(req, timeout=self.timeout) as response:
                     body = json.loads(response.read().decode("utf-8"))
-                text = body.get("text") or body.get("response")
+                text = body.get("text")
                 cited = body.get("cited_evidence_ids") or body.get("citations") or []
+                generated = body.get("response")
+                if text is None and isinstance(generated, str):
+                    stripped = generated.strip()
+                    if stripped.startswith("{"):
+                        try:
+                            generated_payload = json.loads(stripped)
+                        except json.JSONDecodeError:
+                            generated_payload = None
+                        if not isinstance(generated_payload, dict):
+                            result = {**fallback, "failure_reason": "malformed_or_non_json_response"}
+                            generated_payload = {}
+                        text = generated_payload.get("text")
+                        cited = generated_payload.get("cited_evidence_ids") or generated_payload.get("citations") or cited
+                    else:
+                        text = generated
                 allowed = {item.get("evidence_id") or item.get("incident_id") for item in evidence}
                 if not isinstance(text, str) or not isinstance(cited, list) or not set(cited).issubset(allowed):
                     result = {**fallback, "failure_reason": "malformed_or_invented_citation"}

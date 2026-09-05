@@ -4,7 +4,7 @@
 
 SIF Sentinel is a local SIH26165 safety-intelligence prototype. It ingests free-text Unsafe Act, Unsafe Condition, Near Miss, and Incident reports; classifies potential Serious Injury and Fatality (SIF) exposure; maps IOGP-style Life-Saving Rules; extracts precursor signals; retrieves similar reports; calculates recurring patterns and SIF-precursor density; and records qualified human review decisions.
 
-The active analytic method is the transparent deterministic rules engine (`rules-v1.0`). It is **not** a trained, calibrated, externally validated, or production-approved ML model. The displayed percentage is a prototype rule score, not a calibrated probability.
+The active screening method is the frozen supervised classifier (`sif-v0.1`); its raw score is **not** a calibrated probability. The deterministic rules engine (`rules-v1.0`) remains supplemental for extraction and candidate evidence. The classifier is not externally validated or production-approved.
 
 ## Run the demo
 
@@ -25,19 +25,19 @@ If an old browser tab shows unstyled content, close it, reopen `http://localhost
 ## Architecture
 
 ```text
-Browser → Next.js frontend (/api proxy) → FastAPI → rules engine + SQLite
+Browser → Next.js frontend (/api proxy) → FastAPI → frozen classifier + supplemental rules/retrieval + SQLite
 ```
 
 - Frontend: `01-app/frontend/` — Next.js 15, TypeScript, custom CSS, Recharts, Lucide, XLSX import.
 - Backend: `01-app/backend/app/main.py` — FastAPI API, persistence, analytics, density calculation, review workflow.
-- Engine: `01-app/backend/app/services/engine.py` — deterministic classification, Life-Saving Rule mapping, extraction, and lexical similarity.
+- Engine: `01-app/backend/app/services/engine.py` — supplemental Life-Saving Rule cues and extraction; classifier screening is provided by `services/classifier.py`.
 - Database: `01-app/backend/data/sif_sentinel.db` — local SQLite.
 - Public-history manifest: `01-app/backend/data/public_verified_history_manifest.json`.
 - API proxy: frontend calls `/api`; Next.js forwards requests to the local FastAPI service. This avoids direct browser/CORS restrictions on port 8000.
 
 ## Implemented SIH26165 functions
 
-1. **Report ingestion** — manual narrative entry plus TXT, CSV, XLSX, and limited text-extractable PDF upload.
+1. **Report ingestion** — manual narrative entry plus TXT, CSV, and XLSX upload; PDF is not part of the supported demo path.
 2. **Report types** — Unsafe Act, Unsafe Condition, Near Miss, and Incident are stored with new records/imports.
 3. **SIF classification** — every newly analysed report is returned as `SIF Potential`, `Non-SIF Potential`, or `Needs Review`.
 4. **Life-Saving Rules** — primary/secondary keyword-based mappings include Energy Isolation, Line of Fire, Working at Height, Safe Mechanical Lifting, Driving Safety, Confined Space, Hot Work, and Permit to Work.
@@ -93,7 +93,7 @@ Non-blocking test warnings remain for FastAPI's deprecated `@app.on_event` start
 
 ### Prototype limitations
 
-- The classifier is deterministic keyword/rule logic, not validated AI/ML.
+- The classifier is a frozen supervised prototype; it is not externally validated or calibrated.
 - No external labelled OIL dataset has been used for training or evaluation.
 - Public weak labels differ materially from expert SIF labels; the bundled corpus is not representative of OIL operations.
 - Similarity is local lexical word overlap, not semantic embedding retrieval.

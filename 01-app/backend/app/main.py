@@ -75,8 +75,6 @@ def model_outcome(row: dict[str, Any]) -> Optional[str]:
     if decision == "SIF_POTENTIAL": return "SIF Potential"
     if decision == "NON_SIF_POTENTIAL": return "Non-SIF Potential"
     if decision == "HUMAN_REVIEW": return "Needs Review"
-    if analysis.get("model_mode") == "Transparent Rules Engine":
-        return analysis.get("classification")
     return None
 
 def human_review_outcome(row: dict[str, Any]) -> Optional[str]:
@@ -129,9 +127,17 @@ def rows() -> list[dict[str, Any]]:
 
 def _tokens(text: str) -> set[str]: return {word.strip(".,;:()[]{}").lower() for word in text.split() if len(word) > 3}
 
+def _normalized_narrative(text: str) -> str:
+    return " ".join((text or "").casefold().split())
+
 def sim(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> list[dict[str, Any]]:
-    candidates = [x for x in (corpus if corpus is not None else rows()) if x["id"] != item.get("id")]
-    candidate_by_id = {x["id"]: x for x in candidates}; retrieved = get_retrieval_service().historical_evidence(item["narrative"], candidates, limit=limit, locked_ids={str(item.get("id"))}, current_source_id=item.get("source_id"))
+    current_narrative = _normalized_narrative(str(item.get("narrative") or ""))
+    candidates = [x for x in (corpus if corpus is not None else rows()) if x["id"] != item.get("id") and _normalized_narrative(str(x.get("narrative") or "")) != current_narrative]
+    candidate_by_id = {x["id"]: x for x in candidates}
+    try:
+        retrieved = get_retrieval_service().historical_evidence(item["narrative"], candidates, limit=limit, locked_ids={str(item.get("id"))}, current_source_id=item.get("source_id"))
+    except Exception:
+        return []
     return [{"similarity": evidence["relevance_score"], "relevance_score": evidence["relevance_score"], "incident_id": evidence["incident_id"], "source_id": evidence["source_id"], "title": evidence["title"], "site": candidate_by_id[evidence["incident_id"]].get("site"), "activity": candidate_by_id[evidence["incident_id"]].get("activity"), "risk": candidate_by_id[evidence["incident_id"]].get("risk"), "life_saving_rule": (((candidate_by_id[evidence["incident_id"]].get("analysis") or {}).get("rules") or {}).get("primary") or {}).get("rule", "Unmapped"), "retrieval_method": evidence["retrieval_method"], "corpus_version": evidence["corpus_version"], "label_provenance": evidence["label_provenance"]} for evidence in retrieved]
 
 def intelligence_snapshot(narrative: str, item_id: Optional[str] = None, corpus: Optional[list[dict[str, Any]]] = None) -> dict[str, Any]:
@@ -140,8 +146,8 @@ def intelligence_snapshot(narrative: str, item_id: Optional[str] = None, corpus:
         current_source_id = next((str(item.get("source_id")) for item in candidates if str(item.get("id")) == str(item_id) and item.get("source_id")), None)
         historical = service.historical_evidence(narrative, candidates, locked_ids=locked, current_source_id=current_source_id)
         return {"reference_evidence": service.reference_evidence(narrative), "historical_evidence": historical, "corpus_version": service.corpus_version}
-    except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
-        return {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "retrieval_failed", "failure_reason": type(error).__name__}
+    except Exception as error:
+        return {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "retrieval_unavailable", "failure_reason": type(error).__name__}
 
 def _update_analysis_snapshot(incident_id: str, snapshot: dict[str, Any], connection: Optional[sqlite3.Connection] = None) -> None:
     owned = connection is None; connection = connection or con()
@@ -218,6 +224,9 @@ def analyzed_result(report: AnalyzeInput) -> dict[str, Any]:
 
 @app.post("/analyze")
 def analyze(report: AnalyzeInput):
+    duplicate = next((x for x in rows() if _normalized_narrative(x.get("narrative", "")) == _normalized_narrative(report.narrative) and str(x.get("site") or "").casefold() == str(report.site or "Unspecified").casefold()), None)
+    if duplicate:
+        return incident(duplicate["id"])
     try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report))
     except ValueError as error: raise HTTPException(422, str(error)) from error
     result["intelligence"] = intelligence_snapshot(report.narrative, result["id"]); result["similar_incidents"] = sim(result); _update_analysis_snapshot(result["id"], result["intelligence"]); return result

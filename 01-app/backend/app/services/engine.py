@@ -33,10 +33,17 @@ ACTIVITIES = {
     "Inspection": ["inspection", "inspected", "walkdown"],
 }
 BARRIER_FAILURES = {
-    "isolation / control verification failure": ["not been completely", "not completely isolated", "incomplete", "not verified", "isolation"],
-    "permit or authorization control failure": ["permit", "authorization", "procedure bypass", "control bypass"],
-    "line-of-fire exclusion failure": ["release path", "line of fire", "under a suspended", "beneath a suspended", "pinch point"],
-    "fall-protection control failure": ["without harness", "fall protection absent", "unprotected edge"],
+    "isolation / control verification failure": ["not been completely", "not completely isolated", "incomplete", "not verified", "isolation failure", "isolation gap", "without isolation"],
+    "permit or authorization control failure": ["permit bypass", "permit violation", "permit missing", "without a permit", "no permit", "authorization failure", "procedure bypass", "control bypass"],
+    "line-of-fire exclusion failure": ["exclusion failure", "barrier failure", "no exclusion zone", "without an exclusion zone"],
+    "fall-protection control failure": ["without harness", "fall protection absent", "unprotected edge", "no fall protection"],
+}
+
+BARRIER_CANDIDATES = {
+    "isolation / control verification failure": ["isolation", "lockout", "zero energy"],
+    "permit or authorization control failure": ["permit", "authorization", "authorisation"],
+    "line-of-fire exclusion failure": ["release path", "line of fire", "pinch point", "suspended load"],
+    "fall-protection control failure": ["harness", "fall protection", "unprotected edge"],
 }
 
 def _hits(text: str, terms: list[str]) -> list[str]: return [t for t in terms if t in text.lower()]
@@ -68,10 +75,13 @@ def analyze_text(narrative: str) -> dict[str, Any]:
     if any(x in text for x in ["permit","bypass"]): precursors.append("permit or critical-control deviation")
     activity=next((name for name,terms in ACTIVITIES.items() if _hits(text,terms)),"Unclassified")
     barrier_failures=[name for name,terms in BARRIER_FAILURES.items() if _hits(text,terms)]
+    barrier_candidates=[name for name,terms in BARRIER_CANDIDATES.items() if _hits(text,terms) and name not in barrier_failures]
     if probability >= .65:
         classification, sif_potential = "SIF Potential", True
     elif probability < .35:
         classification, sif_potential = "Non-SIF Potential", False
     else:
         classification, sif_potential = "Needs Review", None
-    return {"sif_probability":probability,"risk":risk,"classification":classification,"classification_basis":"Prototype rules threshold; not a calibrated probability.","model_mode":"Transparent Rules Engine","model_version":"rules-v1.0","evidence":evidence or ["No strong SIF precursor language detected; human review remains available."],"evidence_note":"These are textual signals, not proof of causation.","rules":{"primary":{"rule":rule_scores[0][0],"confidence":round(rule_scores[0][1],2)} if rule_scores else None,"secondary":[{"rule":r,"confidence":round(c,2)} for r,c,_ in rule_scores[1:3]]},"activity":activity,"location":_location(narrative),"hazards":hazards or ["not classified"],"precursors":precursors or ["no strong precursor pattern"],"barrier_failures":barrier_failures,"priority":"Immediate review" if probability>=.65 else "Review" if probability>=.35 else "Monitor","review_required":probability>=.35,"high_potential":None,"sif_potential":sif_potential,"sif_label_status":"rules_classified" if sif_potential is not None else "unresolved"}
+    if barrier_candidates:
+        evidence.extend(f"Candidate control topic (not an asserted failure): {candidate}" for candidate in barrier_candidates)
+    return {"sif_probability":probability,"risk":risk,"classification":classification,"classification_basis":"Prototype rules threshold; not a calibrated probability.","model_mode":"Transparent Rules Engine","model_version":"rules-v1.0","evidence":evidence or ["No strong SIF precursor language detected; human review remains available."],"evidence_note":"These are textual signals, not proof of causation.","rules":{"primary":{"rule":rule_scores[0][0],"confidence":round(rule_scores[0][1],2)} if rule_scores else None,"secondary":[{"rule":r,"confidence":round(c,2)} for r,c,_ in rule_scores[1:3]]},"activity":activity,"location":_location(narrative),"hazards":hazards or ["not classified"],"precursors":precursors or ["no strong precursor pattern"],"barrier_failures":barrier_failures,"barrier_candidates":barrier_candidates,"priority":"Immediate review" if probability>=.65 else "Review" if probability>=.35 else "Monitor","review_required":probability>=.35,"high_potential":None,"sif_potential":sif_potential,"sif_label_status":"rules_classified" if sif_potential is not None else "unresolved"}

@@ -18,6 +18,7 @@ Manual start:
 
 ```powershell
 cd 01-app/backend
+$env:SIF_LOCAL_DEMO='1'  # loopback demo only; use SIF_AUTH_TOKENS for a deployed API
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
@@ -27,6 +28,8 @@ cd 01-app/frontend
 npm install
 npm run dev
 ```
+
+The launcher sets `SIF_LOCAL_DEMO=1` automatically. For a non-demo deployment, set `SIF_AUTH_TOKENS=token=Reviewer Name` and leave local demo mode disabled. Optional grounded explanations use `SIF_LLM_URL`, `SIF_LLM_MODEL`, `SIF_LLM_TIMEOUT_SECONDS` (default `5`), and `SIF_LLM_MAX_CONTEXT_CHARS` (default `6000`).
 
 ## Data and model scope
 
