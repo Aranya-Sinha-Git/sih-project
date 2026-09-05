@@ -1,0 +1,18 @@
+{
+  "schema_version": "human-review-finalization-policy-v1",
+  "version": "human-review-finalization-v1",
+  "minimum_retained_records": 70,
+  "approved_exclusion_reasons": [
+    "withdrawn_before_review",
+    "insufficient_source_material",
+    "duplicate_discovered_after_freeze",
+    "reviewer_unavailable"
+  ],
+  "required_exclusion_approval_fields": [
+    "excluded_by",
+    "excluded_at",
+    "adjudicator_id",
+    "adjudication_date",
+    "adjudication_locked"
+  ]
+}

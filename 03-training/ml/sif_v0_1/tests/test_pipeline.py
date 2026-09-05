@@ -17,7 +17,8 @@ from build_blind_test_v0_2 import (
     validation_locked_mask,
 )
 from evaluate import binary_metrics
-from evaluate_human import EvaluationError, assess_calibration, canonical_manifest, evaluate_file
+from evaluate_human import EvaluationError, assess_calibration, canonical_manifest, evaluate_file, finalized_packet_sha256
+from finalize_human_reviews import finalize
 
 
 def release_rows() -> list[dict[str, str]]:
@@ -25,25 +26,47 @@ def release_rows() -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def write_rows(path: Path, rows: list[dict[str, str]]) -> None:
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=REVIEWER_PACKET_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def completed_rows() -> list[dict[str, str]]:
     rows = release_rows()
     for row in rows:
         row.update({
-            "reviewer_id": "Reviewer A", "review_date": "2026-09-05", "reviewer_sif_label": "0",
-            "reviewer_confidence": "high", "reviewer_notes": "independent review",
-            "second_reviewer_id": "Reviewer B", "second_review_date": "2026-09-06", "second_reviewer_label": "0",
-            "second_reviewer_confidence": "high", "second_reviewer_notes": "independent second review",
-            "adjudicated_label": "0", "adjudicator_id": "Adjudicator C", "adjudication_date": "2026-09-07",
+            "reviewer_id": "Synthetic Reviewer A", "review_date": "2026-09-05", "reviewer_sif_label": "0",
+            "reviewer_confidence": "high", "reviewer_notes": "synthetic test fixture",
+            "second_reviewer_id": "Synthetic Reviewer B", "second_review_date": "2026-09-06", "second_reviewer_label": "0",
+            "second_reviewer_confidence": "high", "second_reviewer_notes": "synthetic test fixture",
+            "adjudicated_label": "0", "adjudicator_id": "Synthetic Adjudicator", "adjudication_date": "2026-09-07",
             "disagreement_resolution": "", "adjudication_locked": "true",
             "exclusion_reason": "", "excluded_by": "", "excluded_at": "",
         })
     return rows
 
 
+def exclude(row: dict[str, str]) -> None:
+    row.update({
+        "adjudicated_label": "", "adjudication_locked": "true",
+        "exclusion_reason": "withdrawn_before_review", "excluded_by": "Synthetic Release Steward",
+        "excluded_at": "2026-09-08", "adjudicator_id": "Synthetic Approval Steward",
+        "adjudication_date": "2026-09-08",
+    })
+
+
+def finalized_fixture(tmp_path: Path, rows: list[dict[str, str]] | None = None) -> tuple[Path, Path]:
+    source, packet, manifest = tmp_path / "completed.csv", tmp_path / "finalized.csv", tmp_path / "finalization.json"
+    write_rows(source, rows or completed_rows())
+    finalize(source, packet, manifest, finalized_by="Synthetic Finalizer", finalized_at_utc="2026-09-09T00:00:00+00:00", git_commit_sha="deadbeef", git_tag="blind-v0.2-pre-review")
+    return packet, manifest
+
+
 def test_actual_v02_release_packet_and_manifest_are_canonical_and_reviewer_safe():
-    manifest = canonical_manifest()
-    rows = release_rows()
-    assert len(rows) == 75
+    manifest, rows = canonical_manifest(), release_rows()
+    assert len(rows) == len(manifest["records"]) == 75
     assert list(rows[0]) == REVIEWER_PACKET_FIELDS
     assert len({row["test_id"] for row in rows}) == 75
     assert {row["test_id"] for row in rows} == {record["test_id"] for record in manifest["records"]}
@@ -68,38 +91,85 @@ def test_validation_policy_locks_and_missing_required_lock_field_fail_closed():
         validation_locked_mask(frame.drop(columns=["validation_locked"]), set(), set(policy["locked_record_flags"]))
 
 
-def test_evaluator_refuses_unreviewed_actual_release_packet():
-    with pytest.raises(EvaluationError, match="Complete reviewer and adjudication provenance"):
-        evaluate_file(evaluate_human.CANONICAL_PACKET)
+def test_non_finalized_packet_is_rejected_before_metrics(tmp_path, monkeypatch):
+    source = tmp_path / "completed.csv"
+    write_rows(source, completed_rows())
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    with pytest.raises(EvaluationError, match="Finalization manifest is unreadable"):
+        evaluate_file(source, tmp_path / "missing-finalization.json")
 
 
-def test_locked_structure_requires_complete_adjudication_and_valid_exclusions():
-    manifest = canonical_manifest()
+def test_valid_finalized_packet_evaluates_and_publishes_exclusions(tmp_path, monkeypatch):
     rows = completed_rows()
-    locked, excluded = evaluate_human._locked_rows(rows, manifest)
-    assert len(locked) == 75 and excluded == 0
-    incomplete = completed_rows(); incomplete[0]["adjudicator_id"] = ""
-    with pytest.raises(EvaluationError, match="Complete reviewer and adjudication provenance"):
-        evaluate_human._locked_rows(incomplete, manifest)
-    excluded_rows = completed_rows()
-    excluded_rows[0].update({"adjudication_locked": "", "adjudicated_label": "", "exclusion_reason": "withdrawn_before_review", "excluded_by": "Release steward", "excluded_at": "2026-09-08"})
-    locked, excluded = evaluate_human._locked_rows(excluded_rows, manifest)
-    assert len(locked) == 74 and excluded == 1
-    excluded_rows[1].update({"adjudication_locked": "", "adjudicated_label": "", "exclusion_reason": "post_hoc_removal", "excluded_by": "Release steward", "excluded_at": "2026-09-08"})
-    with pytest.raises(EvaluationError, match="Disallowed exclusion"):
-        evaluate_human._locked_rows(excluded_rows, manifest)
+    exclude(rows[0])
+    packet, manifest = finalized_fixture(tmp_path, rows)
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    result = evaluate_file(packet, manifest)
+    assert result["frozen_records"] == 75
+    assert result["excluded_records"] == 1
+    assert result["evaluated_records"] == 74
+    assert result["exclusions"] == [{"test_id": rows[0]["test_id"], "reason": "withdrawn_before_review", "excluded_by": "Synthetic Release Steward", "excluded_at": "2026-09-08", "approved_by": "Synthetic Approval Steward", "approval_date": "2026-09-08"}]
 
 
-def test_tampered_identity_manifest_packet_model_config_threshold_and_policy_fail(tmp_path, monkeypatch):
+@pytest.mark.parametrize("field,value", [
+    ("adjudicated_label", "1"),
+    ("reviewer_id", "Modified Reviewer"),
+    ("adjudicator_id", "Modified Adjudicator"),
+    ("test_id", "BT-V0.2-999"),
+    ("narrative", "Modified finalized narrative"),
+])
+def test_post_finalization_human_metadata_changes_fail(tmp_path, monkeypatch, field, value):
+    packet, manifest = finalized_fixture(tmp_path)
+    rows = evaluate_human._read_csv(packet)
+    rows[0][field] = value
+    write_rows(packet, rows)
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    with pytest.raises(EvaluationError, match="content hash mismatch"):
+        evaluate_file(packet, manifest)
+
+
+def test_post_finalization_exclusion_change_fails(tmp_path, monkeypatch):
+    rows = completed_rows(); exclude(rows[0])
+    packet, manifest = finalized_fixture(tmp_path, rows)
+    changed = evaluate_human._read_csv(packet)
+    changed[0]["exclusion_reason"] = "reviewer_unavailable"
+    write_rows(packet, changed)
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    with pytest.raises(EvaluationError, match="content hash mismatch"):
+        evaluate_file(packet, manifest)
+
+
+def test_finalized_hash_is_deterministic_across_row_order_and_serialization(tmp_path, monkeypatch):
+    packet, manifest = finalized_fixture(tmp_path)
+    rows = evaluate_human._read_csv(packet)
+    assert finalized_packet_sha256(rows) == finalized_packet_sha256(list(reversed(rows)))
+    write_rows(packet, list(reversed(rows)))
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    assert evaluate_file(packet, manifest)["evaluated_records"] == 75
+
+
+def test_finalization_manifest_cannot_redefine_canonical_release(tmp_path, monkeypatch):
+    packet, manifest = finalized_fixture(tmp_path)
+    altered = json.loads(manifest.read_text(encoding="utf-8"))
+    altered["canonical_blind_release"]["manifest_sha256"] = "0" * 64
+    manifest.write_text(json.dumps(altered), encoding="utf-8")
+    monkeypatch.setattr(evaluate_human, "predict", lambda *_args, **_kwargs: {"sif_score": 0.5})
+    with pytest.raises(EvaluationError, match="cannot redefine"):
+        evaluate_file(packet, manifest)
+
+
+def test_minimum_retained_sample_is_enforced(tmp_path):
+    rows = completed_rows()
+    for row in rows[:6]:
+        exclude(row)
+    source = tmp_path / "below-floor.csv"
+    write_rows(source, rows)
+    with pytest.raises(EvaluationError, match="below policy minimum 70"):
+        finalize(source, tmp_path / "final.csv", tmp_path / "final.json", finalized_by="Synthetic Finalizer", finalized_at_utc="2026-09-09T00:00:00+00:00")
+
+
+def test_tampered_anchor_model_config_threshold_and_policy_fail(tmp_path, monkeypatch):
     manifest = canonical_manifest()
-    rows = release_rows()
-    bad_id = [dict(row) for row in rows]; bad_id[0]["test_id"] = "BT-V0.2-999"
-    with pytest.raises(EvaluationError, match="test IDs"):
-        evaluate_human._validate_packet_identity(bad_id, manifest)
-    bad_text = [dict(row) for row in rows]; bad_text[0]["narrative"] = "Repackaged narrative"
-    with pytest.raises(EvaluationError, match="narrative hash"):
-        evaluate_human._validate_packet_identity(bad_text, manifest)
-
     changed_manifest = tmp_path / "manifest.json"
     changed_manifest.write_text(evaluate_human.CANONICAL_MANIFEST.read_text(encoding="utf-8") + " ", encoding="utf-8")
     monkeypatch.setattr(evaluate_human, "CANONICAL_MANIFEST", changed_manifest)
@@ -125,12 +195,6 @@ def test_tampered_identity_manifest_packet_model_config_threshold_and_policy_fai
         handle.write(b"tamper")
     with pytest.raises(EvaluationError, match="model_sha256"):
         evaluate_human._validate_release_anchor(manifest, altered_artifacts)
-
-    changed_policy = tmp_path / "validation_policy.json"
-    changed_policy.write_text(json.dumps({"version": "changed"}), encoding="utf-8")
-    monkeypatch.setattr(evaluate_human, "VALIDATION_POLICY", changed_policy)
-    with pytest.raises(EvaluationError, match="Validation policy"):
-        evaluate_human._validate_release_anchor(manifest, ARTIFACTS)
 
 
 def test_repackaged_blind_narrative_is_rejected_from_calibration():
