@@ -33,7 +33,7 @@ The launcher sets `SIF_LOCAL_DEMO=1` automatically. For a non-demo deployment, s
 
 ## Data and model scope
 
-The included local history contains 100 real public records: 50 OSHA documented-fatality weak labels and 50 DOE documented no-injury/near-miss weak labels. They are not Oil India data and are not expert SIF adjudications. Source provenance is documented in `05-documentation/docs/public_history_sources.md`. The active rules engine is decision support, not a replacement for approved safety procedures or qualified personnel.
+The included local history contains 100 real public records: 50 OSHA documented-fatality weak labels and 50 DOE documented no-injury/near-miss weak labels. They are not Oil India data and are not expert SIF adjudications. Source provenance is documented in `05-documentation/docs/public_history_sources.md`. New reports use the frozen supervised classifier for authoritative screening; the deterministic rules engine provides supplemental extraction and decision-support cues, not a replacement for approved safety procedures or qualified personnel.
 
 To import incidents into the application:
 

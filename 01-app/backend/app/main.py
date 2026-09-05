@@ -46,6 +46,8 @@ class AnalyzeInput(BaseModel):
     site: Optional[str] = "Unspecified"
     activity: Optional[str] = None
     report_type: Optional[str] = "Unspecified"
+    report_id: Optional[str] = None
+    source: Optional[str] = None
 
     @field_validator("narrative")
     @classmethod
@@ -130,15 +132,24 @@ def _tokens(text: str) -> set[str]: return {word.strip(".,;:()[]{}").lower() for
 def _normalized_narrative(text: str) -> str:
     return " ".join((text or "").casefold().split())
 
-def sim(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> list[dict[str, Any]]:
+def _similar_incidents(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> list[dict[str, Any]]:
     current_narrative = _normalized_narrative(str(item.get("narrative") or ""))
     candidates = [x for x in (corpus if corpus is not None else rows()) if x["id"] != item.get("id") and _normalized_narrative(str(x.get("narrative") or "")) != current_narrative]
     candidate_by_id = {x["id"]: x for x in candidates}
+    retrieved = get_retrieval_service().historical_evidence(item["narrative"], candidates, limit=limit, locked_ids={str(item.get("id"))}, current_source_id=item.get("source_id"))
+    return [{"similarity": evidence["relevance_score"], "relevance_score": evidence["relevance_score"], "incident_id": evidence["incident_id"], "source_id": evidence["source_id"], "title": evidence["title"], "site": candidate_by_id[evidence["incident_id"]].get("site"), "activity": candidate_by_id[evidence["incident_id"]].get("activity"), "risk": candidate_by_id[evidence["incident_id"]].get("risk"), "life_saving_rule": (((candidate_by_id[evidence["incident_id"]].get("analysis") or {}).get("rules") or {}).get("primary") or {}).get("rule", "Unmapped"), "retrieval_method": evidence["retrieval_method"], "corpus_version": evidence["corpus_version"], "label_provenance": evidence["label_provenance"]} for evidence in retrieved]
+
+def sim(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> list[dict[str, Any]]:
     try:
-        retrieved = get_retrieval_service().historical_evidence(item["narrative"], candidates, limit=limit, locked_ids={str(item.get("id"))}, current_source_id=item.get("source_id"))
+        return _similar_incidents(item, limit=limit, corpus=corpus)
     except Exception:
         return []
-    return [{"similarity": evidence["relevance_score"], "relevance_score": evidence["relevance_score"], "incident_id": evidence["incident_id"], "source_id": evidence["source_id"], "title": evidence["title"], "site": candidate_by_id[evidence["incident_id"]].get("site"), "activity": candidate_by_id[evidence["incident_id"]].get("activity"), "risk": candidate_by_id[evidence["incident_id"]].get("risk"), "life_saving_rule": (((candidate_by_id[evidence["incident_id"]].get("analysis") or {}).get("rules") or {}).get("primary") or {}).get("rule", "Unmapped"), "retrieval_method": evidence["retrieval_method"], "corpus_version": evidence["corpus_version"], "label_provenance": evidence["label_provenance"]} for evidence in retrieved]
+
+def sim_with_status(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> tuple[list[dict[str, Any]], str, Optional[str]]:
+    try:
+        return _similar_incidents(item, limit=limit, corpus=corpus), "available", None
+    except Exception as error:
+        return [], "retrieval_unavailable", type(error).__name__
 
 def intelligence_snapshot(narrative: str, item_id: Optional[str] = None, corpus: Optional[list[dict[str, Any]]] = None) -> dict[str, Any]:
     try:
@@ -229,21 +240,27 @@ def analyze(report: AnalyzeInput):
         return incident(duplicate["id"])
     try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report))
     except ValueError as error: raise HTTPException(422, str(error)) from error
-    result["intelligence"] = intelligence_snapshot(report.narrative, result["id"]); result["similar_incidents"] = sim(result); _update_analysis_snapshot(result["id"], result["intelligence"]); return result
+    result["intelligence"] = intelligence_snapshot(report.narrative, result["id"]); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result); _update_analysis_snapshot(result["id"], result["intelligence"]); return result
 
 @app.post("/analyze/batch")
 def batch(batch_input: BatchInput):
     if len(batch_input.reports) > 500: raise HTTPException(422, "Batch limit is 500 reports.")
-    analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con(); working_corpus = rows(); results = []
+    analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con(); working_corpus = rows(); results = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
-            result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analysis, import_batch_id=batch_id, connection=connection); result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]; _update_analysis_snapshot(result["id"], result["intelligence"], connection); result["similar_incidents"] = sim(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); results.append(result)
+            site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = next((x for x in working_corpus if (report_id and str(x.get("id")) == report_id) or (_normalized_narrative(str(x.get("narrative") or "")) == normalized and str(x.get("site") or "Unspecified").casefold() == site.casefold())), None)
+            if duplicate:
+                skipped_duplicates.append({"report_id": report_id, "existing_id": duplicate.get("id"), "reason": "duplicate narrative/site or report ID"}); continue
+            key = (normalized, site.casefold())
+            if key in seen_keys or (report_id and report_id in seen_ids):
+                skipped_duplicates.append({"report_id": report_id, "existing_id": seen_keys.get(key) or seen_ids.get(report_id or ""), "reason": "duplicate within upload"}); continue
+            result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection); result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]; _update_analysis_snapshot(result["id"], result["intelligence"], connection); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
         connection.commit()
     except Exception as error:
         connection.rollback(); raise HTTPException(500, "Batch persistence failed; no reports were saved.") from error
     finally: connection.close()
     scored = [x for x in results if x["sif_probability"] is not None]
-    return {"processed_count": len(results), "sif_potential_count": sum(x["sif_potential"] is True for x in results), "review_count": sum(x["review_required"] for x in results), "highest_risk_site": max(scored, key=lambda x: x["sif_probability"])["site"] if scored else None, "highest_risk_activity": max(scored, key=lambda x: x["sif_probability"])["activity"] if scored else None, "top_lsr": next((x["rules"]["primary"]["rule"] for x in results if x["rules"]["primary"]), None), "results": results}
+    return {"processed_count": len(results), "skipped_duplicate_count": len(skipped_duplicates), "skipped_duplicates": skipped_duplicates, "sif_potential_count": sum(x["sif_potential"] is True for x in results), "review_count": sum(x["review_required"] for x in results), "highest_risk_site": max(scored, key=lambda x: x["sif_probability"])["site"] if scored else None, "highest_risk_activity": max(scored, key=lambda x: x["sif_probability"])["activity"] if scored else None, "top_lsr": next((x["rules"]["primary"]["rule"] for x in results if x["rules"]["primary"]), None), "results": results}
 
 @app.get("/incidents")
 def incidents(search: str = "", site: Optional[str] = None, activity: Optional[str] = None, risk: Optional[str] = None, review: Optional[str] = None, source: Optional[str] = None, page: int = Query(1, ge=1), page_size: int = Query(25, ge=1, le=100)):
@@ -258,7 +275,7 @@ def incidents(search: str = "", site: Optional[str] = None, activity: Optional[s
 def incident(incident_id: str):
     connection = con(); row = connection.execute("SELECT * FROM incidents WHERE id=?", (incident_id,)).fetchone(); history = [dict(x) for x in connection.execute("SELECT * FROM review_history WHERE incident_id=? ORDER BY id ASC", (incident_id,)).fetchall()]; connection.close()
     if not row: raise HTTPException(404, "Report not found")
-    result = out(row); result["review_history"] = history; result["similar_incidents"] = sim(result); return result
+    result = out(row); result["review_history"] = history; result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result); return result
 
 @app.get("/incidents/{incident_id}/similar")
 def similar(incident_id: str): return incident(incident_id)["similar_incidents"]

@@ -61,9 +61,11 @@ def test_classifier_boundaries_and_single_batch_parity(monkeypatch):
  for score,expected_row in zip([0.34999,0.35,0.45,0.45001],expected):
   result=analyze_with_classifier('Boundary narrative for classifier testing.',main.analyze_text('Boundary narrative for classifier testing.'))
   assert (result['classification'],result['sif_potential'],result['review_required'])==expected_row
- single=client.post('/analyze',json={'narrative':'Single and batch parity narrative.'}).json()
- batch=client.post('/analyze/batch',json={'reports':[{'narrative':'Single and batch parity narrative.'}]}).json()['results'][0]
- assert single['sif_probability']==batch['sif_probability'] and single['classification']==batch['classification']
+ single=client.post('/analyze',json={'site':'Parity Single Site','narrative':'Single and batch parity narrative.'}).json()
+ batch_response=client.post('/analyze/batch',json={'reports':[{'site':'Parity Batch Site','narrative':'Single and batch parity narrative.'}]})
+ assert batch_response.status_code==200 and batch_response.json()['processed_count']==1 and batch_response.json()['skipped_duplicate_count']==0
+ batch=batch_response.json()['results'][0]
+ assert single['sif_probability'] is not None and batch['sif_probability'] is not None and single['sif_probability']==batch['sif_probability'] and single['classification']==batch['classification']
 
 def test_classifier_failure_and_null_score_analytics(tmp_path):
  adapter=FrozenClassifierAdapter(tmp_path)
@@ -165,6 +167,24 @@ def test_retrieval_failure_is_distinct_from_empty_evidence(monkeypatch):
  monkeypatch.setattr(main,'get_retrieval_service',failed_service)
  snapshot=main.intelligence_snapshot('A sufficiently long safety narrative.')
  assert snapshot['status']=='retrieval_unavailable' and snapshot['failure_reason']=='OSError'
+
+def test_detail_exposes_historical_retrieval_failure_status(monkeypatch):
+ narrative='A detail report for historical retrieval status testing.'
+ ident=client.post('/analyze',json={'site':'Status Site','narrative':narrative}).json()['id']
+ success=client.get('/incidents/'+ident).json(); assert success['similar_incidents_status']=='available'
+ class HistoricalFailure:
+  def historical_evidence(self,*args,**kwargs):raise OSError('historical catalog unavailable')
+ monkeypatch.setattr(main,'get_retrieval_service',lambda:HistoricalFailure())
+ detail=client.get('/incidents/'+ident)
+ assert detail.status_code==200 and detail.json()['similar_incidents']==[] and detail.json()['similar_incidents_status']=='retrieval_unavailable' and detail.json()['similar_incidents_failure_reason']=='OSError'
+
+def test_batch_deduplicates_within_upload_and_on_retry():
+ narrative='A repeated batch report for idempotency testing.'
+ payload={'reports':[{'report_id':'BATCH-IDEMPOTENT-1','site':'Retry Site','narrative':narrative},{'report_id':'BATCH-IDEMPOTENT-2','site':'Retry Site','narrative':narrative}]}
+ first=client.post('/analyze/batch',json=payload); assert first.status_code==200 and first.json()['processed_count']==1 and first.json()['skipped_duplicate_count']==1
+ second=client.post('/analyze/batch',json=payload); assert second.status_code==200 and second.json()['processed_count']==0 and second.json()['skipped_duplicate_count']==2
+ changed=client.post('/analyze/batch',json={'reports':[{'report_id':'BATCH-IDEMPOTENT-1','site':'Other Site','narrative':'A changed narrative with the same report ID.'}]}); assert changed.status_code==200 and changed.json()['processed_count']==0 and changed.json()['skipped_duplicate_count']==1
+ assert sum(x['narrative']==narrative for x in client.get('/incidents').json()['items'])==1
 
 def test_local_llm_is_optional_grounded_and_cached(monkeypatch):
  service=LocalLLMService(url='http://local.test',timeout=1)
