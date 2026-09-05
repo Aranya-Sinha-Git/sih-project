@@ -5,6 +5,7 @@
 **/__pycache__/
 **/*.py[cod]
 .pytest_cache/
+.pytest-tmp/
 01-app/.run/
 01-app/.pytest_cache/
 01-app/backend/.venv/
