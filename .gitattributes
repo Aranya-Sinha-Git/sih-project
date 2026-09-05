@@ -1,0 +1,8 @@
+# The canonical v0.2 freeze hashes these files byte-for-byte. Keep their
+# checked-out representation stable across platforms and Git configurations.
+03-training/ml/sif_v0_1/data/blind_test_v0_2/*.csv text eol=lf
+03-training/ml/sif_v0_1/data/blind_test_v0_2/*.json text eol=lf
+03-training/ml/sif_v0_1/data/candidate_pool_v0_2.csv text eol=lf
+01-app/backend/app/reference/validation_policy.json text eol=lf
+03-training/ml/sif_v0_1/src/preprocess.py text eol=lf
+03-training/ml/sif_v0_1/artifacts/supervised/threshold.json text eol=lf
