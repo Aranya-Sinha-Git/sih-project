@@ -3,7 +3,7 @@ import tempfile
 import csv
 import runpy
 from pathlib import Path
-os.environ.setdefault('SIF_LOCAL_DEMO', '1')
+os.environ.setdefault('SIF_TEST_AUTH_BYPASS', '1')
 TEST_DIR=Path(tempfile.mkdtemp(prefix='sif_sentinel_api_tests_'))
 TEST_DB=TEST_DIR/'sif_sentinel_api_tests.db'
 os.environ['DATABASE_URL']=f'sqlite:///{TEST_DB.as_posix()}'

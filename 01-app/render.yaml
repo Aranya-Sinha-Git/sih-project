@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: sif-sentinel-api
+    runtime: docker
+    dockerfilePath: ./01-app/backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: MODEL_PATH
+        value: /app/03-training/ml/sif_v0_1/artifacts/supervised

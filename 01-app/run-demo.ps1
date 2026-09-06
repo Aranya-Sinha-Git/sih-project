@@ -8,6 +8,17 @@ $pidFile = Join-Path $runPath 'processes.json'
 $dependencyMarker = Join-Path $runPath 'dependency-state.txt'
 New-Item -ItemType Directory -Force -Path $runPath | Out-Null
 
+# Load local, uncommitted environment values for the same Supabase-backed
+# application used in deployment.  Never print this file or its secrets.
+$envFile = Join-Path $projectRoot '.env'
+if (Test-Path $envFile) {
+  foreach ($line in Get-Content -LiteralPath $envFile) {
+    if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$' -and $line -notmatch '^\s*#') {
+      [Environment]::SetEnvironmentVariable($Matches[1], $Matches[2].Trim().Trim('"'))
+    }
+  }
+}
+
 function Test-Endpoint([string]$Url) {
   # The first Next.js request can compile a route and take longer than two seconds.
   try { return (Invoke-WebRequest -UseBasicParsing $Url -TimeoutSec 8).StatusCode -eq 200 } catch { return $false }
@@ -81,9 +92,6 @@ foreach ($logFile in @($backendLog,$backendErrorLog,$frontendLog,$frontendErrorL
   Remove-Item -LiteralPath $logFile -Force -ErrorAction SilentlyContinue
 }
 
-# This launcher is intentionally loopback-only. Production deployments must
-# provide SIF_AUTH_TOKENS instead of enabling this explicit demo mode.
-$env:SIF_LOCAL_DEMO = '1'
 $backendProc = Start-Process -FilePath (Join-Path $backendPath '.venv\Scripts\python.exe') -ArgumentList '-m','uvicorn','app.main:app','--host','127.0.0.1','--port','8000' -WorkingDirectory $backendPath -WindowStyle Hidden -RedirectStandardOutput $backendLog -RedirectStandardError $backendErrorLog -PassThru
 $nodeExe = (Get-Command 'node.exe').Source
 Push-Location $frontendPath

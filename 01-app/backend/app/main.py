@@ -9,40 +9,25 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
-from .auth import reviewer_for_request, validate_configuration
+from .auth import AuthenticatedUser, reviewer_for_request, validate_configuration
 from .services.classifier import analyze_with_classifier, classifier_metadata
 from .services.engine import analyze_text
 from .services.local_llm import get_local_llm_service
 from .services.retrieval import get_retrieval_service
+from .services.database import get_database, init_sqlite, sqlite_connection
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_DATABASE = "sqlite:///./data/sif_sentinel.db"
-raw_database = os.getenv("DATABASE_URL", DEFAULT_DATABASE).replace("sqlite:///", "")
-DB = Path(raw_database) if Path(raw_database).is_absolute() else ROOT / raw_database
-DB.parent.mkdir(parents=True, exist_ok=True)
-SEED_DB = ROOT / "data" / "sif_sentinel.seed.db"
-if raw_database == DEFAULT_DATABASE.removeprefix("sqlite:///") and not DB.exists() and SEED_DB.exists():
-    import shutil
-    shutil.copy2(SEED_DB, DB)
 REPORT_TYPES = {"Unsafe Act", "Unsafe Condition", "Near Miss", "Incident", "Unspecified"}
 ACTIONABLE_REVIEW_STATUSES = ("Pending", "Escalated")
 REVIEW_OUTCOME_ALIASES = {"Confirm SIF": "Confirm SIF", "Confirm Non-SIF": "Confirm Non-SIF", "Escalate / Unsure": "Escalated / Unsure", "Escalated / Unsure": "Escalated / Unsure"}
 
 def con() -> sqlite3.Connection:
-    connection = sqlite3.connect(DB); connection.row_factory = sqlite3.Row; return connection
+    """Compatibility handle for explicit SQLite legacy/test tooling only."""
+    return sqlite_connection()
 
 def init_db() -> None:
-    connection = con()
-    connection.execute("CREATE TABLE IF NOT EXISTS incidents (id TEXT PRIMARY KEY, report_date TEXT, site TEXT, activity TEXT, narrative TEXT, source TEXT, sif_probability REAL, risk TEXT, high_potential INTEGER, sif_potential INTEGER, sif_label_status TEXT, analysis TEXT, review_status TEXT, reviewer TEXT, review_comment TEXT, created_at TEXT, report_type TEXT, import_batch_id TEXT)")
-    connection.execute("CREATE TABLE IF NOT EXISTS alerts (id TEXT PRIMARY KEY,title TEXT,detail TEXT,severity TEXT,status TEXT,site TEXT,created_at TEXT)")
-    connection.execute("CREATE TABLE IF NOT EXISTS review_history (id INTEGER PRIMARY KEY AUTOINCREMENT,incident_id TEXT,outcome TEXT,reviewer TEXT,comment TEXT,timestamp TEXT,previous_outcome TEXT,new_outcome TEXT,screening_version TEXT)")
-    existing = {row["name"] for row in connection.execute("PRAGMA table_info(incidents)").fetchall()}
-    for column in ("report_type", "import_batch_id"):
-        if column not in existing: connection.execute(f"ALTER TABLE incidents ADD COLUMN {column} TEXT")
-    history_columns = {row["name"] for row in connection.execute("PRAGMA table_info(review_history)").fetchall()}
-    for column in ("previous_outcome", "new_outcome", "screening_version"):
-        if column not in history_columns: connection.execute(f"ALTER TABLE review_history ADD COLUMN {column} TEXT")
-    connection.commit(); connection.close()
+    if get_database().kind == "sqlite-test":
+        init_sqlite()
 
 init_db()
 
@@ -113,24 +98,24 @@ def disposition_counts(reports: list[dict[str, Any]]) -> dict[str, int]:
 
 def _incident_id(narrative: str) -> str: return "ANL-" + hashlib.sha1((narrative + datetime.now().isoformat()).encode()).hexdigest()[:8].upper()
 
-def persist_incident(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, connection: Optional[sqlite3.Connection] = None) -> dict[str, Any]:
+def persist_incident(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, connection: Optional[sqlite3.Connection] = None, auth_user: AuthenticatedUser | None = None) -> dict[str, Any]:
     narrative = narrative.strip()
     if len(narrative) < 12: raise ValueError("narrative must contain at least 12 non-whitespace characters")
     resolved_site = (site or analysis.get("location") or "Unspecified").strip(); resolved_activity = (activity or analysis.get("activity") or "Unspecified").strip(); resolved_type = (report_type or "Unspecified").strip() or "Unspecified"
     if resolved_type not in REPORT_TYPES: raise ValueError("report_type must be Unsafe Act, Unsafe Condition, Near Miss, Incident, or Unspecified.")
-    ident = report_id or _incident_id(narrative); owned = connection is None; connection = connection or con()
+    ident = report_id or _incident_id(narrative)
+    record = {"id": ident, "report_date": report_date or str(date.today()), "site": resolved_site, "activity": resolved_activity, "narrative": narrative, "source": source, "source_id": (analysis.get("provenance") or {}).get("source_report_id"), "normalized_narrative": _normalized_narrative(narrative), "sif_probability": analysis["sif_probability"], "risk": analysis["risk"], "high_potential": analysis["high_potential"], "sif_potential": analysis["sif_potential"], "sif_label_status": analysis["sif_label_status"], "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required", "reviewer": None, "review_comment": None, "created_at": datetime.now().isoformat(), "created_by_user_id": auth_user.id if auth_user else None, "report_type": resolved_type, "import_batch_id": import_batch_id}
     try:
-        connection.execute("INSERT INTO incidents (id,report_date,site,activity,narrative,source,sif_probability,risk,high_potential,sif_potential,sif_label_status,analysis,review_status,reviewer,review_comment,created_at,report_type,import_batch_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (ident, report_date or str(date.today()), resolved_site, resolved_activity, narrative, source, analysis["sif_probability"], analysis["risk"], analysis["high_potential"], analysis["sif_potential"], analysis["sif_label_status"], json.dumps(analysis), "Pending" if analysis["review_required"] else "Not required", None, None, datetime.now().isoformat(), resolved_type, import_batch_id))
-        if owned: connection.commit()
+        get_database().insert_incident(record, connection=connection)
+        if connection is not None:
+            connection.commit()
     except Exception:
-        if owned: connection.rollback()
+        if connection is not None: connection.rollback()
         raise
-    finally:
-        if owned: connection.close()
     return {"id": ident, "narrative": narrative, "site": resolved_site, "activity": resolved_activity, "report_type": resolved_type, **analysis}
 
 def rows() -> list[dict[str, Any]]:
-    connection = con(); result = [out(row) for row in connection.execute("SELECT * FROM incidents ORDER BY report_date DESC, created_at DESC, id DESC").fetchall()]; connection.close(); return result
+    return [out(row) for row in get_database().list_incidents()]
 
 def _tokens(text: str) -> set[str]: return {word.strip(".,;:()[]{}").lower() for word in text.split() if len(word) > 3}
 
@@ -166,14 +151,14 @@ def intelligence_snapshot(narrative: str, item_id: Optional[str] = None, corpus:
         return {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "retrieval_unavailable", "failure_reason": type(error).__name__}
 
 def _update_analysis_snapshot(incident_id: str, snapshot: dict[str, Any], connection: Optional[sqlite3.Connection] = None) -> None:
-    owned = connection is None; connection = connection or con()
-    row = connection.execute("SELECT analysis FROM incidents WHERE id=?", (incident_id,)).fetchone()
+    row = get_database().get_incident(incident_id)
     if row:
-        analysis = json.loads(row["analysis"]) if row["analysis"] else {}
+        analysis = row.get("analysis") or {}
+        if isinstance(analysis, str):
+            try: analysis = json.loads(analysis)
+            except json.JSONDecodeError: analysis = {"legacy_raw_analysis": analysis}
         analysis["intelligence"] = snapshot
-        connection.execute("UPDATE incidents SET analysis=? WHERE id=?", (json.dumps(analysis), incident_id))
-    if owned:
-        connection.commit(); connection.close()
+        get_database().update_analysis(incident_id, analysis, connection=connection)
 
 def report_anchor(reports: list[dict[str, Any]]) -> date: return max((date.fromisoformat(item["report_date"]) for item in reports), default=date.today())
 def trends(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -216,16 +201,19 @@ def cluster_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(result, key=lambda x: x["count"], reverse=True)
 
 app = FastAPI(title="SIF Sentinel API", version="1.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_methods=["*"], allow_headers=["*"])
+_cors_config = os.getenv("CORS_ORIGINS", "").strip() or os.getenv("FRONTEND_URL", "http://localhost:3000")
+_cors_origins = [origin.strip() for origin in _cors_config.split(",") if origin.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["*"], allow_headers=["*"], allow_credentials=True)
 
 @app.middleware("http")
 async def require_bearer_token(request: Request, call_next):
     if request.url.path != "/health":
-        reviewer = reviewer_for_request(request)
-        if reviewer is None and not os.getenv("SIF_LOCAL_DEMO", "").strip().lower() in {"1", "true", "yes"}:
+        user = reviewer_for_request(request)
+        if user is None:
             from fastapi.responses import JSONResponse
             return JSONResponse({"detail": "Authentication required"}, status_code=401)
-        request.state.reviewer = reviewer
+        request.state.user = user
+        request.state.reviewer = user.display_name or user.username
     return await call_next(request)
 
 @app.on_event("startup")
@@ -234,7 +222,7 @@ def start() -> None: validate_configuration(); init_db()
 @app.get("/health")
 def health():
     metadata = classifier_metadata()
-    return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "llm_configured": get_local_llm_service().configured, "database": "sqlite"}
+    return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "llm_configured": get_local_llm_service().configured, "database": get_database().kind}
 def analyzed_result(report: AnalyzeInput) -> dict[str, Any]:
     analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative))
     analysis["intelligence"] = intelligence_snapshot(report.narrative)
@@ -246,18 +234,18 @@ def analyzed_result(report: AnalyzeInput) -> dict[str, Any]:
     return analysis
 
 @app.post("/analyze")
-def analyze(report: AnalyzeInput):
+def analyze(report: AnalyzeInput, request: Request):
     duplicate = next((x for x in rows() if _normalized_narrative(x.get("narrative", "")) == _normalized_narrative(report.narrative) and str(x.get("site") or "").casefold() == str(report.site or "Unspecified").casefold()), None)
     if duplicate:
         return incident(duplicate["id"])
-    try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report))
+    try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report), auth_user=getattr(request.state, "user", None))
     except ValueError as error: raise HTTPException(422, str(error)) from error
     result["intelligence"] = intelligence_snapshot(report.narrative, result["id"]); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result); _update_analysis_snapshot(result["id"], result["intelligence"]); return result
 
 @app.post("/analyze/batch")
-def batch(batch_input: BatchInput):
+def batch(batch_input: BatchInput, request: Request):
     if len(batch_input.reports) > 500: raise HTTPException(422, "Batch limit is 500 reports.")
-    analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con(); working_corpus = rows(); results = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
+    analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if get_database().kind == "sqlite-test" else None; working_corpus = rows(); results = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
             site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = next((x for x in working_corpus if (report_id and str(x.get("id")) == report_id) or (_normalized_narrative(str(x.get("narrative") or "")) == normalized and str(x.get("site") or "Unspecified").casefold() == site.casefold())), None)
@@ -266,26 +254,24 @@ def batch(batch_input: BatchInput):
             key = (normalized, site.casefold())
             if key in seen_keys or (report_id and report_id in seen_ids):
                 skipped_duplicates.append({"report_id": report_id, "existing_id": seen_keys.get(key) or seen_ids.get(report_id or ""), "reason": "duplicate within upload"}); continue
-            result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection); result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]; _update_analysis_snapshot(result["id"], result["intelligence"], connection); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
-        connection.commit()
+            result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection, auth_user=getattr(request.state, "user", None)); result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]; _update_analysis_snapshot(result["id"], result["intelligence"], connection); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
+        if connection is not None: connection.commit()
     except Exception as error:
-        connection.rollback(); raise HTTPException(500, "Batch persistence failed; no reports were saved.") from error
-    finally: connection.close()
+        if connection is not None: connection.rollback()
+        raise HTTPException(500, "Batch persistence failed; no reports were saved.") from error
+    finally:
+        if connection is not None: connection.close()
     scored = [x for x in results if x["sif_probability"] is not None]
     return {"processed_count": len(results), "skipped_duplicate_count": len(skipped_duplicates), "skipped_duplicates": skipped_duplicates, "sif_potential_count": sum(x["sif_potential"] is True for x in results), "review_count": sum(x["review_required"] for x in results), "highest_risk_site": max(scored, key=lambda x: x["sif_probability"])["site"] if scored else None, "highest_risk_activity": max(scored, key=lambda x: x["sif_probability"])["activity"] if scored else None, "top_lsr": next((x["rules"]["primary"]["rule"] for x in results if x["rules"]["primary"]), None), "results": results}
 
 @app.get("/incidents")
 def incidents(search: str = "", site: Optional[str] = None, activity: Optional[str] = None, risk: Optional[str] = None, review: Optional[str] = None, source: Optional[str] = None, page: int = Query(1, ge=1), page_size: int = Query(25, ge=1, le=100)):
-    clauses: list[str] = []; values: list[Any] = []
-    if search.strip():
-        like = f"%{search.strip()}%"; clauses.append("(id LIKE ? OR narrative LIKE ? OR site LIKE ? OR activity LIKE ?)"); values.extend([like] * 4)
-    for column, value in (("site", site), ("activity", activity), ("risk", risk), ("review_status", review), ("source", source)):
-        if value: clauses.append(f"{column} = ?"); values.append(value)
-    where = " WHERE " + " AND ".join(clauses) if clauses else ""; connection = con(); total = connection.execute(f"SELECT COUNT(*) FROM incidents{where}", values).fetchone()[0]; values.extend([page_size, (page - 1) * page_size]); result = [out(row) for row in connection.execute(f"SELECT * FROM incidents{where} ORDER BY report_date DESC, created_at DESC, id DESC LIMIT ? OFFSET ?", values).fetchall()]; connection.close(); return {"items": result, "total": total, "page": page, "page_size": page_size}
+    result, total = get_database().list_incidents_page(search=search, site=site, activity=activity, risk=risk, review=review, source=source, page=page, page_size=page_size)
+    return {"items": [out(row) for row in result], "total": total, "page": page, "page_size": page_size}
 
 @app.get("/incidents/{incident_id}")
 def incident(incident_id: str):
-    connection = con(); row = connection.execute("SELECT * FROM incidents WHERE id=?", (incident_id,)).fetchone(); history = [dict(x) for x in connection.execute("SELECT * FROM review_history WHERE incident_id=? ORDER BY id ASC", (incident_id,)).fetchall()]; connection.close()
+    row = get_database().get_incident(incident_id); history = get_database().review_history(incident_id)
     if not row: raise HTTPException(404, "Report not found")
     result = out(row); result["review_history"] = history; result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result); return result
 
@@ -294,13 +280,12 @@ def similar(incident_id: str): return incident(incident_id)["similar_incidents"]
 
 @app.post("/incidents/{incident_id}/intelligence")
 def intelligence(incident_id: str, intelligence_input: IntelligenceInput):
-    connection = con(); row = connection.execute("SELECT * FROM incidents WHERE id=?", (incident_id,)).fetchone()
-    if not row: connection.close(); raise HTTPException(404, "Report not found")
+    row = get_database().get_incident(incident_id)
+    if not row: raise HTTPException(404, "Report not found")
     try:
-        analysis = json.loads(row["analysis"]) if row["analysis"] else {}
+        analysis = json.loads(row["analysis"]) if isinstance(row.get("analysis"), str) else (row.get("analysis") or {})
         if not isinstance(analysis, dict): raise ValueError("legacy analysis is not an object")
     except (TypeError, ValueError, json.JSONDecodeError):
-        connection.close()
         result = incident(incident_id)
         unavailable = {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "legacy_unavailable", "failure_reason": "analysis_json_invalid", "explanation": {"status": "unavailable", "completion_status": "unavailable", "text": "Intelligence is unavailable for this legacy analysis record."}}
         result["analysis"]["intelligence"] = unavailable
@@ -309,7 +294,7 @@ def intelligence(incident_id: str, intelligence_input: IntelligenceInput):
     snapshot = analysis.get("intelligence") or {}; screening = analysis.get("screening") or {}
     explanation = get_local_llm_service().explain(row["narrative"], screening, snapshot.get("reference_evidence", []), snapshot.get("historical_evidence", []), force=intelligence_input.force)
     snapshot["explanation"] = explanation; analysis["intelligence"] = snapshot
-    connection.execute("UPDATE incidents SET analysis=? WHERE id=?", (json.dumps(analysis), incident_id)); connection.commit(); connection.close()
+    get_database().update_analysis(incident_id, analysis)
     return incident(incident_id)
 
 @app.get("/dashboard/summary")
@@ -345,28 +330,26 @@ def reviews(): return [x for x in rows() if x["review_status"] in ACTIONABLE_REV
 def review(incident_id: str, review_input: ReviewInput, request: Request):
     outcome = REVIEW_OUTCOME_ALIASES.get(review_input.outcome.strip())
     if outcome is None: raise HTTPException(422, "Use Confirm SIF, Confirm Non-SIF, or Escalated / Unsure.")
-    reviewer = getattr(request.state, "reviewer", None) or review_input.reviewer.strip()
+    user = getattr(request.state, "user", None)
+    reviewer = (user.display_name if user else None) or review_input.reviewer.strip()
     if len(reviewer) < 2: raise HTTPException(422, "Reviewer identity is required.")
-    connection = con()
-    current = connection.execute("SELECT * FROM incidents WHERE id=?", (incident_id,)).fetchone()
-    if not current: connection.close(); raise HTTPException(404, "Report not found")
-    previous = human_review_outcome(dict(current))
-    status = "Escalated" if outcome == "Escalated / Unsure" else "Reviewed"; sif_value = 1 if outcome == "Confirm SIF" else 0 if outcome == "Confirm Non-SIF" else None; label_status = "manual_reviewed" if sif_value is not None else "unresolved"; analysis = json.loads(current["analysis"]) if current["analysis"] else {}; screening_version = analysis.get("model_version") or (analysis.get("screening") or {}).get("model_identity")
+    current = get_database().get_incident(incident_id)
+    if not current: raise HTTPException(404, "Report not found")
+    previous = human_review_outcome(current)
+    status = "Escalated" if outcome == "Escalated / Unsure" else "Reviewed"; sif_value = 1 if outcome == "Confirm SIF" else 0 if outcome == "Confirm Non-SIF" else None; label_status = "manual_reviewed" if sif_value is not None else "unresolved"; analysis = current.get("analysis") or {}; analysis = json.loads(analysis) if isinstance(analysis, str) else analysis; screening_version = analysis.get("model_version") or (analysis.get("screening") or {}).get("model_identity")
     try:
-        connection.execute("UPDATE incidents SET review_status=?,reviewer=?,review_comment=?,sif_potential=?,sif_label_status=? WHERE id=?", (status, reviewer, review_input.comment, sif_value, label_status, incident_id)); connection.execute("INSERT INTO review_history (incident_id,outcome,reviewer,comment,timestamp,previous_outcome,new_outcome,screening_version) VALUES (?,?,?,?,?,?,?,?)", (incident_id, outcome, reviewer, review_input.comment, datetime.now().isoformat(), previous, outcome, screening_version)); connection.commit(); updated = connection.execute("SELECT * FROM incidents WHERE id=?", (incident_id,)).fetchone()
+        get_database().apply_review(incident_id, {"status": status, "reviewer": reviewer, "reviewer_user_id": user.id if user else None, "comment": review_input.comment, "sif_potential": sif_value, "label_status": label_status, "outcome": outcome, "timestamp": datetime.now().isoformat(), "previous_outcome": previous, "screening_version": screening_version})
     except Exception:
-        connection.rollback(); connection.close(); raise
-    connection.close()
+        raise
     result = incident(incident_id); result["ok"] = True; return result
 
 @app.get("/alerts")
 def alerts():
-    connection = con(); result = [dict(x) for x in connection.execute("SELECT * FROM alerts ORDER BY created_at DESC")]; connection.close(); return result
+    return get_database().list_alerts()
 @app.patch("/alerts/{alert_id}")
 def alert_update(alert_id: str, update: AlertUpdate):
     if update.status not in ["New", "Acknowledged", "Resolved"]: raise HTTPException(422, "Use New, Acknowledged, or Resolved.")
-    connection = con(); cursor = connection.execute("UPDATE alerts SET status=? WHERE id=?", (update.status, alert_id)); connection.commit(); connection.close()
-    if not cursor.rowcount: raise HTTPException(404, "Alert not found")
+    if not get_database().update_alert(alert_id, update.status): raise HTTPException(404, "Alert not found")
     return {"ok": True, "status": update.status}
 @app.get("/model")
 def model():
