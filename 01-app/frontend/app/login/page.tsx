@@ -1,11 +1,12 @@
 'use client';
-import {FormEvent,useState} from 'react';
-import Link from 'next/link';
+import {FormEvent,useEffect,useState} from 'react';
 import {ShieldAlert} from 'lucide-react';
+import {supabase} from '../../lib/supabase';
+import {usernameToInternalEmail} from '../../lib/auth';
 
 export default function Login(){
-  const [token,setToken]=useState(''); const [error,setError]=useState('');
-  function submit(event:FormEvent){event.preventDefault();if(!token.trim()){setError('Enter the reviewer token.');return}window.localStorage.setItem('sif-api-token',token.trim());window.location.href='/';}
-  function signOut(){window.localStorage.removeItem('sif-api-token');setToken('');setError('Signed out.');}
-  return <main style={{minHeight:'100vh',display:'grid',placeItems:'center',padding:20}}><section className="panel" style={{width:'min(440px,100%)',padding:28}}><div className="brand" style={{color:'#17252c'}}><span className="brand-mark"><ShieldAlert size={16}/></span>SIF Sentinel</div><p className="subtle">Enter the server-issued reviewer token for this workspace.</p><form onSubmit={submit}><label className="input-label" htmlFor="reviewer-token">Reviewer token</label><input id="reviewer-token" className="input" style={{width:'100%',marginTop:6}} type="password" value={token} onChange={event=>setToken(event.target.value)} autoComplete="off"/><button className="button" style={{display:'block',width:'100%',marginTop:12}}>Open workspace</button></form>{error&&<p className="error" role="alert">{error}</p>}<button className="button secondary" style={{width:'100%',marginTop:10}} onClick={signOut}>Sign out</button><Link href="/" className="button secondary" style={{display:'block',textAlign:'center',marginTop:10}}>Open local demo</Link></section></main>;
+  const [username,setUsername]=useState(''); const [password,setPassword]=useState(''); const [error,setError]=useState(''); const [loading,setLoading]=useState(false); const showDemo=process.env.NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS==='true';
+  useEffect(()=>{supabase.auth.getSession().then(({data})=>{if(data.session)window.location.replace('/')})},[]);
+  async function submit(event:FormEvent){event.preventDefault();setError('');if(!username.trim()||!password){setError('Enter your User ID and password.');return}setLoading(true);try{const {error}=await supabase.auth.signInWithPassword({email:usernameToInternalEmail(username),password});if(error)throw error;window.location.replace('/')}catch{setError('Incorrect User ID or password.')}finally{setLoading(false)}}
+  return <main style={{minHeight:'100vh',display:'grid',placeItems:'center',padding:20}}><section className="panel" style={{width:'min(440px,100%)',padding:28}}><div className="brand" style={{color:'#17252c'}}><span className="brand-mark"><ShieldAlert size={16}/></span>SIF Sentinel</div><p className="subtle">Safety Intelligence</p><form onSubmit={submit}><label className="input-label" htmlFor="user-id">User ID</label><input id="user-id" className="input" style={{width:'100%',marginTop:6}} value={username} onChange={event=>setUsername(event.target.value)} autoComplete="username"/><label className="input-label" htmlFor="password" style={{display:'block',marginTop:12}}>Password</label><input id="password" className="input" style={{width:'100%',marginTop:6}} type="password" value={password} onChange={event=>setPassword(event.target.value)} autoComplete="current-password"/><button className="button" disabled={loading} style={{display:'block',width:'100%',marginTop:12}}>{loading?'Signing in…':'Sign in'}</button></form>{showDemo&&<p className="row-meta" style={{marginTop:12}}>Demo: test / test123</p>}{error&&<p className="error" role="alert">{error}</p>}</section></main>;
 }
