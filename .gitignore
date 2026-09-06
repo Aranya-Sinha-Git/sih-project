@@ -10,6 +10,7 @@
 01-app/.pytest_cache/
 01-app/backend/.venv/
 01-app/backend/.deps/
+01-app/backend/data/sif_sentinel.db
 **/.deps/
 **/node_modules/
 01-app/frontend/node_modules/

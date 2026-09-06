@@ -4,7 +4,7 @@ The Next.js frontend is configured for Netlify with the repository-root `netlify
 
 ## Netlify settings
 
-- Base directory: `frontend`
+- Base directory: `01-app/frontend` (configured in the repository-root `netlify.toml`)
 - Build command: `npm run build`
 - Publish directory: `.next`
 - Node.js: 22

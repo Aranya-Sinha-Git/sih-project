@@ -16,9 +16,14 @@ from .services.local_llm import get_local_llm_service
 from .services.retrieval import get_retrieval_service
 
 ROOT = Path(__file__).resolve().parents[1]
-raw_database = os.getenv("DATABASE_URL", "sqlite:///./data/sif_sentinel.db").replace("sqlite:///", "")
+DEFAULT_DATABASE = "sqlite:///./data/sif_sentinel.db"
+raw_database = os.getenv("DATABASE_URL", DEFAULT_DATABASE).replace("sqlite:///", "")
 DB = Path(raw_database) if Path(raw_database).is_absolute() else ROOT / raw_database
 DB.parent.mkdir(parents=True, exist_ok=True)
+SEED_DB = ROOT / "data" / "sif_sentinel.seed.db"
+if raw_database == DEFAULT_DATABASE.removeprefix("sqlite:///") and not DB.exists() and SEED_DB.exists():
+    import shutil
+    shutil.copy2(SEED_DB, DB)
 REPORT_TYPES = {"Unsafe Act", "Unsafe Condition", "Near Miss", "Incident", "Unspecified"}
 ACTIONABLE_REVIEW_STATUSES = ("Pending", "Escalated")
 REVIEW_OUTCOME_ALIASES = {"Confirm SIF": "Confirm SIF", "Confirm Non-SIF": "Confirm Non-SIF", "Escalate / Unsure": "Escalated / Unsure", "Escalated / Unsure": "Escalated / Unsure"}
