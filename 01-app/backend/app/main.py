@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import hashlib, heapq, json, os, sqlite3
+import asyncio, hashlib, heapq, json, os, sqlite3
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Optional
@@ -225,7 +225,10 @@ async def require_bearer_token(request: Request, call_next):
     if request.method == "OPTIONS":
         return await call_next(request)
     if request.url.path != "/health":
-        user = reviewer_for_request(request)
+        # Token verification currently uses the synchronous httpx client;
+        # keep that network call off the event loop until the auth adapter is
+        # migrated to a fully async client.
+        user = await asyncio.to_thread(reviewer_for_request, request)
         if user is None:
             from fastapi.responses import JSONResponse
             return JSONResponse({"detail": "Authentication required"}, status_code=401)
