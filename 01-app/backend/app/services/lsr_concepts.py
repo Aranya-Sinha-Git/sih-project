@@ -31,6 +31,7 @@ CONCEPTS = {
         rf"{PERSON}{GAP}(?:fell|falling|working|worked|climbing){GAP}(?:scaffold|ladder|roof|height|platform|edge)",
     ],
     "Safe Mechanical Lifting": [
+        r"(?:crane|hoist)\s+operations?",
         r"(?:crane|hoist)\s+(?:load|lift|lifting|operation|operations)",
         r"(?:lifting|hoisting)\s+(?:operation|operations|load|loads)",
         r"(?:suspended\s+(?:crane\s+)?load|mechanical lifting)",
@@ -47,12 +48,15 @@ CONCEPTS = {
         r"(?:contact|contacted|touching|touched)\s+(?:with\s+)?(?:a\s+)?(?:live|energized|energised)\s+(?:wire|conductor|circuit)",
     ],
     "Driving": [
+        r"(?:driving|vehicle)\s+(?:operation|operations|movement|safety)",
+        r"journey\s+management",
         r"(?:driver|driving)\s+(?:was\s+)?(?:speeding|distracted|fatigued|without a seatbelt)",
         r"(?:truck|vehicle|car|tanker)\s+(?:collision|collided|crashed|overturned|rollover)",
         r"(?:driving|drove)\s+(?:while\s+)?(?:texting|intoxicated)",
         r"(?:driver|passenger)\s+(?:was\s+)?(?:not wearing|without)\s+(?:a\s+)?seat\s?belt",
     ],
     "Confined Space": [
+        r"confined\s+space",
         r"confined\s+space\s+(?:entry|entered|exposure)",
         rf"(?:entered|entering|inside){GAP}(?:tank|vessel|manhole|silo|confined space)",
     ],
