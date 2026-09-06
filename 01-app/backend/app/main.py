@@ -207,6 +207,11 @@ app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["
 
 @app.middleware("http")
 async def require_bearer_token(request: Request, call_next):
+    # Browsers send unauthenticated OPTIONS requests before cross-origin
+    # requests. Let CORSMiddleware answer the preflight; actual application
+    # requests remain protected below.
+    if request.method == "OPTIONS":
+        return await call_next(request)
     if request.url.path != "/health":
         user = reviewer_for_request(request)
         if user is None:
