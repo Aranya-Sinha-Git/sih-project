@@ -337,7 +337,7 @@ def review(incident_id: str, review_input: ReviewInput, request: Request):
     previous = human_review_outcome(current)
     status = "Escalated" if outcome == "Escalated / Unsure" else "Reviewed"; sif_value = 1 if outcome == "Confirm SIF" else 0 if outcome == "Confirm Non-SIF" else None; label_status = "manual_reviewed" if sif_value is not None else "unresolved"; analysis = current.get("analysis") or {}; analysis = json.loads(analysis) if isinstance(analysis, str) else analysis; screening_version = analysis.get("model_version") or (analysis.get("screening") or {}).get("model_identity")
     try:
-        get_database().apply_review(incident_id, {"status": status, "reviewer": reviewer, "comment": review_input.comment, "sif_potential": sif_value, "label_status": label_status, "outcome": outcome, "timestamp": datetime.now().isoformat(), "previous_outcome": previous, "screening_version": screening_version})
+        get_database().apply_review(incident_id, {"status": status, "reviewer": reviewer, "reviewer_user_id": user.id if user else None, "comment": review_input.comment, "sif_potential": sif_value, "label_status": label_status, "outcome": outcome, "timestamp": datetime.now().isoformat(), "previous_outcome": previous, "screening_version": screening_version})
     except Exception:
         raise
     result = incident(incident_id); result["ok"] = True; return result

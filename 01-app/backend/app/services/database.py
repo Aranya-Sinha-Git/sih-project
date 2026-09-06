@@ -255,7 +255,7 @@ class SupabaseDatabase:
         if not current:
             raise KeyError(incident_id)
         self._request("PATCH", "incidents", params={"id": f"eq.{incident_id}"}, payload={"review_status": values["status"], "reviewer": values["reviewer"], "review_comment": values["comment"], "sif_potential": values["sif_potential"], "sif_label_status": values["label_status"]}, prefer="return=minimal")
-        self._request("POST", "review_history", payload={"incident_id": incident_id, "outcome": values["outcome"], "reviewer": values["reviewer"], "comment": values["comment"], "timestamp": values["timestamp"], "previous_outcome": values["previous_outcome"], "new_outcome": values["outcome"], "screening_version": values["screening_version"]}, prefer="return=minimal")
+        self._request("POST", "review_history", payload={"incident_id": incident_id, "outcome": values["outcome"], "reviewer": values["reviewer"], "reviewer_user_id": values.get("reviewer_user_id"), "comment": values["comment"], "timestamp": values["timestamp"], "previous_outcome": values["previous_outcome"], "new_outcome": values["outcome"], "screening_version": values["screening_version"]}, prefer="return=minimal")
         return self.get_incident(incident_id) or {}
 
     def list_alerts(self) -> list[dict[str, Any]]:
