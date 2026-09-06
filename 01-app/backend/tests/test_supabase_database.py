@@ -47,3 +47,12 @@ def test_review_uses_atomic_rpc(monkeypatch):
     assert rpc_calls[0][0] == "apply_incident_review"
     assert rpc_calls[0][1]["p_incident_id"] == "ANL-1"
     assert rpc_calls[0][1]["p_reviewer_user_id"].endswith("0001")
+
+
+def test_batch_insert_sends_one_bulk_request(monkeypatch):
+    database = make_database(monkeypatch)
+    calls = []
+    monkeypatch.setattr(database, "_request", lambda method, table, **kwargs: calls.append((method, table, kwargs)) or None)
+    database.insert_incidents_batch([{"id": "A", "narrative": "first"}, {"id": "B", "narrative": "second"}])
+    assert len(calls) == 1 and calls[0][0:2] == ("POST", "incidents")
+    assert [row["id"] for row in calls[0][2]["payload"]] == ["A", "B"]

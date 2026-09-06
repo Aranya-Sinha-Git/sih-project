@@ -99,13 +99,18 @@ def disposition_counts(reports: list[dict[str, Any]]) -> dict[str, int]:
 
 def _incident_id(narrative: str) -> str: return "ANL-" + hashlib.sha1((narrative + datetime.now().isoformat()).encode()).hexdigest()[:8].upper()
 
-def persist_incident(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, connection: Optional[sqlite3.Connection] = None, auth_user: AuthenticatedUser | None = None) -> dict[str, Any]:
+def build_incident_record(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, auth_user: AuthenticatedUser | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     narrative = narrative.strip()
     if len(narrative) < 12: raise ValueError("narrative must contain at least 12 non-whitespace characters")
     resolved_site = (site or analysis.get("location") or "Unspecified").strip(); resolved_activity = (activity or analysis.get("activity") or "Unspecified").strip(); resolved_type = (report_type or "Unspecified").strip() or "Unspecified"
     if resolved_type not in REPORT_TYPES: raise ValueError("report_type must be Unsafe Act, Unsafe Condition, Near Miss, Incident, or Unspecified.")
     ident = report_id or _incident_id(narrative)
     record = {"id": ident, "report_date": report_date or str(date.today()), "site": resolved_site, "activity": resolved_activity, "narrative": narrative, "source": source, "source_id": (analysis.get("provenance") or {}).get("source_report_id"), "normalized_narrative": _normalized_narrative(narrative), "sif_probability": analysis["sif_probability"], "risk": analysis["risk"], "high_potential": analysis["high_potential"], "sif_potential": analysis["sif_potential"], "sif_label_status": analysis["sif_label_status"], "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required", "reviewer": None, "review_comment": None, "created_at": datetime.now().isoformat(), "created_by_user_id": auth_user.id if auth_user else None, "report_type": resolved_type, "import_batch_id": import_batch_id}
+    result = {"id": ident, "narrative": narrative, "site": resolved_site, "activity": resolved_activity, "report_type": resolved_type, **analysis}
+    return record, result
+
+def persist_incident(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, connection: Optional[sqlite3.Connection] = None, auth_user: AuthenticatedUser | None = None) -> dict[str, Any]:
+    record, result = build_incident_record(narrative=narrative, site=site, activity=activity, report_type=report_type, analysis=analysis, report_id=report_id, report_date=report_date, source=source, import_batch_id=import_batch_id, auth_user=auth_user)
     try:
         get_database().insert_incident(record, connection=connection)
         if connection is not None:
@@ -113,7 +118,7 @@ def persist_incident(*, narrative: str, site: str, activity: Optional[str], repo
     except Exception:
         if connection is not None: connection.rollback()
         raise
-    return {"id": ident, "narrative": narrative, "site": resolved_site, "activity": resolved_activity, "report_type": resolved_type, **analysis}
+    return result
 
 def rows() -> list[dict[str, Any]]:
     return [out(row) for row in get_database().list_incidents()]
@@ -261,7 +266,7 @@ def analyze(report: AnalyzeInput, request: Request):
 @app.post("/analyze/batch")
 def batch(batch_input: BatchInput, request: Request):
     if len(batch_input.reports) > 500: raise HTTPException(422, "Batch limit is 500 reports.")
-    analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if get_database().kind == "sqlite-test" else None; working_corpus = rows(); results = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
+    database = get_database(); analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; working_corpus = rows(); results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
             site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = next((x for x in working_corpus if (report_id and str(x.get("id")) == report_id) or (_normalized_narrative(str(x.get("narrative") or "")) == normalized and str(x.get("site") or "Unspecified").casefold() == site.casefold())), None)
@@ -270,7 +275,19 @@ def batch(batch_input: BatchInput, request: Request):
             key = (normalized, site.casefold())
             if key in seen_keys or (report_id and report_id in seen_ids):
                 skipped_duplicates.append({"report_id": report_id, "existing_id": seen_keys.get(key) or seen_ids.get(report_id or ""), "reason": "duplicate within upload"}); continue
-            result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection, auth_user=getattr(request.state, "user", None)); result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]; _update_analysis_snapshot(result["id"], result["intelligence"], connection); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
+            if database.kind == "supabase-postgres":
+                record, result = build_incident_record(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, auth_user=getattr(request.state, "user", None))
+            else:
+                record = None
+                result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection, auth_user=getattr(request.state, "user", None))
+            result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]
+            if record is not None:
+                pending_records.append(record)
+            else:
+                _update_analysis_snapshot(result["id"], result["intelligence"], connection)
+            result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
+        if pending_records:
+            database.insert_incidents_batch(pending_records)
         if connection is not None: connection.commit()
     except Exception as error:
         if connection is not None: connection.rollback()

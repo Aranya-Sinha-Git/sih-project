@@ -253,6 +253,10 @@ class SupabaseDatabase:
         payload = {column: record.get(column) for column in INCIDENT_COLUMNS if column in record}
         self._request("POST", "incidents", payload=payload, prefer="return=minimal")
 
+    def insert_incidents_batch(self, records: list[dict[str, Any]]) -> None:
+        payload = [{column: record.get(column) for column in INCIDENT_COLUMNS if column in record} for record in records]
+        self._request("POST", "incidents", payload=payload, prefer="return=minimal")
+
     def update_analysis(self, incident_id: str, analysis: dict[str, Any], connection: Any = None) -> None:
         self._request("PATCH", "incidents", params={"id": f"eq.{incident_id}"}, payload={"analysis": analysis}, prefer="return=minimal")
 
