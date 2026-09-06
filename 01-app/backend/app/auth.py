@@ -30,7 +30,9 @@ def username_to_internal_email(username: str) -> str:
 
 
 def _test_bypass_enabled() -> bool:
-    return os.getenv("SIF_TEST_AUTH_BYPASS", "").strip().lower() in {"1", "true", "yes"}
+    environment = os.getenv("SIF_ENVIRONMENT", "").strip().lower()
+    enabled = os.getenv("SIF_TEST_AUTH_BYPASS", "").strip().lower() in {"1", "true", "yes"}
+    return enabled and environment in {"test", "testing"}
 
 
 def reviewer_for_request(request: Request) -> AuthenticatedUser | None:

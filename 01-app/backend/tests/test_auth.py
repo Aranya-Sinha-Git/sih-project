@@ -27,6 +27,14 @@ def test_missing_auth_is_not_accepted(monkeypatch):
     assert reviewer_for_request(Request(scope)) is None
 
 
+def test_auth_bypass_requires_test_environment(monkeypatch):
+    monkeypatch.setenv("SIF_TEST_AUTH_BYPASS", "true")
+    monkeypatch.setenv("SIF_ENVIRONMENT", "production")
+    from app.auth import reviewer_for_request
+    scope = {"type": "http", "headers": [], "method": "GET", "path": "/incidents", "query_string": b"", "server": ("test", 80), "scheme": "http", "client": ("test", 1), "root_path": "", "http_version": "1.1"}
+    assert reviewer_for_request(Request(scope)) is None
+
+
 def test_invalid_jwt_is_not_accepted(monkeypatch):
     monkeypatch.delenv("SIF_TEST_AUTH_BYPASS", raising=False)
     monkeypatch.setenv("SUPABASE_URL", "https://example.supabase.co")
