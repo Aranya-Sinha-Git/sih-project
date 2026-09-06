@@ -9,13 +9,20 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
-DEFAULT_ARTIFACT_DIR = PROJECT_ROOT / "03-training" / "ml" / "sif_v0_1" / "artifacts" / "supervised"
+_configured_model_path = os.getenv("MODEL_PATH", "").strip()
+if _configured_model_path:
+    _model_path = Path(_configured_model_path).expanduser()
+    MODEL_ARTIFACT_DIR = _model_path if _model_path.is_absolute() else PROJECT_ROOT / _model_path
+else:
+    MODEL_ARTIFACT_DIR = PROJECT_ROOT / "03-training" / "ml" / "sif_v0_1" / "artifacts" / "supervised"
+DEFAULT_ARTIFACT_DIR = MODEL_ARTIFACT_DIR
 PREDICT_PATH = PROJECT_ROOT / "03-training" / "ml" / "sif_v0_1" / "src" / "predict.py"
 POLICY_REVIEW_BAND = (0.35, 0.45)
 _PREDICTOR: Any = None
