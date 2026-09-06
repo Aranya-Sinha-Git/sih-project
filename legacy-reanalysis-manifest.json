@@ -1,0 +1,916 @@
+{
+  "applied": true,
+  "migrated": 101,
+  "skipped": 0,
+  "records": [
+    {
+      "id": "ANL-4FFAD0CB",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": "Non-SIF Potential",
+      "new_classification": "SIF Potential",
+      "old_score": 0.24,
+      "new_score": 0.81204
+    },
+    {
+      "id": "DOE-003FBD7B8F13",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.83442
+    },
+    {
+      "id": "DOE-0795943A5A03",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.7688
+    },
+    {
+      "id": "DOE-07C9E8BE1774",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.37,
+      "new_score": 0.85379
+    },
+    {
+      "id": "DOE-08B46627D05D",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.80961
+    },
+    {
+      "id": "DOE-1198FF9FDE9F",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.80274
+    },
+    {
+      "id": "DOE-1CB3D6DF93DD",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.31,
+      "new_score": 0.81202
+    },
+    {
+      "id": "DOE-1E6D6DA7B7AA",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.07,
+      "new_score": 0.82802
+    },
+    {
+      "id": "DOE-2E31D89EC36E",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.32,
+      "new_score": 0.88013
+    },
+    {
+      "id": "DOE-2F19A71678B7",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.18,
+      "new_score": 0.81888
+    },
+    {
+      "id": "DOE-2F7665F8A020",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.32,
+      "new_score": 0.77001
+    },
+    {
+      "id": "DOE-32B58DF46D52",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.03,
+      "new_score": 0.79236
+    },
+    {
+      "id": "DOE-349BC5C07075",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.796
+    },
+    {
+      "id": "DOE-38FEC2D44671",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.85708
+    },
+    {
+      "id": "DOE-3D6639C607C8",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.80029
+    },
+    {
+      "id": "DOE-4062F39408DE",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.24,
+      "new_score": 0.8413
+    },
+    {
+      "id": "DOE-44770EF10D54",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.7411
+    },
+    {
+      "id": "DOE-4BCB79D2C753",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.79856
+    },
+    {
+      "id": "DOE-59DB57520D77",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.84252
+    },
+    {
+      "id": "DOE-5D28F089AB2E",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.8316
+    },
+    {
+      "id": "DOE-6671E3D57618",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.51,
+      "new_score": 0.89326
+    },
+    {
+      "id": "DOE-6F2F44DCD1C4",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.25,
+      "new_score": 0.84964
+    },
+    {
+      "id": "DOE-7C851CADDF26",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.37,
+      "new_score": 0.75046
+    },
+    {
+      "id": "DOE-7EDD05FFCBD2",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.32,
+      "new_score": 0.81879
+    },
+    {
+      "id": "DOE-81D5DA2498D8",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.85657
+    },
+    {
+      "id": "DOE-989E31FBC517",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.7698
+    },
+    {
+      "id": "DOE-9AB98DB554F9",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.79701
+    },
+    {
+      "id": "DOE-9BD67F55325B",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.31,
+      "new_score": 0.82805
+    },
+    {
+      "id": "DOE-9D8913AA4419",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.51,
+      "new_score": 0.89663
+    },
+    {
+      "id": "DOE-A1E04441849F",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.79703
+    },
+    {
+      "id": "DOE-AC854144E2B6",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.24,
+      "new_score": 0.85607
+    },
+    {
+      "id": "DOE-B2B40A352C8B",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.37,
+      "new_score": 0.89008
+    },
+    {
+      "id": "DOE-B4C3829563E6",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.82207
+    },
+    {
+      "id": "DOE-BE25A14128B7",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.25,
+      "new_score": 0.80418
+    },
+    {
+      "id": "DOE-BE2A8C8AC624",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.29,
+      "new_score": 0.86583
+    },
+    {
+      "id": "DOE-C52E7ED270DA",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.77315
+    },
+    {
+      "id": "DOE-C80BFEBC022E",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.32,
+      "new_score": 0.83288
+    },
+    {
+      "id": "DOE-CD092416B067",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.85045
+    },
+    {
+      "id": "DOE-D1A79F08B3B9",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.39,
+      "new_score": 0.82042
+    },
+    {
+      "id": "DOE-D5FE74842630",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.80121
+    },
+    {
+      "id": "DOE-E3515FF60306",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.87421
+    },
+    {
+      "id": "DOE-EA774A1885E0",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.42,
+      "new_score": 0.88939
+    },
+    {
+      "id": "DOE-EBFC94081ADC",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.13,
+      "new_score": 0.71789
+    },
+    {
+      "id": "DOE-F358B9ED9E85",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.85043
+    },
+    {
+      "id": "DOE-F5FDD7FC3C9E",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.82225
+    },
+    {
+      "id": "DOE-F7385E5580CB",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.87698
+    },
+    {
+      "id": "DOE-FA6D28BFFBBD",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.814
+    },
+    {
+      "id": "DOE-FB2AA563C1E9",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.90863
+    },
+    {
+      "id": "DOE-FBED92F53FAC",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.25,
+      "new_score": 0.79049
+    },
+    {
+      "id": "DOE-FC517CA9B79E",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.77811
+    },
+    {
+      "id": "DOE-FD8A96336632",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.85353
+    },
+    {
+      "id": "OSHA-174329-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.57748
+    },
+    {
+      "id": "OSHA-174354-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.82653
+    },
+    {
+      "id": "OSHA-174360-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.81237
+    },
+    {
+      "id": "OSHA-174379-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.44,
+      "new_score": 0.8302
+    },
+    {
+      "id": "OSHA-174385-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.63588
+    },
+    {
+      "id": "OSHA-174403-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.74628
+    },
+    {
+      "id": "OSHA-174419-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.72792
+    },
+    {
+      "id": "OSHA-174445-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.65585
+    },
+    {
+      "id": "OSHA-174451-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.62538
+    },
+    {
+      "id": "OSHA-174468-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.72252
+    },
+    {
+      "id": "OSHA-174473-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.72109
+    },
+    {
+      "id": "OSHA-174482-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.63905
+    },
+    {
+      "id": "OSHA-174483-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.22,
+      "new_score": 0.77905
+    },
+    {
+      "id": "OSHA-174491-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.75751
+    },
+    {
+      "id": "OSHA-174500-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.4,
+      "new_score": 0.82402
+    },
+    {
+      "id": "OSHA-174505-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.80647
+    },
+    {
+      "id": "OSHA-174513-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.75074
+    },
+    {
+      "id": "OSHA-174514-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.79046
+    },
+    {
+      "id": "OSHA-174519-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.77564
+    },
+    {
+      "id": "OSHA-174522-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.77184
+    },
+    {
+      "id": "OSHA-174541-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.68505
+    },
+    {
+      "id": "OSHA-174548-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.85017
+    },
+    {
+      "id": "OSHA-174555-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.79223
+    },
+    {
+      "id": "OSHA-174557-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.80872
+    },
+    {
+      "id": "OSHA-174558-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.32,
+      "new_score": 0.81435
+    },
+    {
+      "id": "OSHA-174560-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.6799
+    },
+    {
+      "id": "OSHA-174574-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.78972
+    },
+    {
+      "id": "OSHA-174590-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.636
+    },
+    {
+      "id": "OSHA-174620-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.86756
+    },
+    {
+      "id": "OSHA-174660-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.66626
+    },
+    {
+      "id": "OSHA-174728-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.58349
+    },
+    {
+      "id": "OSHA-174739-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.37,
+      "new_score": 0.72801
+    },
+    {
+      "id": "OSHA-174740-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.8783
+    },
+    {
+      "id": "OSHA-174774-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.75588
+    },
+    {
+      "id": "OSHA-174793-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.69952
+    },
+    {
+      "id": "OSHA-174925-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.54308
+    },
+    {
+      "id": "OSHA-174959-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.3,
+      "new_score": 0.79446
+    },
+    {
+      "id": "OSHA-174960-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.73477
+    },
+    {
+      "id": "OSHA-174966-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.84044
+    },
+    {
+      "id": "OSHA-174967-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.75471
+    },
+    {
+      "id": "OSHA-174972-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.78323
+    },
+    {
+      "id": "OSHA-174984-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.8039
+    },
+    {
+      "id": "OSHA-175101-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.33,
+      "new_score": 0.7275
+    },
+    {
+      "id": "OSHA-175818-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.79732
+    },
+    {
+      "id": "OSHA-177774-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.08,
+      "new_score": 0.70833
+    },
+    {
+      "id": "OSHA-177814-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.15,
+      "new_score": 0.75428
+    },
+    {
+      "id": "OSHA-178015-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.62718
+    },
+    {
+      "id": "OSHA-178170-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.70155
+    },
+    {
+      "id": "OSHA-178660-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.69223
+    },
+    {
+      "id": "OSHA-180500-015",
+      "legacy_model": "rules-v1.0",
+      "new_model": "sif_v0.1",
+      "old_classification": null,
+      "new_classification": "SIF Potential",
+      "old_score": 0.23,
+      "new_score": 0.79379
+    }
+  ]
+}
