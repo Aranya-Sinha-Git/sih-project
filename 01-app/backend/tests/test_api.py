@@ -130,6 +130,16 @@ def test_grounded_reference_and_historical_retrieval():
  source_history=service.historical_evidence('permit hot work',incidents,current_source_id='SRC-1')
  assert len(source_history)==1 and source_history[0]['source_id']=='SRC-2' and source_history[0]['retrieval_method']=='tfidf_cosine'
 
+def test_facade_panel_grounded_mapping_endpoint():
+ narrative='Two 9.8 kg façade panels dropped from approximately 22.35 m. Loose panels remained hanging overhead. Repeated references to falling/dropped panels and dropped objects.'
+ response=client.post('/analyze',json={'narrative':narrative})
+ assert response.status_code==200
+ result=response.json()
+ assert result['rules']['primary']['rule']=='Line of Fire' and result['rules']['secondary']==[]
+ evidence=result['intelligence']['reference_evidence']
+ assert len(evidence)==1 and evidence[0]['evidence_id']=='IOGP-459-LINEOFFIRE'
+ assert evidence[0]['citation']['publisher']=='IOGP' and evidence[0]['citation']['page_section']=='page 1'
+
 def test_barrier_extraction_requires_failure_context():
  safe=main.analyze_text('The permit was approved and isolation was verified before work began.')
  assert safe['barrier_failures']==[] and safe['barrier_candidates']

@@ -231,7 +231,14 @@ def health():
     metadata = classifier_metadata()
     return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "llm_configured": get_local_llm_service().configured, "database": "sqlite"}
 def analyzed_result(report: AnalyzeInput) -> dict[str, Any]:
-    analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative)); analysis["intelligence"] = intelligence_snapshot(report.narrative); return analysis
+    analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative))
+    analysis["intelligence"] = intelligence_snapshot(report.narrative)
+    mappings = [{"rule": item["rule"], "evidence_id": item["evidence_id"],
+                 "provenance": "grounded_iogp_reference"}
+                for item in analysis["intelligence"]["reference_evidence"]
+                if item.get("reference_type") == "iogp_reference" and item.get("rule")]
+    analysis["rules"] = {"primary": mappings[0] if mappings else None, "secondary": mappings[1:]}
+    return analysis
 
 @app.post("/analyze")
 def analyze(report: AnalyzeInput):
