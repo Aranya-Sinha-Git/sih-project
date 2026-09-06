@@ -52,7 +52,7 @@ def main() -> None:
         print("Demo Auth user already exists; password was not changed.")
     user_id = str(auth_user["id"])
     profile = {"id": user_id, "username": normalized, "display_name": "Demo Reviewer", "role": "reviewer"}
-    request("POST", f"{base}/rest/v1/profiles", key, json=profile, headers={"Content-Type": "application/json", "Prefer": "resolution=merge-duplicates,return=minimal"})
+    request("POST", f"{base}/rest/v1/profiles", key, params={"on_conflict": "username"}, json=profile, headers={"Content-Type": "application/json", "Prefer": "resolution=merge-duplicates,return=minimal"})
     print(f"Profile ready for User ID: {normalized}")
 
 

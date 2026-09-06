@@ -201,7 +201,8 @@ def cluster_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(result, key=lambda x: x["count"], reverse=True)
 
 app = FastAPI(title="SIF Sentinel API", version="1.0.0")
-_cors_origins = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",") if origin.strip()]
+_cors_config = os.getenv("CORS_ORIGINS", "").strip() or os.getenv("FRONTEND_URL", "http://localhost:3000")
+_cors_origins = [origin.strip() for origin in _cors_config.split(",") if origin.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["*"], allow_headers=["*"], allow_credentials=True)
 
 @app.middleware("http")
