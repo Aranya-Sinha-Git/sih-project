@@ -20,6 +20,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.auth import username_to_internal_email  # noqa: E402,F401
 
 
+def load_local_env() -> None:
+    env_path = Path(__file__).resolve().parents[2] / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        if line.lstrip().startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        name = name.strip()
+        if name and name not in os.environ:
+            os.environ[name] = value.strip().strip('"')
+
+
 def sqlite_path(value: str | None) -> Path:
     raw = value or os.getenv("SQLITE_DATABASE_URL") or os.getenv("DATABASE_URL", "sqlite:///./data/sif_sentinel.db")
     raw = raw.removeprefix("sqlite:///")
@@ -135,6 +148,7 @@ def migrate(source: Path, client: SupabaseMigrationClient) -> dict[str, int]:
 
 
 def main() -> None:
+    load_local_env()
     parser = argparse.ArgumentParser()
     parser.add_argument("--sqlite", help="SQLite URL or path; defaults to SQLITE_DATABASE_URL or DATABASE_URL")
     args = parser.parse_args()

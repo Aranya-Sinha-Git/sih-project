@@ -16,6 +16,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.auth import username_to_internal_email  # noqa: E402
 
 
+def load_local_env() -> None:
+    """Load the ignored 01-app/.env for direct local script execution."""
+    env_path = Path(__file__).resolve().parents[2] / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        if line.lstrip().startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        name = name.strip()
+        if name and name not in os.environ:
+            os.environ[name] = value.strip().strip('"')
+
+
 def required(name: str) -> str:
     value = os.getenv(name, "").strip()
     if not value:
@@ -32,6 +46,7 @@ def request(method: str, url: str, key: str, **kwargs: Any) -> httpx.Response:
 
 
 def main() -> None:
+    load_local_env()
     if os.getenv("ENABLE_DEMO_USER", "true").strip().lower() not in {"1", "true", "yes"}:
         print("Demo user bootstrap disabled (ENABLE_DEMO_USER is false).")
         return
