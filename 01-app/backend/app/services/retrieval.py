@@ -9,6 +9,8 @@ from typing import Any, Iterable
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from .lsr_concepts import ALIAS_VERSION, concept_matches
+
 
 CATALOG_PATH = Path(__file__).resolve().parents[1] / "reference" / "knowledge_catalog.json"
 VALIDATION_POLICY_PATH = Path(__file__).resolve().parents[1] / "reference" / "validation_policy.json"
@@ -49,12 +51,28 @@ class RetrievalService:
     def reference_evidence(self, query: str, limit: int = 5) -> list[dict[str, Any]]:
         documents = [f"{item.get('title','')} {' '.join(item.get('aliases', []))} {item.get('text','')}" for item in self.references]
         documents += [f"{item.get('term','')} {item.get('meaning','')}" for item in self.glossary]
-        ranked = _rank(query, documents, limit, 0.08)
+        nominations = concept_matches(query)
+        # Lexical similarity ranks supported rules; it cannot establish support.
+        # Concept nomination bypasses the lexical cutoff, never the catalog.
+        scores = dict(_rank(query, documents, len(documents), 0.0))
+        supported = [index for index, item in enumerate(self.references)
+                     if item.get('rule') in nominations
+                     and item.get('publisher') == 'IOGP'
+                     and all(item.get(key) for key in ('evidence_id', 'text', 'source_url', 'document_version', 'page_section'))]
+        supported.sort(key=lambda index: scores.get(index, 0.0), reverse=True)
+        glossary = [index for index, score in sorted(scores.items(), key=lambda pair: pair[1], reverse=True)
+                    if index >= len(self.references) and score >= 0.08]
+        ranked = [(index, scores.get(index, 0.0)) for index in (supported + glossary)[:max(0, limit)]]
         evidence = []
         for index, score in ranked:
             item = self.references[index] if index < len(self.references) else self.glossary[index - len(self.references)]
             is_glossary = index >= len(self.references)
             evidence.append({"evidence_id": item.get("evidence_id") or f"OIL-GLOSSARY-{str(item.get('term','unknown')).upper().replace(' ', '-')}", "rule": item.get("rule"), "title": item.get("title") or item.get("term"), "excerpt": item.get("text") or item.get("meaning"), "narrative_spans": _spans(query, item.get("text") or item.get("meaning", "")), "relevance_score": round(score, 4), "retrieval_method": "tfidf_cosine", "corpus_version": self.corpus_version, "reference_type": "oil_glossary" if is_glossary else "iogp_reference", "citation": {"publisher": item.get("publisher"), "source_url": item.get("source_url"), "document_version": item.get("document_version"), "page_section": item.get("page_section")}})
+            if not is_glossary:
+                evidence[-1].update(narrative_spans=nominations[item['rule']],
+                                    retrieval_method='curated_concepts_tfidf',
+                                    mapping_version=ALIAS_VERSION,
+                                    mapping_basis='Hazard/concept match; not proof of a rule violation')
         return evidence
 
     def historical_evidence(self, query: str, incidents: Iterable[dict[str, Any]], limit: int = 5, locked_ids: set[str] | None = None, current_source_id: str | None = None) -> list[dict[str, Any]]:
