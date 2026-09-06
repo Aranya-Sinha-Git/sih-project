@@ -210,7 +210,15 @@ class SupabaseDatabase:
         return response.json()
 
     def list_incidents(self) -> list[dict[str, Any]]:
-        return self._request("GET", "incidents", params={"select": "*", "order": "report_date.desc,created_at.desc,id.desc"}) or []
+        result: list[dict[str, Any]] = []
+        page_size = 500
+        offset = 0
+        while True:
+            page = self._request("GET", "incidents", params={"select": "*", "order": "report_date.desc,created_at.desc,id.desc", "limit": page_size, "offset": offset}) or []
+            result.extend(page)
+            if len(page) < page_size:
+                return result
+            offset += page_size
 
     def get_incident(self, incident_id: str) -> dict[str, Any] | None:
         rows = self._request("GET", "incidents", params={"id": f"eq.{incident_id}", "select": "*"}) or []
@@ -226,19 +234,20 @@ class SupabaseDatabase:
                 params[column] = f"eq.{value}"
         headers = {"Prefer": "count=exact"}
         # A single page request gives the normal operations their stable shape.
-        rows = self._request_with_headers("GET", "incidents", params=params, headers_extra=headers) or []
-        total = int((self._last_content_range or "*/0").split("/")[-1])
+        rows, content_range = self._request_with_headers("GET", "incidents", params=params, headers_extra=headers)
+        rows = rows or []
+        total = int((content_range or "*/0").split("/")[-1])
         return rows, total
 
-    _last_content_range: str | None = None
-
-    def _request_with_headers(self, method: str, table: str, *, params: dict[str, Any], headers_extra: dict[str, str]) -> Any:
+    def _request_with_headers(self, method: str, table: str, *, params: dict[str, Any], headers_extra: dict[str, str]) -> tuple[Any, str | None]:
         headers = {"apikey": self.key, "Authorization": f"Bearer {self.key}", **headers_extra}
-        response = httpx.request(method, f"{self.base_url}/rest/v1/{table}", params=params, headers=headers, timeout=20)
+        try:
+            response = httpx.request(method, f"{self.base_url}/rest/v1/{table}", params=params, headers=headers, timeout=20)
+        except httpx.HTTPError as error:
+            raise DatabaseError("Supabase database is unavailable") from error
         if response.status_code >= 400:
             raise DatabaseError(f"Supabase database request failed ({response.status_code})")
-        self._last_content_range = response.headers.get("content-range")
-        return response.json() if response.content else None
+        return (response.json() if response.content else None), response.headers.get("content-range")
 
     def insert_incident(self, record: dict[str, Any], connection: Any = None) -> None:
         payload = {column: record.get(column) for column in INCIDENT_COLUMNS if column in record}
@@ -254,12 +263,29 @@ class SupabaseDatabase:
         current = self.get_incident(incident_id)
         if not current:
             raise KeyError(incident_id)
-        self._request("PATCH", "incidents", params={"id": f"eq.{incident_id}"}, payload={"review_status": values["status"], "reviewer": values["reviewer"], "review_comment": values["comment"], "sif_potential": values["sif_potential"], "sif_label_status": values["label_status"]}, prefer="return=minimal")
-        self._request("POST", "review_history", payload={"incident_id": incident_id, "outcome": values["outcome"], "reviewer": values["reviewer"], "reviewer_user_id": values.get("reviewer_user_id"), "comment": values["comment"], "timestamp": values["timestamp"], "previous_outcome": values["previous_outcome"], "new_outcome": values["outcome"], "screening_version": values["screening_version"]}, prefer="return=minimal")
+        self._rpc("apply_incident_review", {"p_incident_id": incident_id, "p_status": values["status"], "p_reviewer": values["reviewer"], "p_reviewer_user_id": values.get("reviewer_user_id"), "p_comment": values["comment"], "p_sif_potential": values["sif_potential"], "p_label_status": values["label_status"], "p_outcome": values["outcome"], "p_timestamp": values["timestamp"], "p_previous_outcome": values["previous_outcome"], "p_screening_version": values["screening_version"]})
         return self.get_incident(incident_id) or {}
 
     def list_alerts(self) -> list[dict[str, Any]]:
-        return self._request("GET", "alerts", params={"select": "*", "order": "created_at.desc"}) or []
+        result: list[dict[str, Any]] = []
+        page_size = 500
+        offset = 0
+        while True:
+            page = self._request("GET", "alerts", params={"select": "*", "order": "created_at.desc", "limit": page_size, "offset": offset}) or []
+            result.extend(page)
+            if len(page) < page_size:
+                return result
+            offset += page_size
+
+    def _rpc(self, function: str, payload: dict[str, Any]) -> Any:
+        headers = {"apikey": self.key, "Authorization": f"Bearer {self.key}", "Content-Type": "application/json"}
+        try:
+            response = httpx.post(f"{self.base_url}/rest/v1/rpc/{function}", json=payload, headers=headers, timeout=20)
+        except httpx.HTTPError as error:
+            raise DatabaseError("Supabase database is unavailable") from error
+        if response.status_code >= 400:
+            raise DatabaseError(f"Supabase database RPC failed ({response.status_code})")
+        return response.json() if response.content else None
 
     def update_alert(self, alert_id: str, status: str) -> bool:
         rows = self._request("PATCH", "alerts", params={"id": f"eq.{alert_id}", "select": "id"}, payload={"status": status}, prefer="return=representation") or []
