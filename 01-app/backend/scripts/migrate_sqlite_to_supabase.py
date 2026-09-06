@@ -11,6 +11,7 @@ import os
 import sqlite3
 import sys
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -62,6 +63,19 @@ def bool_or_none(value: Any) -> bool | None:
     return bool(value)
 
 
+def canonical_timestamp(value: Any) -> str | None:
+    if value in (None, ""):
+        return None
+    raw = str(value).strip().replace("Z", "+00:00")
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return str(value)
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
+
+
 class SupabaseMigrationClient:
     def __init__(self) -> None:
         self.base = os.getenv("SUPABASE_URL", "").strip().rstrip("/")
@@ -84,17 +98,34 @@ class SupabaseMigrationClient:
     def insert(self, table: str, payload: dict[str, Any]) -> None:
         self.request("POST", table, payload=payload, prefer="return=minimal")
 
+    def rpc(self, function: str, payload: dict[str, Any] | None = None) -> Any:
+        return self.request("POST", f"rpc/{function}", payload=payload or {}, prefer="return=minimal")
+
+    def all_rows(self, table: str, select: str = "*") -> list[dict[str, Any]]:
+        result: list[dict[str, Any]] = []
+        offset = 0
+        while True:
+            page = self.request("GET", table, params={"select": select, "limit": 500, "offset": offset}) or []
+            result.extend(page)
+            if len(page) < 500:
+                return result
+            offset += 500
+
 
 def incident_payload(row: sqlite3.Row) -> dict[str, Any]:
     analysis = json_object(row["analysis"])
     provenance = analysis.get("provenance") or {}
     source_id = row["source_id"] if "source_id" in row.keys() else provenance.get("source_report_id")
-    return {"id": row["id"], "report_date": row["report_date"], "site": row["site"], "activity": row["activity"], "narrative": row["narrative"], "source": row["source"], "source_id": source_id, "normalized_narrative": " ".join((row["narrative"] or "").casefold().split()), "sif_probability": row["sif_probability"], "risk": row["risk"], "high_potential": bool_or_none(row["high_potential"]), "sif_potential": bool_or_none(row["sif_potential"]), "sif_label_status": row["sif_label_status"], "analysis": analysis, "review_status": row["review_status"], "reviewer": row["reviewer"], "review_comment": row["review_comment"], "created_at": row["created_at"], "report_type": row["report_type"] or "Unspecified", "import_batch_id": row["import_batch_id"]}
+    return {"id": row["id"], "report_date": row["report_date"], "site": row["site"], "activity": row["activity"], "narrative": row["narrative"], "source": row["source"], "source_id": source_id, "normalized_narrative": " ".join((row["narrative"] or "").casefold().split()), "sif_probability": row["sif_probability"], "risk": row["risk"], "high_potential": bool_or_none(row["high_potential"]), "sif_potential": bool_or_none(row["sif_potential"]), "sif_label_status": row["sif_label_status"], "analysis": analysis, "review_status": row["review_status"], "reviewer": row["reviewer"], "review_comment": row["review_comment"], "created_at": canonical_timestamp(row["created_at"]), "report_type": row["report_type"] or "Unspecified", "import_batch_id": row["import_batch_id"]}
 
 
 def comparable_incident(row: dict[str, Any], payload: dict[str, Any]) -> bool:
     fields = ("id", "report_date", "site", "activity", "narrative", "source", "source_id", "sif_probability", "risk", "high_potential", "sif_potential", "sif_label_status", "analysis", "review_status", "reviewer", "review_comment", "created_at", "report_type", "import_batch_id")
-    return all(row.get(field) == payload.get(field) for field in fields)
+    return all((canonical_timestamp(row.get(field)) if field == "created_at" else row.get(field)) == (canonical_timestamp(payload.get(field)) if field == "created_at" else payload.get(field)) for field in fields)
+
+
+def alert_payload(row: sqlite3.Row) -> dict[str, Any]:
+    return {"id": row["id"], "title": row["title"], "detail": row["detail"], "severity": row["severity"], "status": row["status"], "site": row["site"], "created_at": canonical_timestamp(row["created_at"])}
 
 
 def summary(rows: list[dict[str, Any]], history_count: int) -> dict[str, Any]:
@@ -106,8 +137,12 @@ def migrate(source: Path, client: SupabaseMigrationClient) -> dict[str, int]:
     connection.row_factory = sqlite3.Row
     incidents = connection.execute("SELECT * FROM incidents ORDER BY id").fetchall()
     history = connection.execute("SELECT * FROM review_history ORDER BY id").fetchall()
+    try:
+        alerts = connection.execute("SELECT * FROM alerts ORDER BY id").fetchall()
+    except sqlite3.OperationalError:
+        alerts = []
     source_summary = summary([dict(row) for row in incidents], len(history))
-    counts = Counter(read=len(incidents), inserted=0, skipped=0, failed=0, history_read=len(history), history_inserted=0, history_skipped=0, history_failed=0)
+    counts = Counter(read=len(incidents), inserted=0, skipped=0, failed=0, history_read=len(history), history_inserted=0, history_skipped=0, history_failed=0, alerts_read=len(alerts), alerts_inserted=0, alerts_skipped=0, alerts_failed=0)
     for row in incidents:
         payload = incident_payload(row)
         try:
@@ -121,22 +156,39 @@ def migrate(source: Path, client: SupabaseMigrationClient) -> dict[str, int]:
         except Exception as error:
             counts["failed"] += 1; print(f"FAILED incident {row['id']}: {error}")
     for row in history:
-        payload = {"id": row["id"], "incident_id": row["incident_id"], "outcome": row["outcome"], "reviewer": row["reviewer"], "comment": row["comment"], "timestamp": row["timestamp"], "previous_outcome": row["previous_outcome"], "new_outcome": row["new_outcome"], "screening_version": row["screening_version"]}
+        payload = {"id": row["id"], "incident_id": row["incident_id"], "outcome": row["outcome"], "reviewer": row["reviewer"], "comment": row["comment"], "timestamp": canonical_timestamp(row["timestamp"]), "previous_outcome": row["previous_outcome"], "new_outcome": row["new_outcome"], "screening_version": row["screening_version"]}
         try:
             existing = client.existing("review_history", "id", row["id"])
             if existing:
-                if any(existing[0].get(field) != payload.get(field) for field in payload):
+                if any((canonical_timestamp(existing[0].get(field)) if field == "timestamp" else existing[0].get(field)) != (canonical_timestamp(payload.get(field)) if field == "timestamp" else payload.get(field)) for field in payload):
                     raise RuntimeError(f"Existing review history row differs: {row['id']}")
                 counts["history_skipped"] += 1
             else:
                 client.insert("review_history", payload); counts["history_inserted"] += 1
         except Exception as error:
             counts["history_failed"] += 1; print(f"FAILED review history {row['id']}: {error}")
+    for row in alerts:
+        payload = alert_payload(row)
+        try:
+            existing = client.existing("alerts", "id", row["id"])
+            if existing:
+                if any((canonical_timestamp(existing[0].get(field)) if field == "created_at" else existing[0].get(field)) != (canonical_timestamp(payload.get(field)) if field == "created_at" else payload.get(field)) for field in payload):
+                    raise RuntimeError(f"Existing alert differs: {row['id']}")
+                counts["alerts_skipped"] += 1
+            else:
+                client.insert("alerts", payload); counts["alerts_inserted"] += 1
+        except Exception as error:
+            counts["alerts_failed"] += 1; print(f"FAILED alert {row['id']}: {error}")
+    if history:
+        try:
+            client.rpc("sync_review_history_identity")
+        except Exception as error:
+            counts["history_failed"] += 1; print(f"FAILED review history sequence sync: {error}")
     connection.close()
     print("Migration counts:", " ".join(f"{key}={value}" for key, value in counts.items()))
     try:
-        migrated_incidents = client.request("GET", "incidents", params={"select": "review_status,sif_potential"}) or []
-        migrated_history = client.request("GET", "review_history", params={"select": "id"}) or []
+        migrated_incidents = client.all_rows("incidents", "review_status,sif_potential")
+        migrated_history = client.all_rows("review_history", "id")
         destination_summary = summary(migrated_incidents, len(migrated_history))
         print("Source comparison:", json.dumps(source_summary, sort_keys=True))
         print("Supabase comparison:", json.dumps(destination_summary, sort_keys=True))
@@ -155,7 +207,9 @@ def main() -> None:
     source = sqlite_path(args.sqlite)
     if not source.exists():
         raise SystemExit(f"SQLite database not found: {source}")
-    migrate(source, SupabaseMigrationClient())
+    counts = migrate(source, SupabaseMigrationClient())
+    if any(counts.get(key, 0) for key in ("failed", "history_failed", "alerts_failed")):
+        raise SystemExit("Migration completed with failures; inspect the failed rows above.")
 
 
 if __name__ == "__main__":

@@ -40,7 +40,14 @@ def test_repeated_migration_skips_existing_rows(tmp_path):
         def existing(self,table,column,value): return [row for row in self.tables[table].values() if str(row.get(column))==str(value)]
         def insert(self,table,payload): self.tables[table][str(payload['id'])]=payload
         def request(self,method,table,**kwargs): return list(self.tables[table].values())
+        def rpc(self,function,payload=None): assert function == 'sync_review_history_identity'
+        def all_rows(self,table,select='*'): return list(self.tables[table].values())
 
     client=FakeClient()
     first=module['migrate'](db,client); second=module['migrate'](db,client)
     assert first['inserted']==1 and second['skipped']==1 and len(client.tables['incidents'])==1
+
+
+def test_timestamp_comparison_uses_the_same_instant():
+    assert module['canonical_timestamp']('2025-01-02T00:00:00') == module['canonical_timestamp']('2025-01-02T00:00:00+00:00')
+    assert module['comparable_incident']({'id':'A','created_at':'2025-01-02T00:00:00+00:00'}, {'id':'A','created_at':'2025-01-02T00:00:00'})
