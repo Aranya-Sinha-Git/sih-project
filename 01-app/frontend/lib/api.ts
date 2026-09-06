@@ -1,4 +1,5 @@
-export const API=process.env.NEXT_PUBLIC_API_URL||'/api';
+const configuredApi=process.env.NEXT_PUBLIC_API_URL?.trim();
+export const API=configuredApi?configuredApi.replace(/\/+$/,''):'/api';
 import {supabase} from './supabase';
 
 async function headers():Promise<HeadersInit>{const {data}=await supabase.auth.getSession();return data.session?.access_token?{'Authorization':`Bearer ${data.session.access_token}`}:{}}
