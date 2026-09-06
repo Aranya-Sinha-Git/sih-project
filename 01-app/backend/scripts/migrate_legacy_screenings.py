@@ -32,6 +32,7 @@ def migrate(*, apply: bool, all_incidents: bool = False) -> tuple[int, int, list
     connection = sqlite3.connect(DB)
     connection.row_factory = sqlite3.Row
     rows = connection.execute("SELECT * FROM incidents ORDER BY id").fetchall()
+    corpus = [dict(item) for item in rows]
     migrated: list[dict] = []
     skipped = 0
     now = datetime.now(timezone.utc).isoformat()
@@ -49,7 +50,11 @@ def migrate(*, apply: bool, all_incidents: bool = False) -> tuple[int, int, list
             fresh = analyze_with_classifier(row["narrative"], supplemental)
             if all_incidents:
                 from app.main import intelligence_snapshot
-                fresh["intelligence"] = intelligence_snapshot(row["narrative"], item_id=row["id"])
+                # Reuse the snapshot corpus loaded above. Opening rows() from a
+                # second connection while this transaction is writing causes
+                # SQLite to report ``database is locked`` and gets serialized as
+                # retrieval_unavailable by the API.
+                fresh["intelligence"] = intelligence_snapshot(row["narrative"], item_id=row["id"], corpus=corpus)
                 mappings = [{"rule": item["rule"], "evidence_id": item["evidence_id"], "provenance": "grounded_iogp_reference"}
                             for item in fresh["intelligence"].get("reference_evidence", [])
                             if item.get("reference_type") == "iogp_reference" and item.get("rule")]

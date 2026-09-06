@@ -25,6 +25,8 @@ FACADE = (
     ("Energy isolation was verified before work began.", set()),
     ("Energy isolation failed before maintenance.", {"Energy Isolation"}),
     ("The driver was speeding.", {"Driving"}),
+    ("A vehicle traveling at high speed struck the employees.", {"Driving"}),
+    ("A vehicle traveling at a high rate of speed fatally struck the employees.", {"Driving"}),
     ("Journey management controls were required for vehicle movement.", {"Driving"}),
     ("The technician disabled the safety interlock.", {"Bypassing Safety Controls"}),
     ("A worker entered the tank.", {"Confined Space"}),

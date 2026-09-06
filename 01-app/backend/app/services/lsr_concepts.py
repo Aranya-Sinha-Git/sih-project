@@ -50,6 +50,7 @@ CONCEPTS = {
     "Driving": [
         r"(?:driving|vehicle)\s+(?:operation|operations|movement|safety)",
         r"journey\s+management",
+        rf"(?:vehicle|truck|car|tanker|forklift)(?:\s+[\w~-]+){{0,12}}\s+(?:struck|hit|ran over|collided with)(?:\s+[\w~-]+){{0,4}}\s+(?:{PERSON}|people|employees|pedestrians)",
         r"(?:driver|driving)\s+(?:was\s+)?(?:speeding|distracted|fatigued|without a seatbelt)",
         r"(?:truck|vehicle|car|tanker)\s+(?:collision|collided|crashed|overturned|rollover)",
         r"(?:driving|drove)\s+(?:while\s+)?(?:texting|intoxicated)",
