@@ -4,6 +4,7 @@ import hashlib, heapq, json, os, sqlite3
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Optional
+from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -203,9 +204,13 @@ def cluster_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
 app = FastAPI(title="SIF Sentinel API", version="1.0.0")
 _cors_origins = []
 for _cors_value in (os.getenv("CORS_ORIGINS", ""), os.getenv("FRONTEND_URL", "http://localhost:3000")):
-    _cors_origins.extend(origin.strip() for origin in _cors_value.split(",") if origin.strip())
+    for _origin in _cors_value.split(","):
+        _origin = _origin.strip().rstrip("/")
+        _parsed_origin = urlsplit(_origin)
+        if (_parsed_origin.scheme in {"http", "https"} and _parsed_origin.netloc
+                and not _parsed_origin.path and not _parsed_origin.query and not _parsed_origin.fragment):
+            _cors_origins.append(_origin)
 _cors_origins = list(dict.fromkeys(_cors_origins))
-app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["*"], allow_headers=["*"], allow_credentials=True)
 
 @app.middleware("http")
 async def require_bearer_token(request: Request, call_next):
@@ -222,6 +227,10 @@ async def require_bearer_token(request: Request, call_next):
         request.state.user = user
         request.state.reviewer = user.display_name or user.username
     return await call_next(request)
+
+# Keep CORS outermost so allowed-origin headers are present on auth and
+# application error responses as well as successful responses.
+app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["*"], allow_headers=["*"], allow_credentials=True)
 
 @app.on_event("startup")
 def start() -> None: validate_configuration(); init_db()
@@ -338,6 +347,8 @@ def review(incident_id: str, review_input: ReviewInput, request: Request):
     outcome = REVIEW_OUTCOME_ALIASES.get(review_input.outcome.strip())
     if outcome is None: raise HTTPException(422, "Use Confirm SIF, Confirm Non-SIF, or Escalated / Unsure.")
     user = getattr(request.state, "user", None)
+    if user is not None and user.role not in {"reviewer", "admin"}:
+        raise HTTPException(403, "Reviewer permission is required.")
     reviewer = (user.display_name if user else None) or review_input.reviewer.strip()
     if len(reviewer) < 2: raise HTTPException(422, "Reviewer identity is required.")
     current = get_database().get_incident(incident_id)

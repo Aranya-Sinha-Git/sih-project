@@ -16,8 +16,12 @@ client=TestClient(app)
 def teardown_module():TEST_DB.unlink(missing_ok=True);TEST_DIR.rmdir()
 def test_health():assert client.get('/health').status_code==200
 def test_cors_preflight_is_not_blocked_by_auth_middleware():
- response=client.options('/dashboard/summary',headers={'Origin':'http://localhost:3000','Access-Control-Request-Method':'GET','Access-Control-Request-Headers':'authorization'})
- assert response.status_code in {200,204} and response.headers.get('access-control-allow-origin')=='http://localhost:3000'
+    response=client.options('/dashboard/summary',headers={'Origin':'http://localhost:3000','Access-Control-Request-Method':'GET','Access-Control-Request-Headers':'authorization'})
+    assert response.status_code in {200,204} and response.headers.get('access-control-allow-origin')=='http://localhost:3000'
+def test_auth_error_keeps_cors_headers(monkeypatch):
+ monkeypatch.delenv('SIF_TEST_AUTH_BYPASS', raising=False)
+ response=client.get('/dashboard/summary',headers={'Origin':'http://localhost:3000'})
+ assert response.status_code==401 and response.headers.get('access-control-allow-origin')=='http://localhost:3000'
 def test_empty_database():
  d=client.get('/dashboard/summary').json();assert d['reports_analyzed']==0 and d['emerging_alert'] is None and client.get('/alerts').json()==[]
 def test_high_risk():
