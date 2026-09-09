@@ -1,4 +1,75 @@
-# Validation Decisions
+# Project Decision Log
+
+This is the canonical log for major decisions affecting the wider SIF Sentinel
+project, repository/agent workflows, and validation. Keep implementation details
+in the relevant README or design document; record the decision, rationale, and
+scope here.
+
+## How to record a decision
+
+Add a dated entry with:
+
+- **Status:** proposed, accepted, superseded, or rejected
+- **Decision:** what was chosen
+- **Rationale:** why it was chosen
+- **Scope:** the systems, workstreams, or artifacts affected
+
+## Project-wide decisions
+
+### 2026-09-05 — Preserve the application architecture
+
+- **Status:** accepted
+- **Decision:** Keep the deployable application flow as `Next.js → FastAPI →
+  frozen classifier / retrieval / analytics / review`.
+- **Rationale:** The migration is intended to preserve the existing application
+  architecture while changing persistence and deployment details.
+- **Scope:** `01-app`, the deployed application, and its ML/review integration.
+
+### 2026-09-05 — Use Supabase for persistence and authentication
+
+- **Status:** accepted
+- **Decision:** Use Supabase PostgreSQL and Auth for the application; retain
+  FastAPI as the ML/runtime boundary rather than replacing it with Supabase.
+- **Rationale:** This separates hosted persistence/authentication from the
+  classifier, retrieval, analytics, and review runtime.
+- **Scope:** `01-app`, Supabase migrations, deployment, and local migration
+  tooling.
+
+### 2026-09-05 — Keep workstreams separated
+
+- **Status:** accepted
+- **Decision:** Maintain separate workstreams for the application (`01-app`),
+  labeling (`02-labeling`), training/evaluation (`03-training`), data
+  (`04-data`), and documentation (`05-documentation`).
+- **Rationale:** The separation preserves clear ownership and prevents changes
+  in one workflow from silently changing another.
+- **Scope:** Repository layout and cross-workstream changes.
+
+## Agent and repository decisions
+
+### 2026-09-05 — Treat frozen validation artifacts as immutable
+
+- **Status:** accepted
+- **Decision:** Preserve the historical v0.2 human-validation release and the
+  v0.3 release-candidate packet and freeze manifest; official finalization must
+  use the prescribed artifacts and attestation flow.
+- **Rationale:** Blind-test identity, reviewer blinding, and evaluation
+  integrity depend on immutable canonical artifacts.
+- **Scope:** `03-training/ml/sif_v0_1`, especially blind-test packets, manifests,
+  evaluation, calibration, and metrics.
+
+### 2026-09-05 — Use the canonical manifest as blind-test authority
+
+- **Status:** accepted
+- **Decision:** Blind-test membership and identity come only from the canonical
+  freeze manifest; mismatched IDs, source IDs, narrative hashes, packet hashes,
+  artifacts, configuration, thresholds, or aliases must be rejected.
+- **Rationale:** A caller-created or altered manifest could invalidate the blind
+  boundary and contaminate reported results.
+- **Scope:** Blind-test construction, human review, finalization, attestation,
+  and official evaluation.
+
+## Validation decisions
 
 Date: 2026-09-05
 
@@ -20,4 +91,3 @@ Do not score, calibrate against, rename, rebuild, or report this blind set until
 ## Permitted use before remediation
 
 The current files may be inspected for provenance and schema migration only. They must not be presented as external-validation results or used to select a model, threshold, calibration rule, or release claim.
-
