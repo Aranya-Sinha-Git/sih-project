@@ -1,0 +1,22 @@
+{
+  "development_rows": 92,
+  "excluded_fields": [
+    "sif_label",
+    "annotation_status",
+    "label_provenance",
+    "annotation_version",
+    "activity",
+    "source_native_outcome",
+    "human_assigned_lsr",
+    "evidence"
+  ],
+  "fit_preprocessing_on_training_only": true,
+  "group_overlap": 0,
+  "model_input_allowlist": [
+    "narrative"
+  ],
+  "seed": 26165,
+  "selected_fold": 2,
+  "test_rows": 90,
+  "train_rows": 369
+}

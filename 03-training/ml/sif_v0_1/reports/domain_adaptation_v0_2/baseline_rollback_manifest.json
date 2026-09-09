@@ -1,0 +1,32 @@
+{
+  "baseline_artifact_dir": "03-training/ml/sif_v0_1/artifacts/supervised",
+  "captured_before_v0_2_training": true,
+  "files": [
+    {
+      "bytes": 689792,
+      "path": "03-training/ml/sif_v0_1/artifacts/supervised/embedding_cache/436393f95960ec829fbd822cac1220936bb6123b0b9f7f91d32bebc6aaadb96f.npy",
+      "sha256": "212e8117ac0ab950c4b849b605f7af3dd3ddf7f620ce824b7f8f44e40d6c4814"
+    },
+    {
+      "bytes": 2569,
+      "path": "03-training/ml/sif_v0_1/artifacts/supervised/embedding_logreg.joblib",
+      "sha256": "e4220c1158e7834867212952c8dd6102e85e7226c77814e1c4ab9e8546938327"
+    },
+    {
+      "bytes": 514,
+      "path": "03-training/ml/sif_v0_1/artifacts/supervised/embedding_metadata.json",
+      "sha256": "dfd94db7d88da1c7ece0d25c4b907e53745259f89dc4688310e123bc1c07ad9a"
+    },
+    {
+      "bytes": 705140,
+      "path": "03-training/ml/sif_v0_1/artifacts/supervised/tfidf_logreg.joblib",
+      "sha256": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f"
+    },
+    {
+      "bytes": 344,
+      "path": "03-training/ml/sif_v0_1/artifacts/supervised/threshold.json",
+      "sha256": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee"
+    }
+  ],
+  "rollback": "Set MODEL_PATH=03-training/ml/sif_v0_1/artifacts/supervised and restart the backend."
+}

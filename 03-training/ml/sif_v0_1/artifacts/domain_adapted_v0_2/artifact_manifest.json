@@ -1,0 +1,127 @@
+{
+  "artifacts": [
+    {
+      "bytes": 645610,
+      "file": "lsr_model.joblib",
+      "sha256": "b715ecac36452056d615b536118fccf2e0365ee2cc9e8263d3d283df665cf9bf"
+    },
+    {
+      "bytes": 94,
+      "file": "setfit_candidate/1_Pooling/config.json",
+      "sha256": "bb80272f7adad76ce93073c25e18113ee66be1e91f60bcdd72aa41d05b28247e"
+    },
+    {
+      "bytes": 776,
+      "file": "setfit_candidate/config.json",
+      "sha256": "1e7f450066d381635880e8db5dbcdc8f9f8580f2fc505dc7eaafce6bed314d21"
+    },
+    {
+      "bytes": 296,
+      "file": "setfit_candidate/config_sentence_transformers.json",
+      "sha256": "71de8622d6a069b472ad99e0903d8c42e76e0e6f0d8d8141f8277f8756a07749"
+    },
+    {
+      "bytes": 73,
+      "file": "setfit_candidate/config_setfit.json",
+      "sha256": "72c8aadf30ed2e9ef21ca73bff7e57fddf5349c459778f571d79cf91d9f0a4fc"
+    },
+    {
+      "bytes": 45437760,
+      "file": "setfit_candidate/model.safetensors",
+      "sha256": "72e7b1965e925666ca952ca5f453c5a8ecce7f02b35c554ea4ca4eb17cfeaeba"
+    },
+    {
+      "bytes": 3935,
+      "file": "setfit_candidate/model_head.pkl",
+      "sha256": "3bd3c980940b9b6a40828ed13a25b60f2412be204cde644c04211905d8f3925c"
+    },
+    {
+      "bytes": 448,
+      "file": "setfit_candidate/modules.json",
+      "sha256": "5286260f53f0f5d318eb02f1565fd30f7ec7c6d305f41ad29e2bb3ec974046a6"
+    },
+    {
+      "bytes": 10435,
+      "file": "setfit_candidate/README.md",
+      "sha256": "40da6847f4e58e9e0f224c8f57ee1f5f9d5df985f12e7a3f3db71565fca8fe5c"
+    },
+    {
+      "bytes": 250,
+      "file": "setfit_candidate/sentence_bert_config.json",
+      "sha256": "5fee3fcdc4a727fad422f0fed0c867b0921eefa9051de221521956ed42eb4c19"
+    },
+    {
+      "bytes": 711649,
+      "file": "setfit_candidate/tokenizer.json",
+      "sha256": "851ca67100d372ca3ae031a6abd168f53489eebfd7d89523f35c5c9b4d372c3c"
+    },
+    {
+      "bytes": 618,
+      "file": "setfit_candidate/tokenizer_config.json",
+      "sha256": "e9becfd25977397187a9f9359494ed9682d6f93bb58dda91da6cb36e02ef770e"
+    },
+    {
+      "bytes": 300645,
+      "file": "sif_tfidf.joblib",
+      "sha256": "e97699a6b08209b2ea8f0d2736fabe4a91f60127fc50e82929aeddfdbbad9c8e"
+    },
+    {
+      "bytes": 369,
+      "file": "thresholds.json",
+      "sha256": "517712b6e1d19e62269293378cde7ecd7b38c4c235946fe79ea5b64853c9dfc5"
+    }
+  ],
+  "candidate_promoted": false,
+  "created_at_utc": "2026-09-09T20:19:55.276563+00:00",
+  "dependencies": {
+    "datasets": "5.0.1",
+    "evaluate": "0.4.6",
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "psutil": "7.1.0",
+    "python": "3.13.6 (tags/v3.13.6:4e66535, Aug  6 2025, 14:36:00) [MSC v.1944 64 bit (AMD64)]",
+    "scikit_learn": "1.8.0",
+    "sentence-transformers": "5.7.0",
+    "setfit": "1.2.0",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.15.0"
+  },
+  "deployment_sif_model": "baseline_sif_v0.1",
+  "rollback_artifact_dir": "03-training/ml/sif_v0_1/artifacts/supervised",
+  "runtime_generative_llm_calls": false,
+  "seed": 26165,
+  "selected_sif_model": "tfidf_word_12_char_35_logreg",
+  "source_files": [
+    {
+      "path": "04-data/Human labeled data/labeling_decisions_rows (1).csv",
+      "sha256": "9fbaf83b093c722f02b99022937f5223fbc3ed776cde4d8e94de73f1966130e3"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/labeling_queue.csv",
+      "sha256": "b6056010436a31e8a1a39e3ef5f2ec00b2869677be64faa2be857d251078e7d1"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/ai_labeling/training_labels_v0_1.csv",
+      "sha256": "7d95b436760bf1e96e97af6f9fb539c33512a9fec298024226fce914d69c3806"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/candidate_pool_v0_2.csv",
+      "sha256": "2e21287e41bed05861bab821894fa0de07c07c277fc8eeb500646462faca7213"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/reference/iogp_life_saving_rules_v2018.json",
+      "sha256": "266056d8f74aea54b54fde79f1f7682fa75a2e01ffb56fceaa6d94aa577ac2de"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/blind_test_v0_2/blind_test_v0_2_freeze_manifest.json",
+      "sha256": "cdb27d32de1a9845ecd76db72bacb827058a57fb06bb76e93051711f0d7833b0"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/blind_test_v0_3/blind_test_v0_3_freeze_manifest.json",
+      "sha256": "c4821727fbcbcdbb1bce7d3dcb6a4e02077931b52a7a2095cbd27f9c7a88ee53"
+    }
+  ],
+  "version": "sif-domain-v0.2"
+}

@@ -44,17 +44,24 @@ class RetrievalService:
         self.corpus_version = payload.get("corpus_version", DEFAULT_CORPUS_VERSION)
         self.references = payload.get("references", [])
         self.glossary = payload.get("glossary", [])
+        self._reference_documents = [f"{item.get('title','')} {' '.join(item.get('aliases', []))} {item.get('text','')}" for item in self.references]
+        self._reference_documents += [f"{item.get('term','')} {item.get('meaning','')}" for item in self.glossary]
+        self._reference_vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
+        self._reference_matrix = self._reference_vectorizer.fit_transform(self._reference_documents) if self._reference_documents else None
         policy = json.loads(VALIDATION_POLICY_PATH.read_text(encoding="utf-8"))
         self.locked_sources = {str(value).strip().casefold() for value in policy["locked_sources"] if str(value).strip()}
         self.locked_record_flags = {str(value).strip() for value in policy["locked_record_flags"] if str(value).strip()}
 
     def reference_evidence(self, query: str, limit: int = 5) -> list[dict[str, Any]]:
-        documents = [f"{item.get('title','')} {' '.join(item.get('aliases', []))} {item.get('text','')}" for item in self.references]
-        documents += [f"{item.get('term','')} {item.get('meaning','')}" for item in self.glossary]
         nominations = concept_matches(query)
         # Lexical similarity ranks supported rules; it cannot establish support.
         # Concept nomination bypasses the lexical cutoff, never the catalog.
-        scores = dict(_rank(query, documents, len(documents), 0.0))
+        if not query.strip() or self._reference_matrix is None:
+            scores: dict[int, float] = {}
+        else:
+            query_vector = self._reference_vectorizer.transform([query])
+            values = cosine_similarity(query_vector, self._reference_matrix).ravel()
+            scores = {index: float(score) for index, score in enumerate(values)}
         supported = [index for index, item in enumerate(self.references)
                      if item.get('rule') in nominations
                      and item.get('publisher') == 'IOGP'
@@ -99,5 +106,8 @@ class RetrievalService:
         return [{"incident_id": item.get("id") or item.get("incident_id"), "source_id": item.get("source_id") or item.get("id") or item.get("incident_id"), "title": str(item.get("narrative") or "")[:115], "excerpt": str(item.get("narrative") or "")[:400], "narrative_spans": _spans(query, str(item.get("narrative") or "")), "relevance_score": round(score, 4), "retrieval_method": "tfidf_cosine", "corpus_version": self.corpus_version, "label_provenance": item.get("sif_label_status") or "unavailable"} for index, score in ranked for item in [candidates[index]]]
 
 
+_SERVICE = RetrievalService()
+
+
 def get_retrieval_service() -> RetrievalService:
-    return RetrievalService()
+    return _SERVICE

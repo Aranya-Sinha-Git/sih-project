@@ -1,0 +1,443 @@
+{
+  "annotation_version": "iogp-lsr-ai-assisted-v0.2.0",
+  "multilabel_summary": {
+    "confusion_matrix_aggregated": [
+      [
+        408,
+        11
+      ],
+      [
+        17,
+        39
+      ]
+    ],
+    "evaluated_rule_cells": 475,
+    "macro_f1": 0.4964912280701754,
+    "macro_precision": 0.5981182795698925,
+    "macro_recall": 0.513888888888889,
+    "micro_f1": 0.7358490566037736,
+    "micro_precision": 0.78,
+    "micro_recall": 0.6964285714285714,
+    "trained_rules": [
+      "LSR03",
+      "LSR04",
+      "LSR05",
+      "LSR06",
+      "LSR07",
+      "LSR09"
+    ],
+    "unavailable_rules": [
+      "LSR01",
+      "LSR02",
+      "LSR08"
+    ],
+    "unknown_targets_excluded_per_rule": true
+  },
+  "reference_id": "IOGP_REPORT_459_REVISED_2018",
+  "rules": {
+    "LSR01": {
+      "development_counts": {
+        "NEGATIVE": 51,
+        "POSITIVE": 1,
+        "UNKNOWN": 40
+      },
+      "name": "Bypassing Safety Controls",
+      "status": "unavailable",
+      "test_counts": {
+        "NEGATIVE": 79,
+        "UNKNOWN": 11
+      },
+      "train_counts": {
+        "NEGATIVE": 209,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR02": {
+      "development_counts": {
+        "NEGATIVE": 52,
+        "UNKNOWN": 40
+      },
+      "name": "Confined Space",
+      "status": "unavailable",
+      "test_counts": {
+        "NEGATIVE": 78,
+        "POSITIVE": 1,
+        "UNKNOWN": 11
+      },
+      "train_counts": {
+        "NEGATIVE": 208,
+        "POSITIVE": 1,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR03": {
+      "borderline_threshold": 0.3999999999999999,
+      "development_counts": {
+        "NEGATIVE": 49,
+        "POSITIVE": 3,
+        "UNKNOWN": 40
+      },
+      "name": "Driving",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 78,
+        "POSITIVE": 1,
+        "UNKNOWN": 11
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            78,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "f2": 0.0,
+        "false_negatives": 1,
+        "false_positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "threshold": 0.49999999999999994
+      },
+      "threshold": 0.49999999999999994,
+      "train_counts": {
+        "NEGATIVE": 195,
+        "POSITIVE": 14,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR04": {
+      "borderline_threshold": 0.24999999999999997,
+      "development_counts": {
+        "NEGATIVE": 48,
+        "POSITIVE": 5,
+        "UNKNOWN": 39
+      },
+      "name": "Energy Isolation",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 75,
+        "POSITIVE": 4,
+        "UNKNOWN": 11
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            75,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "f1": 0.4,
+        "f2": 0.29411764705882354,
+        "false_negatives": 3,
+        "false_positives": 0,
+        "precision": 1.0,
+        "recall": 0.25,
+        "threshold": 0.35
+      },
+      "threshold": 0.35,
+      "train_counts": {
+        "NEGATIVE": 190,
+        "POSITIVE": 19,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR05": {
+      "borderline_threshold": 0.15,
+      "development_counts": {
+        "NEGATIVE": 50,
+        "POSITIVE": 2,
+        "UNKNOWN": 40
+      },
+      "name": "Hot Work",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 78,
+        "POSITIVE": 1,
+        "UNKNOWN": 11
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            77,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "f1": 0.6666666666666666,
+        "f2": 0.8333333333333334,
+        "false_negatives": 0,
+        "false_positives": 1,
+        "precision": 0.5,
+        "recall": 1.0,
+        "threshold": 0.25
+      },
+      "threshold": 0.25,
+      "train_counts": {
+        "NEGATIVE": 196,
+        "POSITIVE": 13,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR06": {
+      "borderline_threshold": 0.44999999999999996,
+      "development_counts": {
+        "NEGATIVE": 22,
+        "POSITIVE": 30,
+        "UNKNOWN": 40
+      },
+      "name": "Line of Fire",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 61,
+        "POSITIVE": 18,
+        "UNKNOWN": 11
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            58,
+            3
+          ],
+          [
+            9,
+            9
+          ]
+        ],
+        "f1": 0.6,
+        "f2": 0.5357142857142857,
+        "false_negatives": 9,
+        "false_positives": 3,
+        "precision": 0.75,
+        "recall": 0.5,
+        "threshold": 0.5499999999999999
+      },
+      "threshold": 0.5499999999999999,
+      "train_counts": {
+        "NEGATIVE": 88,
+        "POSITIVE": 121,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR07": {
+      "borderline_threshold": 0.4,
+      "development_counts": {
+        "NEGATIVE": 51,
+        "POSITIVE": 1,
+        "UNKNOWN": 40
+      },
+      "name": "Safe Mechanical Lifting",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 73,
+        "POSITIVE": 6,
+        "UNKNOWN": 11
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            71,
+            2
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "f1": 0.4,
+        "f2": 0.3571428571428571,
+        "false_negatives": 4,
+        "false_positives": 2,
+        "precision": 0.5,
+        "recall": 0.3333333333333333,
+        "threshold": 0.5
+      },
+      "threshold": 0.5,
+      "train_counts": {
+        "NEGATIVE": 193,
+        "POSITIVE": 16,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR08": {
+      "development_counts": {
+        "NEGATIVE": 50,
+        "POSITIVE": 2,
+        "UNKNOWN": 40
+      },
+      "name": "Work Authorisation",
+      "status": "unavailable",
+      "test_counts": {
+        "NEGATIVE": 79,
+        "UNKNOWN": 11
+      },
+      "train_counts": {
+        "NEGATIVE": 209,
+        "UNKNOWN": 160
+      }
+    },
+    "LSR09": {
+      "borderline_threshold": 0.35,
+      "development_counts": {
+        "NEGATIVE": 42,
+        "POSITIVE": 10,
+        "UNKNOWN": 40
+      },
+      "name": "Working at Height",
+      "status": "trained",
+      "test_counts": {
+        "NEGATIVE": 54,
+        "POSITIVE": 26,
+        "UNKNOWN": 10
+      },
+      "test_metrics": {
+        "confusion_matrix": [
+          [
+            49,
+            5
+          ],
+          [
+            0,
+            26
+          ]
+        ],
+        "f1": 0.9122807017543859,
+        "f2": 0.9629629629629628,
+        "false_negatives": 0,
+        "false_positives": 5,
+        "precision": 0.8387096774193549,
+        "recall": 1.0,
+        "threshold": 0.44999999999999996
+      },
+      "threshold": 0.44999999999999996,
+      "train_counts": {
+        "NEGATIVE": 176,
+        "POSITIVE": 33,
+        "UNKNOWN": 160
+      }
+    }
+  },
+  "zero_mapping_inspection": {
+    "cases": [
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2021032083",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2020098362",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2017053964",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2015129065",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2020076897",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": true,
+        "incident_id": "OSHA-SIR-2020054760",
+        "reference_positive_rules": [
+          "LSR07"
+        ]
+      },
+      {
+        "contains_missed_reference_positive": true,
+        "incident_id": "OSHA-SIR-2018054754",
+        "reference_positive_rules": [
+          "LSR04"
+        ]
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2024109932",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-20161211901",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2024109357",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2018066254",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2023021575",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-20170910407",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": true,
+        "incident_id": "OSHA-SIR-20171111186",
+        "reference_positive_rules": [
+          "LSR06"
+        ]
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2025088033",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-20161211312",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2020065193",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2020065879",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2017088013",
+        "reference_positive_rules": []
+      },
+      {
+        "contains_missed_reference_positive": false,
+        "incident_id": "OSHA-SIR-2017032340",
+        "reference_positive_rules": []
+      }
+    ],
+    "count": 35,
+    "note": "AI-assisted prototype reference; unavailable rules are not negatives."
+  }
+}

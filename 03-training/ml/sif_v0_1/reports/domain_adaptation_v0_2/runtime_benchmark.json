@@ -1,0 +1,102 @@
+{
+  "benchmark_version": "sif-domain-runtime-benchmark-v0.2",
+  "measured_at_utc": "2026-09-09T20:22:42Z",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "logical_cpu_count": 16,
+    "physical_cpu_count": 8,
+    "ram_bytes": 16438382592,
+    "python": "3.13.6 (tags/v3.13.6:4e66535, Aug  6 2025, 14:36:00) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.5.2",
+    "joblib": "1.5.3",
+    "concurrency": 1
+  },
+  "workload": {
+    "warm_component_requests": 120,
+    "uncached_full_api_requests": 60,
+    "cached_duplicate_requests": 30,
+    "batch_size": 50,
+    "report_character_lengths": [
+      83,
+      121,
+      3095
+    ]
+  },
+  "cold_start": {
+    "median_ms": 4944.4787,
+    "p95_ms": 4992.2917,
+    "min_ms": 4881.3294,
+    "max_ms": 4999.1474
+  },
+  "warm_sif_inference": {
+    "median_ms": 3.8653,
+    "p95_ms": 9.2007,
+    "min_ms": 2.546,
+    "max_ms": 12.0187
+  },
+  "warm_lsr_total": {
+    "median_ms": 3.0244,
+    "p95_ms": 12.1958,
+    "min_ms": 2.0135,
+    "max_ms": 12.8433
+  },
+  "text_normalization": {
+    "median_ms": 0.0045,
+    "p95_ms": 0.092,
+    "min_ms": 0.0021,
+    "max_ms": 0.1015
+  },
+  "lsr_vectorization_and_scoring": {
+    "median_ms": 2.5038,
+    "p95_ms": 7.2783,
+    "min_ms": 1.699,
+    "max_ms": 8.1795
+  },
+  "evidence_and_template": {
+    "median_ms": 0.503,
+    "p95_ms": 4.8921,
+    "min_ms": 0.2747,
+    "max_ms": 6.0622
+  },
+  "retrieval": {
+    "median_ms": 1.4519,
+    "p95_ms": 11.8542,
+    "min_ms": 0.8743,
+    "max_ms": 14.1782
+  },
+  "full_analysis_api_uncached": {
+    "median_ms": 90.1214,
+    "p95_ms": 149.4595,
+    "min_ms": 39.5659,
+    "max_ms": 188.8037
+  },
+  "duplicate_cached_api": {
+    "median_ms": 46.302,
+    "p95_ms": 63.9784,
+    "min_ms": 39.685,
+    "max_ms": 157.8018
+  },
+  "batch": {
+    "seconds": 4.1061,
+    "reports": 50,
+    "reports_per_second": 12.177
+  },
+  "artifact_storage": {
+    "all_baseline_and_v0_2_bytes": 48515872,
+    "all_files": 20,
+    "deployed_sif_and_lsr_bytes": 1351094,
+    "v0_2_comparison_package_bytes": 47117513
+  },
+  "process_memory": {
+    "rss_before_load_bytes": 42106880,
+    "rss_after_benchmark_bytes": 204603392
+  },
+  "runtime_generative_llm_calls": 0,
+  "llm_token_charges": 0,
+  "llm_comparison": {
+    "status": "not_measured",
+    "reason": "No equivalent authorized measured LLM benchmark was available; no incident data was transmitted."
+  },
+  "cost_scope": "No runtime LLM token charges; hosting, offline annotation, training, and maintenance costs are excluded."
+}

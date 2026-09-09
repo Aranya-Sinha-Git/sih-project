@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from .auth import AuthenticatedUser, reviewer_for_request, validate_configuration
 from .services.classifier import analyze_with_classifier, classifier_metadata
+from .services.domain_model import get_domain_model
 from .services.engine import analyze_text
 from .services.local_llm import get_local_llm_service
 from .services.retrieval import get_retrieval_service
@@ -133,7 +134,13 @@ def _similar_incidents(item: dict[str, Any], limit: int = 5, corpus: Optional[li
     candidates = [x for x in (corpus if corpus is not None else rows()) if x["id"] != item.get("id") and _normalized_narrative(str(x.get("narrative") or "")) != current_narrative]
     candidate_by_id = {x["id"]: x for x in candidates}
     retrieved = get_retrieval_service().historical_evidence(item["narrative"], candidates, limit=limit, locked_ids={str(item.get("id"))}, current_source_id=item.get("source_id"))
-    return [{"similarity": evidence["relevance_score"], "relevance_score": evidence["relevance_score"], "incident_id": evidence["incident_id"], "source_id": evidence["source_id"], "title": evidence["title"], "site": candidate_by_id[evidence["incident_id"]].get("site"), "activity": candidate_by_id[evidence["incident_id"]].get("activity"), "risk": candidate_by_id[evidence["incident_id"]].get("risk"), "life_saving_rule": (((candidate_by_id[evidence["incident_id"]].get("analysis") or {}).get("rules") or {}).get("primary") or {}).get("rule", "Unmapped"), "retrieval_method": evidence["retrieval_method"], "corpus_version": evidence["corpus_version"], "label_provenance": evidence["label_provenance"]} for evidence in retrieved]
+    result = []
+    for evidence in retrieved:
+        candidate = candidate_by_id[evidence["incident_id"]]; analysis = candidate.get("analysis") or {}
+        assigned = [rule for rule in (analysis.get("lsr_mapping") or {}).get("rules", []) if rule.get("assignment_status") == "ASSIGNED"]
+        rule_name = assigned[0]["name"] if assigned else (((analysis.get("rules") or {}).get("primary") or {}).get("rule", "Unmapped"))
+        result.append({"similarity": evidence["relevance_score"], "relevance_score": evidence["relevance_score"], "incident_id": evidence["incident_id"], "source_id": evidence["source_id"], "title": evidence["title"], "site": candidate.get("site"), "activity": candidate.get("activity"), "risk": candidate.get("risk"), "life_saving_rule": rule_name, "retrieval_method": evidence["retrieval_method"], "corpus_version": evidence["corpus_version"], "label_provenance": evidence["label_provenance"]})
+    return result
 
 def sim(item: dict[str, Any], limit: int = 5, corpus: Optional[list[dict[str, Any]]] = None) -> list[dict[str, Any]]:
     try:
@@ -189,11 +196,20 @@ def activity_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(result, key=lambda x: (x["sif_precursor_density"], x["reports"]), reverse=True)
 
 def rule_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    counts: dict[str, int] = {}
+    counts: dict[str, int] = {}; provenance: dict[str, str] = {}
     for item in reports:
-        primary = ((item.get("analysis") or {}).get("rules") or {}).get("primary")
-        if primary: counts[primary["rule"]] = counts.get(primary["rule"], 0) + 1
-    return [{"rule": k, "count": v, "provenance": "unverified_keyword_candidate"} for k, v in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
+        analysis = item.get("analysis") or {}
+        mapped = [rule for rule in (analysis.get("lsr_mapping") or {}).get("rules", []) if rule.get("assignment_status") == "ASSIGNED"]
+        if mapped:
+            for rule in mapped:
+                counts[rule["name"]] = counts.get(rule["name"], 0) + 1
+                provenance[rule["name"]] = "offline_multilabel_model"
+        else:
+            primary = (analysis.get("rules") or {}).get("primary")
+            if primary:
+                counts[primary["rule"]] = counts.get(primary["rule"], 0) + 1
+                provenance.setdefault(primary["rule"], "unverified_keyword_candidate")
+    return [{"rule": k, "count": v, "provenance": provenance[k]} for k, v in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
 
 def cluster_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     groups: dict[str, list[dict[str, Any]]] = {}
@@ -241,21 +257,35 @@ async def require_bearer_token(request: Request, call_next):
 app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["*"], allow_headers=["*"], allow_credentials=True)
 
 @app.on_event("startup")
-def start() -> None: validate_configuration(); init_db()
+def start() -> None: validate_configuration(); init_db(); get_domain_model().load(); get_retrieval_service()
 
 @app.get("/health")
 def health():
     metadata = classifier_metadata()
-    return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "llm_configured": get_local_llm_service().configured, "database": get_database().kind}
-def analyzed_result(report: AnalyzeInput) -> dict[str, Any]:
-    analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative))
+    domain = get_domain_model().metadata()
+    return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "lsr_model_status": domain["lsr_status"], "lsr_model_version": domain["lsr_version"], "llm_configured": False, "runtime_generative_llm_calls": False, "database": get_database().kind}
+def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] = None, screening: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+    analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative), screening_result=screening)
+    analysis["lsr_mapping"] = lsr_mapping or get_domain_model().map_rules(report.narrative)
     analysis["intelligence"] = intelligence_snapshot(report.narrative)
     mappings = [{"rule": item["rule"], "evidence_id": item["evidence_id"],
                  "provenance": "grounded_iogp_reference"}
                 for item in analysis["intelligence"]["reference_evidence"]
                 if item.get("reference_type") == "iogp_reference" and item.get("rule")]
     analysis["rules"] = {"primary": mappings[0] if mappings else None, "secondary": mappings[1:]}
+    analysis["artifact_versions"] = {
+        "sif_model": analysis.get("model_version"),
+        "lsr_model": analysis["lsr_mapping"].get("model_version"),
+        "lsr_reference": analysis["lsr_mapping"].get("reference_id"),
+        "runtime_schema": analysis["lsr_mapping"].get("schema_version"),
+    }
     return analysis
+
+def analyzed_results(reports: list[AnalyzeInput]) -> list[dict[str, Any]]:
+    service = get_domain_model(); narratives = [report.narrative for report in reports]
+    screenings = service.classifier.screen_batch(narratives)
+    mappings = service.map_rules_batch(narratives)
+    return [analyzed_result(report, mapping, screening) for report, mapping, screening in zip(reports, mappings, screenings)]
 
 @app.post("/analyze")
 def analyze(report: AnalyzeInput, request: Request):
@@ -269,7 +299,7 @@ def analyze(report: AnalyzeInput, request: Request):
 @app.post("/analyze/batch")
 def batch(batch_input: BatchInput, request: Request):
     if len(batch_input.reports) > 500: raise HTTPException(422, "Batch limit is 500 reports.")
-    database = get_database(); analyses = [analyzed_result(report) for report in batch_input.reports]; batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; working_corpus = rows(); results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
+    database = get_database(); analyses = analyzed_results(batch_input.reports); batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; working_corpus = rows(); results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
             site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = next((x for x in working_corpus if (report_id and str(x.get("id")) == report_id) or (_normalized_narrative(str(x.get("narrative") or "")) == normalized and str(x.get("site") or "Unspecified").casefold() == site.casefold())), None)
@@ -392,4 +422,5 @@ def alert_update(alert_id: str, update: AlertUpdate):
 @app.get("/model")
 def model():
     metadata = classifier_metadata()
-    return {"mode": "Frozen supervised classifier", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": get_local_llm_service().configured, "provenance": "Frozen predictor selected by threshold configuration; raw score is not calibrated as a probability.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "ai_assisted_internal": {"status": "not_published", "sample_size": None, "metrics": None}, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference failures are explicitly routed to human review with no score."}
+    domain = get_domain_model().metadata()
+    return {"mode": "Frozen supervised classifier plus offline multilabel IOGP mapper", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": False, "runtime_generative_llm_calls": False, "lsr_model": domain, "candidate_promotion": "RETAINED_BASELINE_CANDIDATE_REGRESSED_ON_PROTECTED_TEST", "provenance": "Frozen SIF predictor retained after candidate comparison; LSR values are uncalibrated model scores with deterministic evidence templates.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "ai_assisted_internal": {"status": "reported_separately", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_2/sif_test_evaluation.json"}, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference or unsupported-rule failures are explicit and never converted to a negative result."}

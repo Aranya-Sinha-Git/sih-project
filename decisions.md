@@ -71,6 +71,22 @@ Add a dated entry with:
 
 ## Validation decisions
 
+### 2026-09-10 — Retain v0.1 SIF screening and deploy offline v0.2 LSR mapping
+
+- **Status:** accepted
+- **Decision:** Keep the frozen v0.1 TF-IDF model and its 0.35–0.45 review band
+  as the active SIF screen. Retain the trained v0.2 TF-IDF and SetFit candidates
+  as comparison artifacts because the selected candidate failed the protected
+  test quality gate. Add the v0.2 offline multilabel LSR mapper with explicit
+  unknown, borderline and unavailable states; disable runtime generative LLM
+  calls.
+- **Rationale:** The candidate’s protected-test F2 (0.862) was below the
+  baseline (0.877) and it classified all 40 Non-SIF references as SIF. The LSR
+  model adds traceable relevance/evidence while preserving unsupported-rule
+  uncertainty, low latency and zero token charges.
+- **Scope:** SIF/LSR artifacts and runtime integration in `01-app` and
+  `03-training/ml/sif_v0_1`. Frozen human-validation releases remain unchanged.
+
 Date: 2026-09-05
 
 ## Blind-test status

@@ -1,0 +1,554 @@
+{
+  "class_counts": {
+    "NON_SIF_POTENTIAL": 40,
+    "SIF_POTENTIAL": 50
+  },
+  "excluded_frozen_release_ids": true,
+  "frozen_before_model_evaluation": true,
+  "provenance": "deterministic policy annotation independent of model predictions; not HSE expert ground truth",
+  "records": [
+    {
+      "incident_id": "OSHA-SIR-2021032083",
+      "normalized_narrative_sha256": "fae5ccb120b4916bdda8b054687805fa03a5293759fa6581b716964c6c9b3bf4",
+      "source_record_id": "2021032083",
+      "test_id": "PROTO-V0.2-001"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017065220",
+      "normalized_narrative_sha256": "6d13a493d012731446ab2094fd72c6eb65883720452a5f9c8709e129f2bf2b27",
+      "source_record_id": "2017065220",
+      "test_id": "PROTO-V0.2-002"
+    },
+    {
+      "incident_id": "OSHA-SIR-2016043398",
+      "normalized_narrative_sha256": "d0b3d3e5d747c1a6d079f25377f7ac36a6df99188a95593c442a27d12c8ac682",
+      "source_record_id": "2016043398",
+      "test_id": "PROTO-V0.2-003"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020098362",
+      "normalized_narrative_sha256": "fb6b871dce31862800405440d5a8607df4a785b9772f259bdb3430ff957a75ff",
+      "source_record_id": "2020098362",
+      "test_id": "PROTO-V0.2-004"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017032090",
+      "normalized_narrative_sha256": "bd3b5547d922a1a47e3d84806497203570f77547426e7624307c49ed0890163a",
+      "source_record_id": "2017032090",
+      "test_id": "PROTO-V0.2-005"
+    },
+    {
+      "incident_id": "OSHA-SIR-2024032792",
+      "normalized_narrative_sha256": "f99561b51aeece7472e2313860fe7c859a181e917ad30daec5c39b1d32c4e270",
+      "source_record_id": "2024032792",
+      "test_id": "PROTO-V0.2-006"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017053964",
+      "normalized_narrative_sha256": "b7de41e3cacfbf3ce8fd3df5ff5c83e431e8e542a2022fa802312c3c0fdd33dd",
+      "source_record_id": "2017053964",
+      "test_id": "PROTO-V0.2-007"
+    },
+    {
+      "incident_id": "OSHA-SIR-2015129065",
+      "normalized_narrative_sha256": "2e70e7b8fe1d1a54bb05125fc82d557ad9cbe3c21653ea3a4a67d0b1e986bb3e",
+      "source_record_id": "2015129065",
+      "test_id": "PROTO-V0.2-008"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021098394",
+      "normalized_narrative_sha256": "74768d66d412179a5b003228606faf109adaacf184f1eda0a9f01594bc0c31fa",
+      "source_record_id": "2021098394",
+      "test_id": "PROTO-V0.2-009"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020076897",
+      "normalized_narrative_sha256": "04afef9a53add7717e344392f2bee8a1aa02a4abddcd06b4d884f3dbac404e37",
+      "source_record_id": "2020076897",
+      "test_id": "PROTO-V0.2-010"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019010807",
+      "normalized_narrative_sha256": "623cb3b04c1f8e0d2d34239810e5d6491c5965179a55928f4252fd6f4a9e8e14",
+      "source_record_id": "2019010807",
+      "test_id": "PROTO-V0.2-011"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020054760",
+      "normalized_narrative_sha256": "a1ef3b2cab51f10d21245750329970d3785d38063a47bf4470c6b0e489b8a408",
+      "source_record_id": "2020054760",
+      "test_id": "PROTO-V0.2-012"
+    },
+    {
+      "incident_id": "OSHA-SIR-2015086082",
+      "normalized_narrative_sha256": "1389fdf6cc0c835dce215592efe4e82b13370622d2643ff31f2a71643c87847e",
+      "source_record_id": "2015086082",
+      "test_id": "PROTO-V0.2-013"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019033176",
+      "normalized_narrative_sha256": "ce2f9712e231be794bdef0a7a2c9e0bc48fed3c77b0b19c7a12f3e860fc74fd2",
+      "source_record_id": "2019033176",
+      "test_id": "PROTO-V0.2-014"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021043363",
+      "normalized_narrative_sha256": "8ee262f76747cce22b214dd905f12c1aa6c5d16cb656c027025304ad3084f7a7",
+      "source_record_id": "2021043363",
+      "test_id": "PROTO-V0.2-015"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018054754",
+      "normalized_narrative_sha256": "64bf4f5a404d02de8c6c34fe29c13214c775ad34b2fde9b3b9fc4e0e1eaa9e09",
+      "source_record_id": "2018054754",
+      "test_id": "PROTO-V0.2-016"
+    },
+    {
+      "incident_id": "OSHA-SIR-2024109932",
+      "normalized_narrative_sha256": "a479079ab87ea528ea410f1258424ee9775731c9f6a36287ffa075fccdc18d8a",
+      "source_record_id": "2024109932",
+      "test_id": "PROTO-V0.2-017"
+    },
+    {
+      "incident_id": "OSHA-SIR-20161211901",
+      "normalized_narrative_sha256": "e81f84d076784230511ea04f526604e8f04f36ac6a7de789107267984817d6cc",
+      "source_record_id": "20161211901",
+      "test_id": "PROTO-V0.2-018"
+    },
+    {
+      "incident_id": "OSHA-SIR-2024109357",
+      "normalized_narrative_sha256": "947a9150912c0e97b8d8edcdd89ff5e64a1d3427c71e4e12a79380310c9a8e73",
+      "source_record_id": "2024109357",
+      "test_id": "PROTO-V0.2-019"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017076527",
+      "normalized_narrative_sha256": "47c4cb044342e15be1f8bcad264a42c2c7e4a581d8b30e0785c5ff7bf56048f2",
+      "source_record_id": "2017076527",
+      "test_id": "PROTO-V0.2-020"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018043839",
+      "normalized_narrative_sha256": "2713c688c0a776c16a63f199e9080a4ebc9a4f462e84d40ac3a3c0199d475c46",
+      "source_record_id": "2018043839",
+      "test_id": "PROTO-V0.2-021"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018065747",
+      "normalized_narrative_sha256": "a9eb9ac387f863c252a43bf08891593fc9f98aa74a86c4fd50e6687b013f0cfa",
+      "source_record_id": "2018065747",
+      "test_id": "PROTO-V0.2-022"
+    },
+    {
+      "incident_id": "OSHA-SIR-2022097818",
+      "normalized_narrative_sha256": "f344cec7c64fe7b5a94cd0cdd52a072e42ded2b1d25091abcb07ac081a44789c",
+      "source_record_id": "2022097818",
+      "test_id": "PROTO-V0.2-023"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018066254",
+      "normalized_narrative_sha256": "6d24ef3379ba18edeffdf053056e98eca0181c7a817f0f897f92991a54415d4c",
+      "source_record_id": "2018066254",
+      "test_id": "PROTO-V0.2-024"
+    },
+    {
+      "incident_id": "OSHA-SIR-2023021575",
+      "normalized_narrative_sha256": "9f92b03caae8ad5a436b1b93d8eca17bce87ff9d9685737c3da56acb46828beb",
+      "source_record_id": "2023021575",
+      "test_id": "PROTO-V0.2-025"
+    },
+    {
+      "incident_id": "OSHA-SIR-20170910407",
+      "normalized_narrative_sha256": "9674e8f4627feec866c934ea04a1a393229de63e2ba50d8f9fc420b7b6be1ed1",
+      "source_record_id": "20170910407",
+      "test_id": "PROTO-V0.2-026"
+    },
+    {
+      "incident_id": "OSHA-SIR-20171111186",
+      "normalized_narrative_sha256": "8e243367d130877cdca13a68d68667970e3a88bbe24195fe3a81806741504e43",
+      "source_record_id": "20171111186",
+      "test_id": "PROTO-V0.2-027"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020087378",
+      "normalized_narrative_sha256": "ca6f8b62935e7bb7961e2d9c762a84e20b110123cb538f2c49bd895d09bb8362",
+      "source_record_id": "2020087378",
+      "test_id": "PROTO-V0.2-028"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019088363",
+      "normalized_narrative_sha256": "2db3dfa4669ff63a9e0ec8ef5a1e61f7c3e064b62c35c615dddd317e9a223faa",
+      "source_record_id": "2019088363",
+      "test_id": "PROTO-V0.2-029"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025088033",
+      "normalized_narrative_sha256": "01ddbc4d1cd1907758a6d118725ae566afdbcfbd32e07de73e416f1d77e0911b",
+      "source_record_id": "2025088033",
+      "test_id": "PROTO-V0.2-030"
+    },
+    {
+      "incident_id": "OSHA-SIR-20191212881",
+      "normalized_narrative_sha256": "5b9a0b989acbbfe62c903233b9256b127f12c8bc56e820dbebcf690275f13df2",
+      "source_record_id": "20191212881",
+      "test_id": "PROTO-V0.2-031"
+    },
+    {
+      "incident_id": "OSHA-SIR-20171211757",
+      "normalized_narrative_sha256": "86e3171c65eac13a81e3518a1c4e0089900b6e8a50fad9809cc8d90058e83e3d",
+      "source_record_id": "20171211757",
+      "test_id": "PROTO-V0.2-032"
+    },
+    {
+      "incident_id": "OSHA-SIR-2015129778",
+      "normalized_narrative_sha256": "cb5f6b6cfadce17608650bceab73eb7960d65a6c13d2978ed1910284344faefc",
+      "source_record_id": "2015129778",
+      "test_id": "PROTO-V0.2-033"
+    },
+    {
+      "incident_id": "OSHA-SIR-20161211312",
+      "normalized_narrative_sha256": "46fc6513e4911df62a2dd2c054f096f76ecf5c1dd8e4b9ae40de567e5bee7c79",
+      "source_record_id": "20161211312",
+      "test_id": "PROTO-V0.2-034"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020065193",
+      "normalized_narrative_sha256": "11e06a163052c8c7e14689796a6f244346177f8ca3675bef61c33d855485452a",
+      "source_record_id": "2020065193",
+      "test_id": "PROTO-V0.2-035"
+    },
+    {
+      "incident_id": "OSHA-SIR-20231211638",
+      "normalized_narrative_sha256": "059e678e9e17c3d3eff6d879c4fc5b898e754bdf878f514ffb3388dd700aeb32",
+      "source_record_id": "20231211638",
+      "test_id": "PROTO-V0.2-036"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018077811",
+      "normalized_narrative_sha256": "81506d399aee56c7f333a965338f9477dfb3ca183a79fd7bf75363b25c0ee8ac",
+      "source_record_id": "2018077811",
+      "test_id": "PROTO-V0.2-037"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020065879",
+      "normalized_narrative_sha256": "e6c2c026bdaaf8bfb772ba0091eeec57293f0d68d014b4cfb4fad2fd53d168aa",
+      "source_record_id": "2020065879",
+      "test_id": "PROTO-V0.2-038"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017088013",
+      "normalized_narrative_sha256": "da3dd1d8d91fe726cf3ca372242329f082aefcb9b19a98294b0c14b6d12664bb",
+      "source_record_id": "2017088013",
+      "test_id": "PROTO-V0.2-039"
+    },
+    {
+      "incident_id": "OSHA-SIR-20181111979",
+      "normalized_narrative_sha256": "a720f7870025a2b8a95a31d325d9759810d09bf373357cb3ba7180ab6d26a2dc",
+      "source_record_id": "20181111979",
+      "test_id": "PROTO-V0.2-040"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017032340",
+      "normalized_narrative_sha256": "90a37225d4943a8c36ed238e8835239c6190bfda00bbf505f09fb4363834f0bd",
+      "source_record_id": "2017032340",
+      "test_id": "PROTO-V0.2-041"
+    },
+    {
+      "incident_id": "OSHA-SIR-20241110705",
+      "normalized_narrative_sha256": "c1bbd66fa5b3f908e75cb002ae2bf443ee8b2d41482cd5aea2310e0394094d0e",
+      "source_record_id": "20241110705",
+      "test_id": "PROTO-V0.2-042"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017098858",
+      "normalized_narrative_sha256": "17aa625d5b6e26d730a624e9ab9ab71282dac594551f9c4445dca649e723106d",
+      "source_record_id": "2017098858",
+      "test_id": "PROTO-V0.2-043"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018066275",
+      "normalized_narrative_sha256": "9654daaed2bd29901f29faa84db3eab8f684d9560fb384dadc013c9cf256f258",
+      "source_record_id": "2018066275",
+      "test_id": "PROTO-V0.2-044"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021075867",
+      "normalized_narrative_sha256": "0026daf24a057ff1e3f7db449113e77328a69df709b9e9e3484082e1383c1bb6",
+      "source_record_id": "2021075867",
+      "test_id": "PROTO-V0.2-045"
+    },
+    {
+      "incident_id": "OSHA-SIR-20191111643",
+      "normalized_narrative_sha256": "edf6af6c208f0040e042a5ee31ee02bb57bb5fb2cc5307f165d22cf96a11cc2c",
+      "source_record_id": "20191111643",
+      "test_id": "PROTO-V0.2-046"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019043613",
+      "normalized_narrative_sha256": "cba91f19f0f4f5f7a2687c8e729c2fa5803af8b6608592a9e50dc02e84da5246",
+      "source_record_id": "2019043613",
+      "test_id": "PROTO-V0.2-047"
+    },
+    {
+      "incident_id": "OSHA-SIR-2016054625",
+      "normalized_narrative_sha256": "c7a7e670d0ee53036f6a9698034c1ebb8693c90d2d4d709609417bfb50e288d8",
+      "source_record_id": "2016054625",
+      "test_id": "PROTO-V0.2-048"
+    },
+    {
+      "incident_id": "OSHA-SIR-2018021089",
+      "normalized_narrative_sha256": "e160bd907a754ac387ca594861379ec6919daa0b804a9b0298c39426de9bd083",
+      "source_record_id": "2018021089",
+      "test_id": "PROTO-V0.2-049"
+    },
+    {
+      "incident_id": "OSHA-SIR-20171110871",
+      "normalized_narrative_sha256": "66bdf5390fdf82268561e43ef07ed89f5a278fa625d472b523e40c9c0fc6b34f",
+      "source_record_id": "20171110871",
+      "test_id": "PROTO-V0.2-050"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020010133",
+      "normalized_narrative_sha256": "51c333f1696037743964b06485069c440b9632f5bed91f37e375a679d1c7939f",
+      "source_record_id": "2020010133",
+      "test_id": "PROTO-V0.2-051"
+    },
+    {
+      "incident_id": "OSHA-SIR-2016010891",
+      "normalized_narrative_sha256": "5357bcb50b1baec18d08e988c5c849d450abd7db53c5da01a0b348d6df8ee174",
+      "source_record_id": "2016010891",
+      "test_id": "PROTO-V0.2-052"
+    },
+    {
+      "incident_id": "OSHA-SIR-20171010440",
+      "normalized_narrative_sha256": "dfde7adebb3e4b2d3fa0c07d1d34dd84f0d33865f829b85228d5cfdd2a5591ce",
+      "source_record_id": "20171010440",
+      "test_id": "PROTO-V0.2-053"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021075463",
+      "normalized_narrative_sha256": "26476ec148cf823a0afb0570a6f0ba3202042798f8b1fa20068ff2c738820bb8",
+      "source_record_id": "2021075463",
+      "test_id": "PROTO-V0.2-054"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019099393",
+      "normalized_narrative_sha256": "b68c14487d1aa6cf55aaf8201f4dafb7305c5555b3332cad4e087d4b7ed4d684",
+      "source_record_id": "2019099393",
+      "test_id": "PROTO-V0.2-055"
+    },
+    {
+      "incident_id": "OSHA-SIR-2016076599",
+      "normalized_narrative_sha256": "ea32b3aa6a9b614ab639b8054fcba5d4f9277e613fec1345b2e69543d305be48",
+      "source_record_id": "2016076599",
+      "test_id": "PROTO-V0.2-056"
+    },
+    {
+      "incident_id": "OSHA-SIR-2015031061",
+      "normalized_narrative_sha256": "726287c2804e3e25e875f32c72c95ae763cb5139c1cfbc3ef9ebbc21dae2613e",
+      "source_record_id": "2015031061",
+      "test_id": "PROTO-V0.2-057"
+    },
+    {
+      "incident_id": "OSHA-SIR-20201111060",
+      "normalized_narrative_sha256": "e6d045be7e349eb2ad65774892ed6ab5a6c9521c127bd5ae1accf39dc4215214",
+      "source_record_id": "20201111060",
+      "test_id": "PROTO-V0.2-058"
+    },
+    {
+      "incident_id": "OSHA-SIR-2020010101",
+      "normalized_narrative_sha256": "f68a4239db93635e32ed30d3301f9f282c82b0100a28b76c5669046c1d4d2532",
+      "source_record_id": "2020010101",
+      "test_id": "PROTO-V0.2-059"
+    },
+    {
+      "incident_id": "OSHA-SIR-2015096526",
+      "normalized_narrative_sha256": "5aa65164bbbbfa8b1993e1a3b1fa29fe09e79d9c4798242061120b19a6d4d358",
+      "source_record_id": "2015096526",
+      "test_id": "PROTO-V0.2-060"
+    },
+    {
+      "incident_id": "OSHA-SIR-2024076001",
+      "normalized_narrative_sha256": "238fcfdc43f409d5f65a39e92fa19ab51d91d95e0ae642a488eed369765fd208",
+      "source_record_id": "2024076001",
+      "test_id": "PROTO-V0.2-061"
+    },
+    {
+      "incident_id": "OSHA-SIR-20181111806",
+      "normalized_narrative_sha256": "8138ac0512e7a775f299bbcf27ab27ae412926fcb3697d0973c6cb37ff8848e6",
+      "source_record_id": "20181111806",
+      "test_id": "PROTO-V0.2-062"
+    },
+    {
+      "incident_id": "OSHA-SIR-2024032654",
+      "normalized_narrative_sha256": "c44fc7ce03a6fb0f7157c50042ed9136def263f9bf0a8c4b249accb4c0e7cedf",
+      "source_record_id": "2024032654",
+      "test_id": "PROTO-V0.2-063"
+    },
+    {
+      "incident_id": "OSHA-SIR-2023075895",
+      "normalized_narrative_sha256": "8578be9f8e80cccfdd063fd28a4e34edf5b2c332a04bdce7bb046a868386f1de",
+      "source_record_id": "2023075895",
+      "test_id": "PROTO-V0.2-064"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021108492",
+      "normalized_narrative_sha256": "2bf8b0e87f429f0cbda453c966b35fbbd4556f09ba2409a9589e821967acfd2c",
+      "source_record_id": "2021108492",
+      "test_id": "PROTO-V0.2-065"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025021800",
+      "normalized_narrative_sha256": "e71820bfb32be25b0f2993081ead24d29cfa47dfdabdd2f65e9ba8f9cc23a4ec",
+      "source_record_id": "2025021800",
+      "test_id": "PROTO-V0.2-066"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017076915",
+      "normalized_narrative_sha256": "357d965f31d8b1f2163e2e38f9d32c0fdb12fc2d31f07742fc522a5c4cf2c47c",
+      "source_record_id": "2017076915",
+      "test_id": "PROTO-V0.2-067"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021054250",
+      "normalized_narrative_sha256": "d8fa8716e12a57e12dcb54812d3d750c587cff96b2dbd82754a9f1d843ed1055",
+      "source_record_id": "2021054250",
+      "test_id": "PROTO-V0.2-068"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021032373",
+      "normalized_narrative_sha256": "f8e3654474dfa9adf609339de53131bab1e34520642301acc012dad8a9ba5a40",
+      "source_record_id": "2021032373",
+      "test_id": "PROTO-V0.2-069"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025032548",
+      "normalized_narrative_sha256": "9865e16089230fee2427120007dc4b4031a0453d06f9d5fcbdfde92645e70d34",
+      "source_record_id": "2025032548",
+      "test_id": "PROTO-V0.2-070"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025099239",
+      "normalized_narrative_sha256": "1ccd6d4f99535bbc9d3fc0952f4fa88d16cdcfab4e5c3afa0dd0460fa622dd28",
+      "source_record_id": "2025099239",
+      "test_id": "PROTO-V0.2-071"
+    },
+    {
+      "incident_id": "OSHA-SIR-2023043343",
+      "normalized_narrative_sha256": "1f9c002c108d0c81e873c6ffe487e75aa81079a5a2896cd6f85410887771c50e",
+      "source_record_id": "2023043343",
+      "test_id": "PROTO-V0.2-072"
+    },
+    {
+      "incident_id": "OSHA-SIR-20251111553",
+      "normalized_narrative_sha256": "8f09b799c1caa0d8b0bdadf79ae241b3f0d76ddf6f46a4216c7ba74eb597e1f1",
+      "source_record_id": "20251111553",
+      "test_id": "PROTO-V0.2-073"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025010569",
+      "normalized_narrative_sha256": "a135a8758540915218ab8ea5d5c43947c7c32d175d74394761538b18aeaacefe",
+      "source_record_id": "2025010569",
+      "test_id": "PROTO-V0.2-074"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021020895",
+      "normalized_narrative_sha256": "98211611e3415be0608442b854ddeb6966e3a0cbd883e5867b7beaa00dfc457b",
+      "source_record_id": "2021020895",
+      "test_id": "PROTO-V0.2-075"
+    },
+    {
+      "incident_id": "OSHA-SIR-20181111548",
+      "normalized_narrative_sha256": "11cdd7a420860bf57096fa9f8dc9aa295158d0069b0fb77d84f97971a845b402",
+      "source_record_id": "20181111548",
+      "test_id": "PROTO-V0.2-076"
+    },
+    {
+      "incident_id": "OSHA-SIR-20161211831",
+      "normalized_narrative_sha256": "52b92fa6ddb38d241967ba4d61a9d2a9ad71b3530f4dd2ad7e4a6b013545773e",
+      "source_record_id": "20161211831",
+      "test_id": "PROTO-V0.2-077"
+    },
+    {
+      "incident_id": "OSHA-SIR-20251010233",
+      "normalized_narrative_sha256": "46c162a1cad3534a0bd83060aff9012811ce6febae67cc4def61d5b5fc7d218d",
+      "source_record_id": "20251010233",
+      "test_id": "PROTO-V0.2-078"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019022174",
+      "normalized_narrative_sha256": "9dd2cbf074a66db27488f48f06cbbb36d9b74119136ae4fabff407d54bb5cead",
+      "source_record_id": "2019022174",
+      "test_id": "PROTO-V0.2-079"
+    },
+    {
+      "incident_id": "OSHA-SIR-2019034396",
+      "normalized_narrative_sha256": "5795413bf450842cf61bf2b6affc85ab2ee70475efda16e364504ea3c4770213",
+      "source_record_id": "2019034396",
+      "test_id": "PROTO-V0.2-080"
+    },
+    {
+      "incident_id": "OSHA-SIR-2023032881",
+      "normalized_narrative_sha256": "1f744da7170a6a2fb16a34394a6c9cfe23562c5feb10ff9ad4bf1ccc7b7de5b1",
+      "source_record_id": "2023032881",
+      "test_id": "PROTO-V0.2-081"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021064628",
+      "normalized_narrative_sha256": "1c630a28cf23e889c22a55692ea0a3e214773b79114e9544c4d160bbdc06422f",
+      "source_record_id": "2021064628",
+      "test_id": "PROTO-V0.2-082"
+    },
+    {
+      "incident_id": "OSHA-SIR-2022076532",
+      "normalized_narrative_sha256": "e07ec0e469478da93bfaab512a76e328f6c0ec9869b65750118b407d635e1598",
+      "source_record_id": "2022076532",
+      "test_id": "PROTO-V0.2-083"
+    },
+    {
+      "incident_id": "OSHA-SIR-2021077492",
+      "normalized_narrative_sha256": "97c69d36421eeef1792861b61da174e20a76383348cdb116dedf0af15bdfeeb9",
+      "source_record_id": "2021077492",
+      "test_id": "PROTO-V0.2-084"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025032772",
+      "normalized_narrative_sha256": "82c01b6770b4431255f4559ef110051b7009560db7ec8f0b6ca9d06e2fcea094",
+      "source_record_id": "2025032772",
+      "test_id": "PROTO-V0.2-085"
+    },
+    {
+      "incident_id": "OSHA-SIR-2023087919",
+      "normalized_narrative_sha256": "8f7c83ff45461ab363c267fb3260711ce25557ec40487b1c8f6782f7e1669ecb",
+      "source_record_id": "2023087919",
+      "test_id": "PROTO-V0.2-086"
+    },
+    {
+      "incident_id": "OSHA-SIR-2022021405",
+      "normalized_narrative_sha256": "855a7acf487d0dde4c07dc8989a56a151db199daedbaf7664adaa8e098ad0c8d",
+      "source_record_id": "2022021405",
+      "test_id": "PROTO-V0.2-087"
+    },
+    {
+      "incident_id": "OSHA-SIR-2017065558",
+      "normalized_narrative_sha256": "146150f7a7c9ae8c6ff93b6bc90aed60a00265250f78f1f52771a7044d7e03f9",
+      "source_record_id": "2017065558",
+      "test_id": "PROTO-V0.2-088"
+    },
+    {
+      "incident_id": "OSHA-SIR-2016010753",
+      "normalized_narrative_sha256": "406b40eebb4451089e313b2e58592b2b1bec3c8b71a13675a0be385147d7eb49",
+      "source_record_id": "2016010753",
+      "test_id": "PROTO-V0.2-089"
+    },
+    {
+      "incident_id": "OSHA-SIR-2025043222",
+      "normalized_narrative_sha256": "cd08862ed80a2c3ade5e465e1872339f0112ce06ae5ada72cf0ff95f9174efc5",
+      "source_record_id": "2025043222",
+      "test_id": "PROTO-V0.2-090"
+    }
+  ],
+  "rows": 90,
+  "seed": 26165,
+  "source_file_sha256": "cf27c5c4e94e9310e955c68b52615d1be60fec7c936c562573f1839fd77ba438"
+}

@@ -1,0 +1,69 @@
+{
+  "deduplication": {
+    "exact_candidate_id": true,
+    "groups_kept_within_one_split": true,
+    "near_duplicate_group": true,
+    "normalized_narrative_sha256": true,
+    "source_record_id": true
+  },
+  "model_input_allowlist": [
+    "narrative"
+  ],
+  "notes": "Source-native outcome categories were preserved as metadata and were not converted into SIF ground truth.",
+  "sources": [
+    {
+      "eligibility": "eligible_training_backbone",
+      "path": "03-training/ml/sif_v0_1/data/labeling_queue.csv",
+      "rows": 500,
+      "use": "merged incident records and narrative inputs"
+    },
+    {
+      "eligibility": "eligible_labels_after_secondary_review",
+      "path": "04-data/Human labeled data/labeling_decisions_rows (1).csv",
+      "rows": 369,
+      "use": "reference labels and provenance; original remains read-only"
+    },
+    {
+      "eligibility": "eligible_ai_assisted_labels_when_no_teammate_review_exists",
+      "path": "03-training/ml/sif_v0_1/data/ai_labeling/training_labels_v0_1.csv",
+      "rows": 449,
+      "use": "merged labels; never described as expert ground truth"
+    },
+    {
+      "eligibility": "eligible_narratives_not_source_outcome_labels",
+      "path": "03-training/ml/sif_v0_1/data/candidate_pool_v0_2.csv",
+      "rows": 63020,
+      "use": "deduplication metadata and protected-test candidates only"
+    },
+    {
+      "eligibility": "excluded_no_compatible_incident_narrative_labels",
+      "path": "04-data/validation-datasets/09_PROCESSED/source_normalized/bsee_offshore_incidents_normalized.csv",
+      "rows": 6252,
+      "use": "none"
+    },
+    {
+      "eligibility": "excluded_catalog_metadata_not_incident_reports",
+      "path": "04-data/validation-datasets/09_PROCESSED/source_normalized/face_oil_gas_normalized.csv",
+      "rows": 6,
+      "use": "none"
+    },
+    {
+      "eligibility": "excluded_frozen_human_validation_release",
+      "path": "03-training/ml/sif_v0_1/data/blind_test_v0_2/blind_test_v0_2_freeze_manifest.json",
+      "rows": 75,
+      "use": "identity/hash exclusion only"
+    },
+    {
+      "eligibility": "excluded_official_release_candidate",
+      "path": "03-training/ml/sif_v0_1/data/blind_test_v0_3/blind_test_v0_3_freeze_manifest.json",
+      "rows": 75,
+      "use": "identity/hash exclusion only"
+    },
+    {
+      "eligibility": "excluded_synthetic_or_demo",
+      "path_pattern": "01-app/**/demo* and seed fixtures",
+      "use": "application demonstrations only"
+    }
+  ],
+  "version": "domain-source-inventory-v0.2"
+}

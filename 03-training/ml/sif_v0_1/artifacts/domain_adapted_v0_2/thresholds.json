@@ -1,0 +1,15 @@
+{
+  "binary_threshold": 0.25,
+  "calibration_status": "uncalibrated_model_score",
+  "human_review_band": [
+    0.2,
+    0.3
+  ],
+  "input_allowlist": [
+    "narrative"
+  ],
+  "model": "tfidf_word_12_char_35_logreg",
+  "seed": 26165,
+  "selection_note": "TF-IDF selected by development F2 and low-cost tie-break policy.",
+  "version": "sif-domain-v0.2"
+}

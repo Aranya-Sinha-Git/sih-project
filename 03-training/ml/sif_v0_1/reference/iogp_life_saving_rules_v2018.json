@@ -1,0 +1,21 @@
+{
+  "reference_id": "IOGP_REPORT_459_REVISED_2018",
+  "title": "IOGP Life-Saving Rules",
+  "publisher": "International Association of Oil & Gas Producers",
+  "version": "revised simplified nine-rule set, 2018",
+  "source_url": "https://www.iogp.org/workstreams/safety/safety/life-savingrules/",
+  "poster_url": "https://www.iogp.org/wp-content/uploads/2018/08/Life-SavingRules_A1Poster.pdf",
+  "retrieved_at": "2026-09-10",
+  "usage_note": "Rule relevance is not proof that a rule was violated. IOGP wording is preserved for identification; this prototype does not reproduce the official icons.",
+  "rules": [
+    {"id": "LSR01", "name": "Bypassing Safety Controls", "official_action": "Obtain authorisation before overriding or disabling safety controls", "assessment_points": ["Use the safety-critical equipment and procedures that apply to the task", "Obtain authorisation before disabling or overriding safety equipment", "Obtain authorisation before deviating from procedures"]},
+    {"id": "LSR02", "name": "Confined Space", "official_action": "Obtain authorisation before entering a confined space", "assessment_points": ["Confirm energy sources are isolated", "Confirm the atmosphere is tested and monitored", "Use breathing apparatus when required", "Confirm an attendant and rescue plan are in place", "Obtain authorisation to enter"]},
+    {"id": "LSR03", "name": "Driving", "official_action": "Follow safe driving rules", "assessment_points": ["Wear a seatbelt", "Do not exceed the speed limit and reduce speed for conditions", "Do not use a phone while driving", "Be fit, rested and fully alert", "Follow journey-management requirements"]},
+    {"id": "LSR04", "name": "Energy Isolation", "official_action": "Verify isolation and zero energy before work begins", "assessment_points": ["Identify all energy sources", "Confirm hazardous energy is isolated, locked and tagged", "Check zero energy and test for residual or stored energy"]},
+    {"id": "LSR05", "name": "Hot Work", "official_action": "Control flammables and ignition sources", "assessment_points": ["Identify and control ignition sources", "Confirm flammable material is removed or isolated and authorisation is obtained", "In a hazardous area, confirm gas is tested and monitored"]},
+    {"id": "LSR06", "name": "Line of Fire", "official_action": "Keep yourself and others out of the line of fire", "assessment_points": ["Position people to avoid moving objects, vehicles, pressure releases and dropped objects", "Establish and obey barriers and exclusion zones", "Secure loose objects and report potential dropped objects"]},
+    {"id": "LSR07", "name": "Safe Mechanical Lifting", "official_action": "Plan lifting operations and control the area", "assessment_points": ["Confirm lifting equipment and loads are inspected and fit for purpose", "Use qualified operators", "Establish and obey barriers and exclusion zones", "Do not walk under a suspended load"]},
+    {"id": "LSR08", "name": "Work Authorisation", "official_action": "Work with a valid permit when required", "assessment_points": ["Confirm whether a permit is required", "Be authorised to perform the work", "Understand the permit", "Confirm hazards are controlled and it is safe to start", "Stop and reassess if conditions change"]},
+    {"id": "LSR09", "name": "Working at Height", "official_action": "Protect yourself against a fall when working at height", "assessment_points": ["Inspect fall-protection equipment", "Secure tools and materials", "Tie off completely when outside a protected area"]}
+  ]
+}

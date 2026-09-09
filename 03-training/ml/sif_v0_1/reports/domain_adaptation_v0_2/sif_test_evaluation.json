@@ -1,0 +1,120 @@
+{
+  "baseline": {
+    "binary": {
+      "confusion_matrix": [
+        [
+          19,
+          21
+        ],
+        [
+          3,
+          47
+        ]
+      ],
+      "f1": 0.7966101694915254,
+      "f2": 0.8768656716417911,
+      "false_negatives": 3,
+      "false_positives": 21,
+      "precision": 0.6911764705882353,
+      "recall": 0.94,
+      "threshold": 0.4
+    },
+    "false_negative_ids": [
+      "OSHA-SIR-2019010807",
+      "OSHA-SIR-20181111979",
+      "OSHA-SIR-2022021405"
+    ],
+    "model": "baseline_sif_v0.1",
+    "routing": {
+      "auto_non_sif": 18,
+      "auto_sif": 65,
+      "automatic_decision_coverage": 0.9222222222222223,
+      "human_positive_routed_auto_non_sif": 1,
+      "lower": 0.35,
+      "review_count": 7,
+      "review_rate": 0.07777777777777778,
+      "upper": 0.45
+    },
+    "rows_per_second": 2567.4087427068603,
+    "test_inference_seconds": 0.035054800002399134
+  },
+  "binary_metrics_exclude_abstentions": true,
+  "candidate": {
+    "binary": {
+      "confusion_matrix": [
+        [
+          0,
+          40
+        ],
+        [
+          0,
+          50
+        ]
+      ],
+      "f1": 0.7142857142857143,
+      "f2": 0.8620689655172413,
+      "false_negatives": 0,
+      "false_positives": 40,
+      "precision": 0.5555555555555556,
+      "recall": 1.0,
+      "threshold": 0.25
+    },
+    "false_negative_ids": [],
+    "model": "tfidf_word_12_char_35_logreg",
+    "routing": {
+      "auto_non_sif": 0,
+      "auto_sif": 90,
+      "automatic_decision_coverage": 1.0,
+      "human_positive_routed_auto_non_sif": 0,
+      "lower": 0.2,
+      "review_count": 0,
+      "review_rate": 0.0,
+      "upper": 0.3
+    },
+    "rows_per_second": 2579.469145355448,
+    "test_inference_seconds": 0.03489089999857242
+  },
+  "promotion_decision": {
+    "active_sif_model": "baseline_sif_v0.1",
+    "candidate_artifact_retained_for_research": true,
+    "candidate_promoted": false,
+    "reason": "Candidate F2 was below baseline on the protected prototype test; the quality gate failed."
+  },
+  "routing_reported_separately": true,
+  "test_opened_only_after_selection_and_threshold_freeze": true,
+  "test_set": {
+    "annotation_provenance": "AI-assisted deterministic policy labels; not HSE expert ground truth",
+    "class_counts": {
+      "NON_SIF_POTENTIAL": 40,
+      "SIF_POTENTIAL": 50
+    },
+    "rows": 90,
+    "uncertain_reference_labels": 0
+  },
+  "uncertain_reference_handling": {
+    "baseline_routing": {
+      "auto_non_sif": 5,
+      "auto_sif": 32,
+      "automatic_decision_coverage": 0.9487179487179487,
+      "human_positive_routed_auto_non_sif": 0,
+      "lower": 0.35,
+      "review_count": 2,
+      "review_rate": 0.05128205128205128,
+      "upper": 0.45
+    },
+    "candidate_routing": {
+      "auto_non_sif": 0,
+      "auto_sif": 39,
+      "automatic_decision_coverage": 1.0,
+      "human_positive_routed_auto_non_sif": 0,
+      "lower": 0.2,
+      "review_count": 0,
+      "review_rate": 0.0,
+      "upper": 0.3
+    },
+    "excluded_from_binary_metrics_and_supervised_fit": true,
+    "note": "Routing counts are descriptive only; uncertain references have no binary correctness target.",
+    "rows": 39
+  },
+  "uncertain_training_rows_retained_for_checks": 39
+}

@@ -1,0 +1,11 @@
+{
+  "defined_before_test_evaluation": true,
+  "primary_development_metric": "F2",
+  "promotion": {
+    "artifact_loads_in_real_backend": true,
+    "candidate_test_f2_at_least_baseline": true,
+    "candidate_test_recall_not_below_baseline_by_more_than": 0.03,
+    "warm_single_inference_p95_ms_at_most": 50
+  },
+  "tie_break": "prefer TF-IDF when development F2 differs from SetFit by no more than 0.02 or TF-IDF is faster"
+}
