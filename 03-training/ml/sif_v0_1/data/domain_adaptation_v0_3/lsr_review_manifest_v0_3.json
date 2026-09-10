@@ -1,0 +1,31 @@
+{
+  "accepted_targets": {
+    "LSR01": {
+      "NEGATIVE": 2,
+      "POSITIVE": 27,
+      "UNKNOWN": 0
+    },
+    "LSR02": {
+      "NEGATIVE": 13,
+      "POSITIVE": 37,
+      "UNKNOWN": 6
+    },
+    "LSR08": {
+      "NEGATIVE": 4,
+      "POSITIVE": 2,
+      "UNKNOWN": 0
+    }
+  },
+  "annotation_version": "iogp-lsr-ai-assisted-v0.3.0",
+  "corrections_file_sha256": "a4b7a26b4ac88015f919f7abdb36ec5c044dd93c4d61a6850fc881a23a105cfa",
+  "created_at_utc": "2026-09-10T12:53:38+00:00",
+  "minimum_positive_training_support": 3,
+  "note": "Pattern/synonym hits were reviewed as candidates, not treated as labels. Unknowns are masked. Rule relevance does not establish a violation.",
+  "reference_id": "IOGP_REPORT_459_REVISED_2018",
+  "review_file_sha256": "2d277970257dea3cc891a836953bbba024c2c209cd640268d2986a82a98996c5",
+  "reviewed_pattern_hits": {
+    "LSR01": 29,
+    "LSR02": 56,
+    "LSR08_broad_synonym_hits": 6
+  }
+}

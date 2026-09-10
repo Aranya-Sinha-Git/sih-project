@@ -11,5 +11,15 @@
   "unresolved_excluded": 51,
   "selected_model": "tfidf_word_12_char_35",
   "selected_threshold": 0.4,
-  "locked_external_validation": "IOGP 2025 remains untouched"
+  "locked_external_validation": "IOGP 2025 remains untouched",
+  "latest_development_iteration": {
+    "version": "bounded-domain-iteration-v0.3",
+    "status": "EXPERIMENTAL_NOT_PROMOTED",
+    "tfidf_trained": true,
+    "setfit_retrained": false,
+    "development_selected_comparison": "setfit_saved_train_only",
+    "fresh_assessment_rows": 100,
+    "active_model_unchanged": true,
+    "model_card": "DOMAIN_ADAPTED_V0_3_MODEL_CARD.md"
+  }
 }

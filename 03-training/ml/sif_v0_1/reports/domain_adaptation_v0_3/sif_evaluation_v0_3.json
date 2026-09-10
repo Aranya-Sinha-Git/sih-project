@@ -1,0 +1,671 @@
+{
+  "datasets": {
+    "fresh_assessment": {
+      "active_baseline_v0.1": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.74,
+          "confusion_matrix": [
+            [
+              25,
+              25
+            ],
+            [
+              1,
+              49
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.7903225806451613,
+          "f2": 0.8941605839416058,
+          "false_negatives": 1,
+          "false_positives": 25,
+          "precision": 0.6621621621621622,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 26,
+            "SIF_POTENTIAL": 74
+          },
+          "recall": 0.98,
+          "specificity": 0.5,
+          "threshold": 0.4,
+          "true_negatives": 25,
+          "true_positives": 49
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 13,
+          "auto_sif_count": 65,
+          "automatic_decision_coverage": 0.78,
+          "human_review_count": 22,
+          "human_review_rate": 0.22,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 1,
+          "review_band": [
+            0.35,
+            0.45
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.9309685586589581,
+          "roc_auc": 0.9316
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.43277843087208906,
+            "quantiles": {
+              "q00": 0.2286338827288313,
+              "q10": 0.3221380139569549,
+              "q100": 0.8042684151378774,
+              "q25": 0.35392996195945814,
+              "q50": 0.40282501820716027,
+              "q75": 0.5012717512438968,
+              "q90": 0.5909279228136864
+            },
+            "standard_deviation": 0.1140828031530889
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.6987890858516773,
+            "quantiles": {
+              "q00": 0.31134892168018696,
+              "q10": 0.5412255252687403,
+              "q100": 0.8831875322483679,
+              "q25": 0.6604196992192236,
+              "q50": 0.704675294271083,
+              "q75": 0.7862239268002088,
+              "q90": 0.8346519075130255
+            },
+            "standard_deviation": 0.11742359277947466
+          }
+        }
+      },
+      "all_non_sif_reference": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.5,
+          "confusion_matrix": [
+            [
+              50,
+              0
+            ],
+            [
+              50,
+              0
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.0,
+          "f2": 0.0,
+          "false_negatives": 50,
+          "false_positives": 0,
+          "precision": 0.0,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 100,
+            "SIF_POTENTIAL": 0
+          },
+          "recall": 0.0,
+          "specificity": 1.0,
+          "threshold": 0.5,
+          "true_negatives": 50,
+          "true_positives": 0
+        },
+        "operational_routing": {
+          "human_review_rate": null,
+          "note": "A constant-class reference has no operational review band.",
+          "status": "NOT_APPLICABLE"
+        }
+      },
+      "all_sif_reference": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.5,
+          "confusion_matrix": [
+            [
+              0,
+              50
+            ],
+            [
+              0,
+              50
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.6666666666666666,
+          "f2": 0.8333333333333334,
+          "false_negatives": 0,
+          "false_positives": 50,
+          "precision": 0.5,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 0,
+            "SIF_POTENTIAL": 100
+          },
+          "recall": 1.0,
+          "specificity": 0.0,
+          "threshold": 0.5,
+          "true_negatives": 0,
+          "true_positives": 50
+        },
+        "operational_routing": {
+          "human_review_rate": null,
+          "note": "A constant-class reference has no operational review band.",
+          "status": "NOT_APPLICABLE"
+        }
+      },
+      "annotation_provenance": {
+        "deterministic_policy_annotation_no_model_predictions_not_hse_ground_truth": 100
+      },
+      "class_counts": {
+        "NON_SIF_POTENTIAL": 50,
+        "SIF_POTENTIAL": 50
+      },
+      "rows": 100,
+      "setfit_saved_train_only_v0.2": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.73,
+          "confusion_matrix": [
+            [
+              28,
+              22
+            ],
+            [
+              5,
+              45
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.7692307692307693,
+          "f2": 0.8426966292134832,
+          "false_negatives": 5,
+          "false_positives": 22,
+          "precision": 0.6716417910447762,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 33,
+            "SIF_POTENTIAL": 67
+          },
+          "recall": 0.9,
+          "specificity": 0.56,
+          "threshold": 0.25,
+          "true_negatives": 28,
+          "true_positives": 45
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 33,
+          "auto_sif_count": 66,
+          "automatic_decision_coverage": 0.99,
+          "human_review_count": 1,
+          "human_review_rate": 0.01,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 5,
+          "review_band": [
+            0.2,
+            0.3
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.8601605419490087,
+          "roc_auc": 0.8572000000000001
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.39374809982480025,
+            "quantiles": {
+              "q00": 0.039907146400392494,
+              "q10": 0.059604510574844685,
+              "q100": 0.9841169872484661,
+              "q25": 0.08108410575993553,
+              "q50": 0.13550892397376663,
+              "q75": 0.8392075887064492,
+              "q90": 0.9795675219605362
+            },
+            "standard_deviation": 0.3711087576530402
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.8466089199887391,
+            "quantiles": {
+              "q00": 0.06360111163839581,
+              "q10": 0.2696992171361734,
+              "q100": 0.9865459874092559,
+              "q25": 0.9548026410169931,
+              "q50": 0.9791688272272944,
+              "q75": 0.9840794855255809,
+              "q90": 0.985739691896995
+            },
+            "standard_deviation": 0.2796620709627489
+          }
+        }
+      },
+      "tfidf_train_only_v0.3": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.76,
+          "confusion_matrix": [
+            [
+              49,
+              1
+            ],
+            [
+              23,
+              27
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.6923076923076923,
+          "f2": 0.5921052631578948,
+          "false_negatives": 23,
+          "false_positives": 1,
+          "precision": 0.9642857142857143,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 72,
+            "SIF_POTENTIAL": 28
+          },
+          "recall": 0.54,
+          "specificity": 0.98,
+          "threshold": 0.7499999999999999,
+          "true_negatives": 49,
+          "true_positives": 27
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 65,
+          "auto_sif_count": 17,
+          "automatic_decision_coverage": 0.82,
+          "human_review_count": 18,
+          "human_review_rate": 0.18,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 17,
+          "review_band": [
+            0.6999999999999998,
+            0.7999999999999999
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.88598177314663,
+          "roc_auc": 0.9304
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.464343466096387,
+            "quantiles": {
+              "q00": 0.17746388074485162,
+              "q10": 0.3125261718789095,
+              "q100": 0.9252890613823608,
+              "q25": 0.37511370754161,
+              "q50": 0.44638500022110417,
+              "q75": 0.5533164427357903,
+              "q90": 0.640793468155432
+            },
+            "standard_deviation": 0.14142975831541446
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.7366113714317041,
+            "quantiles": {
+              "q00": 0.44220301177050825,
+              "q10": 0.6147748517451839,
+              "q100": 0.9112478902980533,
+              "q25": 0.6485463418279016,
+              "q50": 0.7647220538340029,
+              "q75": 0.8072970152140645,
+              "q90": 0.8550666526989423
+            },
+            "standard_deviation": 0.1048439879778303
+          }
+        }
+      }
+    },
+    "regression_benchmark": {
+      "active_baseline_v0.1": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.7075,
+          "confusion_matrix": [
+            [
+              19,
+              21
+            ],
+            [
+              3,
+              47
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.7966101694915254,
+          "f2": 0.8768656716417911,
+          "false_negatives": 3,
+          "false_positives": 21,
+          "precision": 0.6911764705882353,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 22,
+            "SIF_POTENTIAL": 68
+          },
+          "recall": 0.94,
+          "specificity": 0.475,
+          "threshold": 0.4,
+          "true_negatives": 19,
+          "true_positives": 47
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 18,
+          "auto_sif_count": 65,
+          "automatic_decision_coverage": 0.9222222222222223,
+          "human_review_count": 7,
+          "human_review_rate": 0.07777777777777778,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 1,
+          "review_band": [
+            0.35,
+            0.45
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.9513234763259015,
+          "roc_auc": 0.9305
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 40,
+            "mean": 0.4235197736529434,
+            "quantiles": {
+              "q00": 0.19456906940773347,
+              "q10": 0.29593162268232664,
+              "q100": 0.6962549085267327,
+              "q25": 0.31097951152229636,
+              "q50": 0.425843403655705,
+              "q75": 0.5234393289125403,
+              "q90": 0.5842310694539121
+            },
+            "standard_deviation": 0.12659425775094724
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.6971284695213898,
+            "quantiles": {
+              "q00": 0.32802919106484674,
+              "q10": 0.5343309993752027,
+              "q100": 0.8867140371238216,
+              "q25": 0.6346859593187215,
+              "q50": 0.7218755204206114,
+              "q75": 0.7960881763914133,
+              "q90": 0.835240768273272
+            },
+            "standard_deviation": 0.12555980406252548
+          }
+        }
+      },
+      "all_non_sif_reference": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.5,
+          "confusion_matrix": [
+            [
+              40,
+              0
+            ],
+            [
+              50,
+              0
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.0,
+          "f2": 0.0,
+          "false_negatives": 50,
+          "false_positives": 0,
+          "precision": 0.0,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 90,
+            "SIF_POTENTIAL": 0
+          },
+          "recall": 0.0,
+          "specificity": 1.0,
+          "threshold": 0.5,
+          "true_negatives": 40,
+          "true_positives": 0
+        },
+        "operational_routing": {
+          "human_review_rate": null,
+          "note": "A constant-class reference has no operational review band.",
+          "status": "NOT_APPLICABLE"
+        }
+      },
+      "all_sif_reference": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.5,
+          "confusion_matrix": [
+            [
+              0,
+              40
+            ],
+            [
+              0,
+              50
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.7142857142857143,
+          "f2": 0.8620689655172413,
+          "false_negatives": 0,
+          "false_positives": 40,
+          "precision": 0.5555555555555556,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 0,
+            "SIF_POTENTIAL": 90
+          },
+          "recall": 1.0,
+          "specificity": 0.0,
+          "threshold": 0.5,
+          "true_negatives": 0,
+          "true_positives": 50
+        },
+        "operational_routing": {
+          "human_review_rate": null,
+          "note": "A constant-class reference has no operational review band.",
+          "status": "NOT_APPLICABLE"
+        }
+      },
+      "annotation_provenance": {
+        "deterministic_policy_annotation_no_model_predictions": 90
+      },
+      "class_counts": {
+        "NON_SIF_POTENTIAL": 40,
+        "SIF_POTENTIAL": 50
+      },
+      "rows": 90,
+      "setfit_saved_train_only_v0.2": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.75,
+          "confusion_matrix": [
+            [
+              24,
+              16
+            ],
+            [
+              5,
+              45
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.8108108108108109,
+          "f2": 0.8620689655172414,
+          "false_negatives": 5,
+          "false_positives": 16,
+          "precision": 0.7377049180327869,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 29,
+            "SIF_POTENTIAL": 61
+          },
+          "recall": 0.9,
+          "specificity": 0.6,
+          "threshold": 0.25,
+          "true_negatives": 24,
+          "true_positives": 45
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 28,
+          "auto_sif_count": 61,
+          "automatic_decision_coverage": 0.9888888888888889,
+          "human_review_count": 1,
+          "human_review_rate": 0.011111111111111112,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 4,
+          "review_band": [
+            0.2,
+            0.3
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.8990953813206404,
+          "roc_auc": 0.8655
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 40,
+            "mean": 0.3895584710493981,
+            "quantiles": {
+              "q00": 0.04861325746896235,
+              "q10": 0.05419614885196545,
+              "q100": 0.9842693713299429,
+              "q25": 0.06815023186089418,
+              "q50": 0.10917528312187583,
+              "q75": 0.9181607347404349,
+              "q90": 0.969394165961299
+            },
+            "standard_deviation": 0.39614982288980705
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.8407039295965812,
+            "quantiles": {
+              "q00": 0.052137556577143404,
+              "q10": 0.3144326020699394,
+              "q100": 0.9863370696498795,
+              "q25": 0.9047269938913832,
+              "q50": 0.9813830127061158,
+              "q75": 0.9845293564794751,
+              "q90": 0.985813019013006
+            },
+            "standard_deviation": 0.27953772239261987
+          }
+        }
+      },
+      "tfidf_train_only_v0.3": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.705,
+          "confusion_matrix": [
+            [
+              38,
+              2
+            ],
+            [
+              27,
+              23
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.6133333333333333,
+          "f2": 0.5111111111111112,
+          "false_negatives": 27,
+          "false_positives": 2,
+          "precision": 0.92,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 65,
+            "SIF_POTENTIAL": 25
+          },
+          "recall": 0.46,
+          "specificity": 0.95,
+          "threshold": 0.7499999999999999,
+          "true_negatives": 38,
+          "true_positives": 23
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 55,
+          "auto_sif_count": 14,
+          "automatic_decision_coverage": 0.7666666666666667,
+          "human_review_count": 21,
+          "human_review_rate": 0.23333333333333334,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 19,
+          "review_band": [
+            0.6999999999999998,
+            0.7999999999999999
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.8960369947398565,
+          "roc_auc": 0.881
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 40,
+            "mean": 0.4550749125574323,
+            "quantiles": {
+              "q00": 0.1992201784310791,
+              "q10": 0.29079772547464794,
+              "q100": 0.829077929544761,
+              "q25": 0.35879082117414807,
+              "q50": 0.44264393450969414,
+              "q75": 0.49690695391334677,
+              "q90": 0.6928319970182147
+            },
+            "standard_deviation": 0.14798261485033498
+          },
+          "SIF_POTENTIAL": {
+            "count": 50,
+            "mean": 0.7096859802327242,
+            "quantiles": {
+              "q00": 0.30257528703321923,
+              "q10": 0.5513465465575691,
+              "q100": 0.9215531775942345,
+              "q25": 0.6321285791528123,
+              "q50": 0.7259189956761443,
+              "q75": 0.8000595435500291,
+              "q90": 0.8666880745496547
+            },
+            "standard_deviation": 0.13823759956369452
+          }
+        }
+      }
+    }
+  },
+  "fresh_assessment_status": "ONE_TIME_FROZEN_AI_ASSISTED_PROTOTYPE_ASSESSMENT_NOT_HUMAN_BLIND_VALIDATION",
+  "generated_at_utc": "2026-09-10T13:01:11+00:00",
+  "promotion": {
+    "decision": "RETAIN_ACTIVE_BASELINE",
+    "predeclared_historical_gates": {
+      "artifact_loads_in_real_backend": false,
+      "candidate_f2_at_least_baseline": false,
+      "candidate_recall_not_below_baseline_by_more_than_0.03": false,
+      "warm_single_inference_p95_ms_at_most_50": null
+    },
+    "reason": "The selected development candidate failed the frozen-assessment metric gates and is not supported by the real backend path. Its runtime p95 was therefore not measured and no runtime promotion was attempted."
+  },
+  "regression_status": "90_REPORT_SET_ALREADY_INFORMED_DIAGNOSIS_NOT_FRESH_VALIDATION",
+  "report_version": "bounded-domain-iteration-v0.3",
+  "selection_manifest_sha256": "3a1ee3947385fe6c7de416f23bbd2218e627a5b9369b91b664e0cbd12cc4e97a"
+}

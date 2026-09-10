@@ -3,6 +3,14 @@
 03-training/ml/sif_v0_1/data/blind_test_v0_2/*.csv text eol=lf
 03-training/ml/sif_v0_1/data/blind_test_v0_2/*.json text eol=lf
 03-training/ml/sif_v0_1/data/candidate_pool_v0_2.csv text eol=lf
+03-training/ml/sif_v0_1/data/domain_adaptation_v0_2/*.csv text eol=lf
+03-training/ml/sif_v0_1/data/domain_adaptation_v0_2/*.json text eol=lf
+03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/*.csv text eol=lf
+03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/*.json text eol=lf
+03-training/ml/sif_v0_1/reports/domain_adaptation_v0_3/*.csv text eol=lf
+03-training/ml/sif_v0_1/reports/domain_adaptation_v0_3/*.json text eol=lf
+03-training/ml/sif_v0_1/reports/domain_adaptation_v0_3/*.md text eol=lf
+03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_3/*.json text eol=lf
 01-app/backend/app/reference/validation_policy.json text eol=lf
 01-app/backend/app/reference/human_review_finalization_policy.json text eol=lf
 03-training/ml/sif_v0_1/src/preprocess.py text eol=lf

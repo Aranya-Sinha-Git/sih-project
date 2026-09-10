@@ -107,6 +107,24 @@ Add a dated entry with:
   runtime candidate preprocessing. Frozen v0.2/v0.3 human-validation releases
   and active baseline artifacts are unchanged.
 
+### 2026-09-10 — Retain active models after bounded v0.3 iteration
+
+- **Status:** accepted
+- **Decision:** Keep the v0.1 SIF screen and v0.2 LSR mapper active. Preserve
+  the train-only v0.3 TF-IDF model, the reused SetFit checkpoint operating
+  point, and the eight-rule v0.3 LSR artifact as experimental evidence only.
+- **Rationale:** Corrected TF-IDF thresholding removed the all-SIF collapse but
+  its best development tradeoff failed the 0.90 recall gate. SetFit passed the
+  prototype development gates, then underperformed the active baseline on the
+  one-time frozen 100-report AI-assisted assessment (F2 0.843 vs 0.894; recall
+  0.900 vs 0.980) and is not supported by the real backend adapter. LSR01 and
+  LSR02 gained evidence-supported training examples, but their holdouts are too
+  small and LSR02 classified both holdout negatives as positive. Only two
+  supported LSR08 examples were found, below the minimum of three.
+- **Scope:** `domain_adaptation_v0_3` data, reports and experimental artifacts.
+  The 90-report set remains diagnostic, frozen human-validation releases are
+  unchanged, and runtime continues to make zero generative-LLM calls.
+
 Date: 2026-09-05
 
 ## Blind-test status

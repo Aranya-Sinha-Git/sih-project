@@ -1,0 +1,90 @@
+{
+  "active_lsr_model": "iogp-lsr-v0.2",
+  "active_sif_model": "baseline_sif_v0.1",
+  "artifacts": [
+    {
+      "bytes": 618788,
+      "path": "artifacts/domain_adapted_v0_3/sif_tfidf_train_only.joblib",
+      "sha256": "868b38f914937c1e5246246539db3d6a347f9df3b7c6f77b6295a07616bfc64e"
+    },
+    {
+      "bytes": 1808268,
+      "path": "artifacts/domain_adapted_v0_3/lsr_model_v0_3.joblib",
+      "sha256": "a503e126352010081258948fe58211cdff3ded903ee826e58f3d080c30073aa4"
+    },
+    {
+      "bytes": 7156,
+      "path": "artifacts/domain_adapted_v0_3/selection_manifest_v0_3.json",
+      "sha256": "3a1ee3947385fe6c7de416f23bbd2218e627a5b9369b91b664e0cbd12cc4e97a"
+    }
+  ],
+  "candidate_promoted": false,
+  "continued_from_commit": "860395eb554bb0bc58e7637b36d1cad4de6376fc",
+  "created_at_utc": "2026-09-10T13:01:24+00:00",
+  "experimental_lsr_model": "iogp-lsr-v0.3",
+  "experimental_sif_selection": "setfit_saved_train_only",
+  "latency": {
+    "report": "reports/domain_adaptation_v0_2/runtime_benchmark.json",
+    "status": "reused_v0.2_benchmark_runtime_unchanged"
+  },
+  "random_seed": 26165,
+  "reports": [
+    {
+      "path": "reports/domain_adaptation_v0_3/sif_evaluation_v0_3.json",
+      "sha256": "f870ad648a3b7838fffcb9d764613e190db26216d18eed7c8d677d5446392c56"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_3/lsr_evaluation_v0_3.json",
+      "sha256": "612ae7a87cb65eafae40007dc41b21eb57f48ac88ad1bacc7ecb3fe15078ddcc"
+    }
+  ],
+  "rollback": "No runtime promotion occurred. MODEL_PATH remains the v0.1 supervised directory and the backend default LSR artifact remains domain_adapted_v0_2/lsr_model.joblib.",
+  "runtime_changed": false,
+  "runtime_generative_llm_calls": false,
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.6",
+    "scikit-learn": "1.8.0",
+    "sentence-transformers": "5.7.0",
+    "setfit": "1.2.0",
+    "torch": "2.6.0+cu124"
+  },
+  "sources": [
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_2/train_v0_2.csv",
+      "sha256": "b7c3b9a1c4bacc177dd4e318302fef2b36a85ade05ce565671cfa3744c8882ce"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_2/development_v0_2.csv",
+      "sha256": "acb361ccf7aec6735f2bf7a5911eb44dfd1a8b4c49edad0da887301ff2685519"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_2/protected_test_v0_2.csv",
+      "sha256": "cf27c5c4e94e9310e955c68b52615d1be60fec7c936c562573f1839fd77ba438"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/fresh_assessment_v0_3.csv",
+      "sha256": "b6f80b279257e67e4733d038905130297bc8aeb8fed18fd0a49b45e20b15da5a"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/fresh_assessment_v0_3_manifest.json",
+      "sha256": "e33d524f27bd49956f131a2eeeed0ea13257a738504c42b7a11d2a62176a9cf7"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/lsr_candidate_review_v0_3.csv",
+      "sha256": "2d277970257dea3cc891a836953bbba024c2c209cd640268d2986a82a98996c5"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/data/domain_adaptation_v0_3/lsr_annotation_corrections_v0_3.csv",
+      "sha256": "a4b7a26b4ac88015f919f7abdb36ec5c044dd93c4d61a6850fc881a23a105cfa"
+    },
+    {
+      "path": "03-training/ml/sif_v0_1/reference/iogp_life_saving_rules_v2018.json",
+      "sha256": "266056d8f74aea54b54fde79f1f7682fa75a2e01ffb56fceaa6d94aa577ac2de"
+    }
+  ],
+  "version": "bounded-domain-iteration-v0.3"
+}
