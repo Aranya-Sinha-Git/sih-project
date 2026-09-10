@@ -17,6 +17,17 @@ def test_real_artifacts_load_through_runtime_and_candidate_adapter():
     )
     assert candidate.metadata()["status"] == "READY"
     assert candidate.screen("A worker contacted an energized conductor during maintenance.")["sif_score"] is not None
+    assert candidate.screen("  \n  ")["decision"] == "HUMAN_REVIEW"
+
+
+def test_demo_examples_cover_sif_non_sif_and_review_routes():
+    classifier = get_domain_model().classifier
+    clear_sif = classifier.screen("An employee contacted an energized 13,800 volt power line and suffered severe burns.")
+    clear_non_sif = classifier.screen("A worker walking across a muddy yard slipped and twisted an ankle.")
+    uncertain = classifier.screen("An employee took measurements while standing on an earthen berm, lost balance, and fractured an ankle.")
+    assert clear_sif["decision"] == "SIF_POTENTIAL"
+    assert clear_non_sif["decision"] == "NON_SIF_POTENTIAL"
+    assert uncertain["decision"] == "HUMAN_REVIEW"
 
 
 def test_single_and_multiple_rule_mappings_have_exact_report_evidence():
@@ -40,11 +51,16 @@ def test_zero_mapping_unavailable_and_negation_are_explicit():
     assert zero["mapping_status"] == "MAPPING_UNAVAILABLE"
     assert set(zero["unavailable_rule_ids"]) == {"LSR01", "LSR02", "LSR08"}
     assert "Zero mappings" not in zero["rendered_explanation"]  # status text already states the coverage failure
+    assert all(
+        "does not prove the rule is irrelevant" in rule["rendered_explanation"]
+        for rule in zero["rules"] if rule["assignment_status"] == "BELOW_THRESHOLD"
+    )
 
     negated = service.map_rules("There were no dropped objects and isolation was verified before work began.")
     line_of_fire = next(rule for rule in negated["rules"] if rule["rule_id"] == "LSR06")
     assert line_of_fire["evidence"] == []
     assert line_of_fire["violation_status"] == "NOT_ESTABLISHED"
+    assert "does not prove the rule is irrelevant" in line_of_fire["rendered_explanation"]
 
 
 def test_missing_model_and_short_narrative_never_become_confident_negatives(tmp_path):

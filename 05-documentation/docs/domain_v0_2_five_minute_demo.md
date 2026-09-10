@@ -9,15 +9,23 @@ These illustrative narratives are not drawn from a locked evaluation set.
 3. Single mapping with an explicit control failure: “The technician contacted
    an energized wire after lockout was not applied.” Show LSR04 and the separate
    violation status.
-4. Zero/partial coverage: “Routine housekeeping removed paper from an office
-   floor with no equipment exposure.” Show `MAPPING_UNAVAILABLE`, the unsupported
-   LSR01/LSR02/LSR08 classifiers and the warning that zero mappings do not imply
-   Non-SIF or safety.
-5. Missing information and negation: compare “Short unclear report about work”
-   with “There were no dropped objects and isolation was verified before work
-   began.” Show that neither creates fabricated evidence or a violation.
+4. Non-SIF and zero/partial coverage: “A worker walking across a muddy yard
+   slipped and twisted an ankle.” Show the Non-SIF route, `MAPPING_UNAVAILABLE`,
+   the unsupported LSR01/LSR02/LSR08 classifiers and the warning that zero
+   mappings do not imply Non-SIF or safety.
+5. Human review and negation: compare “An employee took measurements while
+   standing on an earthen berm, lost balance, and fractured an ankle” with
+   “There were no dropped objects and isolation was verified before work began.”
+   Show the review route and that negated text creates neither fabricated
+   evidence nor an established violation.
 6. Open the review queue, save **Escalate / Unsure**, then resolve it and reload
    the report to demonstrate persisted adjudication history.
 7. Analyze a related second report and show similar-incident retrieval. Finish
    on **Model & evidence** and quote the measured uncached median/p95 API latency
-   (90.12/149.46 ms), 12.18 reports/s batch throughput, and zero runtime LLM calls.
+   (90.53/144.90 ms), 12.26 reports/s batch throughput, and zero runtime LLM calls.
+
+These examples are synthetic illustrations, not members of any protected or
+locked evaluation release. The active v0.1 artifact emits an
+`InconsistentVersionWarning` under the current scikit-learn runtime; the demo
+loads successfully, but re-serialization under a pinned supported version is a
+remaining maintenance item rather than evidence of model quality.

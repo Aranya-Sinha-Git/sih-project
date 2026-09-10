@@ -1,6 +1,6 @@
 {
   "benchmark_version": "sif-domain-runtime-benchmark-v0.2",
-  "measured_at_utc": "2026-09-09T20:22:42Z",
+  "measured_at_utc": "2026-09-10T03:31:41Z",
   "environment": {
     "platform": "Windows-11-10.0.26200-SP0",
     "processor": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
@@ -24,63 +24,63 @@
     ]
   },
   "cold_start": {
-    "median_ms": 4944.4787,
-    "p95_ms": 4992.2917,
-    "min_ms": 4881.3294,
-    "max_ms": 4999.1474
+    "median_ms": 4305.5822,
+    "p95_ms": 4405.0306,
+    "min_ms": 4263.64,
+    "max_ms": 4420.4645
   },
   "warm_sif_inference": {
-    "median_ms": 3.8653,
-    "p95_ms": 9.2007,
-    "min_ms": 2.546,
-    "max_ms": 12.0187
+    "median_ms": 2.8425,
+    "p95_ms": 6.4772,
+    "min_ms": 2.3415,
+    "max_ms": 7.5436
   },
   "warm_lsr_total": {
-    "median_ms": 3.0244,
-    "p95_ms": 12.1958,
-    "min_ms": 2.0135,
-    "max_ms": 12.8433
+    "median_ms": 2.1667,
+    "p95_ms": 8.9388,
+    "min_ms": 1.9031,
+    "max_ms": 10.4037
   },
   "text_normalization": {
-    "median_ms": 0.0045,
-    "p95_ms": 0.092,
+    "median_ms": 0.0035,
+    "p95_ms": 0.0507,
     "min_ms": 0.0021,
-    "max_ms": 0.1015
+    "max_ms": 0.0807
   },
   "lsr_vectorization_and_scoring": {
-    "median_ms": 2.5038,
-    "p95_ms": 7.2783,
-    "min_ms": 1.699,
-    "max_ms": 8.1795
+    "median_ms": 1.8458,
+    "p95_ms": 5.3345,
+    "min_ms": 1.6008,
+    "max_ms": 6.5381
   },
   "evidence_and_template": {
-    "median_ms": 0.503,
-    "p95_ms": 4.8921,
-    "min_ms": 0.2747,
-    "max_ms": 6.0622
+    "median_ms": 0.3792,
+    "p95_ms": 3.6393,
+    "min_ms": 0.2573,
+    "max_ms": 4.8003
   },
   "retrieval": {
-    "median_ms": 1.4519,
-    "p95_ms": 11.8542,
-    "min_ms": 0.8743,
-    "max_ms": 14.1782
+    "median_ms": 1.0773,
+    "p95_ms": 9.012,
+    "min_ms": 0.8556,
+    "max_ms": 11.1238
   },
   "full_analysis_api_uncached": {
-    "median_ms": 90.1214,
-    "p95_ms": 149.4595,
-    "min_ms": 39.5659,
-    "max_ms": 188.8037
+    "median_ms": 90.5298,
+    "p95_ms": 144.8989,
+    "min_ms": 41.7932,
+    "max_ms": 156.0262
   },
   "duplicate_cached_api": {
-    "median_ms": 46.302,
-    "p95_ms": 63.9784,
-    "min_ms": 39.685,
-    "max_ms": 157.8018
+    "median_ms": 45.4466,
+    "p95_ms": 64.3178,
+    "min_ms": 40.3691,
+    "max_ms": 159.8523
   },
   "batch": {
-    "seconds": 4.1061,
+    "seconds": 4.08,
     "reports": 50,
-    "reports_per_second": 12.177
+    "reports_per_second": 12.255
   },
   "artifact_storage": {
     "all_baseline_and_v0_2_bytes": 48515872,
@@ -89,8 +89,8 @@
     "v0_2_comparison_package_bytes": 47117513
   },
   "process_memory": {
-    "rss_before_load_bytes": 42106880,
-    "rss_after_benchmark_bytes": 204603392
+    "rss_before_load_bytes": 42000384,
+    "rss_after_benchmark_bytes": 204853248
   },
   "runtime_generative_llm_calls": 0,
   "llm_token_charges": 0,

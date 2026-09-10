@@ -151,7 +151,7 @@ class DomainSafetyModel:
                 explanation = f"{name} met its assignment threshold, but no criterion-aligned supporting excerpt was located."
                 reason = "PREDICTED_WITHOUT_EXTRACTABLE_SUPPORT"
             elif status == "BORDERLINE":
-                explanation = f"{name} is possible but below its assignment threshold."
+                explanation = f"{name} is possible but below its assignment threshold; this does not prove the rule is irrelevant."
             else:
                 explanation = f"{name} was assessed below its assignment threshold; this does not prove the rule is irrelevant."
             rules.append({"rule_id": rule_id, "name": name, "score": round(score, 6), "score_type": "uncalibrated_model_score", "assignment_threshold": threshold, "borderline_threshold": borderline_threshold, "assignment_status": status, "reason_code": reason, "evidence": evidence, "violation_status": violation, "rendered_explanation": explanation})

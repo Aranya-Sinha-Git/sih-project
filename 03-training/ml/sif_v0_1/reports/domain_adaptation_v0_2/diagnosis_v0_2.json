@@ -1,0 +1,1189 @@
+{
+  "active_model_decision": "Retain active baseline v0.1. The TF-IDF candidate fails the corrected development gates; SetFit remains a saved comparison candidate and is not promoted from the now-diagnostic 90-row benchmark. No replacement was selected, so no fresh final set was opened or manufactured.",
+  "demo_readiness": {
+    "focused_regression_checks": {
+      "backend_api_and_domain_tests": "91 passed",
+      "frontend_production_build": "passed (Next.js production build, 17 routes)",
+      "persisted_human_adjudication": "covered by test_review_history_and_explicit_dispositions",
+      "similar_incident_retrieval": "covered by test_grounded_reference_and_historical_retrieval",
+      "training_domain_tests": "30 passed"
+    },
+    "relative_llm_speed_or_cost": "UNMEASURED_NO_COMPARABLE_AUTHORIZED_BENCHMARK",
+    "reused_latency_benchmark": {
+      "batch_reports_per_second": 12.255,
+      "median_ms": 90.5298,
+      "p95_ms": 144.8989,
+      "source": "runtime_benchmark.json; remeasured after deterministic template and candidate-preprocessing fixes"
+    },
+    "runtime_checks": {
+      "all_passed": true,
+      "clear_non_sif": true,
+      "clear_sif": true,
+      "multiple_rule": true,
+      "processing_failure_is_unavailable": true,
+      "single_rule": true,
+      "uncertain_review": true,
+      "zero_mapping_discloses_incomplete_coverage": true
+    },
+    "runtime_examples": {
+      "clear_non_sif": {
+        "assigned_rule_ids": [],
+        "coverage_complete": false,
+        "mapping_status": "MAPPING_UNAVAILABLE",
+        "review_required": false,
+        "sif_decision": "NON_SIF_POTENTIAL",
+        "sif_score": 0.23761,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "clear_sif": {
+        "assigned_rule_ids": [
+          "LSR04",
+          "LSR05"
+        ],
+        "coverage_complete": false,
+        "mapping_status": "MAPPED",
+        "review_required": false,
+        "sif_decision": "SIF_POTENTIAL",
+        "sif_score": 0.82576,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "multiple_rule": {
+        "assigned_rule_ids": [
+          "LSR06",
+          "LSR07"
+        ],
+        "coverage_complete": false,
+        "mapping_status": "MAPPED",
+        "review_required": false,
+        "sif_decision": "SIF_POTENTIAL",
+        "sif_score": 0.81713,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "negated_hazard": {
+        "assigned_rule_ids": [],
+        "coverage_complete": false,
+        "mapping_status": "MAPPING_UNAVAILABLE",
+        "review_required": false,
+        "sif_decision": "SIF_POTENTIAL",
+        "sif_score": 0.77779,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "single_rule": {
+        "assigned_rule_ids": [
+          "LSR04"
+        ],
+        "coverage_complete": false,
+        "mapping_status": "MAPPED",
+        "review_required": false,
+        "sif_decision": "SIF_POTENTIAL",
+        "sif_score": 0.82387,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "uncertain_review": {
+        "assigned_rule_ids": [],
+        "coverage_complete": false,
+        "mapping_status": "MAPPING_UNAVAILABLE",
+        "review_required": true,
+        "sif_decision": "HUMAN_REVIEW",
+        "sif_score": 0.35162,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      },
+      "zero_mapping": {
+        "assigned_rule_ids": [],
+        "coverage_complete": false,
+        "mapping_status": "MAPPING_UNAVAILABLE",
+        "review_required": false,
+        "sif_decision": "SIF_POTENTIAL",
+        "sif_score": 0.60412,
+        "unavailable_rule_ids": [
+          "LSR01",
+          "LSR02",
+          "LSR08"
+        ]
+      }
+    },
+    "runtime_generative_llm_calls": 0
+  },
+  "development_selection_audit": {
+    "all_sif_development_f2": 0.9536082474226806,
+    "fixed_gate_result_on_saved_tfidf_search": {
+      "all_sif_reference": {
+        "balanced_accuracy": 0.5,
+        "precision": 0.8043478260869565,
+        "recall": 1.0,
+        "specificity": 0.0
+      },
+      "auto_non_sif": 39,
+      "auto_sif": 30,
+      "automatic_decision_coverage": 0.75,
+      "balanced_accuracy": 0.777027027027027,
+      "c": 2.0,
+      "class_weight": "balanced",
+      "confusion_matrix": "[[18, 0], [33, 41]]",
+      "development_gate_passed": false,
+      "development_gates": {
+        "maximum_review_rate": 0.4,
+        "minimum_balanced_accuracy": 0.7,
+        "minimum_recall": 0.9,
+        "minimum_specificity": 0.5,
+        "precision_must_exceed_all_sif": 0.8043478260869565
+      },
+      "f1": 0.7130434782608696,
+      "f2": 0.6083086053412462,
+      "false_negatives": 33,
+      "false_positives": 0,
+      "human_positive_routed_auto_non_sif": 24,
+      "lower": 0.6999999999999998,
+      "precision": 1.0,
+      "recall": 0.5540540540540541,
+      "review_count": 23,
+      "review_rate": 0.25,
+      "selection_status": "NO_OPERATING_POINT_MET_DEVELOPMENT_GATES",
+      "specificity": 1.0,
+      "threshold": 0.7499999999999999,
+      "true_negatives": 18,
+      "true_positives": 41,
+      "upper": 0.7999999999999999
+    },
+    "old_selected_operating_point": {
+      "auto_non_sif": 0,
+      "auto_sif": 92,
+      "automatic_decision_coverage": 1.0,
+      "balanced_accuracy": 0.5,
+      "c": 0.25,
+      "class_weight": "none",
+      "confusion_matrix": "[[0, 18], [0, 74]]",
+      "f1": 0.891566265060241,
+      "f2": 0.9536082474226806,
+      "false_negatives": 0,
+      "false_positives": 18,
+      "human_positive_routed_auto_non_sif": 0,
+      "lower": 0.2,
+      "precision": 0.8043478260869565,
+      "recall": 1.0,
+      "review_count": 0,
+      "review_rate": 0.0,
+      "specificity": 0.0,
+      "threshold": 0.25,
+      "true_negatives": 0,
+      "true_positives": 74,
+      "upper": 0.3
+    },
+    "saved_model_configurations": 15,
+    "saved_search_rows": 330,
+    "setfit_saved_artifact": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.7094594594594594,
+        "confusion_matrix": [
+          [
+            9,
+            9
+          ],
+          [
+            6,
+            68
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.9006622516556292,
+        "f2": 0.9115281501340483,
+        "false_negatives": 6,
+        "false_positives": 9,
+        "precision": 0.8831168831168831,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 15,
+          "SIF_POTENTIAL": 77
+        },
+        "recall": 0.918918918918919,
+        "specificity": 0.5,
+        "threshold": 0.25,
+        "true_negatives": 9,
+        "true_positives": 68
+      },
+      "operational_routing": {
+        "auto_non_sif_count": 14,
+        "auto_sif_count": 77,
+        "automatic_decision_coverage": 0.9891304347826086,
+        "human_review_count": 1,
+        "human_review_rate": 0.010869565217391304,
+        "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+        "reference_sif_routed_auto_non_sif": 6,
+        "review_band": [
+          0.2,
+          0.3
+        ]
+      },
+      "ranking_metrics": {
+        "average_precision": 0.9306891692734718,
+        "roc_auc": 0.7702702702702704
+      },
+      "score_distribution_by_reference_class": {
+        "NON_SIF_POTENTIAL": {
+          "count": 18,
+          "mean": 0.5421142133775787,
+          "quantiles": {
+            "q00": 0.06266877386959158,
+            "q10": 0.0820103493068741,
+            "q100": 0.9847354017442922,
+            "q25": 0.10728976121552844,
+            "q50": 0.5639831488784768,
+            "q75": 0.9697419922270913,
+            "q90": 0.9838729391241725
+          },
+          "standard_deviation": 0.4215142031059599
+        },
+        "SIF_POTENTIAL": {
+          "count": 74,
+          "mean": 0.85557652837173,
+          "quantiles": {
+            "q00": 0.0680826743144295,
+            "q10": 0.39739096542654184,
+            "q100": 0.9871230066435343,
+            "q25": 0.9143891965992827,
+            "q50": 0.9825435353819907,
+            "q75": 0.9848866135200169,
+            "q90": 0.9861453561475033
+          },
+          "standard_deviation": 0.2628384931892509
+        }
+      }
+    }
+  },
+  "development_setup": {
+    "annotation_derived_fields_used_as_model_input": false,
+    "cleaning_changes": {
+      "development": 0,
+      "regression_test": 0,
+      "train": 0
+    },
+    "development": {
+      "class_counts": {
+        "NON_SIF_POTENTIAL": 18,
+        "SIF_POTENTIAL": 74
+      },
+      "label_provenance": {
+        "existing_ai_assisted_consensus_v0_1": 22,
+        "teammate_manual_label": 54,
+        "teammate_manual_plus_ai_assisted_secondary_review": 16
+      },
+      "narrative_word_count": {
+        "maximum": 165,
+        "mean": 47.96739130434783,
+        "median": 42.5,
+        "minimum": 7
+      },
+      "positive_prevalence": 0.8043478260869565,
+      "rows": 92,
+      "source_year_counts": {
+        "2015": 24,
+        "2016": 7,
+        "2017": 10,
+        "2018": 8,
+        "2019": 2,
+        "2020": 5,
+        "2021": 7,
+        "2022": 2,
+        "2023": 5,
+        "2024": 16,
+        "2025": 6
+      },
+      "sources": {
+        "OSHA_SIR": 92
+      }
+    },
+    "input_allowlist": [
+      "narrative"
+    ],
+    "isolation": {
+      "development_vs_regression_test": {
+        "duplicate_group": 0,
+        "incident_id": 0,
+        "normalized_narrative_sha256": 0,
+        "source_record_id": 0
+      },
+      "train_vs_development": {
+        "duplicate_group": 0,
+        "incident_id": 0,
+        "normalized_narrative_sha256": 0,
+        "source_record_id": 0
+      },
+      "train_vs_regression_test": {
+        "duplicate_group": 0,
+        "incident_id": 0,
+        "normalized_narrative_sha256": 0,
+        "source_record_id": 0
+      }
+    },
+    "regression_test": {
+      "class_counts": {
+        "NON_SIF_POTENTIAL": 40,
+        "SIF_POTENTIAL": 50
+      },
+      "label_provenance": {
+        "deterministic_policy_annotation_no_model_predictions": 90
+      },
+      "narrative_word_count": {
+        "maximum": 83,
+        "mean": 34.522222222222226,
+        "median": 31.0,
+        "minimum": 12
+      },
+      "positive_prevalence": 0.5555555555555556,
+      "rows": 90,
+      "source_year_counts": {
+        "2015": 5,
+        "2016": 8,
+        "2017": 14,
+        "2018": 10,
+        "2019": 9,
+        "2020": 9,
+        "2021": 11,
+        "2022": 3,
+        "2023": 6,
+        "2024": 6,
+        "2025": 9
+      },
+      "sources": {
+        "OSHA_SIR": 90
+      }
+    },
+    "train": {
+      "class_counts": {
+        "NON_SIF_POTENTIAL": 71,
+        "SIF_POTENTIAL": 298
+      },
+      "label_provenance": {
+        "existing_ai_assisted_consensus_v0_1": 98,
+        "teammate_manual_label": 222,
+        "teammate_manual_plus_ai_assisted_secondary_review": 49
+      },
+      "narrative_word_count": {
+        "maximum": 207,
+        "mean": 49.143631436314365,
+        "median": 42.0,
+        "minimum": 11
+      },
+      "positive_prevalence": 0.8075880758807588,
+      "rows": 369,
+      "source_year_counts": {
+        "2015": 101,
+        "2016": 38,
+        "2017": 23,
+        "2018": 29,
+        "2019": 31,
+        "2020": 11,
+        "2021": 8,
+        "2022": 9,
+        "2023": 8,
+        "2024": 77,
+        "2025": 34
+      },
+      "sources": {
+        "OSHA_SIR": 369
+      }
+    }
+  },
+  "diagnosis": {
+    "ranking_vs_threshold": "Both candidates rank the two classes usefully on the regression benchmark, but the saved TF-IDF threshold is below every score and therefore collapses to all-SIF.",
+    "ruled_out_or_not_supported": [
+      "No positive-class probability-column inversion or label-encoding reversal was found.",
+      "No incident ID, source ID, duplicate group, or normalized narrative hash crosses the saved train/development/regression partitions.",
+      "The model input is narrative-only; annotation labels, explanations, provenance and LSR annotations are not passed to the vectorizers.",
+      "Class weighting is not the direct cause of the deployed candidate collapse: the selected TF-IDF classifier used no class weights. The search nevertheless shows no TF-IDF point meeting the new recall/specificity gates."
+    ],
+    "supported_causes": [
+      {
+        "cause": "F2-only development selection rewarded the trivial class",
+        "evidence": "Development prevalence is 0.804. The selected TF-IDF point predicts all 92 rows SIF, has specificity 0 and F2 0.954, exactly the all-SIF development F2."
+      },
+      {
+        "cause": "Threshold/model score-scale mismatch after refit",
+        "evidence": "The threshold was chosen from a train-only model, then the saved TF-IDF vectorizer and classifier were re-fitted on train+development. The saved candidate intercept is 1.373 versus 0.630 for the baseline, and all 90 regression scores exceed 0.25."
+      },
+      {
+        "cause": "Development/test prevalence and provenance differ",
+        "evidence": "Train/development are 80.8%/80.4% SIF, versus 55.6% in the deliberately balanced regression set. All are OSHA_SIR, but the test labels use a separate deterministic AI-assisted prototype process and reports are shorter."
+      }
+    ]
+  },
+  "evaluation_status": "DIAGNOSTIC_REGRESSION_BENCHMARK_NOT_FRESH_BLIND_VALIDATION",
+  "lsr_audit": {
+    "aggregate": {
+      "confusion_matrix_aggregated": [
+        [
+          408,
+          11
+        ],
+        [
+          17,
+          39
+        ]
+      ],
+      "evaluated_rule_cells": 475,
+      "macro_f1": 0.4964912280701754,
+      "macro_precision": 0.5981182795698925,
+      "macro_recall": 0.513888888888889,
+      "micro_f1": 0.7358490566037736,
+      "micro_precision": 0.78,
+      "micro_recall": 0.6964285714285714,
+      "trained_rules": [
+        "LSR03",
+        "LSR04",
+        "LSR05",
+        "LSR06",
+        "LSR07",
+        "LSR09"
+      ],
+      "unavailable_rules": [
+        "LSR01",
+        "LSR02",
+        "LSR08"
+      ],
+      "unknown_targets_excluded_per_rule": true
+    },
+    "aggregate_handling": "Only known cells for the six trained rules are included. LSR01, LSR02 and LSR08 are excluded, not counted as negative or correct.",
+    "eligible_record_check": {
+      "additional_positive_targets": {
+        "LSR01": 0,
+        "LSR02": 0,
+        "LSR08": 0
+      },
+      "interpretation": "The unused pool contains possible LSR01/LSR02 annotation candidates, but these are pattern hits rather than accepted labels and include ambiguous matches. They were not added, scored, or forced into training. No strict LSR08 candidate was found.",
+      "unresolved_merged_rows_checked": 39,
+      "unused_unlocked_duplicate_isolated_pool_pattern_hits": {
+        "LSR01": 29,
+        "LSR02": 56,
+        "LSR08": 0
+      },
+      "unused_unlocked_duplicate_isolated_pool_rows_checked": 62519
+    },
+    "rules": {
+      "LSR01": {
+        "development_counts": {
+          "NEGATIVE": 51,
+          "POSITIVE": 1,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "not_evaluated",
+        "f1": null,
+        "name": "Bypassing Safety Controls",
+        "precision": null,
+        "recall": null,
+        "regression_test_counts": {
+          "NEGATIVE": 79,
+          "UNKNOWN": 11
+        },
+        "status": "unavailable",
+        "training_counts": {
+          "NEGATIVE": 209,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR02": {
+        "development_counts": {
+          "NEGATIVE": 52,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "not_evaluated",
+        "f1": null,
+        "name": "Confined Space",
+        "precision": null,
+        "recall": null,
+        "regression_test_counts": {
+          "NEGATIVE": 78,
+          "POSITIVE": 1,
+          "UNKNOWN": 11
+        },
+        "status": "unavailable",
+        "training_counts": {
+          "NEGATIVE": 208,
+          "POSITIVE": 1,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR03": {
+        "development_counts": {
+          "NEGATIVE": 49,
+          "POSITIVE": 3,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.0,
+        "name": "Driving",
+        "precision": 0.0,
+        "recall": 0.0,
+        "regression_test_counts": {
+          "NEGATIVE": 78,
+          "POSITIVE": 1,
+          "UNKNOWN": 11
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 195,
+          "POSITIVE": 14,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR04": {
+        "development_counts": {
+          "NEGATIVE": 48,
+          "POSITIVE": 5,
+          "UNKNOWN": 39
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.4,
+        "name": "Energy Isolation",
+        "precision": 1.0,
+        "recall": 0.25,
+        "regression_test_counts": {
+          "NEGATIVE": 75,
+          "POSITIVE": 4,
+          "UNKNOWN": 11
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 190,
+          "POSITIVE": 19,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR05": {
+        "development_counts": {
+          "NEGATIVE": 50,
+          "POSITIVE": 2,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.6666666666666666,
+        "name": "Hot Work",
+        "precision": 0.5,
+        "recall": 1.0,
+        "regression_test_counts": {
+          "NEGATIVE": 78,
+          "POSITIVE": 1,
+          "UNKNOWN": 11
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 196,
+          "POSITIVE": 13,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR06": {
+        "development_counts": {
+          "NEGATIVE": 22,
+          "POSITIVE": 30,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.6,
+        "name": "Line of Fire",
+        "precision": 0.75,
+        "recall": 0.5,
+        "regression_test_counts": {
+          "NEGATIVE": 61,
+          "POSITIVE": 18,
+          "UNKNOWN": 11
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 88,
+          "POSITIVE": 121,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR07": {
+        "development_counts": {
+          "NEGATIVE": 51,
+          "POSITIVE": 1,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.4,
+        "name": "Safe Mechanical Lifting",
+        "precision": 0.5,
+        "recall": 0.3333333333333333,
+        "regression_test_counts": {
+          "NEGATIVE": 73,
+          "POSITIVE": 6,
+          "UNKNOWN": 11
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 193,
+          "POSITIVE": 16,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR08": {
+        "development_counts": {
+          "NEGATIVE": 50,
+          "POSITIVE": 2,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "not_evaluated",
+        "f1": null,
+        "name": "Work Authorisation",
+        "precision": null,
+        "recall": null,
+        "regression_test_counts": {
+          "NEGATIVE": 79,
+          "UNKNOWN": 11
+        },
+        "status": "unavailable",
+        "training_counts": {
+          "NEGATIVE": 209,
+          "UNKNOWN": 160
+        }
+      },
+      "LSR09": {
+        "development_counts": {
+          "NEGATIVE": 42,
+          "POSITIVE": 10,
+          "UNKNOWN": 40
+        },
+        "evaluation_status": "evaluated",
+        "f1": 0.9122807017543859,
+        "name": "Working at Height",
+        "precision": 0.8387096774193549,
+        "recall": 1.0,
+        "regression_test_counts": {
+          "NEGATIVE": 54,
+          "POSITIVE": 26,
+          "UNKNOWN": 10
+        },
+        "status": "trained",
+        "training_counts": {
+          "NEGATIVE": 176,
+          "POSITIVE": 33,
+          "UNKNOWN": 160
+        }
+      }
+    },
+    "runtime_zero_mapping_behavior": "When no supported rule maps, unavailable rules force MAPPING_UNAVAILABLE and coverage_complete=false. Missing evidence is disclosed and never treated as proof that a rule is irrelevant or that a violation did not occur.",
+    "unavailable_causes": {
+      "LSR01": "0 positive training targets; only one positive in development and one in the regression test.",
+      "LSR02": "1 positive training target, below the declared minimum of 3; development and regression test contain no positives.",
+      "LSR08": "0 positive training targets; only two positives in development and two in the regression test."
+    }
+  },
+  "model_integrity": {
+    "active_baseline": {
+      "artifact_sha256": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "classes": [
+        "0",
+        "1"
+      ],
+      "classifier_intercept": 0.6301438034354016,
+      "load_warnings": [
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Trying to unpickle estimator TfidfTransformer from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Trying to unpickle estimator TfidfVectorizer from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Trying to unpickle estimator TfidfTransformer from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Trying to unpickle estimator TfidfVectorizer from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Trying to unpickle estimator FeatureUnion from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Trying to unpickle estimator LogisticRegression from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+        "Trying to unpickle estimator Pipeline from version 1.9.0 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations"
+      ],
+      "positive_probability_column": 1
+    },
+    "active_runtime": {
+      "MODEL_PATH_environment": null,
+      "calibration_status": "uncalibrated",
+      "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+      "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "model_identity": "tfidf_word_12_char_35",
+      "model_version": "sif-v0.1",
+      "resolved_artifact_directory": "C:\\Users\\arany\\Desktop\\SIH Project\\03-training\\ml\\sif_v0_1\\artifacts\\supervised",
+      "status": "READY",
+      "thresholds": {
+        "non_sif_upper_exclusive": 0.35,
+        "review_lower_inclusive": 0.35,
+        "review_upper_inclusive": 0.45,
+        "selected_sif_threshold": 0.4,
+        "sif_lower_exclusive": 0.45
+      }
+    },
+    "probability_mapping_result": "All saved classifiers encode NON_SIF as 0 and SIF as 1; column 1 is the positive score. No inversion was found.",
+    "runtime_preprocessing_result": "The active baseline uses clean_narrative. Candidate adapter preprocessing was aligned by this fix; saved split narratives already match clean_narrative.",
+    "setfit_candidate": {
+      "development": {
+        "binary_prediction_metrics": {
+          "balanced_accuracy": 0.7094594594594594,
+          "confusion_matrix": [
+            [
+              9,
+              9
+            ],
+            [
+              6,
+              68
+            ]
+          ],
+          "confusion_matrix_labels": [
+            "NON_SIF_POTENTIAL",
+            "SIF_POTENTIAL"
+          ],
+          "f1": 0.9006622516556292,
+          "f2": 0.9115281501340483,
+          "false_negatives": 6,
+          "false_positives": 9,
+          "precision": 0.8831168831168831,
+          "predicted_class_counts": {
+            "NON_SIF_POTENTIAL": 15,
+            "SIF_POTENTIAL": 77
+          },
+          "recall": 0.918918918918919,
+          "specificity": 0.5,
+          "threshold": 0.25,
+          "true_negatives": 9,
+          "true_positives": 68
+        },
+        "operational_routing": {
+          "auto_non_sif_count": 14,
+          "auto_sif_count": 77,
+          "automatic_decision_coverage": 0.9891304347826086,
+          "human_review_count": 1,
+          "human_review_rate": 0.010869565217391304,
+          "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+          "reference_sif_routed_auto_non_sif": 6,
+          "review_band": [
+            0.2,
+            0.3
+          ]
+        },
+        "ranking_metrics": {
+          "average_precision": 0.9306891692734718,
+          "roc_auc": 0.7702702702702704
+        },
+        "score_distribution_by_reference_class": {
+          "NON_SIF_POTENTIAL": {
+            "count": 18,
+            "mean": 0.5421142133775787,
+            "quantiles": {
+              "q00": 0.06266877386959158,
+              "q10": 0.0820103493068741,
+              "q100": 0.9847354017442922,
+              "q25": 0.10728976121552844,
+              "q50": 0.5639831488784768,
+              "q75": 0.9697419922270913,
+              "q90": 0.9838729391241725
+            },
+            "standard_deviation": 0.4215142031059599
+          },
+          "SIF_POTENTIAL": {
+            "count": 74,
+            "mean": 0.85557652837173,
+            "quantiles": {
+              "q00": 0.0680826743144295,
+              "q10": 0.39739096542654184,
+              "q100": 0.9871230066435343,
+              "q25": 0.9143891965992827,
+              "q50": 0.9825435353819907,
+              "q75": 0.9848866135200169,
+              "q90": 0.9861453561475033
+            },
+            "standard_deviation": 0.2628384931892509
+          }
+        }
+      },
+      "labels": [
+        "0",
+        "1"
+      ],
+      "positive_probability_column": 1,
+      "status": "loaded_from_saved_artifact"
+    },
+    "tfidf_candidate": {
+      "artifact_sha256": "e97699a6b08209b2ea8f0d2736fabe4a91f60127fc50e82929aeddfdbbad9c8e",
+      "class_weight": null,
+      "classes": [
+        "0",
+        "1"
+      ],
+      "classifier_intercept": 1.3730004707545778,
+      "load_warnings": [
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed)."
+      ],
+      "positive_probability_column": 1,
+      "threshold_configuration": {
+        "binary_threshold": 0.25,
+        "calibration_status": "uncalibrated_model_score",
+        "human_review_band": [
+          0.2,
+          0.3
+        ],
+        "input_allowlist": [
+          "narrative"
+        ],
+        "model": "tfidf_word_12_char_35_logreg",
+        "seed": 26165,
+        "selection_note": "TF-IDF selected by development F2 and low-cost tie-break policy.",
+        "version": "sif-domain-v0.2"
+      }
+    }
+  },
+  "regression_benchmark": {
+    "active_baseline": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.7075,
+        "confusion_matrix": [
+          [
+            19,
+            21
+          ],
+          [
+            3,
+            47
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.7966101694915254,
+        "f2": 0.8768656716417911,
+        "false_negatives": 3,
+        "false_positives": 21,
+        "precision": 0.6911764705882353,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 22,
+          "SIF_POTENTIAL": 68
+        },
+        "recall": 0.94,
+        "specificity": 0.475,
+        "threshold": 0.4,
+        "true_negatives": 19,
+        "true_positives": 47
+      },
+      "display_name": "Active baseline v0.1",
+      "operational_routing": {
+        "auto_non_sif_count": 18,
+        "auto_sif_count": 65,
+        "automatic_decision_coverage": 0.9222222222222223,
+        "human_review_count": 7,
+        "human_review_rate": 0.07777777777777778,
+        "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+        "reference_sif_routed_auto_non_sif": 1,
+        "review_band": [
+          0.35,
+          0.45
+        ]
+      },
+      "ranking_metrics": {
+        "average_precision": 0.9513234763259015,
+        "roc_auc": 0.9305
+      },
+      "score_distribution_by_reference_class": {
+        "NON_SIF_POTENTIAL": {
+          "count": 40,
+          "mean": 0.4235197736529434,
+          "quantiles": {
+            "q00": 0.19456906940773347,
+            "q10": 0.29593162268232664,
+            "q100": 0.6962549085267327,
+            "q25": 0.31097951152229636,
+            "q50": 0.425843403655705,
+            "q75": 0.5234393289125403,
+            "q90": 0.5842310694539121
+          },
+          "standard_deviation": 0.12659425775094724
+        },
+        "SIF_POTENTIAL": {
+          "count": 50,
+          "mean": 0.6971284695213898,
+          "quantiles": {
+            "q00": 0.32802919106484674,
+            "q10": 0.5343309993752027,
+            "q100": 0.8867140371238216,
+            "q25": 0.6346859593187215,
+            "q50": 0.7218755204206114,
+            "q75": 0.7960881763914133,
+            "q90": 0.835240768273272
+          },
+          "standard_deviation": 0.12555980406252548
+        }
+      }
+    },
+    "all_non_sif_reference": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.5,
+        "confusion_matrix": [
+          [
+            40,
+            0
+          ],
+          [
+            50,
+            0
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.0,
+        "f2": 0.0,
+        "false_negatives": 50,
+        "false_positives": 0,
+        "precision": 0.0,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 90,
+          "SIF_POTENTIAL": 0
+        },
+        "recall": 0.0,
+        "specificity": 1.0,
+        "threshold": 0.5,
+        "true_negatives": 40,
+        "true_positives": 0
+      },
+      "display_name": "All-Non-SIF reference",
+      "operational_routing": {
+        "human_review_rate": null,
+        "note": "A constant-class reference has no operational review band.",
+        "status": "NOT_APPLICABLE"
+      }
+    },
+    "all_sif_reference": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.5,
+        "confusion_matrix": [
+          [
+            0,
+            40
+          ],
+          [
+            0,
+            50
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.7142857142857143,
+        "f2": 0.8620689655172413,
+        "false_negatives": 0,
+        "false_positives": 40,
+        "precision": 0.5555555555555556,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 0,
+          "SIF_POTENTIAL": 90
+        },
+        "recall": 1.0,
+        "specificity": 0.0,
+        "threshold": 0.5,
+        "true_negatives": 0,
+        "true_positives": 50
+      },
+      "display_name": "All-SIF reference",
+      "operational_routing": {
+        "human_review_rate": null,
+        "note": "A constant-class reference has no operational review band.",
+        "status": "NOT_APPLICABLE"
+      }
+    },
+    "setfit_candidate": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.75,
+        "confusion_matrix": [
+          [
+            24,
+            16
+          ],
+          [
+            5,
+            45
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.8108108108108109,
+        "f2": 0.8620689655172414,
+        "false_negatives": 5,
+        "false_positives": 16,
+        "precision": 0.7377049180327869,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 29,
+          "SIF_POTENTIAL": 61
+        },
+        "recall": 0.9,
+        "specificity": 0.6,
+        "threshold": 0.25,
+        "true_negatives": 24,
+        "true_positives": 45
+      },
+      "display_name": "SetFit candidate v0.2",
+      "operational_routing": {
+        "auto_non_sif_count": 28,
+        "auto_sif_count": 61,
+        "automatic_decision_coverage": 0.9888888888888889,
+        "human_review_count": 1,
+        "human_review_rate": 0.011111111111111112,
+        "note": "SetFit has no frozen review band; this diagnostic rate uses threshold \u00b10.05 and is not a deployed-routing claim.",
+        "reference_sif_routed_auto_non_sif": 4,
+        "review_band": [
+          0.2,
+          0.3
+        ],
+        "status": "DIAGNOSTIC_BAND_NOT_FROZEN"
+      },
+      "ranking_metrics": {
+        "average_precision": 0.8990953813206404,
+        "roc_auc": 0.8655
+      },
+      "score_distribution_by_reference_class": {
+        "NON_SIF_POTENTIAL": {
+          "count": 40,
+          "mean": 0.3895584710493981,
+          "quantiles": {
+            "q00": 0.04861325746896235,
+            "q10": 0.05419614885196545,
+            "q100": 0.9842693713299429,
+            "q25": 0.06815023186089418,
+            "q50": 0.10917528312187583,
+            "q75": 0.9181607347404349,
+            "q90": 0.969394165961299
+          },
+          "standard_deviation": 0.39614982288980705
+        },
+        "SIF_POTENTIAL": {
+          "count": 50,
+          "mean": 0.8407039295965812,
+          "quantiles": {
+            "q00": 0.052137556577143404,
+            "q10": 0.3144326020699394,
+            "q100": 0.9863370696498795,
+            "q25": 0.9047269938913832,
+            "q50": 0.9813830127061158,
+            "q75": 0.9845293564794751,
+            "q90": 0.985813019013006
+          },
+          "standard_deviation": 0.27953772239261987
+        }
+      }
+    },
+    "tfidf_candidate": {
+      "binary_prediction_metrics": {
+        "balanced_accuracy": 0.5,
+        "confusion_matrix": [
+          [
+            0,
+            40
+          ],
+          [
+            0,
+            50
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "NON_SIF_POTENTIAL",
+          "SIF_POTENTIAL"
+        ],
+        "f1": 0.7142857142857143,
+        "f2": 0.8620689655172413,
+        "false_negatives": 0,
+        "false_positives": 40,
+        "precision": 0.5555555555555556,
+        "predicted_class_counts": {
+          "NON_SIF_POTENTIAL": 0,
+          "SIF_POTENTIAL": 90
+        },
+        "recall": 1.0,
+        "specificity": 0.0,
+        "threshold": 0.25,
+        "true_negatives": 0,
+        "true_positives": 50
+      },
+      "display_name": "TF-IDF candidate v0.2",
+      "operational_routing": {
+        "auto_non_sif_count": 0,
+        "auto_sif_count": 90,
+        "automatic_decision_coverage": 1.0,
+        "human_review_count": 0,
+        "human_review_rate": 0.0,
+        "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+        "reference_sif_routed_auto_non_sif": 0,
+        "review_band": [
+          0.2,
+          0.3
+        ]
+      },
+      "ranking_metrics": {
+        "average_precision": 0.9263023374565189,
+        "roc_auc": 0.9119999999999999
+      },
+      "score_distribution_by_reference_class": {
+        "NON_SIF_POTENTIAL": {
+          "count": 40,
+          "mean": 0.7533981445622873,
+          "quantiles": {
+            "q00": 0.6998303469999912,
+            "q10": 0.721705834531901,
+            "q100": 0.8297665395474213,
+            "q25": 0.7337406370869864,
+            "q50": 0.7500585138190576,
+            "q75": 0.7668118753962335,
+            "q90": 0.7911807727490126
+          },
+          "standard_deviation": 0.02825173048222735
+        },
+        "SIF_POTENTIAL": {
+          "count": 50,
+          "mean": 0.811841111579119,
+          "quantiles": {
+            "q00": 0.7316916398103421,
+            "q10": 0.7785451490016175,
+            "q100": 0.8665784836934729,
+            "q25": 0.7968437552579226,
+            "q50": 0.8168438938317466,
+            "q75": 0.8285108440222679,
+            "q90": 0.8458783724909643
+          },
+          "standard_deviation": 0.02821685458469325
+        }
+      }
+    }
+  },
+  "report_version": "domain-v0.2-diagnosis-v1"
+}

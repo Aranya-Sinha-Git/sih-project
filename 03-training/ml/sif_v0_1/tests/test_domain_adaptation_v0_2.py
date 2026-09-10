@@ -1,5 +1,6 @@
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -8,6 +9,9 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = Path(__file__).resolve().parents[4]
 DATA = ROOT / "data" / "domain_adaptation_v0_2"
+sys.path.insert(0, str(ROOT / "src"))
+
+from train_domain_adapted_v0_2 import select_sif_operating_point
 
 
 def digest(path: Path) -> str:
@@ -71,3 +75,32 @@ def test_artifact_and_source_manifest_hashes_match_disk():
         assert path.stat().st_size == item["bytes"] and digest(path) == item["sha256"]
     for item in manifest["source_files"]:
         assert digest(PROJECT / item["path"]) == item["sha256"]
+
+
+def test_sif_selection_rejects_the_high_f2_all_positive_operating_point():
+    all_positive = {
+        "recall": 1.0, "precision": 0.80, "specificity": 0.0,
+        "balanced_accuracy": 0.5, "f2": 0.95, "review_rate": 0.0,
+    }
+    informative = {
+        "recall": 0.92, "precision": 0.88, "specificity": 0.55,
+        "balanced_accuracy": 0.735, "f2": 0.91, "review_rate": 0.10,
+    }
+    selected = select_sif_operating_point([all_positive, informative], positive_prevalence=0.80)
+    assert selected["development_gate_passed"] is True
+    assert selected["specificity"] == 0.55
+
+
+def test_saved_tfidf_search_has_no_point_that_meets_corrected_gates():
+    import ast
+
+    search = pd.read_csv(ROOT / "reports" / "domain_adaptation_v0_2" / "sif_tfidf_development_search.csv")
+    rows = []
+    for row in search.to_dict("records"):
+        matrix = ast.literal_eval(row["confusion_matrix"])
+        tn, fp = matrix[0]
+        specificity = tn / (tn + fp)
+        rows.append({**row, "specificity": specificity, "balanced_accuracy": (row["recall"] + specificity) / 2})
+    selected = select_sif_operating_point(rows, positive_prevalence=74 / 92)
+    assert selected["development_gate_passed"] is False
+    assert selected["selection_status"] == "NO_OPERATING_POINT_MET_DEVELOPMENT_GATES"

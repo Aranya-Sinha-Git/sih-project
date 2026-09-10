@@ -429,8 +429,24 @@ def binary_metrics(labels: np.ndarray, scores: np.ndarray, threshold: float) -> 
     precision, recall, f1, _ = precision_recall_fscore_support(labels, predictions, average="binary", zero_division=0)
     beta2 = 5 * precision * recall / (4 * precision + recall) if 4 * precision + recall else 0.0
     matrix = confusion_matrix(labels, predictions, labels=[0, 1])
-    return {"threshold": threshold, "precision": float(precision), "recall": float(recall), "f1": float(f1), "f2": float(beta2),
-            "confusion_matrix": matrix.tolist(), "false_negatives": int(matrix[1, 0]), "false_positives": int(matrix[0, 1])}
+    tn, fp, fn, tp = (int(value) for value in matrix.ravel())
+    specificity = tn / (tn + fp) if tn + fp else 0.0
+    balanced_accuracy = (float(recall) + specificity) / 2
+    return {
+        "threshold": threshold,
+        "true_positives": tp,
+        "false_positives": fp,
+        "true_negatives": tn,
+        "false_negatives": fn,
+        "precision": float(precision),
+        "recall": float(recall),
+        "specificity": specificity,
+        "balanced_accuracy": balanced_accuracy,
+        "f1": float(f1),
+        "f2": float(beta2),
+        "confusion_matrix": matrix.tolist(),
+        "predicted_class_counts": {"NON_SIF_POTENTIAL": tn + fn, "SIF_POTENTIAL": fp + tp},
+    }
 
 
 def routing_metrics(labels: np.ndarray, scores: np.ndarray, lower: float, upper: float) -> dict[str, Any]:
@@ -440,6 +456,50 @@ def routing_metrics(labels: np.ndarray, scores: np.ndarray, lower: float, upper:
     return {"lower": lower, "upper": upper, "review_count": int(review.sum()), "review_rate": float(review.mean()),
             "automatic_decision_coverage": float((~review).mean()), "auto_non_sif": int(auto_non.sum()), "auto_sif": int(auto_sif.sum()),
             "human_positive_routed_auto_non_sif": int(((labels == 1) & auto_non).sum())}
+
+
+SIF_DEVELOPMENT_GATES = {
+    "minimum_recall": 0.90,
+    "minimum_specificity": 0.50,
+    "minimum_balanced_accuracy": 0.70,
+    "maximum_review_rate": 0.40,
+}
+
+
+def select_sif_operating_point(search: list[dict[str, Any]], positive_prevalence: float) -> dict[str, Any]:
+    """Reject high-F2 but degenerate operating points before test evaluation.
+
+    F2 alone rewards an all-positive classifier on a SIF-heavy development set.
+    The gates make recall, specificity, class balance and review workload explicit.
+    Precision must also exceed the all-SIF reference precision (the development
+    prevalence), so the selected point must add information over that baseline.
+    """
+    eligible = [
+        row for row in search
+        if row["recall"] >= SIF_DEVELOPMENT_GATES["minimum_recall"]
+        and row["specificity"] >= SIF_DEVELOPMENT_GATES["minimum_specificity"]
+        and row["balanced_accuracy"] >= SIF_DEVELOPMENT_GATES["minimum_balanced_accuracy"]
+        and row["precision"] > positive_prevalence
+        and row["review_rate"] <= SIF_DEVELOPMENT_GATES["maximum_review_rate"]
+    ]
+    pool = eligible or search
+    best = max(
+        pool,
+        key=lambda row: (
+            row["balanced_accuracy"], row["f2"], row["recall"],
+            row["specificity"], row["precision"], -row["review_rate"],
+        ),
+    ).copy()
+    best.update({
+        "development_gate_passed": bool(eligible),
+        "development_gates": {**SIF_DEVELOPMENT_GATES, "precision_must_exceed_all_sif": positive_prevalence},
+        "all_sif_reference": {"precision": positive_prevalence, "recall": 1.0, "specificity": 0.0, "balanced_accuracy": 0.5},
+    })
+    if not eligible:
+        best["selection_status"] = "NO_OPERATING_POINT_MET_DEVELOPMENT_GATES"
+    else:
+        best["selection_status"] = "ELIGIBLE_DEVELOPMENT_OPERATING_POINT"
+    return best
 
 
 def build_tfidf(c: float = 1.0, class_weight: Any = None) -> Pipeline:
@@ -465,12 +525,16 @@ def train_tfidf(train: pd.DataFrame, dev: pd.DataFrame) -> tuple[Pipeline, dict[
                     metrics = binary_metrics(y_dev, scores, float(threshold))
                     routing = routing_metrics(y_dev, scores, lower, upper)
                     search.append({"c": c, "class_weight": weight_name, **metrics, **routing})
-    # Development selection prioritises F2, then recall, precision, and automatic coverage.
-    best = max(search, key=lambda row: (row["f2"], row["recall"], row["precision"], row["automatic_decision_coverage"], -row["review_rate"]))
+    best = select_sif_operating_point(search, float(y_dev.mean()))
     REPORTS.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(search).to_csv(REPORTS / "sif_tfidf_development_search.csv", index=False, lineterminator="\n")
     weights = dict(weight_options)[best["class_weight"]]
-    final = build_tfidf(float(best["c"]), weights).fit(pd.concat([train.narrative, dev.narrative]), np.concatenate([y_train, y_dev]))
+    # Keep the fitted artifact on the same score scale used to choose its
+    # threshold. Re-fitting the vectorizer/classifier on development data after
+    # threshold selection shifted every score upward in v0.2 and made the saved
+    # operating point invalid.
+    final = build_tfidf(float(best["c"]), weights).fit(train.narrative, y_train)
+    best["final_fit_scope"] = "training_only"
     return final, best
 
 
@@ -492,8 +556,14 @@ def train_setfit(train: pd.DataFrame, dev: pd.DataFrame) -> tuple[Any | None, di
         trainer.train()
         scores_raw = model.predict_proba(dev.narrative.tolist())
         scores = scores_raw.detach().cpu().numpy()[:, 1] if hasattr(scores_raw, "detach") else np.asarray(scores_raw)[:, 1]
-        threshold_rows = [binary_metrics(y_dev, scores, float(value)) for value in np.arange(0.25, 0.76, 0.05)]
-        best = max(threshold_rows, key=lambda row: (row["f2"], row["recall"], row["precision"]))
+        threshold_rows = []
+        for value in np.arange(0.25, 0.76, 0.05):
+            threshold = float(value)
+            threshold_rows.append({
+                **binary_metrics(y_dev, scores, threshold),
+                **routing_metrics(y_dev, scores, max(0.05, threshold - 0.05), min(0.95, threshold + 0.05)),
+            })
+        best = select_sif_operating_point(threshold_rows, float(y_dev.mean()))
         info = {**best, "status": "trained", "model_id": model_id, "task_specific_encoder_fine_tuning": True,
                 "device": str(next(model.model_body.parameters()).device),
                 "max_sequence_length": 256, "reports_over_limit": int(sum(length > 256 for length in token_lengths)),
@@ -619,8 +689,10 @@ def train_all(skip_setfit: bool = False) -> dict[str, Any]:
 
     selection_criteria = {
         "defined_before_test_evaluation": True,
-        "primary_development_metric": "F2",
-        "promotion": {"candidate_test_f2_at_least_baseline": True, "candidate_test_recall_not_below_baseline_by_more_than": 0.03,
+        "primary_development_metric": "balanced_accuracy_after_explicit_development_gates",
+        "development_gates": SIF_DEVELOPMENT_GATES,
+        "precision_must_exceed": "all-SIF development precision",
+        "promotion": {"candidate_development_gate_passed": True, "candidate_test_f2_at_least_baseline": True, "candidate_test_recall_not_below_baseline_by_more_than": 0.03,
                       "warm_single_inference_p95_ms_at_most": 50, "artifact_loads_in_real_backend": True},
         "tie_break": "prefer TF-IDF when development F2 differs from SetFit by no more than 0.02 or TF-IDF is faster",
     }
@@ -637,14 +709,16 @@ def train_all(skip_setfit: bool = False) -> dict[str, Any]:
         setfit_model, setfit_dev = train_setfit(train, dev)
         json_write(REPORTS / "setfit_training_report.json", setfit_dev)
 
-    # Candidate selection is development-only.  SetFit remains a trained comparison
-    # candidate; deployment uses only the selected model.
+    # The deployable research artifact remains TF-IDF. SetFit is a separately
+    # saved comparison candidate; neither can displace the active baseline
+    # without passing the corrected development and final assessment gates.
     selected_name = "tfidf_word_12_char_35_logreg"
-    if setfit_model is not None and setfit_dev.get("f2", 0) > tfidf_dev["f2"] + 0.02:
-        selected_name = "setfit_all_minilm_l6_v2"
-    selection_note = ("SetFit selected because its development F2 gain exceeded 0.02."
-                      if selected_name == "setfit_all_minilm_l6_v2"
-                      else "TF-IDF selected by development F2 and low-cost tie-break policy.")
+    if tfidf_dev.get("development_gate_passed"):
+        selection_note = "TF-IDF met the explicit development gates and remains the low-cost deployable candidate."
+    elif setfit_dev.get("development_gate_passed"):
+        selection_note = "TF-IDF failed the development gates; SetFit passed but remains a non-deployed comparison pending a fresh final assessment and runtime-cost decision."
+    else:
+        selection_note = "No trained candidate met the explicit development gates; retain the active baseline."
 
     threshold = float(tfidf_dev["threshold"])
     lower, upper = float(tfidf_dev["lower"]), float(tfidf_dev["upper"])
@@ -681,7 +755,11 @@ def train_all(skip_setfit: bool = False) -> dict[str, Any]:
         "promotion_decision": {
             "active_sif_model": "baseline_sif_v0.1",
             "candidate_promoted": False,
-            "reason": "Candidate F2 was below baseline on the protected prototype test; the quality gate failed.",
+            "reason": (
+                "Candidate failed the explicit development gates."
+                if not tfidf_dev.get("development_gate_passed")
+                else "Candidate F2 was below baseline on the prototype regression benchmark; the quality gate failed."
+            ),
             "candidate_artifact_retained_for_research": True,
         },
     }

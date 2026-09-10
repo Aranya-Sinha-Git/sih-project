@@ -18,10 +18,10 @@ mapper is active with explicit partial-coverage handling.
   28 uncertain. These are AI-assisted labels, not HSE expert ground truth.
 - Merged development population: 500 unique incident IDs; 461 binary rows and
   39 unresolved rows retained outside binary supervision.
-- Group-safe split: 369 train, 92 development. The separate 90-row protected
-  prototype test contains 50 SIF and 40 Non-SIF labels created by deterministic
-  policy checks without model predictions. It is AI-assisted and is not an
-  external-validation result.
+- Group-safe split: 369 train, 92 development. The separate 90-row prototype
+  set contains 50 SIF and 40 Non-SIF labels created by deterministic policy
+  checks without model predictions. It has informed failure diagnosis and is
+  now a regression benchmark—not fresh blind or external validation.
 - Input allowlist: narrative text only. Labels, model scores, adjudications,
   explanations, source-native outcomes and human-assigned LSRs are excluded.
 - Canonical blind-test v0.2/v0.3 IDs, source IDs and normalized narrative hashes
@@ -42,20 +42,34 @@ mapper is active with explicit partial-coverage handling.
   masked per rule. Six rules are trained; LSR01, LSR02 and LSR08 are unavailable
   because positive support was insufficient.
 
-## Protected-test results and promotion
+## Regression diagnosis and promotion
 
 Binary classification and routing are reported separately; review cases are
 not counted as correct classifications.
 
-| SIF model | Precision | Recall | F2 | FN / FP | Review rate | Auto coverage |
-|---|---:|---:|---:|---:|---:|---:|
-| Active baseline v0.1 | 0.691 | 0.940 | 0.877 | 3 / 21 | 7.8% | 92.2% |
-| v0.2 TF-IDF candidate | 0.556 | 1.000 | 0.862 | 0 / 40 | 0.0% | 100.0% |
+| SIF model | Precision | Recall | Specificity | Balanced accuracy | F2 | TP / FP / TN / FN | Review rate |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Active baseline v0.1 | 0.691 | 0.940 | 0.475 | 0.708 | 0.877 | 47 / 21 / 19 / 3 | 7.8% |
+| v0.2 TF-IDF candidate | 0.556 | 1.000 | 0.000 | 0.500 | 0.862 | 50 / 40 / 0 / 0 | 0.0% |
+| v0.2 SetFit candidate | 0.738 | 0.900 | 0.600 | 0.750 | 0.862 | 45 / 16 / 24 / 5 | 1.1% |
+| All-SIF reference | 0.556 | 1.000 | 0.000 | 0.500 | 0.862 | 50 / 40 / 0 / 0 | n/a |
+| All-Non-SIF reference | 0.000 | 0.000 | 1.000 | 0.500 | 0.000 | 0 / 0 / 40 / 50 | n/a |
 
-The v0.2 candidate predicts every protected-test case as SIF at its selected
-threshold, so it is not promoted. The baseline routes one human-positive case
-automatically to the Non-SIF band. Exact false-negative IDs remain in
-`reports/domain_adaptation_v0_2/sif_test_evaluation.json`.
+The TF-IDF candidate ranks cases usefully (regression ROC AUC 0.912), but its
+threshold is below every saved score. Development was 80.4% SIF, and F2-only
+selection chose an all-SIF operating point whose F2 (0.954) exactly matched the
+trivial all-SIF development reference. The threshold was then transferred to a
+model refitted on train plus development, which changed the score scale. Class
+encoding and probability-column selection were correct. The training code now
+requires recall, specificity, balanced accuracy, precision-over-all-SIF and
+review-workload gates, and it preserves the train-only fit used for threshold
+selection. No saved TF-IDF search point passes those gates, so no retraining or
+promotion was justified. SetFit remains a comparison artifact; its results on
+the 90 rows are diagnostic only. The baseline remains active.
+
+Full score distributions, ranking metrics, split/provenance checks and cached
+row predictions are in `reports/domain_adaptation_v0_2/diagnosis_v0_2.json` and
+`sif_regression_predictions_v0_2.csv`.
 
 LSR test summary across 475 known rule cells: micro precision/recall/F1
 0.780/0.696/0.736 and macro precision/recall/F1 0.598/0.514/0.496. Per-rule F1:
@@ -73,11 +87,11 @@ The zero-result precedence is `MAPPING_UNAVAILABLE` →
 `NO_CONFIDENT_MAPPING`. The application makes zero runtime generative-LLM calls.
 
 Measured on Windows 11, Ryzen 7 7840HS-class CPU (8 cores/16 threads), 16 GB RAM,
-Python 3.13, concurrency 1: cold-start median/p95 4944/4992 ms; warm SIF
-3.87/9.20 ms; warm LSR 3.02/12.20 ms; retrieval 1.45/11.85 ms; uncached full API
-90.12/149.46 ms; cached duplicate API 46.30/63.98 ms; 50-row batch throughput
-12.18 reports/s. Deployed SIF+LSR artifacts are 1,351,094 bytes; end-of-benchmark
-RSS was 204,603,392 bytes. No equivalent authorized LLM benchmark existed, so
+Python 3.13, concurrency 1: cold-start median/p95 4306/4405 ms; warm SIF
+2.84/6.48 ms; warm LSR 2.17/8.94 ms; retrieval 1.08/9.01 ms; uncached full API
+90.53/144.90 ms; cached duplicate API 45.45/64.32 ms; 50-row batch throughput
+12.26 reports/s. Deployed SIF+LSR artifacts are 1,351,094 bytes; end-of-benchmark
+RSS was 204,853,248 bytes. No equivalent authorized LLM benchmark existed, so
 relative speed/cost is unmeasured. Runtime LLM token charges are zero; hosting,
 offline annotation/training and maintenance costs remain.
 

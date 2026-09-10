@@ -87,6 +87,26 @@ Add a dated entry with:
 - **Scope:** SIF/LSR artifacts and runtime integration in `01-app` and
   `03-training/ml/sif_v0_1`. Frozen human-validation releases remain unchanged.
 
+### 2026-09-10 — Reject F2-only SIF operating-point selection
+
+- **Status:** accepted
+- **Decision:** Keep v0.1 active; treat the existing 90-report prototype set as
+  a regression benchmark, not fresh blind validation. Require a development
+  candidate to meet explicit recall, specificity, balanced-accuracy,
+  precision-over-all-SIF and review-workload gates. Fit the final candidate on
+  the same training partition used to establish its score scale unless a
+  separately leakage-free calibration procedure is frozen.
+- **Rationale:** The v0.2 TF-IDF search selected the all-SIF development result
+  because F2 alone rewarded the 80.4% positive prevalence. Refitting on train
+  plus development then shifted scores while retaining the train-only
+  threshold. Saved scores show useful ranking but a failed operating point;
+  class encoding and probability-column mapping are correct. No saved TF-IDF
+  operating point passes the corrected gates, and SetFit has no fresh final
+  assessment supporting promotion.
+- **Scope:** SIF candidate selection, thresholding, diagnostic reports and
+  runtime candidate preprocessing. Frozen v0.2/v0.3 human-validation releases
+  and active baseline artifacts are unchanged.
+
 Date: 2026-09-05
 
 ## Blind-test status

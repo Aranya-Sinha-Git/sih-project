@@ -145,6 +145,9 @@ class FrozenClassifierAdapter:
                 path = self.artifact_dir / "sif_tfidf.joblib"; key = str(path.resolve())
                 if meta["status"] != "READY":
                     raise ValueError("candidate artifact invalid")
+                narrative = _predict_module().clean_narrative(narrative)
+                if not narrative:
+                    raise ValueError("candidate narrative is empty after preprocessing")
                 if key not in _JOBLIB_MODELS:
                     _JOBLIB_MODELS[key] = joblib.load(path)
                 score = float(_JOBLIB_MODELS[key].predict_proba([narrative])[0, 1])
@@ -185,10 +188,13 @@ class FrozenClassifierAdapter:
         if meta.get("model_identity") not in {"tfidf_word_12_char_35", "tfidf_word_12_char_35_logreg"} or meta.get("status") != "READY":
             return [self.screen(narrative) for narrative in narratives]
         try:
+            cleaned = [_predict_module().clean_narrative(narrative) for narrative in narratives]
+            if any(not narrative for narrative in cleaned):
+                return [self.screen(narrative) for narrative in narratives]
             key = str(model_path.resolve())
             if key not in _JOBLIB_MODELS:
                 _JOBLIB_MODELS[key] = joblib.load(model_path)
-            scores = _JOBLIB_MODELS[key].predict_proba(narratives)[:, 1]
+            scores = _JOBLIB_MODELS[key].predict_proba(cleaned)[:, 1]
             lower = meta["thresholds"]["review_lower_inclusive"]; upper = meta["thresholds"]["review_upper_inclusive"]
             results = []
             for score_value in scores:
