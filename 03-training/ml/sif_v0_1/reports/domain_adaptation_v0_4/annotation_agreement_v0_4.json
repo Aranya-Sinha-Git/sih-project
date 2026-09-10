@@ -1,0 +1,87 @@
+{
+  "non_independent_recovery_rows_excluded_from_agreement": 125,
+  "resolution_counts": {
+    "FIRST_PASS_NOT_SELECTED_FOR_SECOND_PASS": 358,
+    "FIRST_SECOND_PASS_AGREEMENT": 132,
+    "SECOND_PASS_RECOVERY_NOT_INDEPENDENT_RETAIN_FIRST_PASS": 125,
+    "TWO_PASS_DISAGREEMENT_RETAINED_UNRESOLVED": 135
+  },
+  "reviewed_rows": 267,
+  "rules": {
+    "LSR01": {
+      "agreement_rate": 0.9325842696629213,
+      "cohen_kappa": 0.2305475504322766,
+      "pass1_positive": 16,
+      "pass2_positive": 3
+    },
+    "LSR02": {
+      "agreement_rate": 0.9850187265917603,
+      "cohen_kappa": 0.8201414617716403,
+      "pass1_positive": 8,
+      "pass2_positive": 7
+    },
+    "LSR03": {
+      "agreement_rate": 0.9588014981273408,
+      "cohen_kappa": 0.8516217035465292,
+      "pass1_positive": 43,
+      "pass2_positive": 41
+    },
+    "LSR04": {
+      "agreement_rate": 0.9550561797752809,
+      "cohen_kappa": 0.8384510664044774,
+      "pass1_positive": 42,
+      "pass2_positive": 41
+    },
+    "LSR05": {
+      "agreement_rate": 0.9700374531835206,
+      "cohen_kappa": 0.8633572159672467,
+      "pass1_positive": 28,
+      "pass2_positive": 32
+    },
+    "LSR06": {
+      "agreement_rate": 0.9176029962546817,
+      "cohen_kappa": 0.8364926931106471,
+      "pass1_positive": 150,
+      "pass2_positive": 143
+    },
+    "LSR07": {
+      "agreement_rate": 0.9700374531835206,
+      "cohen_kappa": 0.8283923837069174,
+      "pass1_positive": 26,
+      "pass2_positive": 20
+    },
+    "LSR08": {
+      "agreement_rate": 0.7752808988764045,
+      "cohen_kappa": 0.14051183003380008,
+      "pass1_positive": 51,
+      "pass2_positive": 0
+    },
+    "LSR09": {
+      "agreement_rate": 0.9700374531835206,
+      "cohen_kappa": 0.9221716159591911,
+      "pass1_positive": 62,
+      "pass2_positive": 65
+    }
+  },
+  "sif": {
+    "agreement_rate": 0.8426966292134831,
+    "cohen_kappa": 0.6683033601514434,
+    "confusion": {
+      "NON_SIF_POTENTIAL": {
+        "NON_SIF_POTENTIAL": 37,
+        "SIF_POTENTIAL": 11,
+        "UNCERTAIN": 6
+      },
+      "SIF_POTENTIAL": {
+        "NON_SIF_POTENTIAL": 8,
+        "SIF_POTENTIAL": 168,
+        "UNCERTAIN": 9
+      },
+      "UNCERTAIN": {
+        "NON_SIF_POTENTIAL": 4,
+        "SIF_POTENTIAL": 4,
+        "UNCERTAIN": 20
+      }
+    }
+  }
+}

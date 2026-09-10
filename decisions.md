@@ -125,6 +125,21 @@ Add a dated entry with:
   The 90-report set remains diagnostic, frozen human-validation releases are
   unchanged, and runtime continues to make zero generative-LLM calls.
 
+### 2026-09-10 — Retain active runtime after v0.4 real-report expansion
+
+- **Status:** accepted
+- **Decision:** Keep v0.1 SIF and v0.2 LSR artifacts active. Retain the
+  train-only v0.4 TF-IDF, SetFit, and nine-rule LSR artifacts as experimental
+  reproducibility artifacts only.
+- **Rationale:** The selected TF-IDF candidate passed development gates but on
+  its frozen 132-row binary fresh assessment had better specificity/balanced
+  accuracy (0.542/0.741) while missing five SIF references, versus zero for the
+  active baseline. Its F2 was 0.904 versus the baseline’s 0.921. The candidate
+  LSR mapper has incomplete reliable final support for LSR01, LSR02, and LSR08.
+  AI-assisted references are explicitly not HSE expert ground truth.
+- **Scope:** `domain_adaptation_v0_4` data, artifacts, reports and demo
+  material. No frozen human-validation artifact or live runtime path changed.
+
 Date: 2026-09-05
 
 ## Blind-test status

@@ -1,0 +1,64 @@
+{
+  "batches": [
+    {
+      "input": "annotation_pass2_batch_01_input.csv",
+      "input_sha256": "107577cc63eeabc20c5dd36569c58d1d527c8b8a416a9d86ba1ee0548f4eaa59",
+      "output": "annotation_pass2_batch_01.csv",
+      "rows": 125
+    },
+    {
+      "input": "annotation_pass2_batch_02_input.csv",
+      "input_sha256": "c8acaf89c75cc17991528242bbb25a0fc5dc7d4bf7906ab66f3589102469157e",
+      "output": "annotation_pass2_batch_02.csv",
+      "rows": 125
+    },
+    {
+      "input": "annotation_pass2_batch_03_input.csv",
+      "input_sha256": "780d2cd6d8451e86b86086eed6ed73e90f1313d3b6d9321c03945510c486b2bc",
+      "output": "annotation_pass2_batch_03.csv",
+      "rows": 125
+    },
+    {
+      "input": "annotation_pass2_batch_04_input.csv",
+      "input_sha256": "a7ec22190d67c9f059888a05f6a181885ce4a7e61bdae4ad8a095e0a13ec7665",
+      "output": "annotation_pass2_batch_04.csv",
+      "rows": 4
+    }
+  ],
+  "first_pass_positive_counts": {
+    "LSR01": 24,
+    "LSR02": 9,
+    "LSR03": 143,
+    "LSR04": 67,
+    "LSR05": 37,
+    "LSR06": 438,
+    "LSR07": 78,
+    "LSR08": 74,
+    "LSR09": 159
+  },
+  "first_pass_sif_rates_by_annotator": {
+    "pass1-batch-01": 0.572,
+    "pass1-batch-02": 0.76,
+    "pass1-batch-03": 0.6
+  },
+  "frozen_at_utc": "2026-09-10T14:56:47+00:00",
+  "input_contains_first_pass_labels_or_rationales": false,
+  "input_contains_model_predictions_or_scores": false,
+  "input_sha256": "b5e2ceae460efdc0f4a82125c195fd376073e6b6bf067bf237564e2ae83bac81",
+  "rare_rules_below_50_positive_first_pass": [
+    "LSR01",
+    "LSR02",
+    "LSR05"
+  ],
+  "rows": 379,
+  "selection_counts": {
+    "first_pass_sif_uncertain": 42,
+    "random_remaining": 65,
+    "rare_rule_positive_union": 66,
+    "systematic_batch_union": 250
+  },
+  "status": "FROZEN_BLINDED_SECOND_PASS_INPUT",
+  "systematic_sif_rate_outlier_annotators_over_0.12_from_median": [
+    "pass1-batch-02"
+  ]
+}

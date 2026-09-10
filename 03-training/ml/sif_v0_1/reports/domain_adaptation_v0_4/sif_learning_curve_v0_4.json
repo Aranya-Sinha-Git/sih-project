@@ -1,0 +1,260 @@
+{
+  "all_sif_reference": {
+    "binary_prediction_metrics": {
+      "balanced_accuracy": 0.5,
+      "confusion_matrix": [
+        [
+          0,
+          57
+        ],
+        [
+          0,
+          175
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "NON_SIF_POTENTIAL",
+        "SIF_POTENTIAL"
+      ],
+      "f1": 0.85995085995086,
+      "f2": 0.9388412017167381,
+      "false_negatives": 0,
+      "false_positives": 57,
+      "precision": 0.7543103448275862,
+      "predicted_class_counts": {
+        "NON_SIF_POTENTIAL": 0,
+        "SIF_POTENTIAL": 232
+      },
+      "recall": 1.0,
+      "specificity": 0.0,
+      "threshold": 0.5,
+      "true_negatives": 0,
+      "true_positives": 175
+    },
+    "operational_routing": {
+      "human_review_rate": null,
+      "note": "A constant-class reference has no operational review band.",
+      "status": "NOT_APPLICABLE"
+    }
+  },
+  "checkpoints": [
+    {
+      "all_sif_reference": {
+        "balanced_accuracy": 0.5,
+        "precision": 0.7543103448275862,
+        "recall": 1.0,
+        "specificity": 0.0
+      },
+      "auto_non_sif": 67,
+      "auto_sif": 99,
+      "automatic_decision_coverage": 0.7155172413793104,
+      "balanced_accuracy": 0.7781954887218046,
+      "c": 2.0,
+      "checkpoint": "existing_only",
+      "class_weight": "non_sif_1_5",
+      "classes": [
+        "0",
+        "1"
+      ],
+      "confusion_matrix": [
+        [
+          48,
+          9
+        ],
+        [
+          50,
+          125
+        ]
+      ],
+      "declared_objective": "Pass recall, specificity, balanced-accuracy, precision-over-all-SIF, and review-workload gates; then maximize balanced accuracy, F2, recall, specificity, precision, and lower review rate.",
+      "development_class_counts": {
+        "NON_SIF_POTENTIAL": 57,
+        "SIF_POTENTIAL": 175
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "maximum_review_rate": 0.4,
+        "minimum_balanced_accuracy": 0.7,
+        "minimum_recall": 0.9,
+        "minimum_specificity": 0.5,
+        "precision_must_exceed_all_sif": 0.7543103448275862
+      },
+      "development_rows": 232,
+      "f1": 0.8090614886731392,
+      "f2": 0.7494004796163071,
+      "false_negatives": 50,
+      "false_positives": 9,
+      "fit_scope": "training_only_no_refit_after_threshold_selection",
+      "human_positive_routed_auto_non_sif": 30,
+      "lower": 0.7499999999999998,
+      "model_family": "tfidf",
+      "positive_probability_column": 1,
+      "precision": 0.9328358208955224,
+      "predicted_class_counts": {
+        "NON_SIF_POTENTIAL": 98,
+        "SIF_POTENTIAL": 134
+      },
+      "recall": 0.7142857142857143,
+      "review_count": 66,
+      "review_rate": 0.28448275862068967,
+      "selection_status": "NO_OPERATING_POINT_MET_DEVELOPMENT_GATES",
+      "specificity": 0.8421052631578947,
+      "threshold": 0.7999999999999998,
+      "training_class_counts": {
+        "NON_SIF_POTENTIAL": 71,
+        "SIF_POTENTIAL": 298
+      },
+      "training_rows": 369,
+      "true_negatives": 48,
+      "true_positives": 125,
+      "upper": 0.8499999999999999
+    },
+    {
+      "all_sif_reference": {
+        "balanced_accuracy": 0.5,
+        "precision": 0.7543103448275862,
+        "recall": 1.0,
+        "specificity": 0.0
+      },
+      "auto_non_sif": 37,
+      "auto_sif": 156,
+      "automatic_decision_coverage": 0.8318965517241379,
+      "balanced_accuracy": 0.7437593984962406,
+      "c": 2.0,
+      "checkpoint": "through_annotation_batch_02",
+      "class_weight": "none",
+      "classes": [
+        "0",
+        "1"
+      ],
+      "confusion_matrix": [
+        [
+          33,
+          24
+        ],
+        [
+          16,
+          159
+        ]
+      ],
+      "declared_objective": "Pass recall, specificity, balanced-accuracy, precision-over-all-SIF, and review-workload gates; then maximize balanced accuracy, F2, recall, specificity, precision, and lower review rate.",
+      "development_class_counts": {
+        "NON_SIF_POTENTIAL": 57,
+        "SIF_POTENTIAL": 175
+      },
+      "development_gate_passed": true,
+      "development_gates": {
+        "maximum_review_rate": 0.4,
+        "minimum_balanced_accuracy": 0.7,
+        "minimum_recall": 0.9,
+        "minimum_specificity": 0.5,
+        "precision_must_exceed_all_sif": 0.7543103448275862
+      },
+      "development_rows": 232,
+      "f1": 0.888268156424581,
+      "f2": 0.9003397508493772,
+      "false_negatives": 16,
+      "false_positives": 24,
+      "fit_scope": "training_only_no_refit_after_threshold_selection",
+      "human_positive_routed_auto_non_sif": 11,
+      "lower": 0.6999999999999997,
+      "model_family": "tfidf",
+      "positive_probability_column": 1,
+      "precision": 0.8688524590163934,
+      "predicted_class_counts": {
+        "NON_SIF_POTENTIAL": 49,
+        "SIF_POTENTIAL": 183
+      },
+      "recall": 0.9085714285714286,
+      "review_count": 39,
+      "review_rate": 0.16810344827586207,
+      "selection_status": "ELIGIBLE_DEVELOPMENT_OPERATING_POINT",
+      "specificity": 0.5789473684210527,
+      "threshold": 0.7499999999999998,
+      "training_class_counts": {
+        "NON_SIF_POTENTIAL": 114,
+        "SIF_POTENTIAL": 431
+      },
+      "training_rows": 545,
+      "true_negatives": 33,
+      "true_positives": 159,
+      "upper": 0.7999999999999998
+    },
+    {
+      "all_sif_reference": {
+        "balanced_accuracy": 0.5,
+        "precision": 0.7543103448275862,
+        "recall": 1.0,
+        "specificity": 0.0
+      },
+      "auto_non_sif": 31,
+      "auto_sif": 182,
+      "automatic_decision_coverage": 0.9181034482758621,
+      "balanced_accuracy": 0.743358395989975,
+      "c": 2.0,
+      "checkpoint": "through_annotation_batch_03",
+      "class_weight": "non_sif_1_5",
+      "classes": [
+        "0",
+        "1"
+      ],
+      "confusion_matrix": [
+        [
+          31,
+          26
+        ],
+        [
+          10,
+          165
+        ]
+      ],
+      "declared_objective": "Pass recall, specificity, balanced-accuracy, precision-over-all-SIF, and review-workload gates; then maximize balanced accuracy, F2, recall, specificity, precision, and lower review rate.",
+      "development_class_counts": {
+        "NON_SIF_POTENTIAL": 57,
+        "SIF_POTENTIAL": 175
+      },
+      "development_gate_passed": true,
+      "development_gates": {
+        "maximum_review_rate": 0.4,
+        "minimum_balanced_accuracy": 0.7,
+        "minimum_recall": 0.9,
+        "minimum_specificity": 0.5,
+        "precision_must_exceed_all_sif": 0.7543103448275862
+      },
+      "development_rows": 232,
+      "f1": 0.9016393442622951,
+      "f2": 0.9259259259259259,
+      "false_negatives": 10,
+      "false_positives": 26,
+      "fit_scope": "training_only_no_refit_after_threshold_selection",
+      "human_positive_routed_auto_non_sif": 6,
+      "lower": 0.49999999999999994,
+      "model_family": "tfidf",
+      "positive_probability_column": 1,
+      "precision": 0.8638743455497382,
+      "predicted_class_counts": {
+        "NON_SIF_POTENTIAL": 41,
+        "SIF_POTENTIAL": 191
+      },
+      "recall": 0.9428571428571428,
+      "review_count": 19,
+      "review_rate": 0.08189655172413793,
+      "selection_status": "ELIGIBLE_DEVELOPMENT_OPERATING_POINT",
+      "specificity": 0.543859649122807,
+      "threshold": 0.5499999999999999,
+      "training_class_counts": {
+        "NON_SIF_POTENTIAL": 197,
+        "SIF_POTENTIAL": 581
+      },
+      "training_rows": 778,
+      "true_negatives": 31,
+      "true_positives": 165,
+      "upper": 0.6
+    }
+  ],
+  "fixed_development_class_counts": {
+    "NON_SIF_POTENTIAL": 57,
+    "SIF_POTENTIAL": 175
+  },
+  "fixed_development_rows": 232
+}

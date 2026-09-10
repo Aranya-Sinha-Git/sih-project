@@ -1,0 +1,98 @@
+{
+  "annotation_version": "gpt-5.6-sol-ai-assisted-v0.4.0",
+  "batch_files": [
+    {
+      "path": "annotation_batch_01_input.csv",
+      "rows": 250,
+      "sha256": "ca4d82097c673bbb66f83097186c813c8e3d4f74b9ce0d452b462251f6ce946a"
+    },
+    {
+      "path": "annotation_batch_02_input.csv",
+      "rows": 250,
+      "sha256": "cb181aab1448e1dc98e54191898e6e1d483d6aeb28ffb0e618f6bda2fdbcfa1e"
+    },
+    {
+      "path": "annotation_batch_03_input.csv",
+      "rows": 250,
+      "sha256": "405e30e7f66e1448f6968c2630be9174ae910735d403a44d4d680d6734450335"
+    },
+    {
+      "path": "annotation_batch_04_input.csv",
+      "rows": 250,
+      "sha256": "245c1a867a6929cf939237daa62f49ee6c758e92721bb131fc35a7ba911b8a73"
+    }
+  ],
+  "exclusion_summary": {
+    "excluded_duplicate_groups": 779,
+    "excluded_incident_ids": 851,
+    "excluded_normalized_hashes": 851,
+    "excluded_source_ids": 851,
+    "protected_files_read": 6
+  },
+  "frozen_at_utc": "2026-09-10T13:45:29+00:00",
+  "guide": {
+    "path": "SIF_LABELING_GUIDE.md",
+    "sha256": "06fb86b124e94c973d6799d4a443a861427b4651d6be88a306352dc8d1ecbbfa",
+    "version": "prototype-sif-labeling-framework-repo-2026-09-10"
+  },
+  "length_band_counts": {
+    "long": 104,
+    "medium": 552,
+    "short": 343,
+    "very_long": 1
+  },
+  "limitations": [
+    "The available unused real-report pool is OSHA SIR only; source diversity cannot be increased without external acquisition.",
+    "Source-native severe-injury status is retained as metadata and is never used as the SIF target."
+  ],
+  "near_duplicate_policy": {
+    "character_sequence_ratio": 0.92,
+    "excluded_rows": 0,
+    "token_3gram_jaccard": 0.82
+  },
+  "partition_counts": {
+    "development_addition": 150,
+    "fresh_final_assessment": 150,
+    "train_addition": 700
+  },
+  "partition_policy": "Exactly 150 fresh final, 150 development, and 700 training additions assigned by stable hash before annotation; no prediction-based selection.",
+  "retrieval_stratum_counts": {
+    "GENERAL": 300,
+    "HAZARD_TERM_POSSIBLE_NON_SIF": 243,
+    "HIGH_RISK": 133,
+    "LSR01": 3,
+    "LSR02": 87,
+    "LSR03": 222,
+    "LSR04": 29,
+    "LSR05": 78,
+    "LSR06": 192,
+    "LSR07": 94,
+    "LSR08": 0,
+    "LSR09": 132
+  },
+  "rows": 1000,
+  "rules": {
+    "path": "reference/iogp_life_saving_rules_v2018.json",
+    "sha256": "266056d8f74aea54b54fde79f1f7682fa75a2e01ffb56fceaa6d94aa577ac2de"
+  },
+  "seed": 20260910,
+  "selected_source_sha256": "79acbd1a621b769d69556247cf0a1639726677809eb9fa681b8e974405148972",
+  "selection_policy": "Keyword/patterns select candidates only. Stable hashing and activity/year caps provide diversity. Labels are assigned later by contextual GPT-5.6 Sol review.",
+  "source_counts": {
+    "OSHA_SIR": 1000
+  },
+  "status": "FROZEN_BEFORE_ANNOTATION_OR_MODEL_PREDICTIONS",
+  "year_counts": {
+    "2015": 61,
+    "2016": 84,
+    "2017": 88,
+    "2018": 104,
+    "2019": 85,
+    "2020": 98,
+    "2021": 72,
+    "2022": 95,
+    "2023": 95,
+    "2024": 114,
+    "2025": 104
+  }
+}

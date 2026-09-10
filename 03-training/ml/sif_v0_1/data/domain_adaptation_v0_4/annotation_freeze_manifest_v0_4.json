@@ -1,0 +1,110 @@
+{
+  "adjudication_files": {},
+  "annotation_version": "gpt-5.6-sol-ai-assisted-v0.4.0",
+  "final_annotations_sha256": "e14853381c76a753a9387da57d88bb3599a86f857ebfe6f24dce3de7cea33684",
+  "first_pass_files": {
+    "annotation_batch_01_pass1.csv": "43177199efc13d6035e6b1d8cd3ca171ae0b404540466007b331ddd9876e9f5c",
+    "annotation_batch_02_pass1.csv": "1c9ded48350802501068e78a5a5687b3c9314c2fa8045142649c3616e5a4e59f",
+    "annotation_batch_03_pass1.csv": "0d168297786f20104c54dd4bebcd791dba010e76a31b03d8bff3f71f6ea3cfc8"
+  },
+  "frozen_at_utc": "2026-09-10T19:36:02+00:00",
+  "provenance": "AI-assisted GPT-5.6 Sol prototype references; not HSE expert ground truth",
+  "rows": 750,
+  "rule_target_counts": {
+    "LSR01": {
+      "NEGATIVE": 721,
+      "POSITIVE": 11,
+      "UNKNOWN": 18
+    },
+    "LSR02": {
+      "NEGATIVE": 735,
+      "POSITIVE": 8,
+      "UNKNOWN": 7
+    },
+    "LSR03": {
+      "NEGATIVE": 600,
+      "POSITIVE": 137,
+      "UNKNOWN": 13
+    },
+    "LSR04": {
+      "NEGATIVE": 672,
+      "POSITIVE": 62,
+      "UNKNOWN": 16
+    },
+    "LSR05": {
+      "NEGATIVE": 703,
+      "POSITIVE": 37,
+      "UNKNOWN": 10
+    },
+    "LSR06": {
+      "NEGATIVE": 302,
+      "POSITIVE": 425,
+      "UNKNOWN": 23
+    },
+    "LSR07": {
+      "NEGATIVE": 668,
+      "POSITIVE": 72,
+      "UNKNOWN": 10
+    },
+    "LSR08": {
+      "NEGATIVE": 660,
+      "POSITIVE": 23,
+      "UNKNOWN": 67
+    },
+    "LSR09": {
+      "NEGATIVE": 582,
+      "POSITIVE": 158,
+      "UNKNOWN": 10
+    }
+  },
+  "second_pass_files": {
+    "annotation_pass2_batch_01.csv": "a122cbf0b10dc44f212a4a8bc55b36e187ff31b7959e73ed4e3f2c039d70af5b",
+    "annotation_pass2_batch_02.csv": "bc809224d064b6ff4f56294da56c0bd502f475a246b276d58f21fd26728fb1d2",
+    "annotation_pass2_batch_03.csv": "760aa43ddb4a156218a847840107cb738f0534c2a5d53fac94db57064b95dc80",
+    "annotation_pass2_batch_04.csv": "84a278c6739356ce7d3260726a86893a94f7335552ba0cace21bf8aa4c28528a"
+  },
+  "selected_rows": 1000,
+  "sif_counts": {
+    "NON_SIF_POTENTIAL": 213,
+    "SIF_POTENTIAL": 468,
+    "UNCERTAIN": 69
+  },
+  "source_file_sha256": "79acbd1a621b769d69556247cf0a1639726677809eb9fa681b8e974405148972",
+  "split_files": {
+    "development_addition": {
+      "path": "development_addition_v0_4.csv",
+      "rows": 150,
+      "sha256": "8d75b0a8baac9c439a3f207dbb07135db2236bab21841504d7befc3c4f500648",
+      "sif_counts": {
+        "NON_SIF_POTENTIAL": 39,
+        "SIF_POTENTIAL": 101,
+        "UNCERTAIN": 10
+      }
+    },
+    "fresh_final_assessment": {
+      "path": "fresh_final_assessment_v0_4.csv",
+      "rows": 150,
+      "sha256": "07cfbab6ed2193a0830a0caeace6cc823769562419866408b39f8a2f784fc580",
+      "sif_counts": {
+        "NON_SIF_POTENTIAL": 48,
+        "SIF_POTENTIAL": 84,
+        "UNCERTAIN": 18
+      }
+    },
+    "train_addition": {
+      "path": "train_addition_v0_4.csv",
+      "rows": 450,
+      "sha256": "9412b538afc941483d27fd4ea8cc23795835c1f17f6d9c561626c48e5a81e301",
+      "sif_counts": {
+        "NON_SIF_POTENTIAL": 126,
+        "SIF_POTENTIAL": 283,
+        "UNCERTAIN": 41
+      }
+    }
+  },
+  "status": "FROZEN_REFERENCES_BEFORE_MODEL_TRAINING_OR_FINAL_SCORING",
+  "unannotated_rows": 250,
+  "unannotated_scope": "annotation_batch_04_input.csv excluded at user direction; not used for labels, training, development, final assessment, or retrieval",
+  "unknown_lsr_targets_masked_per_rule": true,
+  "unresolved_sif_excluded_from_binary_training": true
+}

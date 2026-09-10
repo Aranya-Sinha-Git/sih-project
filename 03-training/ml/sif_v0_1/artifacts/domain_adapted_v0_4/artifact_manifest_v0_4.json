@@ -1,0 +1,113 @@
+{
+  "active_lsr_model": "iogp-lsr-v0.2",
+  "active_sif_model": "sif-v0.1",
+  "artifacts": [
+    {
+      "bytes": 933652,
+      "path": "artifacts/domain_adapted_v0_4/sif_tfidf_v0_4.joblib",
+      "sha256": "80bf7c3408153714b66be730056eb4069c56eab2e5e4c42ddf0588e55100cfcb"
+    },
+    {
+      "bytes": 3025730,
+      "path": "artifacts/domain_adapted_v0_4/lsr_model_v0_4.joblib",
+      "sha256": "08a6607df9839c815af8aa597a248e13fbae0c4c463003c730d4774c2a177e0c"
+    },
+    {
+      "bytes": 8005,
+      "path": "artifacts/domain_adapted_v0_4/selection_manifest_v0_4.json",
+      "sha256": "c9bbe1288fce67258b987350301d8b75e8eb71bf092fe8ce89fdd0d64d5a5679"
+    }
+  ],
+  "candidate_lsr_promoted": false,
+  "candidate_sif_promoted": false,
+  "comparative_llm_benchmark": "not_run_no_authorised_comparable_runtime_benchmark",
+  "created_at_utc": "2026-09-10T19:40:34+00:00",
+  "data": [
+    {
+      "path": "data/domain_adaptation_v0_4/selection_freeze_manifest_v0_4.json",
+      "rows": null,
+      "sha256": "37acf38f01a6aa1e4148cc5201936b0133c1b3ac59fc09f7ddda7bf0d0237685"
+    },
+    {
+      "path": "data/domain_adaptation_v0_4/annotation_freeze_manifest_v0_4.json",
+      "rows": null,
+      "sha256": "a07974f0a47933fc084ed85128e649a05256b4aa693c9e7e7be1792959ae288b"
+    },
+    {
+      "path": "data/domain_adaptation_v0_4/annotations_final_v0_4.csv",
+      "rows": 750,
+      "sha256": "e14853381c76a753a9387da57d88bb3599a86f857ebfe6f24dce3de7cea33684"
+    },
+    {
+      "path": "data/domain_adaptation_v0_4/train_addition_v0_4.csv",
+      "rows": 450,
+      "sha256": "9412b538afc941483d27fd4ea8cc23795835c1f17f6d9c561626c48e5a81e301"
+    },
+    {
+      "path": "data/domain_adaptation_v0_4/development_addition_v0_4.csv",
+      "rows": 150,
+      "sha256": "8d75b0a8baac9c439a3f207dbb07135db2236bab21841504d7befc3c4f500648"
+    },
+    {
+      "path": "data/domain_adaptation_v0_4/fresh_final_assessment_v0_4.csv",
+      "rows": 150,
+      "sha256": "07cfbab6ed2193a0830a0caeace6cc823769562419866408b39f8a2f784fc580"
+    }
+  ],
+  "latency": {
+    "report": "reports/domain_adaptation_v0_2/runtime_benchmark.json",
+    "status": "reused_v0.2_benchmark_runtime_unchanged"
+  },
+  "offline_annotation_is_hse_ground_truth": false,
+  "offline_annotation_model": "gpt-5.6-sol",
+  "random_seed": 20260910,
+  "reports": [
+    {
+      "path": "reports/domain_adaptation_v0_4/annotation_agreement_v0_4.json",
+      "sha256": "e10eb27485fec5f85fb8e693c3fc02a535eded7669ad352ca4d4688bd233d721"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/sif_learning_curve_v0_4.json",
+      "sha256": "ef368a57633d67f159f11b0c06b4e9d0fa75ed2307ccdd48812b4c412eeaca5c"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/sif_tfidf_development_search_v0_4.csv",
+      "sha256": "d8b73556677775c4415eccae02421d48e945d4e583d7ad1a7d38dcd17f77b64a"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/sif_setfit_development_search_v0_4.csv",
+      "sha256": "a29b8445fefef47a7a032485d20ea544df0f18bef095d4652ae111fc33b86b1e"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/lsr_development_evaluation_v0_4.json",
+      "sha256": "36e30fa5fa769c969825f42f53023c6fdd6e1d149a34efe5e179c4e508df8ce9"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/final_evaluation_v0_4.json",
+      "sha256": "81cf48d2b16565174618081a4993f02d01c4c2784b22d61f0cfebeec9523114f"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/sif_predictions_v0_4.csv",
+      "sha256": "d8d1385ddfef22ab8e67b1438bc9ab8209dfa7fa82373fc3e962cdfed29afb6d"
+    }
+  ],
+  "rollback": "No runtime promotion occurred. The backend remains on artifacts/supervised for SIF and domain_adapted_v0_2/lsr_model.joblib for IOGP mapping.",
+  "runtime_changed": false,
+  "runtime_generative_llm_calls": false,
+  "setfit_artifact": {
+    "directory_sha256": "4016b5622c76b74634fc4dc3112f8e67af67fef6568978257530f0e6ec25d19e",
+    "path": "artifacts/domain_adapted_v0_4/setfit_candidate_v0_4"
+  },
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.6",
+    "scikit-learn": "1.8.0",
+    "sentence-transformers": "5.7.0",
+    "setfit": "1.2.0",
+    "torch": "2.6.0+cu124"
+  },
+  "version": "domain-expansion-v0.4"
+}

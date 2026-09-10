@@ -1,0 +1,12 @@
+{
+  "agreement_statistics_exclude_rows": true,
+  "limitations": [
+    "These rows received no independent second-pass check.",
+    "No local classifier or generative runtime model was used to manufacture replacement labels."
+  ],
+  "output": "annotation_pass2_batch_02.csv",
+  "output_sha256": "bc809224d064b6ff4f56294da56c0bd502f475a246b276d58f21fd26728fb1d2",
+  "reason": "The already-started GPT-5.6 Sol batch-02 reviewer stalled without producing an output. The validated first-pass values were retained, not re-labelled or represented as an independent second review.",
+  "rows": 125,
+  "status": "RECOVERED_NOT_INDEPENDENT"
+}

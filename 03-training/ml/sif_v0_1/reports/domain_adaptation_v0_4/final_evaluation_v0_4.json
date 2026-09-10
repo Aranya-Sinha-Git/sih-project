@@ -1,0 +1,1174 @@
+{
+  "fresh_final_status": "ONE_TIME_FROZEN_AI_ASSISTED_ASSESSMENT_NOT_HSE_EXPERT_GROUND_TRUTH",
+  "generated_at_utc": "2026-09-10T19:40:14+00:00",
+  "lsr": {
+    "decision": "RETAIN_ACTIVE_V0.2",
+    "evaluations": {
+      "active_v0.2": {
+        "aggregate": {
+          "aggregate_confusion": {
+            "fn": 90,
+            "fp": 20,
+            "tn": 700,
+            "tp": 81
+          },
+          "available_rules": [
+            "LSR03",
+            "LSR04",
+            "LSR05",
+            "LSR06",
+            "LSR07",
+            "LSR09"
+          ],
+          "evaluated_rules": 6,
+          "macro_f1": 0.4479566730052116,
+          "micro_f1": 0.5955882352941176,
+          "micro_precision": 0.801980198019802,
+          "micro_recall": 0.47368421052631576,
+          "unavailable_rules": [
+            "LSR01",
+            "LSR02",
+            "LSR08"
+          ],
+          "unavailable_rules_excluded": true
+        },
+        "artifact_version": "iogp-lsr-v0.2",
+        "rules": {
+          "LSR01": {
+            "reason": "insufficient_positive_or_negative_training_support",
+            "status": "unavailable",
+            "target_counts": {
+              "NEGATIVE": 150
+            }
+          },
+          "LSR02": {
+            "reason": "insufficient_positive_or_negative_training_support",
+            "status": "unavailable",
+            "target_counts": {
+              "NEGATIVE": 147,
+              "POSITIVE": 1,
+              "UNKNOWN": 2
+            }
+          },
+          "LSR03": {
+            "metrics": {
+              "balanced_accuracy": 0.5151324085750315,
+              "confusion_matrix": [
+                [
+                  121,
+                  1
+                ],
+                [
+                  25,
+                  1
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.07142857142857142,
+              "f2": 0.04716981132075472,
+              "false_negatives": 25,
+              "false_positives": 1,
+              "precision": 0.5,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 146,
+                "SIF_POTENTIAL": 2
+              },
+              "recall": 0.038461538461538464,
+              "specificity": 0.9918032786885246,
+              "threshold": 0.49999999999999994,
+              "true_negatives": 121,
+              "true_positives": 1
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 122,
+              "POSITIVE": 26,
+              "UNKNOWN": 2
+            },
+            "threshold": 0.49999999999999994
+          },
+          "LSR04": {
+            "metrics": {
+              "balanced_accuracy": 0.648936170212766,
+              "confusion_matrix": [
+                [
+                  136,
+                  5
+                ],
+                [
+                  6,
+                  3
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.35294117647058826,
+              "f2": 0.34090909090909094,
+              "false_negatives": 6,
+              "false_positives": 5,
+              "precision": 0.375,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 142,
+                "SIF_POTENTIAL": 8
+              },
+              "recall": 0.3333333333333333,
+              "specificity": 0.9645390070921985,
+              "threshold": 0.35,
+              "true_negatives": 136,
+              "true_positives": 3
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 141,
+              "POSITIVE": 9
+            },
+            "threshold": 0.35
+          },
+          "LSR05": {
+            "metrics": {
+              "balanced_accuracy": 0.7751509054325956,
+              "confusion_matrix": [
+                [
+                  139,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.5714285714285714,
+              "f2": 0.5714285714285714,
+              "false_negatives": 3,
+              "false_positives": 3,
+              "precision": 0.5714285714285714,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 142,
+                "SIF_POTENTIAL": 7
+              },
+              "recall": 0.5714285714285714,
+              "specificity": 0.9788732394366197,
+              "threshold": 0.25,
+              "true_negatives": 139,
+              "true_positives": 4
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 142,
+              "POSITIVE": 7,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.25
+          },
+          "LSR06": {
+            "metrics": {
+              "balanced_accuracy": 0.7621212121212121,
+              "confusion_matrix": [
+                [
+                  61,
+                  5
+                ],
+                [
+                  32,
+                  48
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.7218045112781954,
+              "f2": 0.6434316353887399,
+              "false_negatives": 32,
+              "false_positives": 5,
+              "precision": 0.9056603773584906,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 93,
+                "SIF_POTENTIAL": 53
+              },
+              "recall": 0.6,
+              "specificity": 0.9242424242424242,
+              "threshold": 0.5499999999999999,
+              "true_negatives": 61,
+              "true_positives": 48
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 66,
+              "POSITIVE": 80,
+              "UNKNOWN": 4
+            },
+            "threshold": 0.5499999999999999
+          },
+          "LSR07": {
+            "metrics": {
+              "balanced_accuracy": 0.5512477718360071,
+              "confusion_matrix": [
+                [
+                  130,
+                  2
+                ],
+                [
+                  15,
+                  2
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.19047619047619047,
+              "f2": 0.1388888888888889,
+              "false_negatives": 15,
+              "false_positives": 2,
+              "precision": 0.5,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 145,
+                "SIF_POTENTIAL": 4
+              },
+              "recall": 0.11764705882352941,
+              "specificity": 0.9848484848484849,
+              "threshold": 0.5,
+              "true_negatives": 130,
+              "true_positives": 2
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 132,
+              "POSITIVE": 17,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.5
+          },
+          "LSR08": {
+            "reason": "insufficient_positive_or_negative_training_support",
+            "status": "unavailable",
+            "target_counts": {
+              "NEGATIVE": 143,
+              "UNKNOWN": 7
+            }
+          },
+          "LSR09": {
+            "metrics": {
+              "balanced_accuracy": 0.842280982905983,
+              "confusion_matrix": [
+                [
+                  113,
+                  4
+                ],
+                [
+                  9,
+                  23
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.7796610169491526,
+              "f2": 0.7419354838709677,
+              "false_negatives": 9,
+              "false_positives": 4,
+              "precision": 0.8518518518518519,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 122,
+                "SIF_POTENTIAL": 27
+              },
+              "recall": 0.71875,
+              "specificity": 0.9658119658119658,
+              "threshold": 0.44999999999999996,
+              "true_negatives": 113,
+              "true_positives": 23
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 117,
+              "POSITIVE": 32,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.44999999999999996
+          }
+        }
+      },
+      "candidate_v0.4": {
+        "aggregate": {
+          "aggregate_confusion": {
+            "fn": 38,
+            "fp": 40,
+            "tn": 827,
+            "tp": 134
+          },
+          "available_rules": [
+            "LSR01",
+            "LSR02",
+            "LSR03",
+            "LSR04",
+            "LSR05",
+            "LSR06",
+            "LSR07",
+            "LSR08",
+            "LSR09"
+          ],
+          "evaluated_rules": 7,
+          "macro_f1": 0.7349002616422962,
+          "micro_f1": 0.7745664739884393,
+          "micro_precision": 0.7701149425287356,
+          "micro_recall": 0.7790697674418605,
+          "unavailable_rules": [],
+          "unavailable_rules_excluded": true
+        },
+        "artifact_version": "iogp-lsr-v0.4-experimental",
+        "rules": {
+          "LSR01": {
+            "status": "insufficient_two_class_evaluation_support",
+            "target_counts": {
+              "NEGATIVE": 150
+            },
+            "threshold": 0.5999999999999999
+          },
+          "LSR02": {
+            "metrics": {
+              "balanced_accuracy": 1.0,
+              "confusion_matrix": [
+                [
+                  147,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 1.0,
+              "f2": 1.0,
+              "false_negatives": 0,
+              "false_positives": 0,
+              "precision": 1.0,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 147,
+                "SIF_POTENTIAL": 1
+              },
+              "recall": 1.0,
+              "specificity": 1.0,
+              "threshold": 0.25,
+              "true_negatives": 147,
+              "true_positives": 1
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 147,
+              "POSITIVE": 1,
+              "UNKNOWN": 2
+            },
+            "threshold": 0.25
+          },
+          "LSR03": {
+            "metrics": {
+              "balanced_accuracy": 0.7887767969735182,
+              "confusion_matrix": [
+                [
+                  108,
+                  14
+                ],
+                [
+                  8,
+                  18
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.6206896551724138,
+              "f2": 0.6617647058823529,
+              "false_negatives": 8,
+              "false_positives": 14,
+              "precision": 0.5625,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 116,
+                "SIF_POTENTIAL": 32
+              },
+              "recall": 0.6923076923076923,
+              "specificity": 0.8852459016393442,
+              "threshold": 0.44999999999999996,
+              "true_negatives": 108,
+              "true_positives": 18
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 122,
+              "POSITIVE": 26,
+              "UNKNOWN": 2
+            },
+            "threshold": 0.44999999999999996
+          },
+          "LSR04": {
+            "metrics": {
+              "balanced_accuracy": 0.6973995271867612,
+              "confusion_matrix": [
+                [
+                  134,
+                  7
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.4,
+              "f2": 0.425531914893617,
+              "false_negatives": 5,
+              "false_positives": 7,
+              "precision": 0.36363636363636365,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 139,
+                "SIF_POTENTIAL": 11
+              },
+              "recall": 0.4444444444444444,
+              "specificity": 0.950354609929078,
+              "threshold": 0.35,
+              "true_negatives": 134,
+              "true_positives": 4
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 141,
+              "POSITIVE": 9
+            },
+            "threshold": 0.35
+          },
+          "LSR05": {
+            "metrics": {
+              "balanced_accuracy": 0.9894366197183099,
+              "confusion_matrix": [
+                [
+                  139,
+                  3
+                ],
+                [
+                  0,
+                  7
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.8235294117647058,
+              "f2": 0.9210526315789475,
+              "false_negatives": 0,
+              "false_positives": 3,
+              "precision": 0.7,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 139,
+                "SIF_POTENTIAL": 10
+              },
+              "recall": 1.0,
+              "specificity": 0.9788732394366197,
+              "threshold": 0.3,
+              "true_negatives": 139,
+              "true_positives": 7
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 142,
+              "POSITIVE": 7,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.3
+          },
+          "LSR06": {
+            "metrics": {
+              "balanced_accuracy": 0.852840909090909,
+              "confusion_matrix": [
+                [
+                  54,
+                  12
+                ],
+                [
+                  9,
+                  71
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.8711656441717791,
+              "f2": 0.8808933002481388,
+              "false_negatives": 9,
+              "false_positives": 12,
+              "precision": 0.8554216867469879,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 63,
+                "SIF_POTENTIAL": 83
+              },
+              "recall": 0.8875,
+              "specificity": 0.8181818181818182,
+              "threshold": 0.49999999999999994,
+              "true_negatives": 54,
+              "true_positives": 71
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 66,
+              "POSITIVE": 80,
+              "UNKNOWN": 4
+            },
+            "threshold": 0.49999999999999994
+          },
+          "LSR07": {
+            "metrics": {
+              "balanced_accuracy": 0.7201426024955437,
+              "confusion_matrix": [
+                [
+                  128,
+                  4
+                ],
+                [
+                  9,
+                  8
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.5517241379310345,
+              "f2": 0.49999999999999994,
+              "false_negatives": 9,
+              "false_positives": 4,
+              "precision": 0.6666666666666666,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 137,
+                "SIF_POTENTIAL": 12
+              },
+              "recall": 0.47058823529411764,
+              "specificity": 0.9696969696969697,
+              "threshold": 0.44999999999999996,
+              "true_negatives": 128,
+              "true_positives": 8
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 132,
+              "POSITIVE": 17,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.44999999999999996
+          },
+          "LSR08": {
+            "status": "insufficient_two_class_evaluation_support",
+            "target_counts": {
+              "NEGATIVE": 143,
+              "UNKNOWN": 7
+            },
+            "threshold": 0.7499999999999998
+          },
+          "LSR09": {
+            "metrics": {
+              "balanced_accuracy": 0.890625,
+              "confusion_matrix": [
+                [
+                  117,
+                  0
+                ],
+                [
+                  7,
+                  25
+                ]
+              ],
+              "confusion_matrix_labels": [
+                "NON_SIF_POTENTIAL",
+                "SIF_POTENTIAL"
+              ],
+              "f1": 0.8771929824561403,
+              "f2": 0.8169934640522876,
+              "false_negatives": 7,
+              "false_positives": 0,
+              "precision": 1.0,
+              "predicted_class_counts": {
+                "NON_SIF_POTENTIAL": 124,
+                "SIF_POTENTIAL": 25
+              },
+              "recall": 0.78125,
+              "specificity": 1.0,
+              "threshold": 0.5499999999999999,
+              "true_negatives": 117,
+              "true_positives": 25
+            },
+            "status": "evaluated",
+            "target_counts": {
+              "NEGATIVE": 117,
+              "POSITIVE": 32,
+              "UNKNOWN": 1
+            },
+            "threshold": 0.5499999999999999
+          }
+        }
+      }
+    },
+    "new_rule_checks": {
+      "LSR01": false,
+      "LSR02": false,
+      "LSR08": false
+    },
+    "promotion_gates": {
+      "candidate_has_at_least_active_rule_coverage": true,
+      "candidate_macro_f1_not_below_active_by_more_than_0.05": true,
+      "new_rules_have_two_positive_final_examples_and_f1_at_least_0.60": false
+    }
+  },
+  "old_regression_status": "DIAGNOSTIC_ONLY_ALREADY_INFORMED_PRIOR_MODEL_WORK",
+  "report_version": "domain-expansion-v0.4",
+  "runtime_generative_llm_calls": false,
+  "selection_manifest_sha256": "c9bbe1288fce67258b987350301d8b75e8eb71bf092fe8ce89fdd0d64d5a5679",
+  "sif": {
+    "datasets": {
+      "fresh_final_assessment": {
+        "active_baseline_v0.1": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.625,
+            "confusion_matrix": [
+              [
+                12,
+                36
+              ],
+              [
+                0,
+                84
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.8235294117647058,
+            "f2": 0.9210526315789475,
+            "false_negatives": 0,
+            "false_positives": 36,
+            "precision": 0.7,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 12,
+              "SIF_POTENTIAL": 120
+            },
+            "recall": 1.0,
+            "specificity": 0.25,
+            "threshold": 0.4,
+            "true_negatives": 12,
+            "true_positives": 84
+          },
+          "class_mapping": {
+            "classes": [
+              "0",
+              "1"
+            ],
+            "positive_probability_column": 1
+          },
+          "operational_routing": {
+            "auto_non_sif_count": 7,
+            "auto_sif_count": 112,
+            "automatic_decision_coverage": 0.9015151515151515,
+            "human_review_count": 13,
+            "human_review_rate": 0.09848484848484848,
+            "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+            "reference_sif_routed_auto_non_sif": 0,
+            "review_band": [
+              0.35,
+              0.45
+            ]
+          },
+          "ranking_metrics": {
+            "average_precision": 0.9260394625803292,
+            "roc_auc": 0.8874007936507937
+          },
+          "score_distribution_by_reference_class": {
+            "NON_SIF_POTENTIAL": {
+              "count": 48,
+              "mean": 0.5050970729008727,
+              "quantiles": {
+                "q00": 0.22182775168775443,
+                "q10": 0.32088577222389825,
+                "q100": 0.7826633137271599,
+                "q25": 0.40961817761360414,
+                "q50": 0.507454270451557,
+                "q75": 0.5952666282795306,
+                "q90": 0.7199346455139312
+              },
+              "standard_deviation": 0.14540955689243712
+            },
+            "SIF_POTENTIAL": {
+              "count": 84,
+              "mean": 0.7230557632905384,
+              "quantiles": {
+                "q00": 0.44482510439037826,
+                "q10": 0.5921695987896846,
+                "q100": 0.8624594453994455,
+                "q25": 0.6837158839291602,
+                "q50": 0.7413995061198327,
+                "q75": 0.7853445930739328,
+                "q90": 0.8360084999929195
+              },
+              "standard_deviation": 0.09270855892163472
+            }
+          }
+        },
+        "all_non_sif_reference": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.5,
+            "confusion_matrix": [
+              [
+                48,
+                0
+              ],
+              [
+                84,
+                0
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.0,
+            "f2": 0.0,
+            "false_negatives": 84,
+            "false_positives": 0,
+            "precision": 0.0,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 132,
+              "SIF_POTENTIAL": 0
+            },
+            "recall": 0.0,
+            "specificity": 1.0,
+            "threshold": 0.5,
+            "true_negatives": 48,
+            "true_positives": 0
+          },
+          "operational_routing": {
+            "human_review_rate": null,
+            "note": "A constant-class reference has no operational review band.",
+            "status": "NOT_APPLICABLE"
+          }
+        },
+        "all_sif_reference": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.5,
+            "confusion_matrix": [
+              [
+                0,
+                48
+              ],
+              [
+                0,
+                84
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.7777777777777778,
+            "f2": 0.8974358974358974,
+            "false_negatives": 0,
+            "false_positives": 48,
+            "precision": 0.6363636363636364,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 0,
+              "SIF_POTENTIAL": 132
+            },
+            "recall": 1.0,
+            "specificity": 0.0,
+            "threshold": 0.5,
+            "true_negatives": 0,
+            "true_positives": 84
+          },
+          "operational_routing": {
+            "human_review_rate": null,
+            "note": "A constant-class reference has no operational review band.",
+            "status": "NOT_APPLICABLE"
+          }
+        },
+        "class_counts": {
+          "NON_SIF_POTENTIAL": 48,
+          "SIF_POTENTIAL": 84
+        },
+        "rows_with_binary_reference": 132,
+        "selected_candidate": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.7410714285714286,
+            "confusion_matrix": [
+              [
+                26,
+                22
+              ],
+              [
+                5,
+                79
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.8540540540540541,
+            "f2": 0.9038901601830663,
+            "false_negatives": 5,
+            "false_positives": 22,
+            "precision": 0.7821782178217822,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 31,
+              "SIF_POTENTIAL": 101
+            },
+            "recall": 0.9404761904761905,
+            "specificity": 0.5416666666666666,
+            "threshold": 0.5499999999999999,
+            "true_negatives": 26,
+            "true_positives": 79
+          },
+          "class_mapping": {
+            "classes": [
+              "0",
+              "1"
+            ],
+            "positive_probability_column": 1
+          },
+          "family": "tfidf_v0.4",
+          "operational_routing": {
+            "auto_non_sif_count": 26,
+            "auto_sif_count": 95,
+            "automatic_decision_coverage": 0.9166666666666666,
+            "human_review_count": 11,
+            "human_review_rate": 0.08333333333333333,
+            "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+            "reference_sif_routed_auto_non_sif": 3,
+            "review_band": [
+              0.49999999999999994,
+              0.6
+            ]
+          },
+          "ranking_metrics": {
+            "average_precision": 0.9277203299610101,
+            "roc_auc": 0.8861607142857143
+          },
+          "score_distribution_by_reference_class": {
+            "NON_SIF_POTENTIAL": {
+              "count": 48,
+              "mean": 0.513180765986775,
+              "quantiles": {
+                "q00": 0.05612288408583458,
+                "q10": 0.20367814015090538,
+                "q100": 0.907898774652975,
+                "q25": 0.3635947002093977,
+                "q50": 0.504197615692122,
+                "q75": 0.6551204268297313,
+                "q90": 0.8125335122097118
+              },
+              "standard_deviation": 0.21995163904704737
+            },
+            "SIF_POTENTIAL": {
+              "count": 84,
+              "mean": 0.8157624021028567,
+              "quantiles": {
+                "q00": 0.39003670266145657,
+                "q10": 0.6426982822054332,
+                "q100": 0.9700913472754382,
+                "q25": 0.7672271821067551,
+                "q50": 0.8520152556482092,
+                "q75": 0.9147218535398439,
+                "q90": 0.9373210024317825
+              },
+              "standard_deviation": 0.12524600802215896
+            }
+          }
+        },
+        "uncertain_reference_rows_excluded": 18
+      },
+      "old_90_report_regression_benchmark": {
+        "active_baseline_v0.1": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.7075,
+            "confusion_matrix": [
+              [
+                19,
+                21
+              ],
+              [
+                3,
+                47
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.7966101694915254,
+            "f2": 0.8768656716417911,
+            "false_negatives": 3,
+            "false_positives": 21,
+            "precision": 0.6911764705882353,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 22,
+              "SIF_POTENTIAL": 68
+            },
+            "recall": 0.94,
+            "specificity": 0.475,
+            "threshold": 0.4,
+            "true_negatives": 19,
+            "true_positives": 47
+          },
+          "class_mapping": {
+            "classes": [
+              "0",
+              "1"
+            ],
+            "positive_probability_column": 1
+          },
+          "operational_routing": {
+            "auto_non_sif_count": 18,
+            "auto_sif_count": 65,
+            "automatic_decision_coverage": 0.9222222222222223,
+            "human_review_count": 7,
+            "human_review_rate": 0.07777777777777778,
+            "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+            "reference_sif_routed_auto_non_sif": 1,
+            "review_band": [
+              0.35,
+              0.45
+            ]
+          },
+          "ranking_metrics": {
+            "average_precision": 0.9513234763259015,
+            "roc_auc": 0.9305
+          },
+          "score_distribution_by_reference_class": {
+            "NON_SIF_POTENTIAL": {
+              "count": 40,
+              "mean": 0.4235197736529434,
+              "quantiles": {
+                "q00": 0.19456906940773347,
+                "q10": 0.29593162268232664,
+                "q100": 0.6962549085267327,
+                "q25": 0.31097951152229636,
+                "q50": 0.425843403655705,
+                "q75": 0.5234393289125403,
+                "q90": 0.5842310694539121
+              },
+              "standard_deviation": 0.12659425775094724
+            },
+            "SIF_POTENTIAL": {
+              "count": 50,
+              "mean": 0.6971284695213898,
+              "quantiles": {
+                "q00": 0.32802919106484674,
+                "q10": 0.5343309993752027,
+                "q100": 0.8867140371238216,
+                "q25": 0.6346859593187215,
+                "q50": 0.7218755204206114,
+                "q75": 0.7960881763914133,
+                "q90": 0.835240768273272
+              },
+              "standard_deviation": 0.12555980406252548
+            }
+          }
+        },
+        "all_non_sif_reference": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.5,
+            "confusion_matrix": [
+              [
+                40,
+                0
+              ],
+              [
+                50,
+                0
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.0,
+            "f2": 0.0,
+            "false_negatives": 50,
+            "false_positives": 0,
+            "precision": 0.0,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 90,
+              "SIF_POTENTIAL": 0
+            },
+            "recall": 0.0,
+            "specificity": 1.0,
+            "threshold": 0.5,
+            "true_negatives": 40,
+            "true_positives": 0
+          },
+          "operational_routing": {
+            "human_review_rate": null,
+            "note": "A constant-class reference has no operational review band.",
+            "status": "NOT_APPLICABLE"
+          }
+        },
+        "all_sif_reference": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.5,
+            "confusion_matrix": [
+              [
+                0,
+                40
+              ],
+              [
+                0,
+                50
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.7142857142857143,
+            "f2": 0.8620689655172413,
+            "false_negatives": 0,
+            "false_positives": 40,
+            "precision": 0.5555555555555556,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 0,
+              "SIF_POTENTIAL": 90
+            },
+            "recall": 1.0,
+            "specificity": 0.0,
+            "threshold": 0.5,
+            "true_negatives": 0,
+            "true_positives": 50
+          },
+          "operational_routing": {
+            "human_review_rate": null,
+            "note": "A constant-class reference has no operational review band.",
+            "status": "NOT_APPLICABLE"
+          }
+        },
+        "class_counts": {
+          "NON_SIF_POTENTIAL": 40,
+          "SIF_POTENTIAL": 50
+        },
+        "rows_with_binary_reference": 90,
+        "selected_candidate": {
+          "binary_prediction_metrics": {
+            "balanced_accuracy": 0.8725,
+            "confusion_matrix": [
+              [
+                33,
+                7
+              ],
+              [
+                4,
+                46
+              ]
+            ],
+            "confusion_matrix_labels": [
+              "NON_SIF_POTENTIAL",
+              "SIF_POTENTIAL"
+            ],
+            "f1": 0.8932038834951457,
+            "f2": 0.9090909090909092,
+            "false_negatives": 4,
+            "false_positives": 7,
+            "precision": 0.8679245283018868,
+            "predicted_class_counts": {
+              "NON_SIF_POTENTIAL": 37,
+              "SIF_POTENTIAL": 53
+            },
+            "recall": 0.92,
+            "specificity": 0.825,
+            "threshold": 0.5499999999999999,
+            "true_negatives": 33,
+            "true_positives": 46
+          },
+          "class_mapping": {
+            "classes": [
+              "0",
+              "1"
+            ],
+            "positive_probability_column": 1
+          },
+          "family": "tfidf_v0.4",
+          "operational_routing": {
+            "auto_non_sif_count": 34,
+            "auto_sif_count": 50,
+            "automatic_decision_coverage": 0.9333333333333333,
+            "human_review_count": 6,
+            "human_review_rate": 0.06666666666666667,
+            "note": "Routing is reported separately; review rows are not counted as correct binary predictions.",
+            "reference_sif_routed_auto_non_sif": 2,
+            "review_band": [
+              0.49999999999999994,
+              0.6
+            ]
+          },
+          "ranking_metrics": {
+            "average_precision": 0.9551706916650684,
+            "roc_auc": 0.9470000000000001
+          },
+          "score_distribution_by_reference_class": {
+            "NON_SIF_POTENTIAL": {
+              "count": 40,
+              "mean": 0.34863188053582855,
+              "quantiles": {
+                "q00": 0.08347418761062207,
+                "q10": 0.11572623591949874,
+                "q100": 0.838334772628876,
+                "q25": 0.1891497829046147,
+                "q50": 0.2975185488529798,
+                "q75": 0.44039760099917746,
+                "q90": 0.7414066876833438
+              },
+              "standard_deviation": 0.20704564761326913
+            },
+            "SIF_POTENTIAL": {
+              "count": 50,
+              "mean": 0.7987026410774007,
+              "quantiles": {
+                "q00": 0.360259744816519,
+                "q10": 0.600085577612241,
+                "q100": 0.9636349709065092,
+                "q25": 0.7477508649205293,
+                "q50": 0.8267267829826739,
+                "q75": 0.8969168674650628,
+                "q90": 0.9355019642643913
+              },
+              "standard_deviation": 0.14200861302402382
+            }
+          }
+        },
+        "uncertain_reference_rows_excluded": 0
+      }
+    },
+    "decision": "RETAIN_ACTIVE_BASELINE",
+    "promotion_gates": {
+      "candidate_balanced_accuracy_at_least_baseline": true,
+      "candidate_f2_at_least_baseline": false,
+      "candidate_recall_not_below_baseline_by_more_than_0.03": false,
+      "candidate_selected_on_development": true,
+      "candidate_specificity_not_below_baseline_by_more_than_0.03": true,
+      "runtime_adapter_supported": true
+    }
+  }
+}

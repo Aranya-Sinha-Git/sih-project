@@ -1,0 +1,16 @@
+{
+  "batches": [
+    {
+      "input": "annotation_systematic_lsr08_batch_01_input.csv",
+      "input_sha256": "4a806133009a07df2597143d9b9c0018332bb6735c721ef5bebd796a151a1b1d",
+      "output": "annotation_systematic_lsr08_batch_01.csv",
+      "rows": 13
+    }
+  ],
+  "frozen_at_utc": "2026-09-10T14:58:17+00:00",
+  "input_contains_first_pass_labels_or_rationales": false,
+  "input_sha256": "4a806133009a07df2597143d9b9c0018332bb6735c721ef5bebd796a151a1b1d",
+  "reason": "Main-agent inspection found generic-work over-mapping among first-pass LSR08 positives; every remaining positive outside the base second pass is re-reviewed.",
+  "rows": 13,
+  "status": "FROZEN_BLINDED_SYSTEMATIC_LSR08_REVIEW"
+}

@@ -1,0 +1,263 @@
+{
+  "annotation_freeze_manifest_sha256": "a07974f0a47933fc084ed85128e649a05256b4aa693c9e7e7be1792959ae288b",
+  "artifacts": {
+    "lsr": {
+      "path": "lsr_model_v0_4.joblib",
+      "sha256": "08a6607df9839c815af8aa597a248e13fbae0c4c463003c730d4774c2a177e0c"
+    },
+    "setfit": {
+      "directory_sha256": "4016b5622c76b74634fc4dc3112f8e67af67fef6568978257530f0e6ec25d19e",
+      "path": "setfit_candidate_v0_4"
+    },
+    "tfidf": {
+      "path": "sif_tfidf_v0_4.joblib",
+      "sha256": "80bf7c3408153714b66be730056eb4069c56eab2e5e4c42ddf0588e55100cfcb"
+    }
+  },
+  "development_counts": {
+    "NON_SIF_POTENTIAL": 57,
+    "SIF_POTENTIAL": 175
+  },
+  "development_gates": {
+    "maximum_review_rate": 0.4,
+    "minimum_balanced_accuracy": 0.7,
+    "minimum_recall": 0.9,
+    "minimum_specificity": 0.5
+  },
+  "frozen_at_utc": "2026-09-10T19:39:09+00:00",
+  "random_seed": 20260910,
+  "selected_family": "tfidf_v0.4",
+  "selected_operating_point": {
+    "all_sif_reference": {
+      "balanced_accuracy": 0.5,
+      "precision": 0.7543103448275862,
+      "recall": 1.0,
+      "specificity": 0.0
+    },
+    "auto_non_sif": 31,
+    "auto_sif": 182,
+    "automatic_decision_coverage": 0.9181034482758621,
+    "balanced_accuracy": 0.743358395989975,
+    "c": 2.0,
+    "checkpoint": "through_annotation_batch_03",
+    "class_weight": "non_sif_1_5",
+    "classes": [
+      "0",
+      "1"
+    ],
+    "confusion_matrix": [
+      [
+        31,
+        26
+      ],
+      [
+        10,
+        165
+      ]
+    ],
+    "declared_objective": "Pass recall, specificity, balanced-accuracy, precision-over-all-SIF, and review-workload gates; then maximize balanced accuracy, F2, recall, specificity, precision, and lower review rate.",
+    "development_class_counts": {
+      "NON_SIF_POTENTIAL": 57,
+      "SIF_POTENTIAL": 175
+    },
+    "development_gate_passed": true,
+    "development_gates": {
+      "maximum_review_rate": 0.4,
+      "minimum_balanced_accuracy": 0.7,
+      "minimum_recall": 0.9,
+      "minimum_specificity": 0.5,
+      "precision_must_exceed_all_sif": 0.7543103448275862
+    },
+    "development_rows": 232,
+    "f1": 0.9016393442622951,
+    "f2": 0.9259259259259259,
+    "false_negatives": 10,
+    "false_positives": 26,
+    "fit_scope": "training_only_no_refit_after_threshold_selection",
+    "human_positive_routed_auto_non_sif": 6,
+    "lower": 0.49999999999999994,
+    "model_family": "tfidf",
+    "positive_probability_column": 1,
+    "precision": 0.8638743455497382,
+    "predicted_class_counts": {
+      "NON_SIF_POTENTIAL": 41,
+      "SIF_POTENTIAL": 191
+    },
+    "recall": 0.9428571428571428,
+    "review_count": 19,
+    "review_rate": 0.08189655172413793,
+    "selection_status": "ELIGIBLE_DEVELOPMENT_OPERATING_POINT",
+    "specificity": 0.543859649122807,
+    "threshold": 0.5499999999999999,
+    "training_class_counts": {
+      "NON_SIF_POTENTIAL": 197,
+      "SIF_POTENTIAL": 581
+    },
+    "training_rows": 778,
+    "true_negatives": 31,
+    "true_positives": 165,
+    "upper": 0.6
+  },
+  "selection_objective": "Pass all gates; maximize balanced accuracy then F2/recall/specificity/precision; prefer TF-IDF when balanced accuracy is within 0.02.",
+  "setfit": {
+    "all_sif_reference": {
+      "balanced_accuracy": 0.5,
+      "precision": 0.7543103448275862,
+      "recall": 1.0,
+      "specificity": 0.0
+    },
+    "auto_non_sif": 42,
+    "auto_sif": 183,
+    "automatic_decision_coverage": 0.9698275862068966,
+    "balanced_accuracy": 0.758045112781955,
+    "checkpoint": "all_700_additions",
+    "classes": [
+      "0",
+      "1"
+    ],
+    "confusion_matrix": [
+      [
+        33,
+        24
+      ],
+      [
+        11,
+        164
+      ]
+    ],
+    "development_gate_passed": true,
+    "development_gates": {
+      "maximum_review_rate": 0.4,
+      "minimum_balanced_accuracy": 0.7,
+      "minimum_recall": 0.9,
+      "minimum_specificity": 0.5,
+      "precision_must_exceed_all_sif": 0.7543103448275862
+    },
+    "f1": 0.9035812672176309,
+    "f2": 0.9234234234234237,
+    "false_negatives": 11,
+    "false_positives": 24,
+    "fit_scope": "training_only_no_refit",
+    "human_positive_routed_auto_non_sif": 11,
+    "input_limit_handling": {
+      "development": {
+        "max_observed_tokens": 196,
+        "reports_over_250_tokens": 0,
+        "strategy": "head_125_plus_tail_125_tokens_before_special_tokens"
+      },
+      "train": {
+        "max_observed_tokens": 261,
+        "reports_over_250_tokens": 1,
+        "strategy": "head_125_plus_tail_125_tokens_before_special_tokens"
+      }
+    },
+    "lower": 0.3,
+    "model_family": "setfit_finetuned_v0.4",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "positive_probability_column": 1,
+    "precision": 0.8723404255319149,
+    "predicted_class_counts": {
+      "NON_SIF_POTENTIAL": 44,
+      "SIF_POTENTIAL": 188
+    },
+    "recall": 0.9371428571428572,
+    "review_count": 7,
+    "review_rate": 0.03017241379310345,
+    "selection_status": "ELIGIBLE_DEVELOPMENT_OPERATING_POINT",
+    "specificity": 0.5789473684210527,
+    "status": "trained",
+    "task_specific_encoder_fine_tuning": true,
+    "threshold": 0.35,
+    "training_arguments": {
+      "batch_size": 16,
+      "num_epochs": 1,
+      "num_iterations": 5,
+      "sampling_strategy": "oversampling"
+    },
+    "training_rows": 778,
+    "training_seconds": 147.65230200000224,
+    "true_negatives": 33,
+    "true_positives": 164,
+    "upper": 0.39999999999999997
+  },
+  "status": "FROZEN_CANDIDATE_AND_THRESHOLDS_BEFORE_FINAL_ASSESSMENT",
+  "tfidf": {
+    "all_sif_reference": {
+      "balanced_accuracy": 0.5,
+      "precision": 0.7543103448275862,
+      "recall": 1.0,
+      "specificity": 0.0
+    },
+    "auto_non_sif": 31,
+    "auto_sif": 182,
+    "automatic_decision_coverage": 0.9181034482758621,
+    "balanced_accuracy": 0.743358395989975,
+    "c": 2.0,
+    "checkpoint": "through_annotation_batch_03",
+    "class_weight": "non_sif_1_5",
+    "classes": [
+      "0",
+      "1"
+    ],
+    "confusion_matrix": [
+      [
+        31,
+        26
+      ],
+      [
+        10,
+        165
+      ]
+    ],
+    "declared_objective": "Pass recall, specificity, balanced-accuracy, precision-over-all-SIF, and review-workload gates; then maximize balanced accuracy, F2, recall, specificity, precision, and lower review rate.",
+    "development_class_counts": {
+      "NON_SIF_POTENTIAL": 57,
+      "SIF_POTENTIAL": 175
+    },
+    "development_gate_passed": true,
+    "development_gates": {
+      "maximum_review_rate": 0.4,
+      "minimum_balanced_accuracy": 0.7,
+      "minimum_recall": 0.9,
+      "minimum_specificity": 0.5,
+      "precision_must_exceed_all_sif": 0.7543103448275862
+    },
+    "development_rows": 232,
+    "f1": 0.9016393442622951,
+    "f2": 0.9259259259259259,
+    "false_negatives": 10,
+    "false_positives": 26,
+    "fit_scope": "training_only_no_refit_after_threshold_selection",
+    "human_positive_routed_auto_non_sif": 6,
+    "lower": 0.49999999999999994,
+    "model_family": "tfidf",
+    "positive_probability_column": 1,
+    "precision": 0.8638743455497382,
+    "predicted_class_counts": {
+      "NON_SIF_POTENTIAL": 41,
+      "SIF_POTENTIAL": 191
+    },
+    "recall": 0.9428571428571428,
+    "review_count": 19,
+    "review_rate": 0.08189655172413793,
+    "selection_status": "ELIGIBLE_DEVELOPMENT_OPERATING_POINT",
+    "specificity": 0.543859649122807,
+    "threshold": 0.5499999999999999,
+    "training_class_counts": {
+      "NON_SIF_POTENTIAL": 197,
+      "SIF_POTENTIAL": 581
+    },
+    "training_rows": 778,
+    "true_negatives": 31,
+    "true_positives": 165,
+    "upper": 0.6
+  },
+  "training_counts": {
+    "NON_SIF_POTENTIAL": 197,
+    "SIF_POTENTIAL": 581
+  },
+  "unresolved_excluded": {
+    "development": 10,
+    "train": 41
+  }
+}
