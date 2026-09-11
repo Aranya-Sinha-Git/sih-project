@@ -11,15 +11,13 @@ Supabase provides PostgreSQL persistence and Auth. FastAPI remains the only appl
 1. Create a Supabase project and run the SQL files in `supabase/migrations/` in filename order in the Supabase SQL editor. The first creates the tables and RLS policies; the later files add atomic review persistence and migration identity synchronization. Existing projects should run only the migration files they have not already applied.
 2. Copy `.env.example` to `.env` and fill the server URL, publishable key, secret key, CORS origin, and the two frontend public variables. Never put `SUPABASE_SECRET_KEY` in a `NEXT_PUBLIC_*` variable. When running Next.js from `01-app/frontend`, provide the same public values in `frontend/.env.local` and set `NEXT_PUBLIC_API_URL=http://127.0.0.1:8000`; `/api` is not a configured proxy.
 3. From `01-app/backend`, create/install the Python environment with `pip install -r requirements.txt`.
-4. Provision the idempotent demo user from `01-app/backend`:
+4. Apply the member-role migration and start the services. The login page supports self-service account registration with a User ID, display name, and password. New accounts receive the least-privileged `member` role. Reviewer and admin roles are assigned only by the server-side administrative provisioning command:
 
    ```powershell
-   python scripts/seed_demo_user.py
+   python scripts/provision_user.py --user-id reviewer-one --display-name "Reviewer One" --password "Provide-an-explicit-strong-password" --role reviewer
    ```
 
-   It creates or reuses `test@users.sif-sentinel.invalid`, confirms the Auth email, and upserts profile `test` with reviewer role. It does not reset an existing password.
-
-   In Supabase Authentication settings, disable public sign-ups after the demo user has been seeded. The application creates accounts through the server-side seed command only.
+   The command requires every credential explicitly, never supplies defaults, and does not reset an existing Auth password. It is also the supported path for promoting a member to reviewer or admin. Keep the deployment-edge registration rate limiter enabled before opening registration publicly.
 
 5. Optionally migrate the existing local database once:
 
@@ -30,7 +28,7 @@ Supabase provides PostgreSQL persistence and Auth. FastAPI remains the only appl
    The importer preserves report IDs, timestamps, JSON analysis/intelligence, legacy records, review history, and provenance; reruns skip identical rows and fail differing rows without overwriting them.
 6. Start the local app with `run-demo.cmd`, or run `uvicorn app.main:app --host 0.0.0.0 --port 8000` and `npm run dev` separately.
 
-Login uses User ID `test` and Password `test123`. The compact hint appears only when `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true`.
+Open the login page, choose “Create account,” and register with a strong password. Password recovery is not currently available through ordinary email links because User IDs use synthetic internal email addresses; use the administrator-assisted reset process until a dedicated reset flow is implemented.
 
 ## Deployment
 
@@ -64,4 +62,4 @@ cd ../frontend
 npm run build
 ```
 
-After applying the SQL migration and seeding Supabase, manually verify login, dashboard load, analyze, detail/similarity, operational review, refresh persistence, logout, and protected-route redirect with `test / test123`. Runtime review dispositions are not formal dual-reviewer adjudications and cannot be used as official blind-validation ground truth. This is a shared demo workspace, not a tenant-isolated deployment; authenticated users can reach workspace-wide operational data according to their FastAPI role.
+After applying the SQL migration, manually verify registration, immediate login, dashboard load, analyze, detail/similarity, operational review authorization, refresh persistence, logout, duplicate-registration handling, and protected-route redirect. Runtime review dispositions are not formal dual-reviewer adjudications and cannot be used as official blind-validation ground truth. Scores are screening signals rather than accident probabilities; automatic results require qualified human review, the application does not replace safety procedures, and some rule coverage is limited.

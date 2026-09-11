@@ -23,7 +23,7 @@ from app.services.engine import analyze_text  # noqa: E402
 
 BASE = "https://www.osha.gov/ords/imis/accidentsearch"
 ARCHIVE = ROOT / "data" / "public_osha_fatality_reports"
-HEADERS = {"User-Agent": "SIF-Sentinel-public-safety-research/1.0 (educational prototype)"}
+HEADERS = {"User-Agent": "SIF-Sentinel-public-safety-research/1.0"}
 TARGET = 50
 SEED_IDS = [
     "180500.015", "174959.015", "174984.015", "174925.015", "178170.015", "174967.015", "174966.015", "174972.015", "174960.015", "174774.015",

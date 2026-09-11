@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import asyncio, hashlib, heapq, json, os, sqlite3
+import asyncio, hashlib, heapq, json, os, sqlite3, threading, time
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Optional
@@ -9,9 +9,11 @@ from urllib.parse import urlsplit
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field, field_validator
+from pydantic import AliasChoices, BaseModel, Field, field_validator, model_validator
 
-from .auth import AuthenticatedUser, reviewer_for_request, validate_configuration
+from .auth import (MAX_DISPLAY_NAME_LENGTH, MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, AuthProviderError,
+                   AuthenticatedUser, create_auth_user, delete_auth_user, normalize_username,
+                   reviewer_for_request, username_to_internal_email, validate_configuration)
 from .services.classifier import analyze_with_classifier, classifier_metadata
 from .services.domain_model import get_domain_model
 from .services.engine import analyze_text
@@ -26,6 +28,9 @@ REVIEW_OUTCOME_ALIASES = {"Confirm SIF": "Confirm SIF", "Confirm Non-SIF": "Conf
 MAX_NARRATIVE_CHARS = 20_000
 MAX_BATCH_REPORTS = 500
 PUBLIC_HEALTH_PATHS = {"/live", "/health", "/ready"}
+PUBLIC_UNAUTHENTICATED_PATHS = PUBLIC_HEALTH_PATHS | {"/auth/register"}
+_registration_attempts: dict[str, list[float]] = {}
+_registration_attempts_lock = threading.Lock()
 
 def con() -> sqlite3.Connection:
     """Compatibility handle for explicit SQLite legacy/test tooling only."""
@@ -66,6 +71,37 @@ class ReviewInput(BaseModel):
     comment: str = Field(default="", max_length=2000)
 class AlertUpdate(BaseModel): status: str
 class IntelligenceInput(BaseModel): force: bool = False
+
+
+class RegistrationInput(BaseModel):
+    user_id: str = Field(validation_alias=AliasChoices("user_id", "username"), min_length=3, max_length=64)
+    display_name: str = Field(min_length=1, max_length=MAX_DISPLAY_NAME_LENGTH)
+    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
+    password_confirmation: str = Field(validation_alias=AliasChoices("password_confirmation", "confirm_password"), min_length=1, max_length=MAX_PASSWORD_LENGTH)
+
+    @field_validator("user_id", mode="before")
+    @classmethod
+    def normalize_user_id(cls, value: Any) -> str:
+        return normalize_username(str(value or ""))
+
+    @field_validator("display_name", mode="before")
+    @classmethod
+    def normalize_display_name(cls, value: Any) -> str:
+        return " ".join(str(value or "").strip().split())
+
+    @field_validator("password")
+    @classmethod
+    def require_strong_password(cls, value: str) -> str:
+        categories = sum(bool(check) for check in (any(char.islower() for char in value), any(char.isupper() for char in value), any(char.isdigit() for char in value), any(not char.isalnum() for char in value)))
+        if len(value) < MIN_PASSWORD_LENGTH or categories < 3:
+            raise ValueError("Password must be at least 12 characters and include at least three of lowercase, uppercase, number, or symbol.")
+        return value
+
+    @model_validator(mode="after")
+    def passwords_match(self) -> "RegistrationInput":
+        if self.password != self.password_confirmation:
+            raise ValueError("Password confirmation does not match.")
+        return self
 
 def model_outcome(row: dict[str, Any]) -> Optional[str]:
     analysis = row.get("analysis") or {}
@@ -281,7 +317,7 @@ async def require_bearer_token(request: Request, call_next):
     # requests remain protected below.
     if request.method == "OPTIONS":
         return await call_next(request)
-    if request.url.path not in PUBLIC_HEALTH_PATHS:
+    if request.url.path not in PUBLIC_UNAUTHENTICATED_PATHS:
         # Token verification currently uses the synchronous httpx client;
         # keep that network call off the event loop until the auth adapter is
         # migrated to a fully async client.
@@ -321,6 +357,58 @@ def live():
 def health():
     payload, ready = readiness_payload()
     return JSONResponse(payload, status_code=200 if ready else 503)
+
+
+def _registration_rate_limited(request: Request) -> bool:
+    """Apply a conservative per-source limit until an edge limiter is configured."""
+    try:
+        limit = max(1, int(os.getenv("REGISTRATION_RATE_LIMIT", "5")))
+        window = max(60, int(os.getenv("REGISTRATION_RATE_WINDOW_SECONDS", "3600")))
+    except ValueError:
+        limit, window = 5, 3600
+    source = request.client.host if request.client else "unknown"
+    now = time.monotonic()
+    with _registration_attempts_lock:
+        attempts = [timestamp for timestamp in _registration_attempts.get(source, []) if now - timestamp < window]
+        limited = len(attempts) >= limit
+        attempts.append(now)
+        _registration_attempts[source] = attempts
+    return limited
+
+
+@app.post("/auth/register", status_code=201)
+def register(registration: RegistrationInput, request: Request):
+    if _registration_rate_limited(request):
+        raise HTTPException(429, "Too many registration attempts. Please try again later.")
+    try:
+        email = username_to_internal_email(registration.user_id)
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    database = get_database()
+    try:
+        if database.get_profile_by_username(registration.user_id):
+            raise HTTPException(409, "That User ID is already registered.")
+    except HTTPException:
+        raise
+    except Exception as error:
+        raise HTTPException(500, "Registration could not be completed.") from error
+    auth_user: dict[str, str] | None = None
+    try:
+        auth_user = create_auth_user(email=email, password=registration.password, username=registration.user_id, display_name=registration.display_name)
+        database.create_profile({"id": auth_user["id"], "username": registration.user_id, "display_name": registration.display_name, "role": "member"})
+    except AuthProviderError as error:
+        if auth_user:
+            delete_auth_user(auth_user["id"])
+        if error.conflict:
+            raise HTTPException(409, "That User ID is already registered.") from error
+        raise HTTPException(500, "Registration could not be completed.") from error
+    except Exception as error:
+        if auth_user:
+            delete_auth_user(auth_user["id"])
+        raise HTTPException(500, "Registration could not be completed.") from error
+    return {"user_id": registration.user_id, "display_name": registration.display_name, "role": "member"}
+
+
 def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] = None, screening: Optional[dict[str, Any]] = None) -> dict[str, Any]:
     analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative), screening_result=screening)
     analysis["lsr_mapping"] = lsr_mapping or get_domain_model().map_rules(report.narrative)
@@ -482,4 +570,4 @@ def alert_update(alert_id: str, update: AlertUpdate):
 def model():
     metadata = classifier_metadata()
     domain = get_domain_model().metadata()
-    return {"mode": "Frozen supervised classifier plus offline multilabel IOGP mapper", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": False, "runtime_generative_llm_calls": False, "lsr_model": domain, "candidate_promotion": "RETAINED_BASELINE_CANDIDATE_REGRESSED_ON_PROTECTED_TEST", "authorization_scope": "shared_demo_workspace; authenticated profiles are not tenant-isolated", "screening_claim": "uncalibrated screening score; not an accident probability; automatic positives may be false alarms", "experimental_candidates": {"status": "not_promoted_and_not_loaded", "sif": [{"name": "TF-IDF v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/sif_tfidf_v0_4.joblib", "status": "experimental", "fresh_final": "79/22/26/5; recall 0.940; F2 0.904", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}, {"name": "SetFit v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/setfit_candidate_v0_4", "status": "experimental_posthoc", "fresh_final": "79/17/31/5; recall 0.940; F2 0.914", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/setfit_posthoc_evaluation_v0_4.json"}], "lsr": {"name": "LSR v0.4 nine-rule candidate", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/lsr_model_v0_4.joblib", "status": "experimental", "reason": "incomplete reliable support for LSR01, LSR02, and LSR08", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}}, "provenance": "Frozen SIF predictor retained after candidate comparison; LSR values are uncalibrated model scores with deterministic evidence templates.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "ai_assisted_internal": {"status": "reported_separately", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_2/sif_test_evaluation.json"}, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference or unsupported-rule failures are explicit and never converted to a negative result."}
+    return {"mode": "Supervised screening classifier plus offline multilabel IOGP mapper", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": False, "runtime_generative_llm_calls": False, "lsr_model": domain, "authorization_scope": "authenticated workspace access; profiles are not tenant-isolated", "screening_claim": "uncalibrated screening score; not an accident probability; automatic positives may be false alarms", "provenance": "Active screening classifier and deterministic evidence templates.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference or unsupported-rule failures are explicit and never converted to a negative result."}

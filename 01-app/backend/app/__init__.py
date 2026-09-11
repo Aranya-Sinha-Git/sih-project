@@ -1,1 +1,1 @@
-"""SIF Sentinel demo backend."""
+"""SIF Sentinel application backend."""

@@ -198,6 +198,15 @@ class SQLiteDatabase:
     def get_profile(self, user_id: str) -> dict[str, Any] | None:
         return None
 
+    def get_profile_by_username(self, username: str) -> dict[str, Any] | None:
+        return None
+
+    def create_profile(self, profile: dict[str, Any]) -> dict[str, Any]:
+        raise DatabaseError("Profile storage is unavailable")
+
+    def update_profile(self, user_id: str, profile: dict[str, Any]) -> dict[str, Any]:
+        raise DatabaseError("Profile storage is unavailable")
+
 
 class SupabaseDatabase:
     kind = "supabase-postgres"
@@ -313,6 +322,18 @@ class SupabaseDatabase:
     def get_profile(self, user_id: str) -> dict[str, Any] | None:
         rows = self._request("GET", "profiles", params={"id": f"eq.{user_id}", "select": "id,username,display_name,role"}) or []
         return rows[0] if rows else None
+
+    def get_profile_by_username(self, username: str) -> dict[str, Any] | None:
+        rows = self._request("GET", "profiles", params={"username": f"ilike.{username}", "select": "id,username,display_name,role"}) or []
+        return rows[0] if rows else None
+
+    def create_profile(self, profile: dict[str, Any]) -> dict[str, Any]:
+        rows = self._request("POST", "profiles", payload=profile, prefer="return=representation") or []
+        return rows[0] if rows else profile
+
+    def update_profile(self, user_id: str, profile: dict[str, Any]) -> dict[str, Any]:
+        rows = self._request("PATCH", "profiles", params={"id": f"eq.{user_id}"}, payload=profile, prefer="return=representation") or []
+        return rows[0] if rows else {"id": user_id, **profile}
 
 
 _database: SQLiteDatabase | SupabaseDatabase | None = None

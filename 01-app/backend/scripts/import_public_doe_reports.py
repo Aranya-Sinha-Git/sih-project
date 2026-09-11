@@ -29,7 +29,7 @@ from app.services.engine import analyze_text  # noqa: E402
 
 ARCHIVE = ROOT / "data" / "public_doe_oes"
 TARGET_PER_CLASS = 50
-USER_AGENT = "SIF-Sentinel-public-safety-research/1.0 (educational prototype)"
+USER_AGENT = "SIF-Sentinel-public-safety-research/1.0"
 
 # The DOE archive uses a lower-case prefix through 2005 and OES_ thereafter.
 ISSUES = [(year, issue) for year in range(2004, 2011) for issue in range(1, 25)]

@@ -1,6 +1,6 @@
 """Deterministic explanation compatibility service.
 
-The prototype intentionally performs no runtime generative-LLM or network
+The service intentionally performs no runtime generative-LLM or network
 calls. The historical endpoint remains compatible and returns a template made
 only from already-grounded evidence.
 """

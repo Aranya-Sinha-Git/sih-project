@@ -2,12 +2,19 @@
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass
 
 import httpx
 from fastapi import Request
 
 INTERNAL_AUTH_DOMAIN = "users.sif-sentinel.invalid"
+MIN_USERNAME_LENGTH = 3
+MAX_USERNAME_LENGTH = 64
+MAX_DISPLAY_NAME_LENGTH = 120
+MIN_PASSWORD_LENGTH = 12
+MAX_PASSWORD_LENGTH = 128
+_USERNAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9._-]{2,63}$")
 
 
 @dataclass(frozen=True)
@@ -24,8 +31,8 @@ def normalize_username(username: str) -> str:
 
 def username_to_internal_email(username: str) -> str:
     normalized = normalize_username(username)
-    if not normalized or any(char not in "abcdefghijklmnopqrstuvwxyz0123456789._-" for char in normalized):
-        raise ValueError("User ID may contain letters, numbers, dot, underscore, or hyphen.")
+    if not _USERNAME_PATTERN.fullmatch(normalized):
+        raise ValueError("User ID must be 3-64 characters and use only letters, numbers, dot, underscore, or hyphen.")
     return f"{normalized}@{INTERNAL_AUTH_DOMAIN}"
 
 
@@ -59,7 +66,7 @@ def reviewer_for_request(request: Request) -> AuthenticatedUser | None:
         profile = get_database().get_profile(user_id)
         if not profile:
             return None
-        return AuthenticatedUser(user_id, profile["username"], profile.get("display_name") or profile["username"], profile.get("role") or "demo")
+        return AuthenticatedUser(user_id, profile["username"], profile.get("display_name") or profile["username"], profile.get("role") or "member")
     except (httpx.HTTPError, ValueError, KeyError):
         return None
 
@@ -71,3 +78,56 @@ def validate_configuration() -> None:
     missing = [name for name in required if not os.getenv(name, "").strip()]
     if missing:
         raise RuntimeError("Missing required Supabase configuration: " + ", ".join(missing))
+
+
+class AuthProviderError(RuntimeError):
+    """An internal Supabase Auth failure safe to translate into a generic API error."""
+
+    def __init__(self, message: str = "Account registration failed.", *, conflict: bool = False) -> None:
+        super().__init__(message)
+        self.conflict = conflict
+
+
+def create_auth_user(*, email: str, password: str, username: str, display_name: str) -> dict[str, str]:
+    """Create an Auth user with the server-only Supabase administrator key."""
+    url = os.getenv("SUPABASE_URL", "").strip().rstrip("/")
+    secret_key = os.getenv("SUPABASE_SECRET_KEY", "").strip()
+    if not url or not secret_key:
+        raise AuthProviderError()
+    try:
+        response = httpx.post(
+            f"{url}/auth/v1/admin/users",
+            headers={"apikey": secret_key, "Authorization": f"Bearer {secret_key}", "Content-Type": "application/json"},
+            json={"email": email, "password": password, "email_confirm": True, "user_metadata": {"username": username, "display_name": display_name}},
+            timeout=20,
+        )
+    except httpx.HTTPError as error:
+        raise AuthProviderError() from error
+    if response.status_code in {409, 422}:
+        raise AuthProviderError(conflict=True)
+    if response.status_code >= 400:
+        raise AuthProviderError()
+    try:
+        payload = response.json()
+        user_id = str(payload.get("id") or "")
+    except (ValueError, AttributeError):
+        user_id = ""
+    if not user_id:
+        raise AuthProviderError()
+    return {"id": user_id, "email": email}
+
+
+def delete_auth_user(user_id: str) -> None:
+    """Best-effort rollback for a registration whose profile could not be created."""
+    url = os.getenv("SUPABASE_URL", "").strip().rstrip("/")
+    secret_key = os.getenv("SUPABASE_SECRET_KEY", "").strip()
+    if not url or not secret_key:
+        return
+    try:
+        httpx.delete(
+            f"{url}/auth/v1/admin/users/{user_id}",
+            headers={"apikey": secret_key, "Authorization": f"Bearer {secret_key}"},
+            timeout=20,
+        )
+    except httpx.HTTPError:
+        return

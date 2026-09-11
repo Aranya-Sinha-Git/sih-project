@@ -20,7 +20,7 @@ def test_real_artifacts_load_through_runtime_and_candidate_adapter():
     assert candidate.screen("  \n  ")["decision"] == "HUMAN_REVIEW"
 
 
-def test_demo_examples_cover_sif_non_sif_and_review_routes():
+def test_representative_examples_cover_sif_non_sif_and_review_routes():
     classifier = get_domain_model().classifier
     clear_sif = classifier.screen("An employee contacted an energized 13,800 volt power line and suffered severe burns.")
     clear_non_sif = classifier.screen("A worker walking across a muddy yard slipped and twisted an ankle.")
