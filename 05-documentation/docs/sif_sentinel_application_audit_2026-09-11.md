@@ -2,7 +2,7 @@
 
 **Audit date:** 2026-09-11
 
-**Audited revision:** `d7c942dbb528c82a897b97867ba2717239e9b9ea` (`main`, equal to `origin/main`)
+**Audited revision:** `1acc34559168109b32474054432a39c4eec49366` (`main`, equal to `origin/main`)
 
 **Scope:** current application flows, model/runtime behavior, LSR evidence, evaluation/data integrity, persistence/review semantics, reliability/security, browser demo, tests/build.
 
@@ -10,7 +10,7 @@
 
 ## Executive verdict
 
-The repository contains a coherent working prototype with a real Next.js/FastAPI/Supabase architecture, deterministic retrieval/evidence, review persistence, and strong automated coverage. It is **not ready to present as a fully reliable safety-decision system or as a verified live demo in the current environment**.
+The repository contains a coherent working prototype with a real Next.js/FastAPI/Supabase architecture, deterministic retrieval/evidence, review persistence, and strong automated coverage. The deployed Vercel-to-Render path is reachable and authenticated, but the application is **not ready to present as a fully reliable safety-decision system**.
 
 The principal blockers are:
 
@@ -18,7 +18,9 @@ The principal blockers are:
 2. The active text classifier routed deliberately safe/negated or generic narratives to SIF Potential in direct regression probes. These are not formal accuracy estimates, but they are unacceptable unqualified demo behavior for safety language.
 3. LSR mapping is deterministic and evidence-gated, but its active coverage is incomplete and its mapping channel can disagree with the separate reference-evidence channel shown in the UI.
 
-The browser demo is environment-sensitive rather than intrinsically broken: after rebuilding with the repository’s real local Supabase variables and running the backend, `test / test123` authenticated successfully and the dashboard loaded live Supabase data.
+The browser demo is environment-sensitive rather than intrinsically broken: after rebuilding with the repository’s real local Supabase variables and running the backend, `test / test123` authenticated successfully and the dashboard loaded live Supabase data. The deployed frontend at `https://sih-project-orpin-pi.vercel.app/` also authenticated with the same credentials and loaded the dashboard through Render at `https://sih-project-ng01.onrender.com`; the deployed read-only incident, review-queue, and model/evidence routes loaded without mutation.
+
+Deployment connectivity is therefore not the main release blocker. Render `/health` returned `200` with `model_status: READY`, `lsr_model_status: READY`, and `database: supabase-postgres`; unauthenticated `/dashboard/summary` returned `401`; and a preflight from the Vercel origin returned `200` with an exact `Access-Control-Allow-Origin` match.
 
 The official blind-validation boundary remains intact. The v0.2 and v0.3 packets are still blank, hash-valid, and `frozen_unscored`; no human-validation or external-validation claim is supported by this audit.
 
@@ -123,11 +125,13 @@ The backend requires an authenticated Supabase profile for general routes, but o
 
 For a single shared demo workspace this may be intentional. For multi-tenant or least-privilege production use, any authenticated profile with the `demo` default role can reach workspace-wide operational data through FastAPI. **Smallest fix:** document the shared-workspace assumption or add route-level role/tenant authorization and row scoping before production deployment.
 
-### F-10 — Medium — local frontend API target can break the configured login-to-dashboard flow (confirmed configuration mismatch)
+### F-10 — Medium — local frontend API target can break the configured login-to-dashboard flow (confirmed configuration mismatch; not observed in deployed target)
 
 The checked-in example uses `NEXT_PUBLIC_API_URL=http://localhost:8000` (`01-app/.env.example`), but this workspace’s ignored `01-app/frontend/.env.local` uses `/api`. `01-app/frontend/next.config.ts` defines no `/api` rewrite or proxy. During the corrected live check, Supabase login succeeded, but the dashboard showed “Request could not be completed” until the frontend was rebuilt with the direct backend URL; the backend itself returned the dashboard successfully with the authenticated token.
 
 **Impact:** valid credentials can appear to work while the authenticated workspace cannot load data. **Smallest fix:** align local/deployment configuration with the direct backend URL, or add and test a deliberate frontend proxy/rewrite. Keep the public Supabase variables build-time correct.
+
+The deployed Vercel bundle was separately checked and contains the Render origin, so this finding describes the checked-in/local configuration mismatch and is not evidence that the supplied deployed target is currently miswired.
 
 ### F-11 — Medium — dashboard “awaiting human decision” and review queue disagree (confirmed live state)
 
@@ -179,8 +183,8 @@ The authenticated Methodology page says “No operational incident records are p
 | Frontend build | `npm run build` passed with Next.js 15.5.24 and TypeScript/static generation. 15 authenticated workspace routes plus login and the internal not-found route were generated. |
 | Isolated API E2E | Passed single analysis, duplicate-aware batch, SQLite persistence, review update/history reload, deterministic explanation, similar retrieval, validation rejection, and explicit unavailable-model fallback. |
 | Failure-mode probe | Missing active model reproduced HTTP 200 `/health` plus null-score `HUMAN_REVIEW` analysis, establishing F-02. |
-| Live browser read paths | Configured login, dashboard, incidents, reviewed detail, review queue, model, methodology, settings, sites, activities, intelligence, alerts, and analysis-intake surfaces loaded. No live analyze/review writes were performed. |
-| Live API boundary | `/health` returned 200; unauthenticated `/dashboard/summary` returned 401; allowed-origin CORS preflight returned 200. |
+| Live browser read paths | Configured local login, dashboard, incidents, reviewed detail, review queue, model, methodology, settings, sites, activities, intelligence, alerts, and analysis-intake surfaces loaded. The supplied Vercel deployment also loaded login, dashboard, incident register, review queue, and model/evidence routes. No live analyze/review writes were performed. |
+| Deployed Vercel/Render boundary | Vercel bundle contained `https://sih-project-ng01.onrender.com`; Render `/health` returned 200 with the active model/LSR/database ready, unauthenticated `/dashboard/summary` returned 401, and the Vercel-origin CORS preflight returned 200 with an exact origin match. |
 | Browser validation error | A short narrative was rejected without creating a record, but the UI collapsed the validation response to “Analysis could not run. Check the narrative and local backend.” |
 | Frozen artifacts | Packet hash/row/blank-review checks passed for v0.2 and v0.3. |
 
