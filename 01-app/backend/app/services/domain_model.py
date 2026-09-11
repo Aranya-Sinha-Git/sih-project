@@ -137,8 +137,16 @@ class DomainSafetyModel:
             score = float(scores[rule_id][index])
             threshold = float(spec["threshold"]); borderline_threshold = float(spec["borderline_threshold"])
             excerpt = _supported_excerpt(text, rule_id)
-            if score >= threshold:
+            if score >= threshold and excerpt:
                 status = "ASSIGNED"; reason = "MODEL_SCORE_AT_OR_ABOVE_RULE_THRESHOLD"; assigned.append(rule_id)
+            elif score >= threshold:
+                # A model score alone is not enough to expose a confident rule
+                # mapping.  Keep the scored rule visible as borderline when the
+                # deterministic criterion cannot ground it in the narrative;
+                # this prevents contextual collisions such as maintenance
+                # language being shown as Hot Work without inventing a keyword
+                # suppression list.
+                status = "BORDERLINE"; reason = "NO_EXTRACTABLE_SUPPORT_FOR_CONFIDENT_ASSIGNMENT"; borderline.append(rule_id)
             elif score >= borderline_threshold:
                 status = "BORDERLINE"; reason = "MODEL_SCORE_IN_BORDERLINE_BAND"; borderline.append(rule_id)
             else:
@@ -147,9 +155,6 @@ class DomainSafetyModel:
             evidence = [{"excerpt": excerpt, "source": "submitted_narrative", "evidence_type": "criterion_aligned_sentence"}] if excerpt else []
             if status == "ASSIGNED" and excerpt:
                 explanation = f"{name} is relevant. Supporting report excerpt: “{excerpt}”"
-            elif status == "ASSIGNED":
-                explanation = f"{name} met its assignment threshold, but no criterion-aligned supporting excerpt was located."
-                reason = "PREDICTED_WITHOUT_EXTRACTABLE_SUPPORT"
             elif status == "BORDERLINE":
                 explanation = f"{name} is possible but below its assignment threshold; this does not prove the rule is irrelevant."
             else:

@@ -140,6 +140,40 @@ Add a dated entry with:
 - **Scope:** `domain_adaptation_v0_4` data, artifacts, reports and demo
   material. No frozen human-validation artifact or live runtime path changed.
 
+### 2026-09-11 — Complete v0.4 demo-readiness audit without promotion
+
+- **Status:** accepted
+- **Decision:** Keep the active v0.1 SIF screen and v0.2 LSR artifact. Record
+  descriptive routing for all 18 uncertain fresh-final rows in the versioned
+  v0.4 report, and do not treat any automatic route as a correctness result.
+  Keep the v0.4 SIF and LSR candidates experimental and unpromoted.
+- **Rationale:** The active baseline routed 17/18 uncertain rows to automatic
+  SIF and only 1/18 to human review. The ten insufficient-information reasons
+  are supported by the narratives, while the eight disagreement reasons are
+  unresolved adjudication metadata. The active mapper reproduced contextual
+  false nominations for drive-belt and generic-maintenance text when a model
+  score had no extractable criterion evidence.
+- **Scope:** `uncertain_routing_v0_4.json`, the v0.4 model card/checklist, and
+  the active LSR rendering path. This does not change frozen packets, labels,
+  model artifacts, thresholds, or training data.
+
+### 2026-09-11 — Require evidence for confident active LSR mappings
+
+- **Status:** accepted
+- **Decision:** A v0.2 LSR rule is shown as `ASSIGNED` only when its existing
+  model score reaches the rule threshold and the deterministic criterion
+  extractor finds a supporting submitted-narrative excerpt. Otherwise retain
+  the score as borderline/below-threshold and explain that no confident
+  mapping is established.
+- **Rationale:** This is the smallest supported fix for contextual collisions
+  without adding blanket keyword suppression. It prevents unsupported
+  drive-belt and generic-maintenance Hot Work assignments while preserving an
+  evidence-backed driving/Line-of-Fire mapping. LSR coverage and promotion
+  remain independent of the SIF decision.
+- **Scope:** `01-app/backend/app/services/domain_model.py` and its focused
+  regression tests. The v0.2 artifact remains active; the v0.4 nine-rule
+  artifact is not promoted.
+
 Date: 2026-09-05
 
 ## Blind-test status

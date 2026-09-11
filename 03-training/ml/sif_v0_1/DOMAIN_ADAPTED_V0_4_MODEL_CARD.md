@@ -73,3 +73,71 @@ dependency versions, reports, and hashes are listed in
 or rollback is required. The existing runtime benchmark remains applicable:
 uncached API median/p95 90.53/144.90 ms, with zero runtime LLM token charges.
 No comparable authorised LLM benchmark was run.
+
+## Demo-readiness audit (2026-09-11)
+
+The 18 `UNCERTAIN` rows in the frozen fresh-final packet were scored with the
+existing artifacts only. They remain excluded from binary metrics. The saved
+per-report scores and routes are in
+`reports/domain_adaptation_v0_4/uncertain_routing_v0_4.json`.
+
+| Artifact family | Annotator disagreement (8) | Insufficient information (10) | All uncertain rows (18) |
+|---|---:|---:|---:|
+| Active baseline v0.1 | 8 / 0 / 0 | 9 / 0 / 1 | 17 / 0 / 1 |
+| TF-IDF v0.4 experimental | 7 / 1 / 0 | 4 / 2 / 4 | 11 / 3 / 4 |
+| SetFit v0.4 experimental | 5 / 3 / 0 | 5 / 4 / 1 | 10 / 7 / 1 |
+
+Cells are `automatic SIF / automatic Non-SIF / human review`. These are
+descriptive routes, not correctness labels. On the full 150-row packet, the
+review workload is 14/150 (9.3%) for the active baseline, 15/150 (10.0%) for
+TF-IDF v0.4, and 2/150 (1.3%) for SetFit v0.4; these denominators include the
+18 uncertain rows and must not be presented as validated accuracy.
+
+All ten insufficient-information reasons are supported by the corresponding
+narratives: the stated fall-height, fall-distance, mechanism, or environmental
+severity detail is absent. The eight disagreement reasons are adjudication
+provenance rather than narrative-derived missing-information explanations;
+their mechanisms and injuries are described, but the label disagreement
+remains unresolved. The active runtime does not generate a separate
+missing-information rationale, so no such rationale is claimed.
+
+## Confirmed runtime artifacts and rule coverage
+
+The running backend resolves the active SIF screen to
+`artifacts/supervised/tfidf_logreg.joblib` through `src/predict.py`, with
+`sif-v0.1`, binary threshold 0.40, inclusive review band 0.35–0.45, and
+uncalibrated raw scores. It resolves the active mapper to
+`artifacts/domain_adapted_v0_2/lsr_model.joblib`, version `iogp-lsr-v0.2`,
+reference `IOGP_REPORT_459_REVISED_2018`.
+
+The active mapper has trained coverage for LSR03 Driving, LSR04 Energy
+Isolation, LSR05 Hot Work, LSR06 Line of Fire, LSR07 Safe Mechanical Lifting,
+and LSR09 Working at Height. LSR01 Bypassing Safety Controls, LSR02 Confined
+Space, and LSR08 Work Authorisation are unavailable because their training
+support is insufficient. Unavailable rules are not treated as negatives.
+Assigned rules require both a model score at the rule threshold and a
+criterion-aligned excerpt from the submitted narrative; the excerpt is
+supporting evidence, not proof of a violation. This narrow runtime guard keeps
+drive-belt and generic-maintenance collision cases from becoming confident Hot
+Work mappings while retaining evidence-backed mappings. No v0.4 LSR rule or
+SIF candidate was promoted.
+
+## Illustrative demo cases (separate from assessment results)
+
+These inputs are examples for demonstrating the product contract, not rows
+from the fresh-final assessment and not validation evidence.
+
+| Demo case | Illustrative input / expected behavior |
+|---|---|
+| SIF potential | “An employee contacted an energized 13,800 volt power line and suffered severe burns.” → active SIF potential; show raw score and review thresholds. |
+| Non-SIF | “A worker walking across a muddy yard slipped and twisted an ankle.” → Non-SIF potential or review depending on the frozen score; never infer safety from zero rules. |
+| Insufficient information | “An employee took measurements while standing on an earthen berm, lost balance, and fractured an ankle.” → human-review route when the score is in-band; missing detail is not filled in. |
+| Multiple rules | “A hopper being lifted by a forklift fell on the employee and caused a back injury.” → multiple evidence-backed LSR06/LSR07 nominations with narrative excerpts. |
+| Zero/incomplete mapping | “Routine housekeeping removed paper from an office floor.” → no confident mapping; `MAPPING_UNAVAILABLE` discloses incomplete LSR coverage, not a safe-condition claim. |
+| Adjudication and retrieval | Submit a reviewed incident, record a reviewer outcome, then reopen it → Audit history preserves the human decision and Similar historical reports shows deterministic retrieval when matches exist. The seed demo database starts without review-history rows, so this case requires one review action during the demo. |
+
+The UI and API label model scores as uncalibrated, separate relevant rules from
+demonstrated violations, distinguish `NO_CONFIDENT_MAPPING` from
+`MAPPING_UNAVAILABLE`, and keep human outcomes separate from classifier
+screening. Offline AI-assisted references remain prototype evidence, not
+real-world validation or HSE expert ground truth.

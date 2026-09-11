@@ -63,6 +63,35 @@ def test_zero_mapping_unavailable_and_negation_are_explicit():
     assert "does not prove the rule is irrelevant" in line_of_fire["rendered_explanation"]
 
 
+def test_contextual_collisions_do_not_become_confident_mappings_without_evidence():
+    service = get_domain_model()
+    drive_belt = service.map_rules("A compressor drive belt failed during routine maintenance; no vehicle was being driven.")
+    guy_wire = service.map_rules("A guy wire snapped while a crew was stabilizing a tower; no vehicle was involved.")
+    generic_maintenance = service.map_rules("An employee performed routine maintenance on a pump.")
+
+    assert "LSR03" not in drive_belt["assigned_rule_ids"]
+    assert "LSR03" not in guy_wire["assigned_rule_ids"]
+    assert "LSR05" not in drive_belt["assigned_rule_ids"]
+    assert "LSR05" not in generic_maintenance["assigned_rule_ids"]
+    assert all(not rule["evidence"] for rule in drive_belt["rules"] if rule["rule_id"] == "LSR05")
+    assert all(not rule["evidence"] for rule in generic_maintenance["rules"] if rule["rule_id"] == "LSR05")
+    assert all(
+        rule["reason_code"] == "NO_EXTRACTABLE_SUPPORT_FOR_CONFIDENT_ASSIGNMENT"
+        for mapping in (drive_belt, generic_maintenance)
+        for rule in mapping["rules"]
+        if rule["rule_id"] == "LSR05"
+    )
+
+
+def test_evidence_backed_driving_mapping_remains_available():
+    service = get_domain_model()
+    mapping = service.map_rules("A truck driver lost control and struck a pedestrian.")
+    assert "LSR06" in mapping["assigned_rule_ids"]
+    assigned = next(rule for rule in mapping["rules"] if rule["rule_id"] == "LSR06")
+    assert assigned["evidence"]
+    assert assigned["evidence"][0]["excerpt"] in "A truck driver lost control and struck a pedestrian."
+
+
 def test_missing_model_and_short_narrative_never_become_confident_negatives(tmp_path):
     unavailable = DomainSafetyModel(tmp_path / "missing.joblib").map_rules("Short unclear report.")
     assert unavailable["mapping_status"] == "MAPPING_UNAVAILABLE"

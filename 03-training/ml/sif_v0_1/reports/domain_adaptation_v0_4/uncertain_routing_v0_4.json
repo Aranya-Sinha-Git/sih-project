@@ -1,0 +1,73 @@
+{
+  "report_version": "domain-expansion-v0.4-uncertain-routing",
+  "status": "DESCRIPTIVE_ROUTING_ONLY",
+  "source": "data/domain_adaptation_v0_4/fresh_final_assessment_v0_4.csv",
+  "rows": 18,
+  "groups": {
+    "annotator_disagreement": 8,
+    "insufficient_information": 10
+  },
+  "models": {
+    "active_baseline_v0.1": {
+      "artifact": "artifacts/supervised/tfidf_logreg.joblib",
+      "binary_threshold": 0.4,
+      "review_band": [0.35, 0.45],
+      "uncertain_routing": {"auto_sif": 17, "auto_non_sif": 0, "human_review": 1},
+      "all_150_review_workload": {"review_count": 14, "denominator": 150, "review_rate": 0.0933}
+    },
+    "tfidf_v0.4": {
+      "artifact": "artifacts/domain_adapted_v0_4/sif_tfidf_v0_4.joblib",
+      "binary_threshold": 0.55,
+      "review_band": [0.5, 0.6],
+      "uncertain_routing": {"auto_sif": 11, "auto_non_sif": 3, "human_review": 4},
+      "all_150_review_workload": {"review_count": 15, "denominator": 150, "review_rate": 0.1}
+    },
+    "setfit_v0.4": {
+      "artifact": "artifacts/domain_adapted_v0_4/setfit_candidate_v0_4",
+      "binary_threshold": 0.35,
+      "review_band": [0.3, 0.4],
+      "uncertain_routing": {"auto_sif": 10, "auto_non_sif": 7, "human_review": 1},
+      "all_150_review_workload": {"review_count": 2, "denominator": 150, "review_rate": 0.0133}
+    }
+  },
+  "group_routing": {
+    "annotator_disagreement": {
+      "active_baseline_v0.1": {"auto_sif": 8, "auto_non_sif": 0, "human_review": 0},
+      "tfidf_v0.4": {"auto_sif": 7, "auto_non_sif": 1, "human_review": 0},
+      "setfit_v0.4": {"auto_sif": 5, "auto_non_sif": 3, "human_review": 0}
+    },
+    "insufficient_information": {
+      "active_baseline_v0.1": {"auto_sif": 9, "auto_non_sif": 0, "human_review": 1},
+      "tfidf_v0.4": {"auto_sif": 4, "auto_non_sif": 2, "human_review": 4},
+      "setfit_v0.4": {"auto_sif": 5, "auto_non_sif": 4, "human_review": 1}
+    }
+  },
+  "missing_information_inspection": {
+    "method": "Compare the stored uncertainty reason with the submitted narrative; no binary correctness was assigned.",
+    "insufficient_information_rows_supported_by_narrative": 10,
+    "insufficient_information_rows_not_supported": 0,
+    "annotator_disagreement_rows": "The reason is adjudication provenance, not a missing-information explanation. Each narrative contains a concrete mechanism and injury description, but the disagreement remains unresolved.",
+    "note": "The active runtime does not generate a separate missing-information rationale. This inspection therefore evaluates the frozen annotation reasons and documents that limitation."
+  },
+  "rows_detail": [
+    {"incident_id": "OSHA-SIR-2022086730", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.740685, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.846047, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.960299, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2020010318", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.542975, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.477681, "route": "AUTO_NON_SIF"}, "setfit_v0.4": {"score": 0.166641, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2024043733", "group": "insufficient_information", "uncertainty_reason": "The ladder height and fall distance are not stated, so the narrative does not establish a significant fall exposure.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.499279, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.635799, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.172548, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2024088102", "group": "insufficient_information", "uncertainty_reason": "The ladder height and fall distance are not stated, so the severity of the fall potential cannot be resolved.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.658544, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.658038, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.080844, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2021065094", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.729222, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.704221, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.979396, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2024043742", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.719513, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.606871, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.165133, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2025099529", "group": "insufficient_information", "uncertainty_reason": "The extension-ladder height and fall distance are not stated.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.56219, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.437141, "route": "AUTO_NON_SIF"}, "setfit_v0.4": {"score": 0.041817, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-20221110308", "group": "insufficient_information", "uncertainty_reason": "The narrative states a cutting task and a broken arm but does not describe the causal mechanism or exposure.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.651578, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.696891, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.972006, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2019099704", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.650383, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.670331, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.29722, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2024109306", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.839511, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.859039, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.967692, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2016109581", "group": "insufficient_information", "uncertainty_reason": "The height of the fall from the truck is not stated.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.455349, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.550749, "route": "HUMAN_REVIEW"}, "setfit_v0.4": {"score": 0.326985, "route": "HUMAN_REVIEW"}},
+    {"incident_id": "OSHA-SIR-2015107740", "group": "insufficient_information", "uncertainty_reason": "The ladder height and fall distance are not stated.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.613856, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.425106, "route": "AUTO_NON_SIF"}, "setfit_v0.4": {"score": 0.037908, "route": "AUTO_NON_SIF"}},
+    {"incident_id": "OSHA-SIR-2024076799", "group": "insufficient_information", "uncertainty_reason": "The height of the fall from the boom-truck ladder is not stated.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.562184, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.578266, "route": "HUMAN_REVIEW"}, "setfit_v0.4": {"score": 0.977753, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2024109928", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.812563, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.951093, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.9886, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2025077119", "group": "insufficient_information", "uncertainty_reason": "The narrative does not describe environmental severity, duration, or progression beyond heat-exhaustion symptoms.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.650813, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.568803, "route": "HUMAN_REVIEW"}, "setfit_v0.4": {"score": 0.98019, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2016065251", "group": "insufficient_information", "uncertainty_reason": "The scaffold and canopy are described, but the fall height is not stated.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.42542, "route": "HUMAN_REVIEW"}, "tfidf_v0.4": {"score": 0.507248, "route": "HUMAN_REVIEW"}, "setfit_v0.4": {"score": 0.603286, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2016032136", "group": "insufficient_information", "uncertainty_reason": "The narrative does not state whether the fall occurred from the truck or at ground level, or provide a fall height.", "missing_information_supported": true, "active_baseline_v0.1": {"score": 0.591428, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.694668, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.991516, "route": "AUTO_SIF"}},
+    {"incident_id": "OSHA-SIR-2025065219", "group": "annotator_disagreement", "uncertainty_reason": "Independent GPT-5.6 Sol passes disagreed; no additional adjudicator was initiated.", "active_baseline_v0.1": {"score": 0.814438, "route": "AUTO_SIF"}, "tfidf_v0.4": {"score": 0.891485, "route": "AUTO_SIF"}, "setfit_v0.4": {"score": 0.98987, "route": "AUTO_SIF"}}
+  ],
+  "interpretation": "These are uncalibrated model scores, not probabilities. The rows remain excluded from binary metrics and no automatic route is treated as correct or incorrect."
+}
