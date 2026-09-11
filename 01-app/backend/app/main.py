@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import asyncio, hashlib, heapq, json, os, sqlite3, threading, time
+import asyncio, hashlib, heapq, json, os, re, sqlite3, threading, time
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Optional
@@ -42,6 +42,28 @@ def init_db() -> None:
 
 init_db()
 
+_ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+def normalize_report_date(value: Any) -> Optional[str]:
+    """Return a canonical ISO date, rejecting malformed and future values."""
+    if value is None or (isinstance(value, str) and not value.strip()):
+        return None
+    if isinstance(value, datetime):
+        value = value.date()
+    if isinstance(value, date):
+        parsed = value
+    else:
+        candidate = str(value).strip()
+        if not _ISO_DATE_RE.fullmatch(candidate):
+            raise ValueError("report_date must be an ISO date in YYYY-MM-DD format")
+        try:
+            parsed = date.fromisoformat(candidate)
+        except ValueError as error:
+            raise ValueError("report_date must be an ISO date in YYYY-MM-DD format") from error
+    if parsed > date.today():
+        raise ValueError("report_date cannot be in the future")
+    return parsed.isoformat()
+
 class AnalyzeInput(BaseModel):
     narrative: str = Field(min_length=1, max_length=MAX_NARRATIVE_CHARS)
     site: Optional[str] = "Unspecified"
@@ -49,6 +71,7 @@ class AnalyzeInput(BaseModel):
     report_type: Optional[str] = "Unspecified"
     report_id: Optional[str] = None
     source: Optional[str] = None
+    report_date: Optional[str] = Field(default=None, validation_alias=AliasChoices("report_date", "ReportDate", "date"))
 
     @field_validator("narrative")
     @classmethod
@@ -63,6 +86,11 @@ class AnalyzeInput(BaseModel):
         value = (value or "Unspecified").strip() or "Unspecified"
         if value not in REPORT_TYPES: raise ValueError("report_type must be Unsafe Act, Unsafe Condition, Near Miss, Incident, or Unspecified.")
         return value
+
+    @field_validator("report_date", mode="before")
+    @classmethod
+    def valid_report_date(cls, value: Any) -> Optional[str]:
+        return normalize_report_date(value)
 
 class BatchInput(BaseModel): reports: list[AnalyzeInput] = Field(min_length=1, max_length=MAX_BATCH_REPORTS)
 class ReviewInput(BaseModel):
@@ -174,8 +202,9 @@ def build_incident_record(*, narrative: str, site: str, activity: Optional[str],
     resolved_site = (site or analysis.get("location") or "Unspecified").strip(); resolved_activity = (activity or analysis.get("activity") or "Unspecified").strip(); resolved_type = (report_type or "Unspecified").strip() or "Unspecified"
     if resolved_type not in REPORT_TYPES: raise ValueError("report_type must be Unsafe Act, Unsafe Condition, Near Miss, Incident, or Unspecified.")
     ident = report_id or _incident_id(narrative)
-    record = {"id": ident, "report_date": report_date or str(date.today()), "site": resolved_site, "activity": resolved_activity, "narrative": narrative, "source": source, "source_id": (analysis.get("provenance") or {}).get("source_report_id"), "normalized_narrative": _normalized_narrative(narrative), "sif_probability": analysis["sif_probability"], "risk": analysis["risk"], "high_potential": analysis["high_potential"], "sif_potential": analysis["sif_potential"], "sif_label_status": analysis["sif_label_status"], "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required", "reviewer": None, "review_comment": None, "created_at": datetime.now().isoformat(), "created_by_user_id": auth_user.id if auth_user else None, "report_type": resolved_type, "import_batch_id": import_batch_id}
-    result = {"id": ident, "narrative": narrative, "site": resolved_site, "activity": resolved_activity, "report_type": resolved_type, **analysis}
+    resolved_date = normalize_report_date(report_date) or str(date.today())
+    record = {"id": ident, "report_date": resolved_date, "site": resolved_site, "activity": resolved_activity, "narrative": narrative, "source": source, "source_id": (analysis.get("provenance") or {}).get("source_report_id"), "normalized_narrative": _normalized_narrative(narrative), "sif_probability": analysis["sif_probability"], "risk": analysis["risk"], "high_potential": analysis["high_potential"], "sif_potential": analysis["sif_potential"], "sif_label_status": analysis["sif_label_status"], "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required", "reviewer": None, "review_comment": None, "created_at": datetime.now().isoformat(), "created_by_user_id": auth_user.id if auth_user else None, "report_type": resolved_type, "import_batch_id": import_batch_id}
+    result = {"id": ident, "report_date": resolved_date, "narrative": narrative, "site": resolved_site, "activity": resolved_activity, "report_type": resolved_type, "source": source, **analysis}
     return record, result
 
 def persist_incident(*, narrative: str, site: str, activity: Optional[str], report_type: Optional[str], analysis: dict[str, Any], report_id: Optional[str] = None, report_date: Optional[str] = None, source: str = "user_analysis", import_batch_id: Optional[str] = None, connection: Optional[sqlite3.Connection] = None, auth_user: AuthenticatedUser | None = None) -> dict[str, Any]:
@@ -231,6 +260,18 @@ def intelligence_snapshot(narrative: str, item_id: Optional[str] = None, corpus:
     except Exception as error:
         return {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "retrieval_unavailable", "failure_reason": type(error).__name__}
 
+def reference_intelligence_snapshot(narrative: str) -> dict[str, Any]:
+    """Return reference concepts without scanning historical reports.
+
+    Batch imports persist reference context but defer corpus-wide similarity
+    work until a report-detail read, after the entire upload is committed.
+    """
+    try:
+        service = get_retrieval_service()
+        return {"reference_evidence": service.reference_evidence(narrative), "historical_evidence": [], "corpus_version": service.corpus_version, "historical_evidence_deferred": True}
+    except Exception as error:
+        return {"reference_evidence": [], "historical_evidence": [], "corpus_version": "unavailable", "status": "retrieval_unavailable", "failure_reason": type(error).__name__, "historical_evidence_deferred": True}
+
 def _update_analysis_snapshot(incident_id: str, snapshot: dict[str, Any], connection: Optional[sqlite3.Connection] = None) -> None:
     row = get_database().get_incident(incident_id)
     if row:
@@ -242,6 +283,12 @@ def _update_analysis_snapshot(incident_id: str, snapshot: dict[str, Any], connec
         get_database().update_analysis(incident_id, analysis, connection=connection)
 
 def report_anchor(reports: list[dict[str, Any]]) -> date: return max((date.fromisoformat(item["report_date"]) for item in reports), default=date.today())
+def _trend_label(recent: int, prior: int) -> str:
+    # A one-report or ten-percent swing is presentation noise for small site
+    # cohorts, so keep it in the stable band rather than overstating direction.
+    tolerance = max(1, round(max(recent, prior) * 0.10))
+    return "Rising" if recent - prior > tolerance else "Declining" if prior - recent > tolerance else "Stable"
+
 def trends(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     anchor = report_anchor(reports); result = []
     for offset in range(5, -1, -1):
@@ -252,7 +299,7 @@ def trends(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def site_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     result = []
     for site in sorted({x["site"] for x in reports if x["site"]}):
-        group = [x for x in reports if x["site"] == site]; anchor = report_anchor(group); high = sum(x["risk"] == "High" for x in group); current_sif_cases = sum(x.get("sif_potential") == 1 for x in group); model_positive = sum(x.get("model_outcome") == "SIF Potential" for x in group); effective_positive = sum(x.get("effective_outcome") in {"SIF Potential", "Confirm SIF"} for x in group); pending = sum(requires_human_review(x) for x in group); scores = [x["sif_probability"] for x in group if x["sif_probability"] is not None]; score_signal = sum(scores) / len(scores) if scores else 0; density = round(100 * model_positive / len(group), 1); index = min(100, round((high / len(group) * 55 + score_signal * 45) * 1.65 + pending * .7)); recent = sum(date.fromisoformat(x["report_date"]) >= anchor - timedelta(days=30) for x in group); prior = sum(anchor - timedelta(days=60) <= date.fromisoformat(x["report_date"]) < anchor - timedelta(days=30) for x in group); trend = "Rising" if recent > prior else "Declining" if recent < prior else "Stable"
+        group = [x for x in reports if x["site"] == site]; anchor = report_anchor(group); high = sum(x["risk"] == "High" for x in group); current_sif_cases = sum(x.get("sif_potential") == 1 for x in group); model_positive = sum(x.get("model_outcome") == "SIF Potential" for x in group); effective_positive = sum(x.get("effective_outcome") in {"SIF Potential", "Confirm SIF"} for x in group); pending = sum(requires_human_review(x) for x in group); scores = [x["sif_probability"] for x in group if x["sif_probability"] is not None]; score_signal = sum(scores) / len(scores) if scores else 0; density = round(100 * model_positive / len(group), 1); index = min(100, round((high / len(group) * 55 + score_signal * 45) * 1.65 + pending * .7)); recent = sum(date.fromisoformat(x["report_date"]) >= anchor - timedelta(days=30) for x in group); prior = sum(anchor - timedelta(days=60) <= date.fromisoformat(x["report_date"]) < anchor - timedelta(days=30) for x in group); trend = _trend_label(recent, prior)
         average = round(sum(scores) / len(scores), 2) if scores else None
         result.append({"site": site, "reports": len(group), "sif_cases": current_sif_cases, "model_positive_cases": model_positive, "effective_positive_cases": effective_positive, "sif_precursor_density": density, "avg_model_score": average, "pending_reviews": pending, "risk_index": index, "trend": trend, **disposition_counts(group)})
     return sorted(result, key=lambda x: (x["sif_precursor_density"], x["reports"]), reverse=True)
@@ -401,10 +448,10 @@ def register(registration: RegistrationInput, request: Request):
     return {"user_id": registration.user_id, "display_name": registration.display_name, "role": "member"}
 
 
-def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] = None, screening: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+def _compose_analyzed_result(report: AnalyzeInput, lsr_mapping: dict[str, Any], screening: dict[str, Any], intelligence: dict[str, Any]) -> dict[str, Any]:
     analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative), screening_result=screening)
-    analysis["lsr_mapping"] = lsr_mapping or get_domain_model().map_rules(report.narrative)
-    analysis["intelligence"] = intelligence_snapshot(report.narrative)
+    analysis["lsr_mapping"] = lsr_mapping
+    analysis["intelligence"] = intelligence
     assigned = [{"rule": item.get("name", item.get("rule_id")), "rule_id": item.get("rule_id"), "name": item.get("name"), "evidence": item.get("evidence", []), "score": item.get("score"), "score_type": item.get("score_type"), "assignment_status": item.get("assignment_status"), "provenance": "active_lsr_classifier_and_narrative_evidence"}
                 for item in analysis["lsr_mapping"].get("rules", []) if item.get("assignment_status") == "ASSIGNED"]
     reference_concepts = [{"rule": item["rule"], "evidence_id": item["evidence_id"],
@@ -420,46 +467,50 @@ def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] 
     }
     return analysis
 
+def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] = None, screening: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+    mapping = lsr_mapping if lsr_mapping is not None else get_domain_model().map_rules(report.narrative)
+    active_screening = screening if screening is not None else get_domain_model().classifier.screen(report.narrative)
+    return _compose_analyzed_result(report, mapping, active_screening, intelligence_snapshot(report.narrative))
+
 def analyzed_results(reports: list[AnalyzeInput]) -> list[dict[str, Any]]:
     service = get_domain_model(); narratives = [report.narrative for report in reports]
     screenings = service.classifier.screen_batch(narratives)
     mappings = service.map_rules_batch(narratives)
-    return [analyzed_result(report, mapping, screening) for report, mapping, screening in zip(reports, mappings, screenings)]
+    return [_compose_analyzed_result(report, mapping, screening, reference_intelligence_snapshot(report.narrative)) for report, mapping, screening in zip(reports, mappings, screenings)]
 
 @app.post("/analyze")
 def analyze(report: AnalyzeInput, request: Request):
-    duplicate = next((x for x in rows() if _normalized_narrative(x.get("narrative", "")) == _normalized_narrative(report.narrative) and str(x.get("site") or "").casefold() == str(report.site or "Unspecified").casefold()), None)
+    duplicate = next((x for x in rows() if (report.report_id and str(x.get("id")) == report.report_id) or (_normalized_narrative(x.get("narrative", "")) == _normalized_narrative(report.narrative) and str(x.get("site") or "").casefold() == str(report.site or "Unspecified").casefold())), None)
     if duplicate:
         return incident(duplicate["id"])
-    try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report), auth_user=getattr(request.state, "user", None))
+    try: result = persist_incident(narrative=report.narrative, site=report.site or "Unspecified", activity=report.activity, report_type=report.report_type, analysis=analyzed_result(report), report_id=report.report_id, report_date=report.report_date, source=report.source or "user_analysis", auth_user=getattr(request.state, "user", None))
     except ValueError as error: raise HTTPException(422, str(error)) from error
     result["intelligence"] = intelligence_snapshot(report.narrative, result["id"]); result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result); _update_analysis_snapshot(result["id"], result["intelligence"]); return result
 
 @app.post("/analyze/batch")
 def batch(batch_input: BatchInput, request: Request):
     if len(batch_input.reports) > MAX_BATCH_REPORTS: raise HTTPException(422, f"Batch limit is {MAX_BATCH_REPORTS} reports.")
-    database = get_database(); analyses = analyzed_results(batch_input.reports); batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; working_corpus = rows(); results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
+    database = get_database(); analyses = analyzed_results(batch_input.reports); batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; existing = database.list_incidents(); existing_by_id = {str(item.get("id")): item for item in existing}; existing_by_key = {(_normalized_narrative(str(item.get("narrative") or "")), str(item.get("site") or "Unspecified").casefold()): item for item in existing}; results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
-            site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = next((x for x in working_corpus if (report_id and str(x.get("id")) == report_id) or (_normalized_narrative(str(x.get("narrative") or "")) == normalized and str(x.get("site") or "Unspecified").casefold() == site.casefold())), None)
+            site = (report.site or "Unspecified").strip() or "Unspecified"; normalized = _normalized_narrative(report.narrative); report_id = (report.report_id or "").strip() or None; duplicate = existing_by_id.get(report_id) if report_id else None; duplicate = duplicate or existing_by_key.get((normalized, site.casefold()))
             if duplicate:
                 skipped_duplicates.append({"report_id": report_id, "existing_id": duplicate.get("id"), "reason": "duplicate narrative/site or report ID"}); continue
             key = (normalized, site.casefold())
             if key in seen_keys or (report_id and report_id in seen_ids):
                 skipped_duplicates.append({"report_id": report_id, "existing_id": seen_keys.get(key) or seen_ids.get(report_id or ""), "reason": "duplicate within upload"}); continue
-            if database.kind == "supabase-postgres":
-                record, result = build_incident_record(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, auth_user=getattr(request.state, "user", None))
-            else:
-                record = None
-                result = persist_incident(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, source=report.source or "user_analysis", import_batch_id=batch_id, connection=connection, auth_user=getattr(request.state, "user", None))
-            result["intelligence"] = intelligence_snapshot(report.narrative, result["id"], working_corpus); analysis["intelligence"] = result["intelligence"]
-            if record is not None:
-                pending_records.append(record)
-            else:
-                _update_analysis_snapshot(result["id"], result["intelligence"], connection)
-            result["similar_incidents"], result["similar_incidents_status"], result["similar_incidents_failure_reason"] = sim_with_status(result, corpus=working_corpus); working_corpus.append({**result, "analysis": analysis, "review_status": "Pending" if analysis["review_required"] else "Not required"}); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; results.append(result)
+            record, result = build_incident_record(narrative=report.narrative, site=site, activity=report.activity, report_type=report.report_type, analysis=analysis, report_id=report_id, report_date=report.report_date, source=report.source or "user_analysis", import_batch_id=batch_id, auth_user=getattr(request.state, "user", None))
+            # Historical similarity requires the completed corpus and is
+            # intentionally recomputed by the report-detail endpoint.
+            result["similar_incidents"] = []
+            result["similar_incidents_status"] = "deferred_to_detail"
+            result["similar_incidents_failure_reason"] = None
+            pending_records.append(record); seen_keys[key] = result["id"]; seen_ids[result["id"]] = result["id"]; existing_by_key[key] = record; existing_by_id[result["id"]] = record; results.append(result)
         if pending_records:
-            database.insert_incidents_batch(pending_records)
+            if database.kind == "sqlite-test":
+                database.insert_incidents_batch(pending_records, connection=connection)
+            else:
+                database.insert_incidents_batch(pending_records)
         if connection is not None: connection.commit()
     except Exception as error:
         if connection is not None: connection.rollback()

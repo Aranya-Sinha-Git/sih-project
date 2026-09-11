@@ -146,6 +146,30 @@ class SQLiteDatabase:
             if owned:
                 connection.close()
 
+    def insert_incidents_batch(self, records: list[dict[str, Any]], connection: sqlite3.Connection | None = None) -> None:
+        """Insert a batch in one transaction so partial uploads cannot persist."""
+        if not records:
+            return
+        owned = connection is None
+        connection = connection or sqlite_connection()
+        columns = [column for column in INCIDENT_COLUMNS if column in {row[1] for row in connection.execute("PRAGMA table_info(incidents)").fetchall()}]
+        values = []
+        for record in records:
+            row = {column: record.get(column) for column in columns}
+            row["analysis"] = json.dumps(row["analysis"]) if isinstance(row.get("analysis"), dict) else row.get("analysis")
+            values.append([row[column] for column in columns])
+        try:
+            connection.executemany(f"INSERT INTO incidents ({','.join(columns)}) VALUES ({','.join('?' for _ in columns)})", values)
+            if owned:
+                connection.commit()
+        except Exception:
+            if owned:
+                connection.rollback()
+            raise
+        finally:
+            if owned:
+                connection.close()
+
     def update_analysis(self, incident_id: str, analysis: dict[str, Any], connection: sqlite3.Connection | None = None) -> None:
         owned = connection is None
         connection = connection or sqlite_connection()

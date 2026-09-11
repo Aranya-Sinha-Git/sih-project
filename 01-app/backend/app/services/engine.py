@@ -30,6 +30,7 @@ ACTIVITIES = {
     "Driving": ["driving", "vehicle", "forklift", "traffic", "revers"],
     "Hot Work": ["hot work", "welding", "cutting", "grinding"],
     "Pressure Testing": ["pressure test", "hydrotest", "pneumatic test", "pressuriz"],
+    "Electrical Maintenance": ["electrical maintenance", "electrical", "wiring", "control panel", "power source"],
     "Inspection": ["inspection", "inspected", "walkdown"],
 }
 BARRIER_FAILURES = {
@@ -75,6 +76,12 @@ def analyze_text(narrative: str) -> dict[str, Any]:
     if isolation_failure: precursors.append("isolation verification gap")
     if any(x in text for x in ["release path","flange","suspended","pinch"]): precursors.append("line-of-fire exposure")
     if permit_failure: precursors.append("permit or critical-control deviation")
+    if any(x in text for x in ["vehicle", "driver", "driving"]) and any(x in text for x in ["speeding", "revers", "collision", "pedestrian", "spotter"]): precursors.append("vehicle separation gap")
+    if any(x in text for x in ["crane", "hoist", "sling", "rigging", "suspended load"]) and any(x in text for x in ["dropped", "dropped", "swung", "slipped", "load path"]): precursors.append("lifting exclusion gap")
+    if any(x in text for x in ["welding", "torch", "hot work", "flammable"]) and any(x in text for x in ["gas test", "vapour", "ignition"]): precursors.append("hot-work control deviation")
+    if any(x in text for x in ["height", "platform", "scaffold", "ladder"]) and any(x in text for x in ["fall protection", "harness", "unprotected", "edge"]): precursors.append("fall-protection gap")
+    if "confined space" in text and any(x in text for x in ["attendant", "gas test", "rescue plan", "entry"]): precursors.append("confined-space entry gap")
+    if any(x in text for x in ["guard", "interlock", "bypass"]): precursors.append("safeguard bypass concern")
     activity=next((name for name,terms in ACTIVITIES.items() if _hits(text,terms)),"Unclassified")
     barrier_failures=[name for name,terms in BARRIER_FAILURES.items() if _hits(text,terms)]
     barrier_candidates=[name for name,terms in BARRIER_CANDIDATES.items() if _hits(text,terms) and name not in barrier_failures]

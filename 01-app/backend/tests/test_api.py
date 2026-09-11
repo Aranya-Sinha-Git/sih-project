@@ -2,7 +2,9 @@ import os
 import tempfile
 import csv
 import runpy
+from datetime import date, timedelta
 from pathlib import Path
+import pytest
 os.environ.setdefault('SIF_TEST_AUTH_BYPASS', '1')
 os.environ.setdefault('SIF_ENVIRONMENT', 'test')
 TEST_DIR=Path(tempfile.mkdtemp(prefix='sif_sentinel_api_tests_'))
@@ -15,6 +17,13 @@ from app.services.classifier import ClassifierAdapter, analyze_with_classifier
 from app.services.local_llm import LocalLLMService
 client=TestClient(app)
 def teardown_module():TEST_DB.unlink(missing_ok=True);TEST_DIR.rmdir()
+
+def test_report_date_alias_validation():
+ yesterday=(date.today()-timedelta(days=1)).isoformat(); tomorrow=(date.today()+timedelta(days=1)).isoformat()
+ assert main.AnalyzeInput.model_validate({'narrative':'Date alias is preserved in the API.','date':yesterday}).report_date==yesterday
+ assert main.AnalyzeInput.model_validate({'narrative':'ReportDate alias is preserved.','ReportDate':yesterday}).report_date==yesterday
+ with pytest.raises(ValueError):main.AnalyzeInput.model_validate({'narrative':'Malformed report date.','report_date':'2026/09/01'})
+ with pytest.raises(ValueError):main.AnalyzeInput.model_validate({'narrative':'Future report date.','report_date':tomorrow})
 def test_health():assert client.get('/health').status_code==200
 def test_liveness_and_readiness_keep_unsupported_lsr_rules_non_blocking():
  assert client.get('/live').json()=={'status':'alive'}
@@ -207,6 +216,7 @@ def test_csv_import_uses_classifier_pipeline(tmp_path):
   writer=csv.DictWriter(handle,fieldnames=['report_id','date','site','activity','narrative']); writer.writeheader(); writer.writerow({'report_id':'CSV-PIPELINE','date':'2026-09-05','site':'CSV Site','activity':'Maintenance','narrative':'A unique imported report with pressure exposure.'})
  runpy.run_path(str(Path(__file__).resolve().parents[1]/'scripts'/'import_incidents.py'),run_name='not_main')['main'](path)
  imported=client.get('/incidents/CSV-PIPELINE').json()
+ assert imported['report_date']=='2026-09-05'
  assert imported['analysis']['model_mode']=='Supervised screening classifier'
  assert imported['analysis']['screening']['decision'] in {'SIF_POTENTIAL','NON_SIF_POTENTIAL','HUMAN_REVIEW'}
 
@@ -258,3 +268,12 @@ def test_narrative_and_batch_limits_are_rejected_without_persistence():
  assert client.post('/analyze',json={'narrative':'x'*20001}).status_code==422
  assert client.post('/analyze/batch',json={'reports':[{'narrative':f'Valid report row {i} with enough detail.'} for i in range(501)]}).status_code==422
  assert client.get('/incidents').json()['total']==before
+
+def test_production_like_500_row_demo_import_preserves_dates_and_is_idempotent():
+ demo_path=Path(__file__).resolve().parents[3]/'04-data'/'demo-datasets'/'judge_demo_v0_1'/'judge_demo_500.csv'
+ reports=list(csv.DictReader(demo_path.open(encoding='utf-8')))
+ response=client.post('/analyze/batch',json={'reports':reports})
+ assert response.status_code==200 and response.json()['processed_count']==500 and response.json()['skipped_duplicate_count']==0
+ first=client.get('/incidents/DEMO500-0001').json(); assert first['report_date']==reports[0]['report_date']
+ retry=client.post('/analyze/batch',json={'reports':reports[:3]})
+ assert retry.status_code==200 and retry.json()['processed_count']==0 and retry.json()['skipped_duplicate_count']==3

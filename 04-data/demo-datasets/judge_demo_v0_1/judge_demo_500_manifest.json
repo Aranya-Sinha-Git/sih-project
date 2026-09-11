@@ -1,0 +1,342 @@
+{
+  "active_artifacts": {
+    "lsr": {
+      "coverage_complete": false,
+      "lsr_artifact_hash": "b715ecac36452056d615b536118fccf2e0365ee2cc9e8263d3d283df665cf9bf",
+      "lsr_failure_reason": null,
+      "lsr_reference_id": "IOGP_REPORT_459_REVISED_2018",
+      "lsr_status": "READY",
+      "lsr_version": "iogp-lsr-v0.2",
+      "runtime_generative_llm_calls": false,
+      "sif": {
+        "calibration_status": "uncalibrated",
+        "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+        "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+        "model_identity": "tfidf_word_12_char_35",
+        "model_version": "sif-v0.1",
+        "status": "READY",
+        "thresholds": {
+          "non_sif_upper_exclusive": 0.35,
+          "review_lower_inclusive": 0.35,
+          "review_upper_inclusive": 0.45,
+          "selected_sif_threshold": 0.4,
+          "sif_lower_exclusive": 0.45
+        }
+      },
+      "supported_rule_ids": [
+        "LSR03",
+        "LSR04",
+        "LSR05",
+        "LSR06",
+        "LSR07",
+        "LSR09"
+      ],
+      "unavailable_rule_ids": [
+        "LSR01",
+        "LSR02",
+        "LSR08"
+      ]
+    },
+    "sif": {
+      "calibration_status": "uncalibrated",
+      "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+      "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "model_identity": "tfidf_word_12_char_35",
+      "model_version": "sif-v0.1",
+      "status": "READY",
+      "thresholds": {
+        "non_sif_upper_exclusive": 0.35,
+        "review_lower_inclusive": 0.35,
+        "review_upper_inclusive": 0.45,
+        "selected_sif_threshold": 0.4,
+        "sif_lower_exclusive": 0.45
+      }
+    }
+  },
+  "boundary": {
+    "blind_test_releases_untouched": true,
+    "frozen_paths": [
+      "03-training/ml/sif_v0_1/data/blind_test_v0_2",
+      "03-training/ml/sif_v0_1/data/blind_test_v0_3"
+    ],
+    "no_predictions_or_ai_labels_in_upload": true,
+    "no_real_people_or_confidential_records": true
+  },
+  "checksum_scope": "All listed artifact files are checksummed; this manifest excludes its own checksum.",
+  "dataset_id": "synthetic_judge_demo_v0_1",
+  "date_range": {
+    "max": "2026-09-11",
+    "min": "2026-07-20"
+  },
+  "dimension_counts": {
+    "activity": {
+      "Drilling": 65,
+      "Driving": 60,
+      "Electrical Maintenance": 45,
+      "Hot Work": 55,
+      "Inspection": 50,
+      "Mechanical Lifting": 75,
+      "Pressure Testing": 60,
+      "Valve Maintenance": 90
+    },
+    "report_type": {
+      "Incident": 100,
+      "Near Miss": 180,
+      "Unsafe Act": 90,
+      "Unsafe Condition": 130
+    },
+    "scenario_design": {
+      "Bypassed safety controls": 25,
+      "Confined space": 35,
+      "Driving": 50,
+      "Energy isolation": 65,
+      "Hot work": 50,
+      "Line of fire": 60,
+      "Mechanical lifting": 55,
+      "Routine work": 80,
+      "Work authorization": 35,
+      "Working at height": 45
+    },
+    "site": {
+      "Aurora Basin": 100,
+      "Blue Mesa Yard": 90,
+      "Cedar Ridge Station": 85,
+      "Delta Point Facility": 80,
+      "Echo Valley Works": 75,
+      "Frostline Depot": 70
+    },
+    "weekly_groups": {
+      "0": 50,
+      "1": 55,
+      "2": 55,
+      "3": 60,
+      "4": 65,
+      "5": 70,
+      "6": 70,
+      "7": 75
+    }
+  },
+  "duplicate_checks": {
+    "duplicate_normalized_narrative_site_pairs": 0,
+    "duplicate_report_ids": 0,
+    "invalid_or_future_report_dates": 0,
+    "runtime_profile_normalized_narrative_site_duplicates": 0
+  },
+  "files": {
+    "DATASET_CARD.md": {
+      "bytes": 3622,
+      "sha256": "f2f92bae2d3c8c23ed5116a535606497809ea22d9b9cf48d5144d0faa8eac366"
+    },
+    "judge_demo_500.csv": {
+      "bytes": 358626,
+      "sha256": "2329468022852eb38679ce1423063627ae567fdfdedbbe06fd111515f0dadee7"
+    },
+    "judge_demo_500.xlsx": {
+      "bytes": 32135,
+      "sha256": "a06a40a96e5ddd97f551e7d423922dad8fe43c3ef5c2c1b4b9dcb82c57263ad5"
+    },
+    "judge_demo_qa_matrix.csv": {
+      "bytes": 383537,
+      "sha256": "5ddaac55b5b3b9153c8e5cde46b35ab98428688bfd74526cb4b0c43348483264"
+    },
+    "judge_demo_runtime_profile.json": {
+      "bytes": 6255,
+      "sha256": "486e8c873c9761866ae2000784388f2cf24ec05ce3db5ca0d87d9dbb0b91c6f1"
+    },
+    "judge_demo_smoke_25.csv": {
+      "bytes": 17086,
+      "sha256": "0bc0f97a3038740c59c3c2e305ce89142e40d7d4aa1aebb06d725e80eb8a2e6d"
+    }
+  },
+  "generator": {
+    "seed": 26165,
+    "source": "generate_judge_demo.py",
+    "version": "judge_demo_generator_v0.1"
+  },
+  "manifest_version": "judge_demo_manifest_v0.1",
+  "planned_quotas": {
+    "activity": {
+      "Drilling": 65,
+      "Driving": 60,
+      "Electrical Maintenance": 45,
+      "Hot Work": 55,
+      "Inspection": 50,
+      "Mechanical Lifting": 75,
+      "Pressure Testing": 60,
+      "Valve Maintenance": 90
+    },
+    "report_type": {
+      "Incident": 100,
+      "Near Miss": 180,
+      "Unsafe Act": 90,
+      "Unsafe Condition": 130
+    },
+    "site": {
+      "Aurora Basin": 100,
+      "Blue Mesa Yard": 90,
+      "Cedar Ridge Station": 85,
+      "Delta Point Facility": 80,
+      "Echo Valley Works": 75,
+      "Frostline Depot": 70
+    },
+    "weekly_groups": [
+      50,
+      55,
+      55,
+      60,
+      65,
+      70,
+      70,
+      75
+    ]
+  },
+  "row_count": 500,
+  "runtime_profile": {
+    "file": "judge_demo_runtime_profile.json",
+    "observed": {
+      "meaningful_hazard_extraction_count": 474,
+      "meaningful_hazard_extraction_percentage": 94.8,
+      "normalized_narrative_site_duplicates": 0,
+      "profile_seconds": 3.054,
+      "recurring_precursor_clusters": [
+        {
+          "name": "isolation verification gap",
+          "report_count": 160,
+          "site_count": 6
+        },
+        {
+          "name": "line-of-fire exposure",
+          "report_count": 69,
+          "site_count": 6
+        },
+        {
+          "name": "lifting exclusion gap",
+          "report_count": 54,
+          "site_count": 6
+        },
+        {
+          "name": "safeguard bypass concern",
+          "report_count": 40,
+          "site_count": 6
+        },
+        {
+          "name": "hot-work control deviation",
+          "report_count": 23,
+          "site_count": 6
+        },
+        {
+          "name": "vehicle separation gap",
+          "report_count": 20,
+          "site_count": 6
+        },
+        {
+          "name": "fall-protection gap",
+          "report_count": 15,
+          "site_count": 6
+        },
+        {
+          "name": "confined-space entry gap",
+          "report_count": 5,
+          "site_count": 4
+        }
+      ],
+      "related_nonduplicate_cohorts": {
+        "Bypassed safety controls": 11,
+        "Confined space": 17,
+        "Driving": 22,
+        "Energy isolation": 31,
+        "Hot work": 23,
+        "Line of fire": 29,
+        "Mechanical lifting": 27,
+        "Routine work": 35,
+        "Work authorization": 11,
+        "Working at height": 21
+      },
+      "risk_distribution": {
+        "High": 160,
+        "Low": 220,
+        "Medium": 120
+      },
+      "risk_percentages": {
+        "High": 32.0,
+        "Low": 44.0,
+        "Medium": 24.0
+      },
+      "scenario_counts": {
+        "Bypassed safety controls": 25,
+        "Confined space": 35,
+        "Driving": 50,
+        "Energy isolation": 65,
+        "Hot work": 50,
+        "Line of fire": 60,
+        "Mechanical lifting": 55,
+        "Routine work": 80,
+        "Work authorization": 35,
+        "Working at height": 45
+      },
+      "supported_lsr_assignments": {
+        "LSR03": 20,
+        "LSR04": 28,
+        "LSR05": 21,
+        "LSR06": 37,
+        "LSR07": 21,
+        "LSR09": 15
+      },
+      "trend_points": [
+        {
+          "high": 18,
+          "period": "01 Aug",
+          "reviews": 13
+        },
+        {
+          "high": 23,
+          "period": "08 Aug",
+          "reviews": 15
+        },
+        {
+          "high": 21,
+          "period": "15 Aug",
+          "reviews": 13
+        },
+        {
+          "high": 25,
+          "period": "22 Aug",
+          "reviews": 14
+        },
+        {
+          "high": 24,
+          "period": "29 Aug",
+          "reviews": 17
+        },
+        {
+          "high": 20,
+          "period": "05 Sep",
+          "reviews": 20
+        }
+      ],
+      "unavailable_lsr_examples": {
+        "LSR01": "DEMO500-0001",
+        "LSR02": "DEMO500-0001",
+        "LSR08": "DEMO500-0001"
+      },
+      "unavailable_lsr_rule_ids": [
+        "LSR01",
+        "LSR02",
+        "LSR08"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "synthetic_non_validation",
+  "synthetic": true,
+  "upload_schema": [
+    "report_id",
+    "report_date",
+    "site",
+    "activity",
+    "report_type",
+    "narrative",
+    "source"
+  ],
+  "validation_use_prohibited": true
+}

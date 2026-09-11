@@ -1,0 +1,5 @@
+.profile_only.db
+*.inspect.ndjson
+*.pyc
+__pycache__/
+node_modules/
