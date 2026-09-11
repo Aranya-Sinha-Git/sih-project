@@ -51,6 +51,14 @@ It improves discrimination but misses five SIF references; it therefore fails
 the recall and F2 promotion gates. The 90-report set remains a diagnostic
 regression benchmark, not fresh validation; candidate F2 there was 0.909.
 
+The frozen SetFit candidate was also evaluated post-hoc without reopening
+selection: fresh-final TP/FP/TN/FN was 79/17/31/5, recall 0.940, precision
+0.823, specificity 0.646, balanced accuracy 0.793, F2 0.914, and one review
+row. Four reference SIF cases were auto-routed Non-SIF; the fifth was reviewed.
+It still fails the active-baseline recall/F2 promotion gate. Its 90-report
+diagnostic result was 45/7/33/5, F2 0.893 and 1.1% review. This post-hoc result
+is descriptive only and did not alter threshold selection or promotion.
+
 The experimental mapper covers all nine rules in training, but final support is
 insufficient for LSR01 and LSR08 and only one LSR02 positive appears in the
 fresh-final set. It is not promoted. The active mapper continues to report

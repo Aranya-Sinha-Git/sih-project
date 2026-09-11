@@ -21,7 +21,7 @@
   "candidate_lsr_promoted": false,
   "candidate_sif_promoted": false,
   "comparative_llm_benchmark": "not_run_no_authorised_comparable_runtime_benchmark",
-  "created_at_utc": "2026-09-10T19:40:34+00:00",
+  "created_at_utc": "2026-09-11T03:47:20+00:00",
   "data": [
     {
       "path": "data/domain_adaptation_v0_4/selection_freeze_manifest_v0_4.json",
@@ -89,6 +89,10 @@
     {
       "path": "reports/domain_adaptation_v0_4/sif_predictions_v0_4.csv",
       "sha256": "d8d1385ddfef22ab8e67b1438bc9ab8209dfa7fa82373fc3e962cdfed29afb6d"
+    },
+    {
+      "path": "reports/domain_adaptation_v0_4/setfit_posthoc_evaluation_v0_4.json",
+      "sha256": "4559865c5ef6389009727118c54ba88f2e5d89832bec58ec12dbb49c497aa962"
     }
   ],
   "rollback": "No runtime promotion occurred. The backend remains on artifacts/supervised for SIF and domain_adapted_v0_2/lsr_model.joblib for IOGP mapping.",

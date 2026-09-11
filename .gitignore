@@ -23,6 +23,7 @@
 03-training/ml/sif_v0_1/data/annotation_decisions.csv
 03-training/ml/sif_v0_1/data/reviewed_labels.csv
 03-training/ml/sif_v0_1/checkpoints/
+01-app/backend/_pytest_v04_*/
 
 # Downloaded or regenerated validation-source assets are not versioned in the
 # public repository. Their manifests, source links, schemas, and small derived

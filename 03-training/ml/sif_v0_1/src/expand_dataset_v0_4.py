@@ -982,6 +982,57 @@ def evaluate_frozen() -> None:
     print(json.dumps({"sif_decision": report["sif"]["decision"], "lsr_decision": report["lsr"]["decision"], "fresh_binary_rows": len(final)}, indent=2))
 
 
+def evaluate_setfit_posthoc() -> None:
+    """Describe the already-frozen SetFit candidate without reopening selection.
+
+    TF-IDF was the predeclared selected family, so SetFit was deliberately not
+    part of the original promotion calculation.  This report is read-only
+    follow-up evidence requested after finalisation; it cannot change the
+    selected artifact, thresholds, promotion decision, or runtime.
+    """
+    verify_annotation_freeze()
+    selection_path = ARTIFACTS / "selection_manifest_v0_4.json"
+    selection = json.loads(selection_path.read_text(encoding="utf-8"))
+    if selection.get("setfit", {}).get("status") != "trained":
+        raise RuntimeError("No trained SetFit candidate is available for post-hoc reporting")
+    setfit_item = selection.get("artifacts", {}).get("setfit")
+    setfit_path = ARTIFACTS / "setfit_candidate_v0_4"
+    if not setfit_item or directory_sha256(setfit_path) != setfit_item["directory_sha256"]:
+        raise RuntimeError("SetFit artifact differs from its frozen candidate manifest")
+    from setfit import SetFitModel
+    model = SetFitModel.from_pretrained(str(setfit_path), local_files_only=True)
+    datasets: dict[str, Any] = {}
+    for name, path in (
+        ("fresh_final_assessment", DATA / "fresh_final_assessment_v0_4.csv"),
+        ("old_90_report_regression_benchmark", OLD_DATA / "protected_test_v0_2.csv"),
+    ):
+        frame_all = pd.read_csv(path, dtype=str, keep_default_na=False)
+        frame = frame_all[frame_all.sif_label.isin([SIF, NON_SIF])].copy()
+        result, _ = score_sif(model, frame, selection["setfit"], setfit=True)
+        labels = (frame.sif_label == SIF).astype(int).to_numpy()
+        datasets[name] = {
+            "rows_with_binary_reference": len(frame),
+            "uncertain_reference_rows_excluded": int((frame_all.sif_label == "UNCERTAIN").sum()),
+            "class_counts": frame.sif_label.value_counts().to_dict(),
+            "all_sif_reference": constant_baseline(labels, 1),
+            "all_non_sif_reference": constant_baseline(labels, 0),
+            "setfit": result,
+        }
+    report = {
+        "status": "POSTHOC_DESCRIPTIVE_NOT_USED_FOR_SELECTION_OR_PROMOTION",
+        "generated_at_utc": utc_now(),
+        "selection_manifest_sha256": sha256(selection_path),
+        "frozen_operating_point": selection["setfit"],
+        "datasets": datasets,
+        "limitations": [
+            "TF-IDF was selected before final assessment under the declared tie preference.",
+            "This post-hoc report must not be used to reopen threshold selection or claim independent validation.",
+        ],
+    }
+    json_write(REPORTS / "setfit_posthoc_evaluation_v0_4.json", report)
+    print(json.dumps({"status": report["status"], "fresh_binary_rows": datasets["fresh_final_assessment"]["rows_with_binary_reference"]}, indent=2))
+
+
 def finalize() -> None:
     evaluation_path = REPORTS / "final_evaluation_v0_4.json"
     selection_path = ARTIFACTS / "selection_manifest_v0_4.json"
@@ -1010,6 +1061,7 @@ def finalize() -> None:
         REPORTS / "lsr_development_evaluation_v0_4.json",
         evaluation_path,
         REPORTS / "sif_predictions_v0_4.csv",
+        REPORTS / "setfit_posthoc_evaluation_v0_4.json",
     ]
     data_paths = [
         DATA / "selection_freeze_manifest_v0_4.json",
@@ -1242,7 +1294,7 @@ def prepare() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=["prepare", "validate-pass1", "make-second-pass", "make-systematic-lsr08-review", "recover-stalled-second-pass-batch-02", "validate-pass2", "make-adjudication", "assemble", "train", "evaluate", "finalize"])
+    parser.add_argument("phase", choices=["prepare", "validate-pass1", "make-second-pass", "make-systematic-lsr08-review", "recover-stalled-second-pass-batch-02", "validate-pass2", "make-adjudication", "assemble", "train", "evaluate", "evaluate-setfit-posthoc", "finalize"])
     args = parser.parse_args()
     if args.phase == "prepare":
         prepare()
@@ -1266,6 +1318,8 @@ def main() -> None:
         train_models()
     elif args.phase == "evaluate":
         evaluate_frozen()
+    elif args.phase == "evaluate-setfit-posthoc":
+        evaluate_setfit_posthoc()
     elif args.phase == "finalize":
         finalize()
 
