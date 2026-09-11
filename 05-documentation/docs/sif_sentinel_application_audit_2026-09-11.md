@@ -123,6 +123,38 @@ The backend requires an authenticated Supabase profile for general routes, but o
 
 For a single shared demo workspace this may be intentional. For multi-tenant or least-privilege production use, any authenticated profile with the `demo` default role can reach workspace-wide operational data through FastAPI. **Smallest fix:** document the shared-workspace assumption or add route-level role/tenant authorization and row scoping before production deployment.
 
+### F-10 — Medium — local frontend API target can break the configured login-to-dashboard flow (confirmed configuration mismatch)
+
+The checked-in example uses `NEXT_PUBLIC_API_URL=http://localhost:8000` (`01-app/.env.example`), but this workspace’s ignored `01-app/frontend/.env.local` uses `/api`. `01-app/frontend/next.config.ts` defines no `/api` rewrite or proxy. During the corrected live check, Supabase login succeeded, but the dashboard showed “Request could not be completed” until the frontend was rebuilt with the direct backend URL; the backend itself returned the dashboard successfully with the authenticated token.
+
+**Impact:** valid credentials can appear to work while the authenticated workspace cannot load data. **Smallest fix:** align local/deployment configuration with the direct backend URL, or add and test a deliberate frontend proxy/rewrite. Keep the public Supabase variables build-time correct.
+
+### F-11 — Medium — dashboard “awaiting human decision” and review queue disagree (confirmed live state)
+
+The live dashboard displayed `Unreviewed model-positive: 1 · Awaiting human decision`, while `/reviews` displayed `0 records · No records have been added to this workspace`. The code counts any model-positive row without a human outcome as unreviewed (`01-app/backend/app/main.py:367-370`), but the review endpoint only returns rows whose `review_status` is in `ACTIONABLE_REVIEW_STATUSES` (`01-app/backend/app/main.py:393-395`). The observed first live record is `SIF Potential` with `review_status: Not required`, so it is counted by the dashboard but excluded from the queue.
+
+**Impact:** a reviewer can be told that a decision is awaiting while the work queue contains nothing. **Smallest fix:** decide whether automatic SIF-positive rows require review; then use the same state predicate for dashboard counts, queue membership, and labels.
+
+### F-12 — Medium — legacy/partial persisted records are displayed as current decisions without current evidence (confirmed live state)
+
+The live incident detail for `ANL-B1BECD47` showed `SIF Potential` at `66.4%`, `Confirm SIF`, and active SIF model identity/hash, but also showed `LSR model / reference: Legacy · Not available`, no LSR mapping, no supported reference evidence, and a deterministic explanation stating that no supported evidence was retrieved. The engine evidence panel said “No strong SIF precursor language detected.” Its history contained two `Confirm SIF` entries by the same `Demo Reviewer` identity. This appears to be a legacy or partially migrated seeded record, not a new runtime analysis.
+
+**Impact:** the workspace presents a current-looking high-risk/confirmed outcome whose evidence and LSR provenance are unavailable, while the page only partially signals the legacy state. This can mislead a demo reviewer and contaminate downstream interpretation if legacy rows are treated as current model evidence.
+
+**Smallest fix:** explicitly version and badge legacy records, exclude them from current evidence/metrics, or migrate/recompute them through the current analysis schema before displaying current-model claims. Preserve their historical review history.
+
+### F-13 — Low — site detail omits average model score while the UI renders zero (confirmed data-contract defect)
+
+The live site detail for `Unspecified` showed `Average model score: 0`, although its two incident rows had scores `79.6%` and `66.4%`; the activity detail correctly showed `80%`. `site_stats()` calculates a score signal for its risk index but does not return `avg_model_score` (`01-app/backend/app/main.py:184-190`), while the shared entity view reads `s.avg_model_score` (`01-app/frontend/components/workbench.tsx:28`).
+
+**Impact:** site-level reporting understates or misrepresents model-score context. **Smallest fix:** return the field consistently or omit the metric when the API does not provide it; do not substitute pending-review counts as a score.
+
+### F-14 — Low — methodology copy does not match the seeded live workspace (confirmed copy mismatch)
+
+The authenticated Methodology page says “No operational incident records are preloaded,” while the same workspace’s dashboard and incident register visibly contain two persisted operational records. This may be intentional demo seed data, but the statement is unqualified (`01-app/frontend/components/workbench.tsx:30`).
+
+**Impact:** judges or reviewers cannot tell whether visible records are seeded demo fixtures, live user submissions, or an unexpected data residue. **Smallest fix:** label seeded fixtures explicitly or update the copy to describe the actual demo state.
+
 ## Data integrity and blind-boundary audit
 
 - Both `blind_test_v0_2` and `blind_test_v0_3` contain 75 unique narratives, have packet SHA-256 `f911b0a78b8c366c95a18d6c60f47dda596adae3ef9edfc0719a357c0b6d83b3`, match their canonical manifest hashes, and have zero completed reviewer rows. Both manifests remain `frozen_unscored`.
@@ -147,17 +179,20 @@ For a single shared demo workspace this may be intentional. For multi-tenant or 
 | Frontend build | `npm run build` passed with Next.js 15.5.24 and TypeScript/static generation. 15 authenticated workspace routes plus login and the internal not-found route were generated. |
 | Isolated API E2E | Passed single analysis, duplicate-aware batch, SQLite persistence, review update/history reload, deterministic explanation, similar retrieval, validation rejection, and explicit unavailable-model fallback. |
 | Failure-mode probe | Missing active model reproduced HTTP 200 `/health` plus null-score `HUMAN_REVIEW` analysis, establishing F-02. |
-| Browser | Corrected configured run passed login and dashboard loading. The initial failed attempt used an audit build compiled with placeholder public variables. Live analyze/review writes were not exercised. |
+| Live browser read paths | Configured login, dashboard, incidents, reviewed detail, review queue, model, methodology, settings, sites, activities, intelligence, alerts, and analysis-intake surfaces loaded. No live analyze/review writes were performed. |
+| Live API boundary | `/health` returned 200; unauthenticated `/dashboard/summary` returned 401; allowed-origin CORS preflight returned 200. |
+| Browser validation error | A short narrative was rejected without creating a record, but the UI collapsed the validation response to “Analysis could not run. Check the narrative and local backend.” |
 | Frozen artifacts | Packet hash/row/blank-review checks passed for v0.2 and v0.3. |
 
 ## Recommended release order
 
-1. Configure and seed a real Supabase demo environment, then complete the documented browser acceptance flow.
+1. Align the frontend API target/proxy and complete the documented browser acceptance flow with the configured Supabase environment.
 2. Fix readiness semantics so missing/invalid active artifacts cannot report healthy.
 3. Add safety-language regression gates for negation, hypothetical text, completed precautions, and generic safe narratives; keep the frozen active model unchanged until a governed re-evaluation.
 4. Unify LSR/reference mapping semantics and make unavailable coverage explicit in every downstream view.
-5. Separate provisional review from locked dual-reviewer adjudication before using runtime outcomes in metrics.
-6. Pin/rebuild model dependencies, then add input-size and per-row batch failure handling.
-7. Decide whether the shared workspace is an explicit demo-only authorization model; otherwise add role and tenant scoping.
+5. Reconcile dashboard queue predicates and explicitly separate legacy/partial records from current evidence.
+6. Separate provisional review from locked dual-reviewer adjudication before using runtime outcomes in metrics.
+7. Pin/rebuild model dependencies, then add input-size, per-row batch failure, and field-level validation handling.
+8. Decide whether the shared workspace is an explicit demo-only authorization model; otherwise add role and tenant scoping.
 
 **Audit conclusion:** suitable for a controlled prototype demonstration after environment setup and with the limitations above stated plainly; not suitable for unqualified operational safety decisions, calibrated-probability claims, or official blind-validation reporting at this revision.
