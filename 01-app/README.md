@@ -2,7 +2,7 @@
 
 The application is a migration, not a redesign:
 
-`Next.js frontend → FastAPI API → frozen classifier, retrieval, analytics, and review logic`
+`Next.js frontend → FastAPI API → classifier, retrieval, analytics, and review logic`
 
 Supabase provides PostgreSQL persistence and Auth. FastAPI remains the only application/business API; the browser does not read or write incident tables directly.
 
@@ -32,7 +32,7 @@ Open the login page, choose “Create account,” and register with a password. 
 
 ## Deployment
 
-For Render/Railway/Fly.io-style deployment, build from the repository root with [`backend/Dockerfile`](backend/Dockerfile); it includes the frozen artifact tree from `03-training` and binds to `0.0.0.0:$PORT`. [`render.yaml`](render.yaml) is an example service definition. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `CORS_ORIGINS`, `FRONTEND_URL`, and `MODEL_PATH` in the backend service. Render checks `/ready` for readiness; `/live` is the liveness endpoint. Missing/invalid required artifacts or database connectivity make `/ready` return non-2xx. The three intentionally unsupported LSR classifiers are reported as unavailable coverage and do not make an otherwise loaded LSR artifact unready. `CORS_ORIGINS` and `FRONTEND_URL` accept comma-separated origins and normalize a root trailing slash; use the deployed frontend origin, for example `https://sih-project-orpin-pi.vercel.app`.
+For Render/Railway/Fly.io-style deployment, build from the repository root with [`backend/Dockerfile`](backend/Dockerfile); it includes the model artifact tree from `03-training` and binds to `0.0.0.0:$PORT`. [`render.yaml`](render.yaml) is an example service definition. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `CORS_ORIGINS`, `FRONTEND_URL`, and `MODEL_PATH` in the backend service. Render checks `/ready` for readiness; `/live` is the liveness endpoint. Missing/invalid required artifacts or database connectivity make `/ready` return non-2xx. The three intentionally unsupported LSR classifiers are reported as unavailable coverage and do not make an otherwise loaded LSR artifact unready. `CORS_ORIGINS` and `FRONTEND_URL` accept comma-separated origins and normalize a root trailing slash; use the deployed frontend origin, for example `https://sih-project-orpin-pi.vercel.app`.
 
 Deploy `01-app/frontend` to Vercel. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `NEXT_PUBLIC_API_URL` to the public FastAPI URL, with no endpoint suffix such as `/dashboard/summary`. Add the deployed frontend origin to backend `CORS_ORIGINS`; do not use `*` with credentials. Vercel builds fail fast when required public variables are missing. Redeploy the backend after changing backend variables and redeploy the frontend after changing any `NEXT_PUBLIC_*` variable.
 

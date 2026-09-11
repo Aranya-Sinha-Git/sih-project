@@ -11,7 +11,7 @@ os.environ['DATABASE_URL']=f'sqlite:///{TEST_DB.as_posix()}'
 from fastapi.testclient import TestClient
 from app.main import app
 import app.main as main
-from app.services.classifier import FrozenClassifierAdapter, analyze_with_classifier
+from app.services.classifier import ClassifierAdapter, analyze_with_classifier
 from app.services.local_llm import LocalLLMService
 client=TestClient(app)
 def teardown_module():TEST_DB.unlink(missing_ok=True);TEST_DIR.rmdir()
@@ -37,7 +37,7 @@ def test_empty_database():
 def test_high_risk():
  r=client.post('/analyze',json={'narrative':'Stored pressure was not completely isolated; a technician loosened the flange while standing in the release path.','report_type':'Near Miss'});assert r.status_code==200 and r.json()['risk']=='High' and r.json()['classification']=='SIF Potential' and r.json()['sif_potential'] is True and r.json()['report_type']=='Near Miss' and r.json()['priority']=='Immediate attention'
 def test_low_risk():
- r=client.post('/analyze',json={'narrative':'Routine housekeeping cleared a cable from a walkway with no equipment exposure.'});assert r.status_code==200 and r.json()['model_mode']=='Frozen supervised classifier' and r.json()['sif_probability']==r.json()['screening']['raw_score'] and r.json()['classification'] in {'SIF Potential','Needs Review','Non-SIF Potential'}
+ r=client.post('/analyze',json={'narrative':'Routine housekeeping cleared a cable from a walkway with no equipment exposure.'});assert r.status_code==200 and r.json()['model_mode']=='Supervised screening classifier' and r.json()['sif_probability']==r.json()['screening']['raw_score'] and r.json()['classification'] in {'SIF Potential','Needs Review','Non-SIF Potential'}
 def test_invalid():assert client.post('/analyze',json={'narrative':'short'}).status_code==422
 def test_batch():assert client.post('/analyze/batch',json={'reports':[{'narrative':'Routine housekeeping cleared a cable from a walkway with no exposure.'}]}).status_code==200
 def test_records_similarity_dashboard_analytics():
@@ -73,7 +73,7 @@ def test_classifier_boundaries_and_single_batch_parity(monkeypatch):
  def fake_predict(text,artifact_dir=None):
   score=next(scores);decision='NON_SIF_POTENTIAL' if score<0.35 else 'HUMAN_REVIEW' if score<=0.45 else 'SIF_POTENTIAL';return {'model_version':'test','model_status':'READY','sif_score':score,'decision':decision,'review_required':decision=='HUMAN_REVIEW'}
  monkeypatch.setattr('app.services.classifier._predict_module',lambda: type('Predictor',(),{'predict':staticmethod(fake_predict)})())
- adapter=FrozenClassifierAdapter()
+ adapter=ClassifierAdapter()
  expected=[('Non-SIF Potential',False,False),('Needs Review',None,True),('Needs Review',None,True),('SIF Potential',True,False)]
  for score,expected_row in zip([0.34999,0.35,0.45,0.45001],expected):
   result=analyze_with_classifier('Boundary narrative for classifier testing.',main.analyze_text('Boundary narrative for classifier testing.'))
@@ -86,11 +86,11 @@ def test_classifier_boundaries_and_single_batch_parity(monkeypatch):
  assert single['sif_probability'] is not None and batch['sif_probability'] is not None and single['sif_probability']==batch['sif_probability'] and single['classification']==batch['classification']
 
 def test_classifier_failure_and_null_score_analytics(tmp_path):
- adapter=FrozenClassifierAdapter(tmp_path)
- failed=adapter.screen('A narrative with a missing frozen artifact.')
+ adapter=ClassifierAdapter(tmp_path)
+ failed=adapter.screen('A narrative with a missing model artifact.')
  assert failed['decision']=='HUMAN_REVIEW' and failed['sif_score'] is None
  (tmp_path/'threshold.json').write_text('{"model":"tfidf_word_12_char_35","sif_threshold":"bad","human_review_band":null}',encoding='utf-8')
- corrupt=FrozenClassifierAdapter(tmp_path);assert corrupt.metadata()['status']=='ARTIFACT_INVALID' and corrupt.screen('A narrative with a corrupt configuration.')['decision']=='HUMAN_REVIEW'
+ corrupt=ClassifierAdapter(tmp_path);assert corrupt.metadata()['status']=='ARTIFACT_INVALID' and corrupt.screen('A narrative with a corrupt configuration.')['decision']=='HUMAN_REVIEW'
  stats=main.site_stats([{'site':'Missing score','report_date':'2026-01-01','risk':'Medium','sif_potential':None,'sif_probability':None,'review_status':'Pending'}])
  assert stats[0]['risk_index']==1
 
@@ -100,15 +100,15 @@ def test_site_average_score_excludes_null_scores():
 
 def test_classifier_metadata_rejects_unknown_model(tmp_path):
  (tmp_path/'threshold.json').write_text('{"model":"unknown-model","sif_threshold":0.4,"human_review_band":[0.35,0.45]}',encoding='utf-8')
- metadata=FrozenClassifierAdapter(tmp_path).metadata()
+ metadata=ClassifierAdapter(tmp_path).metadata()
  assert metadata['status']=='ARTIFACT_INVALID' and metadata['model_hash'] is None
  prefixed=tmp_path/'prefixed';prefixed.mkdir();(prefixed/'threshold.json').write_text('{"model":"tfidf_fake","sif_threshold":0.4,"human_review_band":[0.35,0.45]}',encoding='utf-8')
- assert FrozenClassifierAdapter(prefixed).metadata()['status']=='ARTIFACT_INVALID'
+ assert ClassifierAdapter(prefixed).metadata()['status']=='ARTIFACT_INVALID'
 
 def test_classifier_rejects_inconsistent_predictor_output(monkeypatch,tmp_path):
  def invalid_predict(text,artifact_dir=None):return {'model_version':'test','model_status':'READY','sif_score':0.2,'decision':'SIF_POTENTIAL','review_required':False}
  monkeypatch.setattr('app.services.classifier._predict_module',lambda: type('Predictor',(),{'predict':staticmethod(invalid_predict)})())
- result=FrozenClassifierAdapter(tmp_path).screen('Inconsistent predictor output narrative.')
+ result=ClassifierAdapter(tmp_path).screen('Inconsistent predictor output narrative.')
  assert result['decision']=='HUMAN_REVIEW' and result['sif_score'] is None and result['reason']=='invalid_model_output'
 
 def test_legacy_analysis_remains_readable():
@@ -120,8 +120,8 @@ def test_historical_provenance_never_falls_back_to_active_model():
  assert row['provenance']['record_class']=='legacy' and row['provenance']['sif']['model_identity'] is None and row['formal_evaluation_eligible'] is False
 
 def test_dashboard_distinguishes_automatic_positive_from_required_review():
- automatic=main.out({'id':'AUTO','analysis':{'screening':{'decision':'SIF_POTENTIAL','model_identity':'m','model_hash':'h'},'model_mode':'Frozen supervised classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Not required','sif_potential':1})
- pending=main.out({'id':'PENDING','analysis':{'screening':{'decision':'HUMAN_REVIEW','model_identity':'m','model_hash':'h'},'model_mode':'Frozen supervised classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Pending','sif_potential':None})
+ automatic=main.out({'id':'AUTO','analysis':{'screening':{'decision':'SIF_POTENTIAL','model_identity':'m','model_hash':'h'},'model_mode':'Supervised screening classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Not required','sif_potential':1})
+ pending=main.out({'id':'PENDING','analysis':{'screening':{'decision':'HUMAN_REVIEW','model_identity':'m','model_hash':'h'},'model_mode':'Supervised screening classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Pending','sif_potential':None})
  counts=main.disposition_counts([automatic,pending]);assert counts['unreviewed_automatic_positive']==1 and counts['awaiting_human_review']==1
 
 def test_legacy_intelligence_parse_failure_is_explicit_and_preserves_raw_analysis():
@@ -201,13 +201,13 @@ def test_retrieval_failure_does_not_break_submission_or_detail(monkeypatch):
  detail=client.get('/incidents/'+response.json()['id'])
  assert detail.status_code==200 and detail.json()['analysis']['intelligence']['status']=='retrieval_unavailable'
 
-def test_csv_import_uses_frozen_classifier_pipeline(tmp_path):
+def test_csv_import_uses_classifier_pipeline(tmp_path):
  path=tmp_path/'reports.csv'
  with path.open('w',newline='',encoding='utf-8') as handle:
   writer=csv.DictWriter(handle,fieldnames=['report_id','date','site','activity','narrative']); writer.writeheader(); writer.writerow({'report_id':'CSV-PIPELINE','date':'2026-09-05','site':'CSV Site','activity':'Maintenance','narrative':'A unique imported report with pressure exposure.'})
  runpy.run_path(str(Path(__file__).resolve().parents[1]/'scripts'/'import_incidents.py'),run_name='not_main')['main'](path)
  imported=client.get('/incidents/CSV-PIPELINE').json()
- assert imported['analysis']['model_mode']=='Frozen supervised classifier'
+ assert imported['analysis']['model_mode']=='Supervised screening classifier'
  assert imported['analysis']['screening']['decision'] in {'SIF_POTENTIAL','NON_SIF_POTENTIAL','HUMAN_REVIEW'}
 
 def test_retrieval_failure_is_distinct_from_empty_evidence(monkeypatch):

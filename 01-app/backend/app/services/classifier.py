@@ -1,4 +1,4 @@
-"""Adapter for the frozen SIF classifier used by the operational API.
+"""Adapter for the SIF classifier used by the operational API.
 
 The rules engine remains responsible for extraction and evidence cues.  This
 module owns screening only, so a classifier failure can never be mistaken for
@@ -28,7 +28,7 @@ DEFAULT_ARTIFACT_DIR = MODEL_ARTIFACT_DIR
 PREDICT_PATH = PROJECT_ROOT / "03-training" / "ml" / "sif_v0_1" / "src" / "predict.py"
 POLICY_REVIEW_BAND = (0.35, 0.45)
 _PREDICTOR: Any = None
-_ADAPTERS: dict[str, "FrozenClassifierAdapter"] = {}
+_ADAPTERS: dict[str, "ClassifierAdapter"] = {}
 _JOBLIB_MODELS: dict[str, Any] = {}
 
 
@@ -52,16 +52,16 @@ def _predict_module() -> Any:
     src_dir = str(PREDICT_PATH.parent)
     if src_dir not in sys.path:
         sys.path.insert(0, src_dir)
-    spec = importlib.util.spec_from_file_location("sif_sentinel_frozen_predict", PREDICT_PATH)
+    spec = importlib.util.spec_from_file_location("sif_sentinel_predict", PREDICT_PATH)
     if spec is None or spec.loader is None:
-        raise ImportError(f"Unable to load frozen predictor from {PREDICT_PATH}")
+        raise ImportError(f"Unable to load predictor from {PREDICT_PATH}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     _PREDICTOR = module
     return module
 
 
-class FrozenClassifierAdapter:
+class ClassifierAdapter:
     def __init__(self, artifact_dir: Path | None = None) -> None:
         self.artifact_dir = Path(artifact_dir or DEFAULT_ARTIFACT_DIR)
         self._metadata: dict[str, Any] | None = None
@@ -209,11 +209,11 @@ class FrozenClassifierAdapter:
             return [self.screen(narrative) for narrative in narratives]
 
 
-def get_classifier(artifact_dir: Path | None = None) -> FrozenClassifierAdapter:
+def get_classifier(artifact_dir: Path | None = None) -> ClassifierAdapter:
     resolved = Path(artifact_dir or DEFAULT_ARTIFACT_DIR).resolve()
     key = str(resolved)
     if key not in _ADAPTERS:
-        _ADAPTERS[key] = FrozenClassifierAdapter(resolved)
+        _ADAPTERS[key] = ClassifierAdapter(resolved)
     return _ADAPTERS[key]
 
 
@@ -232,8 +232,8 @@ def analyze_with_classifier(narrative: str, supplemental: dict[str, Any], artifa
         "sif_probability": score,
         "risk": risk,
         "classification": classification,
-        "classification_basis": "Frozen classifier raw score; not calibrated as a probability.",
-        "model_mode": "Frozen supervised classifier",
+        "classification_basis": "Classifier raw score; not calibrated as a probability.",
+        "model_mode": "Supervised screening classifier",
         "model_version": screening.get("model_version", "sif-v0.1"),
         "priority": "Immediate attention" if decision == "SIF_POTENTIAL" else "Review" if review_required else "Monitor",
         "review_required": review_required,

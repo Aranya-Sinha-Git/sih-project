@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from app.services.classifier import FrozenClassifierAdapter
+from app.services.classifier import ClassifierAdapter
 from app.services.domain_model import DomainSafetyModel, get_domain_model
 from app.services.local_llm import LocalLLMService
 
@@ -11,7 +11,7 @@ def test_real_artifacts_load_through_runtime_and_candidate_adapter():
     assert metadata["sif"]["status"] == "READY"
     assert metadata["lsr_status"] == "READY"
     assert metadata["runtime_generative_llm_calls"] is False
-    candidate = FrozenClassifierAdapter(
+    candidate = ClassifierAdapter(
         Path(__file__).resolve().parents[3]
         / "03-training" / "ml" / "sif_v0_1" / "artifacts" / "domain_adapted_v0_2"
     )

@@ -1,6 +1,6 @@
 """Cached, offline SIF + IOGP Life-Saving Rule inference.
 
-The deployed SIF screen remains the promoted frozen artifact.  LSR relevance is
+The deployed SIF screen remains the promoted model artifact.  LSR relevance is
 scored by the v0.2 multilabel model and explained with deterministic narrative
 excerpts; this module never calls a generative model or a network service.
 """

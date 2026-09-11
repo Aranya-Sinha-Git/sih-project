@@ -1,4 +1,4 @@
-"""Replace screenings with current frozen-classifier and grounded mappings.
+"""Replace screenings with current classifier and grounded mappings.
 
 The original screening is retained inside each analysis JSON object under
 ``legacy_screening``. Human review fields and review history are never changed.

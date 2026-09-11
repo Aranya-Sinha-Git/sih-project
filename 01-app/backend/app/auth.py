@@ -16,7 +16,7 @@ MAX_PASSWORD_LENGTH = 128
 _USERNAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9._-]{2,63}$")
 
 
-@dataclass(frozen=True)
+@dataclass
 class AuthenticatedUser:
     id: str
     username: str
