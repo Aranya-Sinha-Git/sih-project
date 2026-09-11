@@ -14,10 +14,11 @@ The repository contains a coherent working prototype with a real Next.js/FastAPI
 
 The principal blockers are:
 
-1. The browser demo cannot authenticate without a configured and seeded Supabase project; `test / test123` failed in the audited environment.
-2. `/health` reports `status: ok` even when the active classifier artifact is missing; the deployment health check can therefore pass while analysis has degraded to null-score human review.
-3. The active text classifier routed deliberately safe/negated or generic narratives to SIF Potential in direct regression probes. These are not formal accuracy estimates, but they are unacceptable unqualified demo behavior for safety language.
-4. LSR mapping is deterministic and evidence-gated, but its active coverage is incomplete and its mapping channel can disagree with the separate reference-evidence channel shown in the UI.
+1. `/health` reports `status: ok` even when the active classifier artifact is missing; the deployment health check can therefore pass while analysis has degraded to null-score human review.
+2. The active text classifier routed deliberately safe/negated or generic narratives to SIF Potential in direct regression probes. These are not formal accuracy estimates, but they are unacceptable unqualified demo behavior for safety language.
+3. LSR mapping is deterministic and evidence-gated, but its active coverage is incomplete and its mapping channel can disagree with the separate reference-evidence channel shown in the UI.
+
+The browser demo is environment-sensitive rather than intrinsically broken: after rebuilding with the repository’s real local Supabase variables and running the backend, `test / test123` authenticated successfully and the dashboard loaded live Supabase data.
 
 The official blind-validation boundary remains intact. The v0.2 and v0.3 packets are still blank, hash-valid, and `frozen_unscored`; no human-validation or external-validation claim is supported by this audit.
 
@@ -25,27 +26,27 @@ The official blind-validation boundary remains intact. The v0.2 and v0.3 packets
 
 | Area | Status | Evidence and limitation |
 |---|---|---|
-| Authentication and protected workspace | Implemented; live browser flow unverified | Supabase session gates the Next.js workspace; backend rejects unauthenticated requests. The configured browser environment had placeholder Supabase values and could not sign in. |
+| Authentication and protected workspace | Working with configured Supabase; configuration-sensitive | Supabase session gates the Next.js workspace; backend validates the Supabase token/profile. A correctly configured browser run authenticated with `test / test123` and loaded the dashboard. |
 | Single-report analysis | Working in isolated API run | Validates narrative length/type, screens with the frozen active model, persists an incident, returns retrieval and LSR state. Scores are raw and uncalibrated. |
 | TXT/CSV/XLSX batch intake | Working with bounded request count | Browser parses files and posts at most the API’s 500-report batch limit. Duplicate rows are reported and skipped. There is no row-level partial-failure report, file-size cap, or export flow. |
 | SIF routing | Operational but unsafe for unqualified interpretation | Active `sif-v0.1` uses `<0.35` Non-SIF, `0.35–0.45` human review, `>0.45` SIF Potential. The score is not calibrated; direct probes exposed false-positive behavior. |
 | LSR mapping and excerpts | Partially working | Six rules are available; LSR01, LSR02, and LSR08 are unavailable in the active artifact. Assigned rules require a deterministic score and extractable narrative evidence. |
-| Reference evidence and retrieval | Working in isolated API run | Catalog evidence and historical similarity are deterministic and expose unavailable status. Relevance is lexical, not calibrated confidence; live Supabase corpus behavior was not exercised. |
+| Reference evidence and retrieval | Working in isolated API run; live read path verified | Catalog evidence and historical similarity are deterministic and expose unavailable status. Relevance is lexical, not calibrated confidence; live Supabase write flows were not exercised. |
 | Review/escalation/history | Working in isolated API run; adjudication semantics incomplete | Review update and history are atomic and survive reload. The runtime endpoint accepts one reviewer and immediately updates the effective outcome; the official two-reviewer adjudication gate is not enforced in this UI path. |
-| Dashboards, filters, sites, activities, alerts | Implemented in code and build | Backend routes and client views exist. Authenticated visual verification and populated live-Supabase behavior were not completed. |
+| Dashboards, filters, sites, activities, alerts | Implemented; dashboard visually verified | Backend routes and client views exist. The authenticated dashboard loaded live Supabase data; populated detail/review/write flows were not exercised. |
 | Model/methodology/provenance views | Implemented | The UI exposes model identity, hashes, score status, LSR reference, and deterministic explanation status. It must not be read as a calibrated probability or HSE-ground-truth decision. |
 
 ## Findings
 
-### F-01 — High — live browser demo is blocked by missing Supabase setup (confirmed for this environment)
+### F-01 — Medium — frontend authentication is build-time configuration-sensitive (confirmed implementation; initial audit failure was harness-induced)
 
-**Expected:** the documented clean demo path should reach the authenticated workspace after the documented Supabase setup and `test / test123` seed.
+**Expected:** a correctly configured build should authenticate with the documented `test / test123` credentials; a misconfigured build should identify missing/invalid Supabase configuration rather than presenting it as a bad password.
 
-**Observed:** the login page rendered correctly, including the documented demo hint, but `test / test123` returned “Incorrect User ID or password.” The frontend falls back to placeholder Supabase URL/key values when public variables are absent (`01-app/frontend/lib/supabase.ts:4-6`); the repository requires a real project, migrations, server secrets, and seeded user (`01-app/README.md:7-22,33-45`).
+**Observed:** the repository’s ignored `01-app/.env` and `01-app/frontend/.env.local` contain real Supabase configuration. A direct password-grant check returned HTTP 200, and a corrected production build authenticated in the browser and loaded the dashboard. The initial audit attempt had explicitly compiled the frontend with placeholder public variables, which caused the generic “Incorrect User ID or password” message. The fallback is in `01-app/frontend/lib/supabase.ts:4-6`; the required setup and seed flow is documented in `01-app/README.md:7-22,33-45`.
 
-**Impact:** a reviewer cannot currently execute the end-to-end browser flow, including dashboard, detail, review, refresh persistence, logout, and protected-route redirect. This is an environment/demo-readiness blocker, not proof that Supabase authentication is intrinsically broken.
+**Impact:** an incorrectly built local/deployed frontend can look like a credential failure even when the Supabase account is healthy. This is configuration hardening, not an authentication regression in the current configured environment.
 
-**Smallest fix:** provide the configured Supabase project and seed the documented user, then run the manual acceptance list in `01-app/README.md:67`. Do not enable public signup for the demo.
+**Smallest fix:** fail fast for missing public Supabase variables outside explicitly local development, or add a non-secret configuration diagnostic before login. Keep the documented seed and disable public signup.
 
 ### F-02 — High — readiness health is green when the active model is unusable (confirmed)
 
@@ -146,7 +147,7 @@ For a single shared demo workspace this may be intentional. For multi-tenant or 
 | Frontend build | `npm run build` passed with Next.js 15.5.24 and TypeScript/static generation. 15 authenticated workspace routes plus login and the internal not-found route were generated. |
 | Isolated API E2E | Passed single analysis, duplicate-aware batch, SQLite persistence, review update/history reload, deterministic explanation, similar retrieval, validation rejection, and explicit unavailable-model fallback. |
 | Failure-mode probe | Missing active model reproduced HTTP 200 `/health` plus null-score `HUMAN_REVIEW` analysis, establishing F-02. |
-| Browser | Login surface visually rendered. Authenticated flows were not verified because Supabase was not configured/seeded in the audit environment. |
+| Browser | Corrected configured run passed login and dashboard loading. The initial failed attempt used an audit build compiled with placeholder public variables. Live analyze/review writes were not exercised. |
 | Frozen artifacts | Packet hash/row/blank-review checks passed for v0.2 and v0.3. |
 
 ## Recommended release order
