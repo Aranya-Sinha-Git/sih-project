@@ -199,4 +199,22 @@ The authenticated Methodology page says “No operational incident records are p
 7. Pin/rebuild model dependencies, then add input-size, per-row batch failure, and field-level validation handling.
 8. Decide whether the shared workspace is an explicit demo-only authorization model; otherwise add role and tenant scoping.
 
+## Implementation follow-up
+
+The confirmed application fixes were implemented after the audit base revision `1acc34559168109b32474054432a39c4eec49366` (documentation baseline commit `17abc15`):
+
+- F-02: `/live` is liveness-only; `/ready` and `/health` now return non-2xx when the frozen SIF artifact, required LSR artifact, or database check is unavailable. The three intentionally unsupported LSR rules are reported as coverage gaps and do not make an otherwise loaded artifact unready. Render now checks `/ready`.
+- F-11: dashboard, trends, site summaries, and `/reviews` share one actionable-review predicate. Automatic model-positive records marked `Not required` are labelled as unreviewed screening positives rather than as awaiting human review.
+- F-12: incident responses expose persisted model/evidence provenance and legacy/partial badges. Missing historical identity is shown as unavailable; the current runtime artifact is never substituted. Operational totals retain historical rows while current-model compatibility is tracked separately.
+- F-04: active assigned LSRs are separated from retrieved reference concepts. Batch `top_lsr` and rule statistics use assignment-derived fields; multiple assignments remain possible. Driving evidence now has paired positive/negated regression coverage.
+- F-05: runtime decisions are labelled operational human review, authenticated reviewer identity is retained, and responses explicitly mark them ineligible for formal evaluation. The existing blind evaluator remains the formal evaluation path.
+- F-07: deployment requirements pin scikit-learn to `1.8.0`, matching the active frozen SIF artifact serialization version. The current local virtualenv was refreshed to that version during verification; frozen prediction fixtures remained unchanged. An experimental domain-adaptation candidate loaded only by tests still emits a 1.9.0 serialization warning under the pinned runtime; it is not loaded by the deployed application and remains an unresolved non-runtime compatibility note.
+- F-01/F-10/F-13/F-14: missing public Supabase configuration now gives a configuration diagnostic, local direct-API setup is documented with an example frontend environment file, site average scores return/render as nullable values, and methodology copy no longer asserts that records are absent or invents their origin.
+- F-08: narrative, batch-row, upload-size, and row-indexed validation limits are enforced at the API/browser boundaries, with structured validation details surfaced in the UI.
+- F-03/F-06/F-09: product text now calls the result an uncalibrated screening signal, records false-alarm examples as known limitations, separates operational review from validation, and documents the shared demo-workspace authorization assumption.
+
+The implementation does not retrain, promote, recalibrate, or reserialize any model; it does not alter thresholds, training data, frozen packets, manifests, or official evaluation artifacts. The safe/negated and generic-language false positives remain model limitations rather than being hidden by application logic.
+
+Focused verification after implementation: backend `101 passed, 57 warnings`; frontend `npm run build` passed with all 17 routes generated; active artifact loading and existing frozen prediction fixtures passed; the local configured launcher built and started successfully, with no analysis/review writes made during the read-only smoke check. Remaining warnings are framework/joblib deprecations plus the explicitly noted experimental-candidate serialization mismatch; the active deployed artifact mismatch is addressed by the pinned deployment requirement.
+
 **Audit conclusion:** suitable for a controlled prototype demonstration after environment setup and with the limitations above stated plainly; not suitable for unqualified operational safety decisions, calibrated-probability claims, or official blind-validation reporting at this revision.

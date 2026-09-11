@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 from .auth import AuthenticatedUser, reviewer_for_request, validate_configuration
@@ -22,6 +23,9 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT_TYPES = {"Unsafe Act", "Unsafe Condition", "Near Miss", "Incident", "Unspecified"}
 ACTIONABLE_REVIEW_STATUSES = ("Pending", "Escalated")
 REVIEW_OUTCOME_ALIASES = {"Confirm SIF": "Confirm SIF", "Confirm Non-SIF": "Confirm Non-SIF", "Escalate / Unsure": "Escalated / Unsure", "Escalated / Unsure": "Escalated / Unsure"}
+MAX_NARRATIVE_CHARS = 20_000
+MAX_BATCH_REPORTS = 500
+PUBLIC_HEALTH_PATHS = {"/live", "/health", "/ready"}
 
 def con() -> sqlite3.Connection:
     """Compatibility handle for explicit SQLite legacy/test tooling only."""
@@ -34,7 +38,7 @@ def init_db() -> None:
 init_db()
 
 class AnalyzeInput(BaseModel):
-    narrative: str = Field(min_length=1)
+    narrative: str = Field(min_length=1, max_length=MAX_NARRATIVE_CHARS)
     site: Optional[str] = "Unspecified"
     activity: Optional[str] = None
     report_type: Optional[str] = "Unspecified"
@@ -55,7 +59,7 @@ class AnalyzeInput(BaseModel):
         if value not in REPORT_TYPES: raise ValueError("report_type must be Unsafe Act, Unsafe Condition, Near Miss, Incident, or Unspecified.")
         return value
 
-class BatchInput(BaseModel): reports: list[AnalyzeInput]
+class BatchInput(BaseModel): reports: list[AnalyzeInput] = Field(min_length=1, max_length=MAX_BATCH_REPORTS)
 class ReviewInput(BaseModel):
     outcome: str
     reviewer: str = Field(default="", max_length=100)
@@ -77,6 +81,37 @@ def human_review_outcome(row: dict[str, Any]) -> Optional[str]:
     if row.get("review_status") == "Reviewed" and row.get("sif_potential") == 0: return "Confirm Non-SIF"
     return None
 
+def requires_human_review(row: dict[str, Any]) -> bool:
+    """Return the one queue predicate used by dashboard, API, and UI labels."""
+    return row.get("review_status") in ACTIONABLE_REVIEW_STATUSES
+
+def _stored_provenance(analysis: dict[str, Any]) -> dict[str, Any]:
+    screening = analysis.get("screening") or {}
+    mapping = analysis.get("lsr_mapping") or {}
+    mode = str(analysis.get("model_mode") or "").casefold()
+    version = str(analysis.get("model_version") or "").casefold()
+    legacy = mode in {"transparent rules engine", "unknown legacy analysis"} or version.startswith("rules-") or version.startswith("legacy") or screening.get("decision") == "LEGACY_RULES_ENGINE"
+    has_sif_identity = bool(screening.get("model_identity") and screening.get("model_hash"))
+    has_lsr_identity = bool(mapping.get("model_version") and mapping.get("artifact_hash") and mapping.get("reference_id"))
+    record_class = "legacy" if legacy else "current_model" if has_sif_identity and has_lsr_identity else "partial"
+    stored_sif = {key: screening.get(key) for key in ("model_identity", "model_hash", "configuration_hash", "calibration_status", "thresholds")}
+    stored_lsr = {key: mapping.get(key) for key in ("model_version", "artifact_hash", "reference_id", "schema_version", "coverage_complete", "unavailable_rule_ids")}
+    try:
+        active = classifier_metadata()
+        current_model_compatible = record_class == "current_model" and stored_sif["model_identity"] == active.get("model_identity") and stored_sif["model_hash"] == active.get("model_hash")
+    except Exception:
+        current_model_compatible = False
+    intelligence = analysis.get("intelligence") or {}
+    return {
+        "record_class": record_class,
+        "label": {"current_model": "Current-model provenance", "partial": "Partial provenance", "legacy": "Legacy / historical record"}[record_class],
+        "current_model_compatible": current_model_compatible,
+        "sif": stored_sif,
+        "lsr": stored_lsr,
+        "evidence_status": "unavailable" if intelligence.get("status") in {"retrieval_unavailable", "legacy_unavailable"} else "stored" if "intelligence" in analysis else "not_stored",
+        "formal_evaluation_eligible": False,
+    }
+
 def out(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
     item = dict(row)
     if isinstance(item.get("analysis"), str):
@@ -92,11 +127,16 @@ def out(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
     item["model_outcome"] = model_outcome(item)
     item["human_outcome"] = human_review_outcome(item)
     item["human_review_outcome"] = item["human_outcome"]
-    item["effective_outcome"] = item["human_outcome"] or ("Pending human review" if item.get("review_status") in ACTIONABLE_REVIEW_STATUSES else item["model_outcome"])
+    item["review_requirement"] = "required" if requires_human_review(item) else "not_required"
+    item["effective_outcome"] = item["human_outcome"] or ("Pending human review" if requires_human_review(item) else item["model_outcome"])
+    item["provenance"] = _stored_provenance(item["analysis"])
+    item["formal_evaluation_eligible"] = False
+    item["human_review_provenance"] = "operational_human_review" if item["human_outcome"] else None
     return item
 
 def disposition_counts(reports: list[dict[str, Any]]) -> dict[str, int]:
-    return {"model_positive_cases": sum(x.get("model_outcome") == "SIF Potential" for x in reports), "confirmed_sif_cases": sum(x.get("human_outcome") == "Confirm SIF" for x in reports), "confirmed_non_sif_cases": sum(x.get("human_outcome") == "Confirm Non-SIF" for x in reports), "unresolved_escalated": sum(x.get("human_outcome") == "Escalated / Unsure" for x in reports), "unreviewed_model_positive": sum(x.get("model_outcome") == "SIF Potential" and x.get("human_outcome") is None for x in reports)}
+    automatic_positive = sum(x.get("model_outcome") == "SIF Potential" and x.get("human_outcome") is None and not requires_human_review(x) for x in reports)
+    return {"model_positive_cases": sum(x.get("model_outcome") == "SIF Potential" for x in reports), "confirmed_sif_cases": sum(x.get("human_outcome") == "Confirm SIF" for x in reports), "confirmed_non_sif_cases": sum(x.get("human_outcome") == "Confirm Non-SIF" for x in reports), "unresolved_escalated": sum(x.get("human_outcome") == "Escalated / Unsure" for x in reports), "unreviewed_model_positive": automatic_positive, "unreviewed_automatic_positive": automatic_positive, "awaiting_human_review": sum(requires_human_review(x) for x in reports)}
 
 def _incident_id(narrative: str) -> str: return "ANL-" + hashlib.sha1((narrative + datetime.now().isoformat()).encode()).hexdigest()[:8].upper()
 
@@ -178,14 +218,15 @@ def trends(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     anchor = report_anchor(reports); result = []
     for offset in range(5, -1, -1):
         end = anchor - timedelta(days=offset * 7); start = end - timedelta(days=6); period = [x for x in reports if start <= date.fromisoformat(x["report_date"]) <= end]
-        result.append({"period": start.strftime("%d %b"), "high": sum(x["risk"] == "High" for x in period), "reviews": sum(x["review_status"] in ACTIONABLE_REVIEW_STATUSES for x in period)})
+        result.append({"period": start.strftime("%d %b"), "high": sum(x["risk"] == "High" for x in period), "reviews": sum(requires_human_review(x) for x in period)})
     return result
 
 def site_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     result = []
     for site in sorted({x["site"] for x in reports if x["site"]}):
-        group = [x for x in reports if x["site"] == site]; anchor = report_anchor(group); high = sum(x["risk"] == "High" for x in group); current_sif_cases = sum(x.get("sif_potential") == 1 for x in group); model_positive = sum(x.get("model_outcome") == "SIF Potential" for x in group); effective_positive = sum(x.get("effective_outcome") in {"SIF Potential", "Confirm SIF"} for x in group); pending = sum(x["review_status"] in ACTIONABLE_REVIEW_STATUSES for x in group); scores = [x["sif_probability"] for x in group if x["sif_probability"] is not None]; score_signal = sum(scores) / len(scores) if scores else 0; density = round(100 * model_positive / len(group), 1); index = min(100, round((high / len(group) * 55 + score_signal * 45) * 1.65 + pending * .7)); recent = sum(date.fromisoformat(x["report_date"]) >= anchor - timedelta(days=30) for x in group); prior = sum(anchor - timedelta(days=60) <= date.fromisoformat(x["report_date"]) < anchor - timedelta(days=30) for x in group); trend = "Rising" if recent > prior else "Declining" if recent < prior else "Stable"
-        result.append({"site": site, "reports": len(group), "sif_cases": current_sif_cases, "model_positive_cases": model_positive, "effective_positive_cases": effective_positive, "sif_precursor_density": density, "pending_reviews": pending, "risk_index": index, "trend": trend, **disposition_counts(group)})
+        group = [x for x in reports if x["site"] == site]; anchor = report_anchor(group); high = sum(x["risk"] == "High" for x in group); current_sif_cases = sum(x.get("sif_potential") == 1 for x in group); model_positive = sum(x.get("model_outcome") == "SIF Potential" for x in group); effective_positive = sum(x.get("effective_outcome") in {"SIF Potential", "Confirm SIF"} for x in group); pending = sum(requires_human_review(x) for x in group); scores = [x["sif_probability"] for x in group if x["sif_probability"] is not None]; score_signal = sum(scores) / len(scores) if scores else 0; density = round(100 * model_positive / len(group), 1); index = min(100, round((high / len(group) * 55 + score_signal * 45) * 1.65 + pending * .7)); recent = sum(date.fromisoformat(x["report_date"]) >= anchor - timedelta(days=30) for x in group); prior = sum(anchor - timedelta(days=60) <= date.fromisoformat(x["report_date"]) < anchor - timedelta(days=30) for x in group); trend = "Rising" if recent > prior else "Declining" if recent < prior else "Stable"
+        average = round(sum(scores) / len(scores), 2) if scores else None
+        result.append({"site": site, "reports": len(group), "sif_cases": current_sif_cases, "model_positive_cases": model_positive, "effective_positive_cases": effective_positive, "sif_precursor_density": density, "avg_model_score": average, "pending_reviews": pending, "risk_index": index, "trend": trend, **disposition_counts(group)})
     return sorted(result, key=lambda x: (x["sif_precursor_density"], x["reports"]), reverse=True)
 
 def activity_stats(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -240,7 +281,7 @@ async def require_bearer_token(request: Request, call_next):
     # requests remain protected below.
     if request.method == "OPTIONS":
         return await call_next(request)
-    if request.url.path != "/health":
+    if request.url.path not in PUBLIC_HEALTH_PATHS:
         # Token verification currently uses the synchronous httpx client;
         # keep that network call off the event loop until the auth adapter is
         # migrated to a fully async client.
@@ -259,20 +300,38 @@ app.add_middleware(CORSMiddleware, allow_origins=_cors_origins, allow_methods=["
 @app.on_event("startup")
 def start() -> None: validate_configuration(); init_db(); get_domain_model().load(); get_retrieval_service()
 
-@app.get("/health")
-def health():
+def readiness_payload() -> tuple[dict[str, Any], bool]:
     metadata = classifier_metadata()
     domain = get_domain_model().metadata()
-    return {"status": "ok", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "lsr_model_status": domain["lsr_status"], "lsr_model_version": domain["lsr_version"], "llm_configured": False, "runtime_generative_llm_calls": False, "database": get_database().kind}
+    try:
+        database_status = get_database().healthcheck()
+    except Exception as error:
+        database_status = {"status": "UNAVAILABLE", "reason": type(error).__name__}
+    checks = {"classifier": metadata["status"], "lsr_artifact": domain["lsr_status"], "database": database_status.get("status", "UNAVAILABLE")}
+    ready = metadata["status"] == "READY" and domain["lsr_status"] == "READY" and database_status.get("status") == "READY"
+    payload = {"status": "ready" if ready else "not_ready", "model_mode": "Frozen supervised classifier", "model_status": metadata["status"], "model_version": metadata["model_version"], "lsr_model_status": domain["lsr_status"], "lsr_model_version": domain["lsr_version"], "lsr_supported_rule_ids": domain.get("supported_rule_ids", []), "lsr_unavailable_rule_ids": domain.get("unavailable_rule_ids", []), "checks": checks, "llm_configured": False, "runtime_generative_llm_calls": False, "database": get_database().kind}
+    return payload, ready
+
+@app.get("/live")
+def live():
+    return {"status": "alive"}
+
+@app.get("/ready")
+@app.get("/health")
+def health():
+    payload, ready = readiness_payload()
+    return JSONResponse(payload, status_code=200 if ready else 503)
 def analyzed_result(report: AnalyzeInput, lsr_mapping: Optional[dict[str, Any]] = None, screening: Optional[dict[str, Any]] = None) -> dict[str, Any]:
     analysis = analyze_with_classifier(report.narrative, analyze_text(report.narrative), screening_result=screening)
     analysis["lsr_mapping"] = lsr_mapping or get_domain_model().map_rules(report.narrative)
     analysis["intelligence"] = intelligence_snapshot(report.narrative)
-    mappings = [{"rule": item["rule"], "evidence_id": item["evidence_id"],
-                 "provenance": "grounded_iogp_reference"}
+    assigned = [{"rule": item.get("name", item.get("rule_id")), "rule_id": item.get("rule_id"), "name": item.get("name"), "evidence": item.get("evidence", []), "score": item.get("score"), "score_type": item.get("score_type"), "assignment_status": item.get("assignment_status"), "provenance": "active_lsr_classifier_and_narrative_evidence"}
+                for item in analysis["lsr_mapping"].get("rules", []) if item.get("assignment_status") == "ASSIGNED"]
+    reference_concepts = [{"rule": item["rule"], "evidence_id": item["evidence_id"],
+                 "provenance": "grounded_iogp_reference", "mapping_basis": item.get("mapping_basis", "curated concept match; not an assignment")}
                 for item in analysis["intelligence"]["reference_evidence"]
                 if item.get("reference_type") == "iogp_reference" and item.get("rule")]
-    analysis["rules"] = {"primary": mappings[0] if mappings else None, "secondary": mappings[1:]}
+    analysis["rules"] = {"primary": assigned[0] if assigned else None, "secondary": assigned[1:], "assigned": assigned, "reference_concepts": reference_concepts, "assignment_contract": "assigned fields require active LSR score and submitted-narrative evidence; reference concepts are separate and are not assignments"}
     analysis["artifact_versions"] = {
         "sif_model": analysis.get("model_version"),
         "lsr_model": analysis["lsr_mapping"].get("model_version"),
@@ -298,7 +357,7 @@ def analyze(report: AnalyzeInput, request: Request):
 
 @app.post("/analyze/batch")
 def batch(batch_input: BatchInput, request: Request):
-    if len(batch_input.reports) > 500: raise HTTPException(422, "Batch limit is 500 reports.")
+    if len(batch_input.reports) > MAX_BATCH_REPORTS: raise HTTPException(422, f"Batch limit is {MAX_BATCH_REPORTS} reports.")
     database = get_database(); analyses = analyzed_results(batch_input.reports); batch_id = "BATCH-" + hashlib.sha1(datetime.now().isoformat().encode()).hexdigest()[:12].upper(); connection = con() if database.kind == "sqlite-test" else None; working_corpus = rows(); results = []; pending_records: list[dict[str, Any]] = []; skipped_duplicates = []; seen_keys: dict[tuple[str, str], str] = {}; seen_ids: dict[str, str] = {}
     try:
         for report, analysis in zip(batch_input.reports, analyses):
@@ -365,8 +424,8 @@ def intelligence(incident_id: str, intelligence_input: IntelligenceInput):
 
 @app.get("/dashboard/summary")
 def dashboard():
-    report_rows = rows(); site_rows = site_stats(report_rows); alert_rows = alerts(); model_positive = sum(x["model_outcome"] == "SIF Potential" for x in report_rows); confirmed_sif = sum(x["human_outcome"] == "Confirm SIF" for x in report_rows); confirmed_non_sif = sum(x["human_outcome"] == "Confirm Non-SIF" for x in report_rows); unresolved = sum(x["human_outcome"] == "Escalated / Unsure" for x in report_rows); unreviewed_model_positive = sum(x["model_outcome"] == "SIF Potential" and x["human_outcome"] is None for x in report_rows)
-    return {"reports_analyzed": len(report_rows), "potential_sif_cases": model_positive, "sif_case_basis": "frozen classifier screening", "confirmed_sif_cases": confirmed_sif, "confirmed_non_sif_cases": confirmed_non_sif, "unresolved_escalated": unresolved, "unreviewed_model_positive": unreviewed_model_positive, "high_risk_sites": sum(x["risk_index"] >= 58 for x in site_rows), "pending_reviews": sum(x["review_status"] in ACTIONABLE_REVIEW_STATUSES for x in report_rows), "operational_risk_index": round(sum(x["risk_index"] for x in site_rows) / len(site_rows)) if site_rows else None, "emerging_alert": alert_rows[0]["title"] if alert_rows else None, "trend": trends(report_rows), "risk_distribution": [{"name": x, "value": sum(a["risk"] == x for a in report_rows)} for x in ["High", "Medium", "Low"]], "rules": rule_stats(report_rows)[:5], "sites": site_rows[:5], "activities": activity_stats(report_rows)[:5], "clusters": cluster_stats(report_rows)[:4]}
+    report_rows = rows(); site_rows = site_stats(report_rows); alert_rows = alerts(); counts = disposition_counts(report_rows); model_positive = counts["model_positive_cases"]; confirmed_sif = counts["confirmed_sif_cases"]; confirmed_non_sif = counts["confirmed_non_sif_cases"]; unresolved = counts["unresolved_escalated"]
+    return {"reports_analyzed": len(report_rows), "potential_sif_cases": model_positive, "sif_case_basis": "frozen classifier screening; raw uncalibrated score", "confirmed_sif_cases": confirmed_sif, "confirmed_non_sif_cases": confirmed_non_sif, "unresolved_escalated": unresolved, "unreviewed_model_positive": counts["unreviewed_automatic_positive"], "unreviewed_automatic_positive": counts["unreviewed_automatic_positive"], "awaiting_human_review": counts["awaiting_human_review"], "high_risk_sites": sum(x["risk_index"] >= 58 for x in site_rows), "pending_reviews": counts["awaiting_human_review"], "operational_totals_include_legacy": True, "legacy_or_partial_records": sum(not x["provenance"]["current_model_compatible"] for x in report_rows), "current_model_compatible_records": sum(x["provenance"]["current_model_compatible"] for x in report_rows), "operational_risk_index": round(sum(x["risk_index"] for x in site_rows) / len(site_rows)) if site_rows else None, "emerging_alert": alert_rows[0]["title"] if alert_rows else None, "trend": trends(report_rows), "risk_distribution": [{"name": x, "value": sum(a["risk"] == x for a in report_rows)} for x in ["High", "Medium", "Low"]], "rules": rule_stats(report_rows)[:5], "sites": site_rows[:5], "activities": activity_stats(report_rows)[:5], "clusters": cluster_stats(report_rows)[:4]}
 
 @app.get("/analytics/sites")
 def sites(): return site_stats(rows())
@@ -390,7 +449,7 @@ def analytics_trends(): return trends(rows())
 def clusters(): return cluster_stats(rows())
 
 @app.get("/reviews")
-def reviews(): return [x for x in rows() if x["review_status"] in ACTIONABLE_REVIEW_STATUSES]
+def reviews(): return [x for x in rows() if requires_human_review(x)]
 
 @app.post("/reviews/{incident_id}")
 def review(incident_id: str, review_input: ReviewInput, request: Request):
@@ -404,7 +463,7 @@ def review(incident_id: str, review_input: ReviewInput, request: Request):
     current = get_database().get_incident(incident_id)
     if not current: raise HTTPException(404, "Report not found")
     previous = human_review_outcome(current)
-    status = "Escalated" if outcome == "Escalated / Unsure" else "Reviewed"; sif_value = 1 if outcome == "Confirm SIF" else 0 if outcome == "Confirm Non-SIF" else None; label_status = "manual_reviewed" if sif_value is not None else "unresolved"; analysis = current.get("analysis") or {}; analysis = json.loads(analysis) if isinstance(analysis, str) else analysis; screening_version = analysis.get("model_version") or (analysis.get("screening") or {}).get("model_identity")
+    status = "Escalated" if outcome == "Escalated / Unsure" else "Reviewed"; sif_value = 1 if outcome == "Confirm SIF" else 0 if outcome == "Confirm Non-SIF" else None; label_status = "operational_human_reviewed" if sif_value is not None else "operational_unresolved"; analysis = current.get("analysis") or {}; analysis = json.loads(analysis) if isinstance(analysis, str) else analysis; screening_version = (analysis.get("screening") or {}).get("model_identity") or analysis.get("model_version")
     try:
         get_database().apply_review(incident_id, {"status": status, "reviewer": reviewer, "reviewer_user_id": user.id if user else None, "comment": review_input.comment, "sif_potential": sif_value, "label_status": label_status, "outcome": outcome, "timestamp": datetime.now().isoformat(), "previous_outcome": previous, "screening_version": screening_version})
     except Exception:
@@ -423,4 +482,4 @@ def alert_update(alert_id: str, update: AlertUpdate):
 def model():
     metadata = classifier_metadata()
     domain = get_domain_model().metadata()
-    return {"mode": "Frozen supervised classifier plus offline multilabel IOGP mapper", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": False, "runtime_generative_llm_calls": False, "lsr_model": domain, "candidate_promotion": "RETAINED_BASELINE_CANDIDATE_REGRESSED_ON_PROTECTED_TEST", "experimental_candidates": {"status": "not_promoted_and_not_loaded", "sif": [{"name": "TF-IDF v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/sif_tfidf_v0_4.joblib", "status": "experimental", "fresh_final": "79/22/26/5; recall 0.940; F2 0.904", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}, {"name": "SetFit v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/setfit_candidate_v0_4", "status": "experimental_posthoc", "fresh_final": "79/17/31/5; recall 0.940; F2 0.914", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/setfit_posthoc_evaluation_v0_4.json"}], "lsr": {"name": "LSR v0.4 nine-rule candidate", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/lsr_model_v0_4.joblib", "status": "experimental", "reason": "incomplete reliable support for LSR01, LSR02, and LSR08", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}}, "provenance": "Frozen SIF predictor retained after candidate comparison; LSR values are uncalibrated model scores with deterministic evidence templates.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "ai_assisted_internal": {"status": "reported_separately", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_2/sif_test_evaluation.json"}, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference or unsupported-rule failures are explicit and never converted to a negative result."}
+    return {"mode": "Frozen supervised classifier plus offline multilabel IOGP mapper", "version": metadata["model_version"], "model_identity": metadata["model_identity"], "model_hash": metadata["model_hash"], "configuration_hash": metadata["configuration_hash"], "status": metadata["status"], "thresholds": metadata["thresholds"], "calibration_status": metadata["calibration_status"], "calibration": {"status": "incomplete", "evidence_population": None, "requirement": "independent human-labelled development data; never the final blind test", "metrics": None}, "llm_configured": False, "runtime_generative_llm_calls": False, "lsr_model": domain, "candidate_promotion": "RETAINED_BASELINE_CANDIDATE_REGRESSED_ON_PROTECTED_TEST", "authorization_scope": "shared_demo_workspace; authenticated profiles are not tenant-isolated", "screening_claim": "uncalibrated screening score; not an accident probability; automatic positives may be false alarms", "experimental_candidates": {"status": "not_promoted_and_not_loaded", "sif": [{"name": "TF-IDF v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/sif_tfidf_v0_4.joblib", "status": "experimental", "fresh_final": "79/22/26/5; recall 0.940; F2 0.904", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}, {"name": "SetFit v0.4", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/setfit_candidate_v0_4", "status": "experimental_posthoc", "fresh_final": "79/17/31/5; recall 0.940; F2 0.914", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/setfit_posthoc_evaluation_v0_4.json"}], "lsr": {"name": "LSR v0.4 nine-rule candidate", "artifact": "03-training/ml/sif_v0_1/artifacts/domain_adapted_v0_4/lsr_model_v0_4.joblib", "status": "experimental", "reason": "incomplete reliable support for LSR01, LSR02, and LSR08", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_4/final_evaluation_v0_4.json"}}, "provenance": "Frozen SIF predictor retained after candidate comparison; LSR values are uncalibrated model scores with deterministic evidence templates.", "external_evaluation": "Human blind validation is pending locked adjudications.", "metrics": None, "ai_assisted_internal": {"status": "reported_separately", "report": "03-training/ml/sif_v0_1/reports/domain_adaptation_v0_2/sif_test_evaluation.json"}, "human_blind_test": {"status": "pending_locked_adjudications", "sample_size": None, "unresolved_exclusions": None, "metrics": None}, "fallback": "Inference or unsupported-rule failures are explicit and never converted to a negative result."}

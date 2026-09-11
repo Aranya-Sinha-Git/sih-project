@@ -4,7 +4,7 @@ services:
     runtime: docker
     dockerfilePath: ./01-app/backend/Dockerfile
     dockerContext: .
-    healthCheckPath: /health
+    healthCheckPath: /ready
     envVars:
       - key: PORT
         value: 8000

@@ -26,7 +26,7 @@ STATUS_PRECEDENCE = ["MAPPING_UNAVAILABLE", "INSUFFICIENT_INFORMATION", "BORDERL
 RULE_PATTERNS: dict[str, tuple[str, ...]] = {
     "LSR01": (r"\b(?:guard|interlock|alarm|safety control|trip).{0,35}(?:bypass|disable|defeat|override|removed|missing|absent)\b", r"\bwithout (?:a )?guard\b"),
     "LSR02": (r"\bconfined space\b", r"\b(?:entered|inside|within) (?:a |the )?(?:tank|vessel|silo|manhole|reactor)\b"),
-    "LSR03": (r"\b(?:driver|driving|vehicle|truck|car|ATV|UTV|bus|telehandler).{0,70}(?:crash|collision|collid|rollover|overturned|veered|struck|ran over|lost control)\b",),
+    "LSR03": (r"\b(?:driver|driving|vehicle|truck|car|ATV|UTV|bus|telehandler).{0,70}(?:crash|collision|collid|rollover|overturned|veered|struck|ran over|lost control)\b", r"\b(?:driver|driving|vehicle|truck|car|ATV|UTV|bus|telehandler).{0,45}(?:speeding|high speed|distracted|fatigued|seatbelt|journey management)\b"),
     "LSR04": (r"\b(?:energized|electric shock|power line|hot wire|stored pressure|trapped pressure|pressurized|residual pressure|lockout|tagout|zero energy|unexpectedly started|actuated)\b",),
     "LSR05": (r"\b(?:weld|welding|torch|hot tap|gouging|grinding).{0,80}(?:fire|flammable|gas|vapou?r|explos|ignit)\b", r"\b(?:flash fire|flammable gas|ignition source)\b"),
     "LSR06": (r"\b(?:struck by|pinned|crushed|caught between|line of fire|release path|whip|snapback|fell on|dropped|falling object|run over)\b", r"\b(?:pipe|load|equipment|vehicle|truck|forklift|cap|hose|cable).{0,55}(?:fell|struck|hit|pinned|crushed|released|whip)\b"),
@@ -66,6 +66,8 @@ def _supported_excerpt(text: str, rule_id: str) -> str | None:
             continue
         if re.search(r"\b(?:no|not|never)\s+(?:evidence of\s+)?(?:fire|explosion|fall|pressure release|contact|dropped objects?)\b", sentence, re.I):
             continue
+        if re.search(r"\b(?:no|not|never)\s+(?:evidence of\s+)?(?:speeding|high speed|distracted driving|fatigue|seatbelt|journey-management failure)\b", sentence, re.I):
+            continue
         if any(re.search(pattern, sentence, re.I) for pattern in RULE_PATTERNS[rule_id]):
             return sentence
     return None
@@ -93,6 +95,8 @@ class DomainSafetyModel:
 
     def metadata(self) -> dict[str, Any]:
         self.load()
+        unavailable_rule_ids = sorted(rule_id for rule_id, spec in (self.lsr or {}).get("rules", {}).items() if not spec.get("available"))
+        supported_rule_ids = sorted(rule_id for rule_id, spec in (self.lsr or {}).get("rules", {}).items() if spec.get("available"))
         return {
             "sif": self.classifier.metadata(),
             "lsr_version": self.lsr.get("version") if self.lsr else None,
@@ -100,6 +104,9 @@ class DomainSafetyModel:
             "lsr_artifact_hash": self.artifact_hash,
             "lsr_status": "READY" if self.lsr else "MAPPING_UNAVAILABLE",
             "lsr_failure_reason": self.load_error,
+            "supported_rule_ids": supported_rule_ids,
+            "unavailable_rule_ids": unavailable_rule_ids,
+            "coverage_complete": bool(self.lsr) and not unavailable_rule_ids,
             "runtime_generative_llm_calls": False,
         }
 

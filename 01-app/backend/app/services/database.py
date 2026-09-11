@@ -51,11 +51,14 @@ def init_sqlite() -> None:
     connection = sqlite_connection()
     connection.execute("CREATE TABLE IF NOT EXISTS incidents (id TEXT PRIMARY KEY, report_date TEXT, site TEXT, activity TEXT, narrative TEXT, source TEXT, sif_probability REAL, risk TEXT, high_potential INTEGER, sif_potential INTEGER, sif_label_status TEXT, analysis TEXT, review_status TEXT, reviewer TEXT, review_comment TEXT, created_at TEXT, report_type TEXT, import_batch_id TEXT)")
     connection.execute("CREATE TABLE IF NOT EXISTS alerts (id TEXT PRIMARY KEY,title TEXT,detail TEXT,severity TEXT,status TEXT,site TEXT,created_at TEXT)")
-    connection.execute("CREATE TABLE IF NOT EXISTS review_history (id INTEGER PRIMARY KEY AUTOINCREMENT,incident_id TEXT,outcome TEXT,reviewer TEXT,comment TEXT,timestamp TEXT,previous_outcome TEXT,new_outcome TEXT,screening_version TEXT)")
+    connection.execute("CREATE TABLE IF NOT EXISTS review_history (id INTEGER PRIMARY KEY AUTOINCREMENT,incident_id TEXT,outcome TEXT,reviewer TEXT,reviewer_user_id TEXT,comment TEXT,timestamp TEXT,previous_outcome TEXT,new_outcome TEXT,screening_version TEXT)")
     incident_columns = {row["name"] for row in connection.execute("PRAGMA table_info(incidents)").fetchall()}
     for column in ("source_id", "normalized_narrative", "created_by_user_id"):
         if column not in incident_columns:
             connection.execute(f"ALTER TABLE incidents ADD COLUMN {column} TEXT")
+    history_columns = {row["name"] for row in connection.execute("PRAGMA table_info(review_history)").fetchall()}
+    if "reviewer_user_id" not in history_columns:
+        connection.execute("ALTER TABLE review_history ADD COLUMN reviewer_user_id TEXT")
     connection.commit()
     connection.close()
 
@@ -69,6 +72,14 @@ class SQLiteDatabase:
 
     def __init__(self) -> None:
         init_sqlite()
+
+    def healthcheck(self) -> dict[str, str]:
+        connection = sqlite_connection()
+        try:
+            connection.execute("SELECT 1").fetchone()
+            return {"status": "READY"}
+        finally:
+            connection.close()
 
     @staticmethod
     def _decode(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
@@ -159,7 +170,7 @@ class SQLiteDatabase:
             connection.execute("UPDATE incidents SET review_status=?,reviewer=?,review_comment=?,sif_potential=?,sif_label_status=? WHERE id=?", (values["status"], values["reviewer"], values["comment"], values["sif_potential"], values["label_status"], incident_id))
             if connection.total_changes == 0:
                 raise KeyError(incident_id)
-            connection.execute("INSERT INTO review_history (incident_id,outcome,reviewer,comment,timestamp,previous_outcome,new_outcome,screening_version) VALUES (?,?,?,?,?,?,?,?)", (incident_id, values["outcome"], values["reviewer"], values["comment"], values["timestamp"], values["previous_outcome"], values["outcome"], values["screening_version"]))
+            connection.execute("INSERT INTO review_history (incident_id,outcome,reviewer,reviewer_user_id,comment,timestamp,previous_outcome,new_outcome,screening_version) VALUES (?,?,?,?,?,?,?,?,?)", (incident_id, values["outcome"], values["reviewer"], values.get("reviewer_user_id"), values["comment"], values["timestamp"], values["previous_outcome"], values["outcome"], values["screening_version"]))
             connection.commit()
         except Exception:
             connection.rollback()
@@ -194,6 +205,10 @@ class SupabaseDatabase:
     def __init__(self) -> None:
         self.base_url = os.environ["SUPABASE_URL"].rstrip("/")
         self.key = os.environ["SUPABASE_SECRET_KEY"]
+
+    def healthcheck(self) -> dict[str, str]:
+        self._request("GET", "incidents", params={"select": "id", "limit": 1})
+        return {"status": "READY"}
 
     def _request(self, method: str, table: str, *, params: dict[str, Any] | None = None, payload: Any = None, prefer: str | None = None) -> Any:
         headers = {"apikey": self.key, "Authorization": f"Bearer {self.key}", "Content-Type": "application/json"}

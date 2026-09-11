@@ -77,10 +77,12 @@ def test_facade_api_and_screening_independence(monkeypatch):
     monkeypatch.setattr(main, 'rows', lambda: [])
     report = main.AnalyzeInput(narrative=FACADE)
     result = main.analyzed_result(report)
-    assert result['rules']['primary'] == {
+    assert result['rules']['primary'] is None
+    assert result['rules']['reference_concepts'] == [{
         'rule': 'Line of Fire', 'evidence_id': 'IOGP-459-LINEOFFIRE',
         'provenance': 'grounded_iogp_reference',
-    }
+        'mapping_basis': 'Hazard/concept match; not proof of a rule violation',
+    }]
     assert result['rules']['secondary'] == []
     grounded = result['intelligence']['reference_evidence'][0]
     assert grounded['citation']['publisher'] == 'IOGP'
@@ -88,6 +90,7 @@ def test_facade_api_and_screening_independence(monkeypatch):
     monkeypatch.setattr(main, 'intelligence_snapshot', lambda *args: {'reference_evidence': []})
     unmapped = main.analyzed_result(report)
     assert unmapped['rules']['primary'] is None
+    assert unmapped['rules']['reference_concepts'] == []
     for key in ('screening', 'sif_probability', 'sif_potential', 'classification', 'risk', 'review_required'):
         assert result[key] == unmapped[key]
 
@@ -97,3 +100,9 @@ def test_verified_isolation_is_not_extracted_as_failure():
     result = analyze_text('Energy isolation was verified before work began.')
     assert result['barrier_failures'] == []
     assert result['precursors'] == ['no strong precursor pattern']
+
+
+def test_active_driving_evidence_handles_positive_and_negated_speeding():
+    from app.services.domain_model import _supported_excerpt
+    assert _supported_excerpt('The driver was speeding.', 'LSR03') == 'The driver was speeding.'
+    assert _supported_excerpt('The driver was not speeding.', 'LSR03') is None

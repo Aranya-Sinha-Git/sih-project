@@ -16,6 +16,15 @@ from app.services.local_llm import LocalLLMService
 client=TestClient(app)
 def teardown_module():TEST_DB.unlink(missing_ok=True);TEST_DIR.rmdir()
 def test_health():assert client.get('/health').status_code==200
+def test_liveness_and_readiness_keep_unsupported_lsr_rules_non_blocking():
+ assert client.get('/live').json()=={'status':'alive'}
+ response=client.get('/ready');assert response.status_code==200 and response.json()['status']=='ready'
+ assert set(response.json()['lsr_unavailable_rule_ids'])=={'LSR01','LSR02','LSR08'}
+
+def test_readiness_fails_when_required_classifier_is_invalid(monkeypatch):
+ monkeypatch.setattr(main,'classifier_metadata',lambda:{'status':'ARTIFACT_MISSING','model_version':'sif-v0.1'})
+ monkeypatch.setattr(main,'get_domain_model',lambda:type('Domain',(),{'metadata':lambda self:{'lsr_status':'READY','lsr_version':'test','supported_rule_ids':['LSR03'],'unavailable_rule_ids':['LSR01','LSR02','LSR08']}})())
+ response=client.get('/ready');assert response.status_code==503 and response.json()['status']=='not_ready' and response.json()['checks']['classifier']=='ARTIFACT_MISSING'
 def test_cors_preflight_is_not_blocked_by_auth_middleware():
     response=client.options('/dashboard/summary',headers={'Origin':'http://localhost:3000','Access-Control-Request-Method':'GET','Access-Control-Request-Headers':'authorization'})
     assert response.status_code in {200,204} and response.headers.get('access-control-allow-origin')=='http://localhost:3000'
@@ -85,6 +94,10 @@ def test_classifier_failure_and_null_score_analytics(tmp_path):
  stats=main.site_stats([{'site':'Missing score','report_date':'2026-01-01','risk':'Medium','sif_potential':None,'sif_probability':None,'review_status':'Pending'}])
  assert stats[0]['risk_index']==1
 
+def test_site_average_score_excludes_null_scores():
+ stats=main.site_stats([{'site':'Score Site','report_date':'2026-01-01','risk':'High','sif_potential':1,'sif_probability':0.8,'review_status':'Not required','analysis':{'screening':{'decision':'SIF_POTENTIAL'}}},{'site':'Score Site','report_date':'2026-01-02','risk':'Medium','sif_potential':None,'sif_probability':None,'review_status':'Pending','analysis':{'screening':{'decision':'HUMAN_REVIEW'}}}])
+ assert stats[0]['avg_model_score']==0.8
+
 def test_classifier_metadata_rejects_unknown_model(tmp_path):
  (tmp_path/'threshold.json').write_text('{"model":"unknown-model","sif_threshold":0.4,"human_review_band":[0.35,0.45]}',encoding='utf-8')
  metadata=FrozenClassifierAdapter(tmp_path).metadata()
@@ -101,6 +114,15 @@ def test_classifier_rejects_inconsistent_predictor_output(monkeypatch,tmp_path):
 def test_legacy_analysis_remains_readable():
  row=main.out({'id':'LEGACY-1','analysis':'{"model_mode":"Transparent Rules Engine","sif_probability":0.2}','review_status':'Not required','sif_potential':0})
  assert row['analysis']['model_mode']=='Transparent Rules Engine' and row['analysis']['screening']['decision']=='LEGACY_RULES_ENGINE'
+
+def test_historical_provenance_never_falls_back_to_active_model():
+ row=main.out({'id':'LEGACY-2','analysis':'{"model_mode":"Transparent Rules Engine","model_version":"rules-v1.0","sif_probability":0.2}','review_status':'Not required','sif_potential':0})
+ assert row['provenance']['record_class']=='legacy' and row['provenance']['sif']['model_identity'] is None and row['formal_evaluation_eligible'] is False
+
+def test_dashboard_distinguishes_automatic_positive_from_required_review():
+ automatic=main.out({'id':'AUTO','analysis':{'screening':{'decision':'SIF_POTENTIAL','model_identity':'m','model_hash':'h'},'model_mode':'Frozen supervised classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Not required','sif_potential':1})
+ pending=main.out({'id':'PENDING','analysis':{'screening':{'decision':'HUMAN_REVIEW','model_identity':'m','model_hash':'h'},'model_mode':'Frozen supervised classifier','model_version':'sif-v0.1','lsr_mapping':{'model_version':'l','artifact_hash':'a','reference_id':'r'},'intelligence':{}},'review_status':'Pending','sif_potential':None})
+ counts=main.disposition_counts([automatic,pending]);assert counts['unreviewed_automatic_positive']==1 and counts['awaiting_human_review']==1
 
 def test_legacy_intelligence_parse_failure_is_explicit_and_preserves_raw_analysis():
  ident='LEGACY-INTELLIGENCE'
@@ -126,6 +148,13 @@ def test_review_history_and_explicit_dispositions(monkeypatch):
  detail=client.get('/incidents/'+ident).json();assert detail['effective_outcome']=='Confirm Non-SIF' and len(detail['review_history'])==2 and detail['review_history'][1]['previous_outcome']=='Escalated / Unsure'
  dashboard=client.get('/dashboard/summary').json();assert dashboard['confirmed_non_sif_cases']>=1 and dashboard['unresolved_escalated']==0
 
+def test_operational_review_is_not_formal_evaluation(monkeypatch):
+ original=main.analyzed_result
+ monkeypatch.setattr(main,'analyzed_result',lambda report:{**original(report),'sif_probability':0.4,'risk':'Medium','classification':'Needs Review','review_required':True,'sif_potential':None,'sif_label_status':'unresolved','screening':{**original(report)['screening'],'raw_score':0.4,'decision':'HUMAN_REVIEW'}})
+ ident=client.post('/analyze',json={'site':'Review provenance','narrative':'A reviewer must classify this operational report.'}).json()['id']
+ reviewed=client.post('/reviews/'+ident,json={'outcome':'Confirm SIF','reviewer':'Reviewer Provenance'})
+ assert reviewed.status_code==200 and reviewed.json()['sif_label_status']=='operational_human_reviewed' and reviewed.json()['formal_evaluation_eligible'] is False and reviewed.json()['human_review_provenance']=='operational_human_review'
+
 def test_grounded_reference_and_historical_retrieval():
  service=main.get_retrieval_service()
  references=service.reference_evidence('worker entered a pressure release path while isolation was incomplete')
@@ -144,7 +173,7 @@ def test_facade_panel_grounded_mapping_endpoint():
  response=client.post('/analyze',json={'narrative':narrative})
  assert response.status_code==200
  result=response.json()
- assert result['rules']['primary']['rule']=='Line of Fire' and result['rules']['secondary']==[]
+ assert result['rules']['primary'] is None and result['rules']['secondary']==[] and result['rules']['reference_concepts'][0]['rule']=='Line of Fire'
  evidence=result['intelligence']['reference_evidence']
  assert len(evidence)==1 and evidence[0]['evidence_id']=='IOGP-459-LINEOFFIRE'
  assert evidence[0]['citation']['publisher']=='IOGP' and evidence[0]['citation']['page_section']=='page 1'
@@ -223,3 +252,9 @@ def test_batch_invalid_report_does_not_insert():
  before=client.get('/incidents').json()['total']
  response=client.post('/analyze/batch',json={'reports':[{'narrative':'Routine housekeeping cleared a cable from walkway.'},{'narrative':'too short'}]})
  assert response.status_code==422 and client.get('/incidents').json()['total']==before
+
+def test_narrative_and_batch_limits_are_rejected_without_persistence():
+ before=client.get('/incidents').json()['total']
+ assert client.post('/analyze',json={'narrative':'x'*20001}).status_code==422
+ assert client.post('/analyze/batch',json={'reports':[{'narrative':f'Valid report row {i} with enough detail.'} for i in range(501)]}).status_code==422
+ assert client.get('/incidents').json()['total']==before

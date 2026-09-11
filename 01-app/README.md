@@ -9,7 +9,7 @@ Supabase provides PostgreSQL persistence and Auth. FastAPI remains the only appl
 ## Local setup
 
 1. Create a Supabase project and run the SQL files in `supabase/migrations/` in filename order in the Supabase SQL editor. The first creates the tables and RLS policies; the later files add atomic review persistence and migration identity synchronization. Existing projects should run only the migration files they have not already applied.
-2. Copy `.env.example` to `.env` and fill the server URL, publishable key, secret key, CORS origin, and the two frontend public variables. Never put `SUPABASE_SECRET_KEY` in a `NEXT_PUBLIC_*` variable.
+2. Copy `.env.example` to `.env` and fill the server URL, publishable key, secret key, CORS origin, and the two frontend public variables. Never put `SUPABASE_SECRET_KEY` in a `NEXT_PUBLIC_*` variable. When running Next.js from `01-app/frontend`, provide the same public values in `frontend/.env.local` and set `NEXT_PUBLIC_API_URL=http://127.0.0.1:8000`; `/api` is not a configured proxy.
 3. From `01-app/backend`, create/install the Python environment with `pip install -r requirements.txt`.
 4. Provision the idempotent demo user from `01-app/backend`:
 
@@ -34,14 +34,14 @@ Login uses User ID `test` and Password `test123`. The compact hint appears only 
 
 ## Deployment
 
-For Render/Railway/Fly.io-style deployment, build from the repository root with [`backend/Dockerfile`](backend/Dockerfile); it includes the frozen artifact tree from `03-training` and binds to `0.0.0.0:$PORT`. [`render.yaml`](render.yaml) is an example service definition. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `CORS_ORIGINS`, `FRONTEND_URL`, and `MODEL_PATH` in the backend service. `CORS_ORIGINS` and `FRONTEND_URL` accept comma-separated origins and normalize a root trailing slash; use the deployed frontend origin, for example `https://sih-project-orpin-pi.vercel.app`.
+For Render/Railway/Fly.io-style deployment, build from the repository root with [`backend/Dockerfile`](backend/Dockerfile); it includes the frozen artifact tree from `03-training` and binds to `0.0.0.0:$PORT`. [`render.yaml`](render.yaml) is an example service definition. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `CORS_ORIGINS`, `FRONTEND_URL`, and `MODEL_PATH` in the backend service. Render checks `/ready` for readiness; `/live` is the liveness endpoint. Missing/invalid required artifacts or database connectivity make `/ready` return non-2xx. The three intentionally unsupported LSR classifiers are reported as unavailable coverage and do not make an otherwise loaded LSR artifact unready. `CORS_ORIGINS` and `FRONTEND_URL` accept comma-separated origins and normalize a root trailing slash; use the deployed frontend origin, for example `https://sih-project-orpin-pi.vercel.app`.
 
-Deploy `01-app/frontend` to Vercel. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `NEXT_PUBLIC_API_URL` to the public FastAPI URL, with no endpoint suffix such as `/dashboard/summary`. Add the deployed frontend origin to backend `CORS_ORIGINS`; do not use `*` with credentials. Redeploy the backend after changing backend variables and redeploy the frontend after changing any `NEXT_PUBLIC_*` variable.
+Deploy `01-app/frontend` to Vercel. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `NEXT_PUBLIC_API_URL` to the public FastAPI URL, with no endpoint suffix such as `/dashboard/summary`. Add the deployed frontend origin to backend `CORS_ORIGINS`; do not use `*` with credentials. Vercel builds fail fast when required public variables are missing. Redeploy the backend after changing backend variables and redeploy the frontend after changing any `NEXT_PUBLIC_*` variable.
 
 ## Component responsibilities
 
 - Supabase: database and password authentication. RLS is enabled; only a user’s own profile is readable to browser-authenticated clients. Incident, alert, and review-history tables have no browser write/read policy; FastAPI uses the server-only key after authorization.
-- FastAPI: Supabase session verification, username/profile resolution, classifier inference, retrieval, analytics, batch persistence, and review lifecycle.
+- FastAPI: Supabase session verification, username/profile resolution, classifier inference, retrieval, analytics, batch persistence, and operational review lifecycle.
 - Next.js: presentation, Supabase browser session, User ID login, and a centralized authenticated API client.
 
 ## Current-to-Supabase mapping
@@ -64,4 +64,4 @@ cd ../frontend
 npm run build
 ```
 
-After applying the SQL migration and seeding Supabase, manually verify login, dashboard load, analyze, detail/similarity, review, refresh persistence, logout, and protected-route redirect with `test / test123`.
+After applying the SQL migration and seeding Supabase, manually verify login, dashboard load, analyze, detail/similarity, operational review, refresh persistence, logout, and protected-route redirect with `test / test123`. Runtime review dispositions are not formal dual-reviewer adjudications and cannot be used as official blind-validation ground truth. This is a shared demo workspace, not a tenant-isolated deployment; authenticated users can reach workspace-wide operational data according to their FastAPI role.
