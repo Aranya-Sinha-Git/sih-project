@@ -28,7 +28,7 @@ Supabase provides PostgreSQL persistence and Auth. FastAPI remains the only appl
    The importer preserves report IDs, timestamps, JSON analysis/intelligence, legacy records, review history, and provenance; reruns skip identical rows and fail differing rows without overwriting them.
 6. Start the local app with `run-demo.cmd`, or run `uvicorn app.main:app --host 0.0.0.0 --port 8000` and `npm run dev` separately.
 
-Open the login page, choose “Create account,” and register with a strong password. Password recovery is not currently available through ordinary email links because User IDs use synthetic internal email addresses; use the administrator-assisted reset process until a dedicated reset flow is implemented.
+Open the login page, choose “Create account,” and register with a password. Password recovery is not currently available through ordinary email links because User IDs use synthetic internal email addresses; use the administrator-assisted reset process until a dedicated reset flow is implemented.
 
 ## Deployment
 

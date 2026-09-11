@@ -53,6 +53,15 @@ def test_registration_is_public_creates_member_and_ignores_client_role(monkeypat
     assert database.profiles[-1]["role"] == "member"
 
 
+def test_registration_accepts_non_empty_password_without_strength_rules(monkeypatch):
+    reset_attempts()
+    database = FakeDatabase()
+    monkeypatch.setattr(main, "get_database", lambda: database)
+    monkeypatch.setattr(main, "create_auth_user", lambda **kwargs: {"id": "auth-short", "email": kwargs["email"]})
+    response = client.post("/auth/register", json={"user_id": "short-password", "display_name": "User", "password": "x", "password_confirmation": "x"})
+    assert response.status_code == 201
+
+
 def test_registration_validation_rejects_invalid_user_id_weak_and_mismatched_passwords():
     reset_attempts()
     assert client.post("/auth/register", json={"user_id": "bad id", "display_name": "User", "password": "short", "password_confirmation": "short"}).status_code == 422

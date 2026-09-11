@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import AliasChoices, BaseModel, Field, field_validator, model_validator
 
-from .auth import (MAX_DISPLAY_NAME_LENGTH, MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, AuthProviderError,
+from .auth import (MAX_DISPLAY_NAME_LENGTH, MAX_PASSWORD_LENGTH, AuthProviderError,
                    AuthenticatedUser, create_auth_user, delete_auth_user, normalize_username,
                    reviewer_for_request, username_to_internal_email, validate_configuration)
 from .services.classifier import analyze_with_classifier, classifier_metadata
@@ -76,7 +76,7 @@ class IntelligenceInput(BaseModel): force: bool = False
 class RegistrationInput(BaseModel):
     user_id: str = Field(validation_alias=AliasChoices("user_id", "username"), min_length=3, max_length=64)
     display_name: str = Field(min_length=1, max_length=MAX_DISPLAY_NAME_LENGTH)
-    password: str = Field(min_length=MIN_PASSWORD_LENGTH, max_length=MAX_PASSWORD_LENGTH)
+    password: str = Field(min_length=1, max_length=MAX_PASSWORD_LENGTH)
     password_confirmation: str = Field(validation_alias=AliasChoices("password_confirmation", "confirm_password"), min_length=1, max_length=MAX_PASSWORD_LENGTH)
 
     @field_validator("user_id", mode="before")
@@ -88,14 +88,6 @@ class RegistrationInput(BaseModel):
     @classmethod
     def normalize_display_name(cls, value: Any) -> str:
         return " ".join(str(value or "").strip().split())
-
-    @field_validator("password")
-    @classmethod
-    def require_strong_password(cls, value: str) -> str:
-        categories = sum(bool(check) for check in (any(char.islower() for char in value), any(char.isupper() for char in value), any(char.isdigit() for char in value), any(not char.isalnum() for char in value)))
-        if len(value) < MIN_PASSWORD_LENGTH or categories < 3:
-            raise ValueError("Password must be at least 12 characters and include at least three of lowercase, uppercase, number, or symbol.")
-        return value
 
     @model_validator(mode="after")
     def passwords_match(self) -> "RegistrationInput":
