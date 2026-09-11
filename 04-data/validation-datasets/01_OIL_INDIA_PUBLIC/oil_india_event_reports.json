@@ -1,0 +1,300 @@
+{
+  "dataset_id": "oil_india_actual_event_reports",
+  "dataset_version": "0.1.0",
+  "generated_at": "2026-09-12T00:00:00+05:30",
+  "publisher_scope": "Publicly available Oil India Limited event reports and official supporting documents.",
+  "record_count": 3,
+  "event_report_count": 3,
+  "source_document_count": 7,
+  "records_are_distinct_events": true,
+  "records": [
+    {
+      "event_id": "OIL-BAGHJAN-2020",
+      "operator": "Oil India Limited",
+      "report_title": "Blowout at Baghjan Well No. 5",
+      "report_type": "Incident",
+      "record_status": "publicly documented; reference-only",
+      "location": {
+        "well": "Baghjan Well No. 5",
+        "field": "Baghjan Oilfield",
+        "district": "Tinsukia",
+        "state": "Assam",
+        "country": "India"
+      },
+      "event_dates": {
+        "initial_uncontrolled_release": "2020-05-27T10:30:00+05:30",
+        "well_fire": "2020-06-09",
+        "peripheral_fire_contained": "2020-06-10",
+        "well_capped": "2020-08-17",
+        "gas_flow_diverted": "2020-09-13",
+        "well_killed_and_fire_doused": "2020-11-15"
+      },
+      "activity_context": "Workover operations on a producing gas well.",
+      "event_mechanism": [
+        "The well became suddenly active during workover operations.",
+        "Natural gas and condensate were released in an uncontrolled manner.",
+        "The well subsequently caught fire."
+      ],
+      "reported_narrative": "Oil India reports that Baghjan Well No. 5 became active during workover operations on 27 May 2020 and released natural gas and condensate uncontrollably. The well caught fire on 9 June 2020. It was capped on 17 August and finally killed, with the fire completely doused, on 15 November 2020.",
+      "reported_consequences": {
+        "fatalities_reported": 3,
+        "fatality_detail": "Two OIL fire-fighters died while escaping the sudden ignition on 9 June; OIL's report also records the death of another OIL officer in the line of duty on 9 September.",
+        "families_evacuated": 1610,
+        "people_in_relief_camps_approx": 9000,
+        "houses_burned_approx": 16,
+        "affected_assets": [
+          "property",
+          "farmland",
+          "vegetation",
+          "tea bushes"
+        ],
+        "environmental_impact_reported": true
+      },
+      "response_and_recovery": [
+        "OIL, ONGC Crisis Management Team, Alert Disaster Control, Indian Army, district administration and other agencies supported the response.",
+        "Continuous water spraying and site-control measures were used.",
+        "A BOP stack was placed over the well on 17 August 2020.",
+        "Gas flow was diverted to the Baghjan EPS and flare pits on 13 September 2020.",
+        "A snubbing operation began on 8 November 2020 and the well was killed with brine solution on 15 November 2020.",
+        "The later OIL compliance report records bioremediation, plantation of 50,000 saplings and CCTV surveillance."
+      ],
+      "preliminary_authority_findings": [
+        {
+          "finding": "Deficiency in understanding the gravity of removing the BOP without a confirmed and tested secondary safety barrier.",
+          "source_document_id": "OISD-BAGHJAN-2024",
+          "source_locator": "printed page 52"
+        },
+        {
+          "finding": "Preliminary material identifies deficiencies in planning, execution, adherence to procedure and supervision of the critical operation.",
+          "source_document_id": "NGT-BAGHJAN-2020",
+          "source_locator": "conclusions section"
+        }
+      ],
+      "source_discrepancies": [
+        "The OIL News narrative identifies two fire-fighter deaths on 9 June and one additional officer death on 9 September; the OISD report summarizes this as three employee deaths."
+      ],
+      "sif_label_status": "unresolved",
+      "source_document_ids": [
+        "OIL-BAGHJAN-PAGE-2020",
+        "OIL-BAGHJAN-NEWS-2020",
+        "OISD-BAGHJAN-2024",
+        "NGT-BAGHJAN-2020",
+        "OIL-BAGHJAN-COMPLIANCE-2025"
+      ]
+    },
+    {
+      "event_id": "OIL-NHK162-2024",
+      "operator": "Oil India Limited",
+      "report_title": "Incident at OIL well plinth NHK 162",
+      "report_type": "Incident",
+      "record_status": "publicly documented; reference-only",
+      "location": {
+        "well_plinth": "NHK 162",
+        "asset": "Western Asset Mine",
+        "district": "Duliajan area",
+        "state": "Assam",
+        "country": "India"
+      },
+      "event_dates": {
+        "event": "2024-02-14T15:05:00+05:30",
+        "death_reported": "2024-02-14T17:00:00+05:30",
+        "press_release": "2024-02-15"
+      },
+      "activity_context": "Bleeding hydrotest water through a 2-inch bleed line.",
+      "event_mechanism": "While a 2-inch valve fitted to an artery-line connection was being opened, the valve and bleed line unexpectedly dislodged.",
+      "reported_narrative": "OIL reported that the dislodged valve and bleed line caused fatal injury to a contractor employee working nearby. The employee was taken to OIL Hospital at Duliajan but died at approximately 5:00 pm on 14 February 2024.",
+      "reported_consequences": {
+        "fatalities_reported": 1,
+        "injuries_reported": 1,
+        "victim_status": "contractor employee"
+      },
+      "response_and_investigation": [
+        "The employee was taken immediately to OIL Hospital at Duliajan.",
+        "OIL announced an internal enquiry.",
+        "OIL stated that it would take measures to prevent recurrence."
+      ],
+      "regulatory_filing": {
+        "reference_number": "OIL/SEC/32-33/NSE-BSE",
+        "filing_basis": "Regulation 30 of the SEBI (LODR) Regulations, 2015"
+      },
+      "sif_label_status": "unresolved",
+      "source_document_ids": [
+        "OIL-NHK162-2024"
+      ]
+    },
+    {
+      "event_id": "OIL-BGN24-2024",
+      "operator": "Oil India Limited",
+      "report_title": "Incident at BGN#24",
+      "report_type": "Incident",
+      "record_status": "publicly documented; reference-only",
+      "location": {
+        "well": "BGN#24",
+        "site": "Dighaltarang Tea Estate",
+        "district": "Tinsukia",
+        "state": "Assam",
+        "country": "India"
+      },
+      "event_dates": {
+        "incident_reported": "2024-04-09T23:30:00+05:30",
+        "leak_controlled": "2024-04-10T02:20:00+05:30",
+        "press_release": "2024-04-10"
+      },
+      "activity_context": "Wellsite production equipment at the X-mass tree.",
+      "event_mechanism": "A hole was observed on the flow path from the X-mass tree, causing leakage of gas and crude oil.",
+      "reported_narrative": "OIL reported leakage at the X-mass tree of BGN#24. OIL personnel controlled the leak at approximately 2:20 am on 10 April 2024. Gas and crude oil spread across nearby areas within approximately 100 metres of the wellsite.",
+      "reported_consequences": {
+        "affected_area_approx_metres": 100,
+        "fatalities_reported": null,
+        "injuries_reported": null,
+        "release_note": "The press release does not state a fatality or injury count."
+      },
+      "response_and_investigation": [
+        "OIL personnel controlled the leak.",
+        "The district administration was informed and officials attended the site.",
+        "Fire service was mobilized and kept on standby.",
+        "OIL formed an on-site assessment team and began remediation measures.",
+        "OIL announced an internal enquiry and stated that the well was controlled and closed."
+      ],
+      "regulatory_filing": {
+        "reference_number": "OIL/SEC/32-33/NSE-BSE",
+        "filing_basis": "Regulation 30 of the SEBI (LODR) Regulations, 2015"
+      },
+      "sif_label_status": "unresolved",
+      "source_document_ids": [
+        "OIL-BGN24-2024"
+      ]
+    }
+  ],
+  "source_documents": [
+    {
+      "document_id": "OIL-BAGHJAN-PAGE-2020",
+      "publisher": "Oil India Limited",
+      "title": "Baghjan Update",
+      "document_type": "official incident page capture",
+      "source_url": "https://www.oil-india.com/baghjan-update",
+      "official_landing_page": "https://www.oil-india.com/baghjan-update",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/OTHER_PUBLIC_SAFETY/oil_india_baghjan_update.html",
+      "local_bytes": 705030,
+      "sha256": "c52677df3d71cb9620e5719607b1010a56515abbc85835566a237c32161cb8c3",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BAGHJAN-2020"
+      ],
+      "source_role": "OIL incident chronology, response and committee index"
+    },
+    {
+      "document_id": "OIL-BAGHJAN-NEWS-2020",
+      "publisher": "Oil India Limited",
+      "title": "OIL News April-September 2020: Blowout at Baghjan Well No. 5",
+      "document_type": "company publication with event narrative",
+      "source_url": "https://www.oil-india.com/files/publications_documents/OIL_News_April_Sept_03012020.pdf",
+      "official_landing_page": "https://www.oil-india.com/baghjan-update",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/BAGHJAN/oil_india_baghjan_news_2020.pdf",
+      "local_bytes": 10308485,
+      "sha256": "4b2906470fdea39d6e46aa347e54cb7ed54206583aeeab2044604c4e34a5fd10",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BAGHJAN-2020"
+      ],
+      "source_role": "OIL primary event narrative",
+      "source_locator": "printed pages 6-7"
+    },
+    {
+      "document_id": "OISD-BAGHJAN-2024",
+      "publisher": "Oil Industry Safety Directorate",
+      "title": "Report of the Working Group on Safety in Indian Petroleum Sector",
+      "document_type": "official safety investigation/reference report",
+      "source_url": "https://www.oisd.gov.in/public/assets/upload/Content/1732794948_520baaa79fde295d76fc.pdf",
+      "official_landing_page": "https://www.oisd.gov.in/en-in/CaseStudies",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/BAGHJAN/oisd_working_group_safety_report_baghjan_reference.pdf",
+      "local_bytes": 4035739,
+      "sha256": "bb5a9a22e9dbc5f1071bd80fe6bb768a7589f9ac3420921a043947948cd289fc",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BAGHJAN-2020"
+      ],
+      "source_role": "official supporting safety report",
+      "source_locator": "printed page 52 and related recommendations"
+    },
+    {
+      "document_id": "NGT-BAGHJAN-2020",
+      "publisher": "National Green Tribunal",
+      "title": "Preliminary Report of the Committee of Experts concerning Well Baghjan-5",
+      "document_type": "official committee report",
+      "source_url": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Preliminary%20Report%20of%20the%20Committee%20of%20Experts%20in%20the%20matter%20of%20I.A.%20No.%2030%20of%202020%20in%20O.%20A.%20No.%2043%20of%202020%20%28EZ%29%20and%20I.A.%20No.%2031%20of%202020%20in%20O.%20A.%20No.%2044%20of%202020%28EZ%29.pdf",
+      "official_landing_page": "https://www.greentribunal.gov.in/",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/BAGHJAN/ngt_baghjan_preliminary_committee_report.pdf",
+      "local_bytes": 48739490,
+      "sha256": "fa3b6782ee8c5f4642efa6bc6d366f277804619cfa113b7bde24a24877dac137",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BAGHJAN-2020"
+      ],
+      "source_role": "official environmental and causal-context report"
+    },
+    {
+      "document_id": "OIL-BAGHJAN-COMPLIANCE-2025",
+      "publisher": "Oil India Limited",
+      "title": "Environmental compliance report for OIL's Baghjan project",
+      "document_type": "official compliance follow-up",
+      "source_url": "https://www.oil-india.com/files/compliance_reports/8_NHTD_0.pdf",
+      "official_landing_page": "https://www.oil-india.com/baghjan-update",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/BAGHJAN/oil_india_baghjan_environment_compliance_2025.pdf",
+      "local_bytes": 10455853,
+      "sha256": "62b268bcc8093d7afe43989790e0b3ca290e6ae59fe4e1b793b8c1700918db33",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BAGHJAN-2020"
+      ],
+      "source_role": "OIL post-incident compliance and remediation follow-up"
+    },
+    {
+      "document_id": "OIL-NHK162-2024",
+      "publisher": "Oil India Limited",
+      "title": "Press Release - Incident at OIL well plinth NHK 162",
+      "document_type": "SEBI Regulation 30 incident press release",
+      "source_url": "https://www.oil-india.com/files/investor_services_documents/Regthree0PressRelease15022024.pdf",
+      "official_landing_page": "https://www.oil-india.com/investor-services/74",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/ACTUAL_EVENT_REPORTS/oil_india_nhk162_incident_2024.pdf",
+      "local_bytes": 757931,
+      "sha256": "abc57f176bfdce8bcfe980fc74d14e734836bc7289c059727c64d54555927e7f",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-NHK162-2024"
+      ],
+      "source_role": "OIL primary event press release"
+    },
+    {
+      "document_id": "OIL-BGN24-2024",
+      "publisher": "Oil India Limited",
+      "title": "Press Release - Incident at BGN#24",
+      "document_type": "SEBI Regulation 30 incident press release",
+      "source_url": "https://www.oil-india.com/files/investor_services_documents/Regulation%2030%20Press%20Release%2010.04.2024.pdf",
+      "official_landing_page": "https://www.oil-india.com/investor-services/74",
+      "local_path": "04-data/validation-datasets/01_OIL_INDIA_PUBLIC/ACTUAL_EVENT_REPORTS/oil_india_bgn24_leakage_2024.pdf",
+      "local_bytes": 278266,
+      "sha256": "646b232f0f95b4295ef237eb3b4f8c8d4042bf1f15a06da8d8c618cd4d193fec",
+      "download_status": "downloaded",
+      "event_ids": [
+        "OIL-BGN24-2024"
+      ],
+      "source_role": "OIL primary event press release"
+    }
+  ],
+  "data_quality": {
+    "usable_as": [
+      "source-preserving event-report reference data",
+      "manual HSE review and schema development",
+      "future expert annotation input"
+    ],
+    "not_usable_as": [
+      "a complete OIL India incident or near-miss census",
+      "expert SIF ground truth",
+      "a statistically representative OIL safety dataset"
+    ],
+    "labels": "No AI predictions, model scores, or expert SIF labels are included. SIF status remains unresolved.",
+    "coverage_note": "Public disclosures are selective and tend to emphasize major incidents. Internal OIL reports, near misses, unsafe acts and unsafe conditions are not included.",
+    "document_note": "The complete downloaded source documents remain available at the local_path values; this JSON stores normalized event facts and provenance rather than duplicating every page of the source PDFs."
+  }
+}
