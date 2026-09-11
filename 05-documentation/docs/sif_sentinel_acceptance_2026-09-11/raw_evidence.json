@@ -1,0 +1,257 @@
+{
+  "sanitization": {
+    "tokens_passwords_cookies_authorization_headers": "omitted",
+    "source": "Fresh observations made during ACCEPTANCE_20260911T061040Z"
+  },
+  "repository": {
+    "head": "54b8f329926735f6260e21d1de8ce09dbd6b662c",
+    "origin_main": "54b8f329926735f6260e21d1de8ce09dbd6b662c",
+    "initial_status": "## main...origin/main",
+    "initial_worktree_changed_paths": [],
+    "remote": "https://github.com/Aranya-Sinha-Git/sih-project.git"
+  },
+  "deployment_identity": {
+    "frontend": {
+      "url": "https://sih-project-orpin-pi.vercel.app/",
+      "public_probe_utc": "2026-09-11T06:18:18.3442262Z",
+      "http_status": 200,
+      "server": "Vercel",
+      "x_vercel_id": "bom1::4jcqv-1789107498727-aee40b546c81",
+      "next_build_id": "4KaGV8LTHVtv9gDdOOvnR",
+      "deployment_id": null,
+      "commit": null,
+      "identity_verified": false,
+      "provider_console_url": "https://vercel.com/dashboard",
+      "provider_console_result": "Redirected to https://vercel.com/login?next=%2Fdashboard"
+    },
+    "backend": {
+      "url": "https://sih-project-ng01.onrender.com",
+      "public_probe_utc": "2026-09-11T06:18:16.5319222Z",
+      "server": "cloudflare",
+      "x_render_origin_server": "uvicorn",
+      "deployment_id": null,
+      "commit": null,
+      "identity_verified": false,
+      "provider_console_url": "https://dashboard.render.com/",
+      "provider_console_result": "Redirected to https://dashboard.render.com/login",
+      "redeploy_triggered": false,
+      "redeploy_reason": "No authorized provider console/integration was available."
+    }
+  },
+  "configuration": {
+    "render_yaml_healthCheckPath": "/ready",
+    "render_yaml_source_commit": "54b8f329926735f6260e21d1de8ce09dbd6b662c",
+    "live_render_healthCheckPath": null,
+    "live_render_healthCheckPath_verified": false
+  },
+  "endpoint_probes": {
+    "live": {
+      "at_utc": "2026-09-11T06:18:16.5319222Z",
+      "url": "https://sih-project-ng01.onrender.com/live",
+      "method": "GET",
+      "status": 200,
+      "headers": {"server": "cloudflare", "x_render_origin_server": "uvicorn", "content_type": "application/json"},
+      "body": {"status": "alive"}
+    },
+    "ready": {
+      "at_utc": "2026-09-11T06:18:17.1515425Z",
+      "url": "https://sih-project-ng01.onrender.com/ready",
+      "method": "GET",
+      "status": 200,
+      "headers": {"server": "cloudflare", "x_render_origin_server": "uvicorn", "content_type": "application/json"},
+      "body": {
+        "status": "ready",
+        "model_mode": "Frozen supervised classifier",
+        "model_status": "READY",
+        "model_version": "sif-v0.1",
+        "lsr_model_status": "READY",
+        "lsr_model_version": "iogp-lsr-v0.2",
+        "lsr_supported_rule_ids": ["LSR03", "LSR04", "LSR05", "LSR06", "LSR07", "LSR09"],
+        "lsr_unavailable_rule_ids": ["LSR01", "LSR02", "LSR08"],
+        "checks": {"classifier": "READY", "lsr_artifact": "READY", "database": "READY"},
+        "llm_configured": false,
+        "runtime_generative_llm_calls": false,
+        "database": "supabase-postgres"
+      }
+    },
+    "health": {
+      "at_utc": "2026-09-11T06:18:17.5244525Z",
+      "url": "https://sih-project-ng01.onrender.com/health",
+      "method": "GET",
+      "status": 200,
+      "body_matches_ready": true
+    },
+    "unauthenticated": {
+      "dashboard_summary": {"at_utc": "2026-09-11T06:18:17.8499805Z", "status": 401, "body": {"detail": "Authentication required"}},
+      "primary_incident": {"at_utc": "2026-09-11T06:18:18.0878770Z", "status": 401, "body": {"detail": "Authentication required"}}
+    },
+    "cors_corrected": {
+      "at_utc": "2026-09-11T06:18:18.2309424Z",
+      "method": "OPTIONS",
+      "origin": "https://sih-project-orpin-pi.vercel.app",
+      "status": 200,
+      "headers": {"access_control_allow_origin": "https://sih-project-orpin-pi.vercel.app", "access_control_allow_credentials": "true"},
+      "body": "OK"
+    }
+  },
+  "failed_attempts": {
+    "cors_trailing_slash": {
+      "at_utc": "2026-09-11T06:07:54.3952810Z",
+      "method": "OPTIONS",
+      "origin": "https://sih-project-orpin-pi.vercel.app/",
+      "status": 400,
+      "body": "Disallowed CORS origin",
+      "resolution": "Retried with browser-standard origin without trailing slash; status 200."
+    },
+    "backend_tests_default_temp": {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest tests -q",
+      "exit_code": 1,
+      "summary": "93 passed, 8 errors; Windows PermissionError under pytest tmp_path setup; no assertion failure."
+    },
+    "provider_console_access": {
+      "vercel": "Redirected to login; no credentials entered.",
+      "render": "Redirected to login; no credentials entered."
+    },
+    "immediate_review_render": {
+      "record_id": "ANL-6BF36018",
+      "summary": "Review widget showed saved escalation and Demo Reviewer, while parent detail summary briefly remained Pending until reload.",
+      "resolution": "Required reload and navigate-away/back flow showed persisted Escalated / Unsure and one history row; no code fix applied."
+    }
+  },
+  "browser_auth_dashboard": {
+    "frontend_url": "https://sih-project-orpin-pi.vercel.app/",
+    "login_navigation_result": "Navigating to /login immediately redirected to / under an existing authenticated session.",
+    "dashboard_after_auth": {
+      "pending_required_reviews": 0,
+      "unreviewed_automatic_positives": 1,
+      "model_positive_screenings": 2,
+      "reports_analyzed": 2
+    },
+    "review_authenticated_identity": "Demo Reviewer",
+    "fresh_password_entry": "not repeated; password omitted"
+  },
+  "browser_primary_analysis": {
+    "submission_steps": "Open /analyze; fill narrative, site marker, activity, Near Miss; click Analyze report.",
+    "record_id": "ANL-AE471CFB",
+    "site": "ACCEPTANCE_20260911T061040Z",
+    "activity": "Maintenance / Energy Isolation",
+    "report_type": "Near Miss",
+    "narrative": "During maintenance on a compressor, stored pressure was not completely isolated. A technician loosened the flange while standing in the release path and contacted an energized wire after lockout was not applied. Work stopped and the area was made safe; no injury was reported.",
+    "url": "https://sih-project-orpin-pi.vercel.app/analyze/ANL-AE471CFB",
+    "observed": {
+      "classification": "SIF Potential",
+      "score": 0.835,
+      "score_label": "83.5% uncalibrated screening score",
+      "risk": "High",
+      "priority": "Immediate attention",
+      "review_status": "Not required",
+      "model_mode": "Frozen supervised classifier",
+      "model_version": "sif_v0.1",
+      "assigned_lsr": [{"rule_id": "LSR04", "name": "Energy Isolation", "score": 0.484, "score_type": "uncalibrated model score", "violation_status": "not established"}],
+      "retrieved_reference_concepts": ["Line of Fire", "Energy Isolation", "SIF"],
+      "unavailable_rule_coverage": ["LSR01", "LSR02", "LSR08"],
+      "similar_historical_reports": "No relevant historical incidents were found"
+    }
+  },
+  "browser_primary_persisted_detail": {
+    "steps": "Navigate away; return directly to /incidents/ANL-AE471CFB; expand Stored technical provenance.",
+    "record_id": "ANL-AE471CFB",
+    "observed": {
+      "record_provenance": "Current-model provenance",
+      "stored_sif_model_identity": "tfidf_word_12_char_35",
+      "stored_sif_model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "stored_lsr_model_reference": "iogp-lsr-v0.2 · IOGP_REPORT_459_REVISED_2018",
+      "stored_evidence": "stored",
+      "score_status": "uncalibrated",
+      "assigned_lsr_panel": "LSR04 · Energy Isolation",
+      "reference_panel": "Line of Fire; Energy Isolation; SIF; reference evidence is not an assignment",
+      "unavailable_lsr_coverage": "LSR01, LSR02, LSR08"
+    }
+  },
+  "browser_review_fixture": {
+    "submission_steps": "Open /analyze; fill fixture narrative, acceptance site marker, Acceptance review fixture activity, Near Miss; click Analyze report.",
+    "record_id": "ANL-6BF36018",
+    "narrative": "An employee took measurements while standing on an earthen berm, lost balance, and fractured an ankle.",
+    "observed": {"classification": "Needs Review", "score": 0.352, "score_label": "35.2% uncalibrated screening score", "risk": "Medium", "review_status": "Pending", "activity": "Acceptance review fixture", "site": "ACCEPTANCE_20260911T061040Z"}
+  },
+  "browser_queue_before": {
+    "utc_timestamp": "2026-09-11T06:11:00Z",
+    "count": 1,
+    "record_ids": ["ANL-6BF36018"],
+    "status": "Pending"
+  },
+  "browser_review_save_immediate": {
+    "utc_timestamp": "2026-09-11T06:12:09.254489Z",
+    "steps": "Open fixture detail; leave reviewer name blank; fill acceptance-marked review comment; click Escalate / Unsure.",
+    "observed": {"outcome": "Escalated / Unsure", "routing_status": "Escalated", "reviewer": "Demo Reviewer", "comment_marker": "ACCEPTANCE_20260911T061040Z", "formal_evaluation_copy": "Operational human review only; not formal adjudication or expert-validated ground truth."}
+  },
+  "browser_review_persisted_reload": {
+    "utc_timestamp": "2026-09-11T06:13:00Z",
+    "steps": "Reload fixture detail.",
+    "observed": {"outcome": "Escalated / Unsure", "routing_status": "Escalated", "reviewer": "Demo Reviewer", "comment_present": true, "audit_history_rows": 1}
+  },
+  "browser_queue_after": {
+    "utc_timestamp": "2026-09-11T06:14:00Z",
+    "count": 1,
+    "record_ids": ["ANL-6BF36018"],
+    "status": "Escalated"
+  },
+  "browser_review_persisted_navigation": {
+    "steps": "Open Review queue; open ANL-6BF36018; wait for persisted detail.",
+    "observed": {"outcome": "Escalated / Unsure", "reviewer": "Demo Reviewer", "audit_history": [{"outcome": "Escalated / Unsure", "reviewer": "Demo Reviewer", "operational": true}]}
+  },
+  "browser_dashboard_after": {
+    "utc_timestamp": "2026-09-11T06:15:00Z",
+    "pending_required_reviews": 1,
+    "unresolved_escalated": 1,
+    "unreviewed_automatic_positives": 2,
+    "model_positive_screenings": 3,
+    "reports_analyzed": 4,
+    "site_marker_reports": 2,
+    "site_marker_model_positive_screenings": 1
+  },
+  "browser_partial_record": {
+    "record_id": "ANL-B1BECD47",
+    "steps": "Open pre-existing record from Incident register; inspect without changing it.",
+    "observed": {
+      "record_provenance": "Partial provenance",
+      "screening_display": "Stored historical result",
+      "historical_partial_notice": "Retained for operational continuity; not silently re-scored; excluded from current-model performance summaries.",
+      "assigned_lsr_display": "No current assignment provenance is stored for this historical record; no assignment is available for this legacy record.",
+      "reference_display": "No supported concept in the public reference catalog.",
+      "historical_evidence_display": "No relevant historical incidents were found.",
+      "stored_sif_model_identity": "tfidf_word_12_char_35",
+      "stored_sif_model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "stored_lsr_reference": "Not available · Not available",
+      "stored_evidence": "stored"
+    }
+  },
+  "browser_site_detail": {
+    "site": "Unspecified",
+    "reports": 2,
+    "model_positive_screenings": 2,
+    "average_model_score_display": "73%",
+    "zero_substitution_observed": false
+  },
+  "browser_model_page": {
+    "status": "READY",
+    "model_identity": "tfidf_word_12_char_35",
+    "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+    "evaluation": "Human blind validation is pending locked adjudications.",
+    "calibration": "incomplete",
+    "experimental_candidates": ["TF-IDF v0.4 Not promoted", "SetFit v0.4 Not promoted", "LSR v0.4 nine-rule candidate Not promoted"]
+  },
+  "browser_settings_page": {
+    "status": "READY",
+    "threshold_display": {"non_sif": "< 0.35", "review": "0.35–0.45 inclusive", "sif": "> 0.45"},
+    "score_fallback_copy": "Raw model scores are uncalibrated and unavailable on inference failure."
+  },
+  "browser_console": {"error_count": 0, "warning_count": 0, "entries": []},
+  "commands": {
+    "backend_first_attempt": {"command": ".\\.venv\\Scripts\\python.exe -m pytest tests -q", "exit_code": 1, "summary": "93 passed, 8 errors from Windows PermissionError during tmp_path setup."},
+    "backend_isolated_rerun": {"command": ".\\.venv\\Scripts\\python.exe -m pytest tests -q --basetemp=.codex-pytest-acceptance-20260911-0615", "exit_code": 0, "summary": "101 passed, 57 warnings in 7.39s."},
+    "local_targeted_tests": {"command": ".\\.venv\\Scripts\\python.exe -m pytest -q --basetemp=.codex-pytest-acceptance-local-20260911-0620 tests/test_api.py::test_readiness_fails_when_required_classifier_is_invalid tests/test_api.py::test_classifier_failure_and_null_score_analytics tests/test_api.py::test_site_average_score_excludes_null_scores tests/test_api.py::test_legacy_analysis_remains_readable tests/test_api.py::test_historical_provenance_never_falls_back_to_active_model", "exit_code": 0, "summary": "5 passed, 3 warnings in 3.71s."},
+    "frontend_build": {"command": "npm run build", "workdir": "01-app/frontend", "exit_code": 0, "summary": "Next.js 15.5.24; all 17 routes generated."},
+    "artifact_diff": {"command": "git diff --quiet HEAD -- active artifacts and frozen v0.2/v0.3 paths", "exit_code": 0, "summary": "No changed paths."}
+  }
+}
