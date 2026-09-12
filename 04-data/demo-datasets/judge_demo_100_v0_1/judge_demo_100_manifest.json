@@ -1,0 +1,132 @@
+{
+  "active_artifacts": {
+    "lsr": {
+      "coverage_complete": false,
+      "lsr_artifact_hash": "b715ecac36452056d615b536118fccf2e0365ee2cc9e8263d3d283df665cf9bf",
+      "lsr_failure_reason": null,
+      "lsr_reference_id": "IOGP_REPORT_459_REVISED_2018",
+      "lsr_status": "READY",
+      "lsr_version": "iogp-lsr-v0.2",
+      "runtime_generative_llm_calls": false,
+      "sif": {
+        "calibration_status": "uncalibrated",
+        "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+        "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+        "model_identity": "tfidf_word_12_char_35",
+        "model_version": "sif-v0.1",
+        "status": "READY",
+        "thresholds": {
+          "non_sif_upper_exclusive": 0.35,
+          "review_lower_inclusive": 0.35,
+          "review_upper_inclusive": 0.45,
+          "selected_sif_threshold": 0.4,
+          "sif_lower_exclusive": 0.45
+        }
+      },
+      "supported_rule_ids": [
+        "LSR03",
+        "LSR04",
+        "LSR05",
+        "LSR06",
+        "LSR07",
+        "LSR09"
+      ],
+      "unavailable_rule_ids": [
+        "LSR01",
+        "LSR02",
+        "LSR08"
+      ]
+    },
+    "sif": {
+      "calibration_status": "uncalibrated",
+      "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+      "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "model_identity": "tfidf_word_12_char_35",
+      "model_version": "sif-v0.1",
+      "status": "READY",
+      "thresholds": {
+        "non_sif_upper_exclusive": 0.35,
+        "review_lower_inclusive": 0.35,
+        "review_upper_inclusive": 0.45,
+        "selected_sif_threshold": 0.4,
+        "sif_lower_exclusive": 0.45
+      }
+    }
+  },
+  "boundary": {
+    "blind_test_releases_untouched": true,
+    "no_predictions_or_ai_labels_in_upload": true,
+    "no_real_people_or_confidential_records": true
+  },
+  "checksum_scope": "All listed files are checksummed; this manifest excludes its own checksum.",
+  "dataset_id": "synthetic_judge_demo_100_v0_1",
+  "date_range": {
+    "max": "2026-09-11",
+    "min": "2026-07-20"
+  },
+  "dimension_counts": {
+    "activity": {
+      "Drilling": 10,
+      "Driving": 12,
+      "Electrical Maintenance": 11,
+      "Hot Work": 6,
+      "Inspection": 22,
+      "Mechanical Lifting": 20,
+      "Pressure Testing": 5,
+      "Valve Maintenance": 14
+    },
+    "report_type": {
+      "Incident": 16,
+      "Near Miss": 36,
+      "Unsafe Act": 18,
+      "Unsafe Condition": 30
+    },
+    "site": {
+      "Aurora Basin": 21,
+      "Blue Mesa Yard": 18,
+      "Cedar Ridge Station": 12,
+      "Delta Point Facility": 15,
+      "Echo Valley Works": 21,
+      "Frostline Depot": 13
+    }
+  },
+  "duplicate_checks": {
+    "duplicate_normalized_narrative_site_pairs": 0,
+    "duplicate_report_ids": 0
+  },
+  "files": {
+    "DATASET_CARD.md": {
+      "bytes": 1482,
+      "sha256": "e7441bbb527867c599d6d906feeb6b185c6248fa2fa0aa5150d8fe7bf64d6819"
+    },
+    "judge_demo_100.csv": {
+      "bytes": 73221,
+      "sha256": "69ac3d59adba7eb147a28cc0544f42f2741331e745462f6b712806b176a16241"
+    },
+    "judge_demo_100_qa_matrix.csv": {
+      "bytes": 76630,
+      "sha256": "ef0a886cea6700834a8b319c20cf73d22014116eb3829135a4401f83f0acf888"
+    },
+    "judge_demo_100_runtime_profile.json": {
+      "bytes": 4385,
+      "sha256": "390a893ed5053b400f0bf5650d9bd0fdaa2e8f6cd595c81d3f8fc1a6b7c6b1e1"
+    },
+    "outputs/judge_demo_100_20260912/judge_demo_100.xlsx": {
+      "bytes": 12558,
+      "sha256": "68351f71905672086d5dcb1b7370d74a9364dbde982fa5ce3b14d60a86ae1e24"
+    }
+  },
+  "row_count": 100,
+  "runtime_profile_status": "PASS",
+  "schema": [
+    "report_id",
+    "report_date",
+    "site",
+    "activity",
+    "report_type",
+    "narrative",
+    "source"
+  ],
+  "status": "synthetic_non_validation",
+  "synthetic": true
+}

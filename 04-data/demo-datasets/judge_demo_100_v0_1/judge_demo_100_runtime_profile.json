@@ -1,0 +1,163 @@
+{
+  "active_artifacts": {
+    "lsr": {
+      "coverage_complete": false,
+      "lsr_artifact_hash": "b715ecac36452056d615b536118fccf2e0365ee2cc9e8263d3d283df665cf9bf",
+      "lsr_failure_reason": null,
+      "lsr_reference_id": "IOGP_REPORT_459_REVISED_2018",
+      "lsr_status": "READY",
+      "lsr_version": "iogp-lsr-v0.2",
+      "runtime_generative_llm_calls": false,
+      "sif": {
+        "calibration_status": "uncalibrated",
+        "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+        "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+        "model_identity": "tfidf_word_12_char_35",
+        "model_version": "sif-v0.1",
+        "status": "READY",
+        "thresholds": {
+          "non_sif_upper_exclusive": 0.35,
+          "review_lower_inclusive": 0.35,
+          "review_upper_inclusive": 0.45,
+          "selected_sif_threshold": 0.4,
+          "sif_lower_exclusive": 0.45
+        }
+      },
+      "supported_rule_ids": [
+        "LSR03",
+        "LSR04",
+        "LSR05",
+        "LSR06",
+        "LSR07",
+        "LSR09"
+      ],
+      "unavailable_rule_ids": [
+        "LSR01",
+        "LSR02",
+        "LSR08"
+      ]
+    },
+    "sif": {
+      "calibration_status": "uncalibrated",
+      "configuration_hash": "2460249ff71b913074c21d9dd489ed9c11681d0029c6276820fd78aabead70ee",
+      "model_hash": "f9f88650988e0abc92a74807480e9097e422ebfe252f95e69f45dd20c736473f",
+      "model_identity": "tfidf_word_12_char_35",
+      "model_version": "sif-v0.1",
+      "status": "READY",
+      "thresholds": {
+        "non_sif_upper_exclusive": 0.35,
+        "review_lower_inclusive": 0.35,
+        "review_upper_inclusive": 0.45,
+        "selected_sif_threshold": 0.4,
+        "sif_lower_exclusive": 0.45
+      }
+    }
+  },
+  "checks": {
+    "duplicates": true,
+    "meaningful_extraction": true,
+    "precursor_clusters": true,
+    "profile_runtime": true,
+    "risk_distribution": true,
+    "row_count": true,
+    "supported_lsr_coverage": true,
+    "trend_coverage": true,
+    "unavailable_lsr_examples": true,
+    "word_count": true
+  },
+  "corpus": "synthetic_judge_demo_100_v0_1",
+  "generator_version": "judge_demo_100_generator_v0.1",
+  "notes": [
+    "Observed runtime categories are screening outputs for presentation coverage, not ground-truth labels.",
+    "This synthetic corpus is not accuracy, calibration, or external-validation evidence."
+  ],
+  "observed": {
+    "duplicate_normalized_narrative_site_pairs": 0,
+    "meaningful_hazard_extraction_count": 99,
+    "precursor_clusters": [
+      {
+        "name": "fall-protection gap",
+        "site_count": 4
+      },
+      {
+        "name": "isolation verification gap",
+        "site_count": 6
+      },
+      {
+        "name": "lifting exclusion gap",
+        "site_count": 5
+      },
+      {
+        "name": "line-of-fire exposure",
+        "site_count": 5
+      },
+      {
+        "name": "safeguard bypass concern",
+        "site_count": 5
+      },
+      {
+        "name": "vehicle separation gap",
+        "site_count": 4
+      }
+    ],
+    "profile_seconds": 0.796,
+    "risk_distribution": {
+      "High": 32,
+      "Low": 44,
+      "Medium": 24
+    },
+    "supported_lsr_assignments": {
+      "LSR03": 5,
+      "LSR04": 5,
+      "LSR05": 5,
+      "LSR06": 7,
+      "LSR07": 7,
+      "LSR09": 5
+    },
+    "trend_points": [
+      {
+        "high": 5,
+        "period": "01 Aug",
+        "reviews": 2
+      },
+      {
+        "high": 2,
+        "period": "08 Aug",
+        "reviews": 3
+      },
+      {
+        "high": 4,
+        "period": "15 Aug",
+        "reviews": 5
+      },
+      {
+        "high": 6,
+        "period": "22 Aug",
+        "reviews": 3
+      },
+      {
+        "high": 6,
+        "period": "29 Aug",
+        "reviews": 2
+      },
+      {
+        "high": 4,
+        "period": "05 Sep",
+        "reviews": 3
+      }
+    ],
+    "unavailable_lsr_examples": {
+      "LSR01": "DEMO100-0001",
+      "LSR02": "DEMO100-0001",
+      "LSR08": "DEMO100-0001"
+    },
+    "word_count": {
+      "maximum": 127,
+      "minimum": 75
+    }
+  },
+  "profile_version": "judge_demo_100_runtime_profile_v0.1",
+  "row_count": 100,
+  "seed": 27165,
+  "status": "PASS"
+}
