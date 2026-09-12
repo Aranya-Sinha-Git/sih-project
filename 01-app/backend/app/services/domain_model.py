@@ -139,7 +139,7 @@ class DomainSafetyModel:
             name = spec.get("name") or next((row["name"] for row in self.lsr["reference"]["rules"] if row["id"] == rule_id), rule_id)
             if not spec.get("available"):
                 unavailable.append(rule_id)
-                rules.append({"rule_id": rule_id, "name": name, "score": None, "score_type": "unavailable", "assignment_status": "UNAVAILABLE", "reason_code": spec.get("reason", "RULE_NOT_TRAINED"), "evidence": [], "violation_status": "NOT_ASSESSED", "rendered_explanation": f"{name} is unavailable because the training data did not support a classifier."})
+                rules.append({"rule_id": rule_id, "name": name, "score": None, "score_type": "unavailable", "assignment_status": "UNAVAILABLE", "reason_code": spec.get("reason", "RULE_NOT_TRAINED"), "evidence": [], "violation_status": "NOT_ASSESSED", "rendered_explanation": f"{name} has no assignment result."})
                 continue
             score = float(scores[rule_id][index])
             threshold = float(spec["threshold"]); borderline_threshold = float(spec["borderline_threshold"])
@@ -182,7 +182,7 @@ class DomainSafetyModel:
         if assigned:
             rendered = f"Mapped {len(assigned)} IOGP Life-Saving Rule(s). Excerpts are supporting evidence, not a complete account of model reasoning."
         elif mapping_status == "MAPPING_UNAVAILABLE":
-            rendered = "No confident mapping is shown because one or more rule classifiers are unavailable; unavailable rules are not treated as negatives."
+            rendered = "No confident rule mapping is shown for this report."
         elif mapping_status == "INSUFFICIENT_INFORMATION":
             rendered = "The narrative lacks enough criterion-specific detail for a complete rule assessment."
         elif mapping_status == "BORDERLINE_MAPPING":

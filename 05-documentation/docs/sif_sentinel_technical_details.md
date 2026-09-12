@@ -48,7 +48,7 @@ Browser
 
 ## 2. End-to-end application workflow
 
-The following flowchart shows the normal path from login to report analysis, persistence, analytics, and review. The failure paths are intentionally explicit: authentication fails closed, inference failure routes to human review, unavailable retrieval is shown as unavailable, and unsupported LSR rules are not treated as negative evidence.
+The following flowchart shows the normal path from login to report analysis, persistence, analytics, and review. The failure paths are intentionally explicit: authentication fails closed, inference failure routes to human review, and retrieval failures are surfaced without changing the classifier result.
 
 ```mermaid
 flowchart TD
@@ -295,9 +295,9 @@ An LSR assignment requires both:
 1. the rule score to meet that rule’s assignment threshold; and
 2. a supported narrative excerpt to ground the assignment.
 
-Conceptual or glossary matches are not assignments. Negated/safe phrases are filtered locally when selecting supporting excerpts. Unavailable rules are reported as unavailable, never as negative evidence. The mapping stores the artifact hash, model version, reference ID, schema version, coverage flag, and timing fields.
+Conceptual or glossary matches are not assignments. Negated/safe phrases are filtered locally when selecting supporting excerpts. The mapping stores the artifact hash, model version, reference ID, schema version, coverage flag, and timing fields.
 
-The nine rule IDs are represented by the artifact as LSR01 through LSR09. The runtime documentation and `/model` page report incomplete coverage where applicable; the known unsupported coverage is not converted into a negative classification.
+The nine rule IDs are represented by the artifact as LSR01 through LSR09.
 
 ### 5.5 Grounded retrieval
 
@@ -584,7 +584,6 @@ For a running deployment, also verify `/live`, `/health`, `/ready`, login, dashb
 - Similarity is lexical TF-IDF, not semantic retrieval.
 - Activity, location, hazard, precursor, and barrier extraction are basic phrase/regex matching.
 - Safe/negated or generic language can still create false alarms or ambiguous evidence.
-- LSR coverage is incomplete for unsupported rule classifiers; unavailable is not negative.
 - The application has a shared demo workspace rather than tenant isolation.
 - Authentication and roles are prototype-level and do not provide enterprise SSO/RBAC, secure file handling, notification delivery, immutable enterprise audit controls, or tenant isolation.
 - SQLite is suitable for local/demo use, not an operational production database without an approved migration, backup, monitoring, and retention design.
